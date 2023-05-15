@@ -1,5 +1,7 @@
 .setting
 {
+    display: flex;
+    position: fixed;
     background-color: rgb(0, 105, 128);
     border-color: aqua;
     margin-left: 90%;
@@ -8,8 +10,26 @@
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
-    width: 100px;
 }
 .settingimg{
     width: 70px;
+}
+.avatar{
+    background-color: rgb(0, 105, 128);
+    border-color: aqua;
+    display: flex;
+    position: fixed;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+   
+}
+.avatarimg{
+    width: 70px;
+}
+.bouton{
+ display: flex;
+ align-content: center;
 }

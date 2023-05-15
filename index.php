@@ -25,30 +25,23 @@ session_start() ;
 
 <body>
     <header>
+    <button class="avatar" type=submit>
+        <img class="avatarimg" src="WEB/image/avatar.png"  >
+    </button>
     <button class="setting" type=submit>
-<<<<<<< Updated upstream
-        <img src="WEB/image/para.png"  >
-=======
     <a href="WEB/option.php">
     <img class="settingimg" src="WEB/image/para.png" >
     </a>
->>>>>>> Stashed changes
     </button>
-
-    <button class="setting" type=submit>
-        <img src="WEB/image/avatar.png"  >
-    </button>
-
-    <button class="setting" type=submit>
+    </header>
+    <main>
+    <button class="bouton" type=submit>
         <div>CONNEXION</div>
     </button>
 
-    <button class="setting" type=submit>
+    <button class="bouton" type=submit>
         <div>Inscription</div>
     </button>
-
-    </header>
-    <main>
     <div>Martin  Carpenter !</div>
     </main>
     <footer>
