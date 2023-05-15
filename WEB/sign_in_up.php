@@ -9,7 +9,7 @@
     <body>
         <?php
             session_start();
-            if(empty($_SESSION["id"])){
+            if(empty($_SESSION["username"])){
                 if(isset($_GET["inscrip"]) && (($_GET["inscrip"] == 0) || ($_GET["inscrip"] == 1) || ($_GET["inscrip"] == 2))){ 
                     $page_inscription = 10;
                 } else if(isset($_GET['reset']) && (($_GET["reset"] == 2) || ($_GET["reset"] == 3))){ //ici on test le liens pour savoir quelle formulaire afficher

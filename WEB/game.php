@@ -17,4 +17,20 @@
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
 </head>
+<body> 
+    <header>
+     <button class="pause" type=submit>
+        <a href="WEB/user.php">
+        <img class="avatarimg" src="WEB/image/avatar.png"  >
+        </a>
+    </button>
+    
+    </header>
+
+
+
+
+
+
+</body>
    
