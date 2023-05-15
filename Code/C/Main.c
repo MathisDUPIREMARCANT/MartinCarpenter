@@ -7,7 +7,7 @@ void main() {
 
 	char* Board = malloc((x * y) * sizeof(char));
 
-	
+	Init_board_Game(&Board, x, y);
 
 
 }

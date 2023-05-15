@@ -11,4 +11,4 @@ typedef struct Island{
     int number;
 }Island;
 
-int Init_boardGame(char* Board);
+int Init_boardGame(char* Board, int x, int y);
