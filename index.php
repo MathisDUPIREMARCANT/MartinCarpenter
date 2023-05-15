@@ -40,10 +40,10 @@ session_start() ;
     <button class="setting" type=submit>
         <div>Inscription</div>
     </button>
-    
+
     </header>
     <main>
-    <div>Salut ! </div>
+    <div>Martin  Carpenter !</div>
     </main>
     <footer>
     </footer>
