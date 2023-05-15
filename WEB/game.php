@@ -5,9 +5,9 @@
     
     <title>Martin Carpenter</title>
    
-    <meta name="description" content="Martin carpenter Rules" >
+    <meta name="description" content="Martin carpenter Games" >
     <!--page description-->
-    <meta name="keywords" content="Martin Carpenter,Rules,informations " >
+    <meta name="keywords" content="Martin Carpenter,Games,level" >
     <!--Page keywords-->
     <meta name="viewport"content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Setting up a web page visibility zone for the user-->
