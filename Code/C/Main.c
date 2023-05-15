@@ -11,8 +11,8 @@ void main(int argc, char* argv[]) {
 
 	Init_board_Game(&Board, Xmax, Ymax);
 
-	int startx = Random_number(Xmax);
-	int starty = Random_number(Ymax);
+	int startx = Random(Xmax);
+	int starty = Random(Ymax);
 
 
 
