@@ -5,5 +5,9 @@
 void main() {
 	int x; int y;
 
-	char board[y][x];
+	char* Board = malloc((x * y) * sizeof(char));
+
+	
+
+
 }
