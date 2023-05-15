@@ -18,7 +18,7 @@ session_start() ;
     
     <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir" >
     <!--Page authors-->
-    <link rel="icon" type="image/x-con" href="../Images/Images.ico/logo.ico" >
+    <link rel="icon" type="image/x-con" href="../image/logo.jpg" >
     <!--Browser icon-->
 </head>
    
