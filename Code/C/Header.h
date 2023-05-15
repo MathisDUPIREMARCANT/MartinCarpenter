@@ -12,3 +12,4 @@ typedef struct Island{
 }Island;
 
 int Init_boardGame(char* Board, int x, int y);
+int Random_number(int maximum);
