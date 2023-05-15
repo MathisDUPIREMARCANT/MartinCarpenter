@@ -26,7 +26,9 @@ session_start() ;
 <body>
     <header>
     <button class="avatar" type=submit>
+        <a href="WEB/user.php">
         <img class="avatarimg" src="WEB/image/avatar.png"  >
+        </a>
     </button>
     <button class="setting" type=submit>
     <a href="WEB/option.php">
@@ -36,13 +38,28 @@ session_start() ;
     </header>
     <main>
     <button class="bouton" type=submit>
-        <div>CONNEXION</div>
+    <a class='al' href="WEB/game.php"
+    >PLAY</a>
     </button>
 
     <button class="bouton" type=submit>
-        <div>Inscription</div>
+    <a class='al' href="WEB/rules.php"
+    >Rules</a>
     </button>
-    <div>Martin  Carpenter !</div>
+        
+    <button class="bouton" type=submit>
+    <a class='al' href="WEB/sign_in_up.php"
+    >CONNEXION</a>
+    </button>
+
+    <button class="bouton" type=submit>
+    <a class='al' href="WEB/sign_in_up.php"
+    >Inscription</a>
+    </button>
+
+    <h1>Martin  Carpenter !</h1>
+    <br>
+    <a>Damia Ta Gueule</a>
     </main>
     <footer>
     </footer>

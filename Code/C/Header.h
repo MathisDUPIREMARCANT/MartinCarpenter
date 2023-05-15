@@ -18,5 +18,5 @@ typedef struct Island{
 }Island;
 
 int Init_boardGame(char* Board, int x, int y);
-int Random(int maximum);
+int Random_number(int maximum);
 int Place_bridge_on_map(char* Board, int Xmax, int x, int y)
