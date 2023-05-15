@@ -26,7 +26,13 @@ session_start() ;
 <body>
     <header>
     <button class="setting" type=submit>
+<<<<<<< Updated upstream
         <img src="WEB/image/para.png"  >
+=======
+    <a href="WEB/option.php">
+    <img class="settingimg" src="WEB/image/para.png" >
+    </a>
+>>>>>>> Stashed changes
     </button>
 
     <button class="setting" type=submit>
