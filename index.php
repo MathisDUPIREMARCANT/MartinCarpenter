@@ -24,7 +24,17 @@ session_start() ;
 </head>
 
 <body>
+<video
+      id="background-video"
+      muted=""
+      autoplay="autoplay"
+      playsinline
+      loop
+    >
+      <source src="WEB/image/fond.mp4" type="video/mp4" ></video
+    >
     <header>
+        <div class="boutonhead">
     <button class="avatar" type=submit>
         <a href="WEB/user.php">
         <img class="avatarimg" src="WEB/image/avatar.png"  >
@@ -35,8 +45,12 @@ session_start() ;
     <img class="settingimg" src="WEB/image/para.png" >
     </a>
     </button>
+</div>
     </header>
     <main>
+
+
+    <div class="boutons">
     <button class="bouton" type=submit>
     <a class='al' href="WEB/game.php"
     >PLAY</a>
@@ -56,10 +70,8 @@ session_start() ;
     <a class='al' href="WEB/sign_in_up.php"
     >Inscription</a>
     </button>
-
+</div>
     <h1>Martin  Carpenter !</h1>
-    <br>
-    <a>Damia Ta Gueule</a>
     </main>
     <footer>
     </footer>
