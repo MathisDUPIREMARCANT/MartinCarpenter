@@ -3,11 +3,15 @@
 
 
 void main() {
-	int x; int y;
+	int Xmax; int Ymax;
 
-	char* Board = malloc((x * y) * sizeof(char));
+	char* Board = malloc((Xmax * Ymax) * sizeof(char));
 
-	Init_board_Game(&Board, x, y);
+	Init_board_Game(&Board, Xmax, Ymax);
+
+	int startx = Random_number(Xmax);
+	int starty = Random_number(Ymax);
+
 
 
 }
