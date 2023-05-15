@@ -20,5 +20,20 @@ session_start() ;
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
+    <link rel="stylesheet" href="WEB/CSS/header.css">
 </head>
-   
+
+<body>
+    <header>
+    <button class="setting" type=submit>
+    <img src="WEB/image/para.png"  >
+    </button>
+
+    </header>
+    <main>
+    <div>Salut ! </div>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>
