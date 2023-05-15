@@ -26,9 +26,21 @@ session_start() ;
 <body>
     <header>
     <button class="setting" type=submit>
-    <img src="WEB/image/para.png"  >
+        <img src="WEB/image/para.png"  >
     </button>
 
+    <button class="setting" type=submit>
+        <img src="WEB/image/avatar.png"  >
+    </button>
+
+    <button class="setting" type=submit>
+        <div>CONNEXION</div>
+    </button>
+
+    <button class="setting" type=submit>
+        <div>Inscription</div>
+    </button>
+    
     </header>
     <main>
     <div>Salut ! </div>
