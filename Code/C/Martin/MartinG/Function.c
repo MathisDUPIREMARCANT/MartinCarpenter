@@ -36,7 +36,7 @@ int Space_next_bridge(char* Board, int x, int y, int Xmax, int Ymax){
     int xcopy = x;
     int ycopy = y;
 
-    while(y>0 && (*(Board + Ymax*x + y) == "*")){
+    while(y>0 && strcmp(*(Board + Ymax*x + y), '*')){
         N += 1;
         y -= 1;
     }
@@ -44,7 +44,7 @@ int Space_next_bridge(char* Board, int x, int y, int Xmax, int Ymax){
     x = xcopy;
     y = ycopy;
 
-    while(x < Xmax && (*(Board + Ymax*x + y) == "*")){
+    while(x < Xmax && strcmp(*(Board + Ymax * x + y), '*')){
         E += 1;
         x += 1;
     }
@@ -52,7 +52,7 @@ int Space_next_bridge(char* Board, int x, int y, int Xmax, int Ymax){
     x = xcopy;
     y = ycopy;
 
-    while(y < Ymax && (*(Board + Ymax*x + y) == "*")){
+    while(y < Ymax && strcmp(*(Board + Ymax * x + y), '*')){
         S += 1;
         y += 1;
     }
@@ -60,7 +60,7 @@ int Space_next_bridge(char* Board, int x, int y, int Xmax, int Ymax){
     x = xcopy;
     y = ycopy;
 
-    while(x>0 && (*(Board + Ymax*x + y) == "*")){
+    while(x>0 && strcmp(*(Board + Ymax * x + y), '*')){
         O += 1;
         x -= 1;
     }
