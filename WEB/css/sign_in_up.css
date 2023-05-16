@@ -16,7 +16,9 @@
 body {
     margin: 0;
     color: white;
-    background: var(--violet_isen);
+    background: url("../image/fondsigninup.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: 'Montserrat', monospace;
     font-weight: bold;
 }
@@ -126,7 +128,7 @@ a {
     border: none;
     padding: 15px 20px;
     border-radius: 25px;
-    background: rgba(255, 255, 255, .1);
+    background: rgba(69, 16, 16, 0.1);
 }
 
 .login-form .group input[data-type="password"] {

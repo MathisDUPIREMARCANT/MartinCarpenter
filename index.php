@@ -39,27 +39,12 @@ session_start() ;
         <a href="WEB/user.php">
         <img class="avatarimg" src="WEB/image/avatar.png"  >
         </a>
-    </button>
-    <button class="setting" type=submit>
-    <a href="WEB/option.php">
-    <img class="settingimg" src="WEB/image/para.png" >
-    </a>
-    </button>
-   <!-- <button class="button" type="submit" onclick="showPopup()">
-    <a class="al" href="WEB/rules.php">Rules</a>
+    
+   <button class="setting" type="submit" onclick="showPopup()">
+    <a class="al"- href="WEB/setting.php" ><img class="settingimg" src="WEB/image/para.png" ></a>
     </button>
 
-    <div id="popup" style="display: none;">
-         Contenu de votre pop-up 
-        Texte du pop-up
-    </div>
-
-    <script>
-        function showPopup() {
-            var popup = document.getElementById("popup");
-            popup.style.display = "block";
-        }
-    </script>-->
+    
 </div>
     </header>
     <main>
