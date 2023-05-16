@@ -7,7 +7,7 @@ typedef struct Bridge {
     int size;
     int lenght;
     struct Coord;
-    char direction;
+    int direction;
 }Bridge;
 
 typedef struct Island{
@@ -19,5 +19,5 @@ typedef struct Island{
 
 int Init_boardGame(int x, int y);
 int Random(int maximum);
-int Place_bridge_on_map(char* Board, int Xmax, int x, int y);
+int Place_bridge_on_map(char* Board, int Ymax, int x, int y, int type_bridge);
 int Space_next_bridge(char* Board, int x, int y, int Xmax, int Ymax);
