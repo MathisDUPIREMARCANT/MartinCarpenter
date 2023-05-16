@@ -17,4 +17,10 @@
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
 </head>
-   
+<div class="buttonhead">
+    <button class="arrow" type=submit>
+        <a href="logout.php">
+        <img class="arrowimg" src="image/arrow.png"  >
+        </a>
+    </button>
+    </div>
