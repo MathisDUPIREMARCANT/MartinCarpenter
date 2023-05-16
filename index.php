@@ -23,7 +23,7 @@ session_start() ;
     <link rel="stylesheet" href="WEB/CSS/index.css">
 </head>
 
-<body>
+<body >
 <video
       id="background-video"
       muted=""
@@ -67,16 +67,13 @@ session_start() ;
     >CONNEXION</a>
     </button>
 
-    <button class="button" type="submit">
-    <a class='al' href="WEB/sign_in_up.php"
-    >Inscription</a>
-    </button>
+    
 </div>
     </main>
-    <footer>
+    <footer >
     <audio class="audio" controls>
             <source src="WEB/image/music.mp3" type="video/mp4">
-          </audio>
+    </audio>
     </footer>
 </body>
 </html>

@@ -5,9 +5,9 @@
     
     <title>Martin Carpenter</title>
    
-    <meta name="description" content="Martin carpenter information user" >
+    <meta name="description" content="Martin carpenter option" >
     <!--page description-->
-    <meta name="keywords" content="Martin Carpenter,id,mp,name" >
+    <meta name="keywords" content="Martin Carpenter,sound,display" >
     <!--Page keywords-->
     <meta name="viewport"content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Setting up a web page visibility zone for the user-->
@@ -16,11 +16,10 @@
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
+    <script
+      src="https://kit.fontawesome.com/0e1c95535d.js" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" href="../CSS/setting.css">
 </head>
-<div class="buttonhead">
-    <button class="arrow" type=submit>
-        <a href="logout.php">
-        <img class="arrowimg" src="image/arrow.png"  >
-        </a>
-    </button>
-    </div>
+
+<body>
