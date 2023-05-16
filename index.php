@@ -83,9 +83,11 @@ session_start() ;
     >Inscription</a>
     </button>
 </div>
-    <h1>Martin  Carpenter !</h1>
     </main>
     <footer>
+    <audio class="audio" controls>
+            <source src="WEB/image/music.mp3" type="video/mp4">
+          </audio>
     </footer>
 </body>
 </html>
