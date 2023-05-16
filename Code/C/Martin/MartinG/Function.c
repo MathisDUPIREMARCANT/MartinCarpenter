@@ -1,3 +1,4 @@
+#include <stdbool.h>
 char * Init_boardGame(int x, int y){
     /*Initialize the board and fill it with '*' 
     Returns the pointer of the Board*/
@@ -75,24 +76,34 @@ int Space_next_bridge(char* Board, int x, int y, int Xmax, int Ymax){
 }
 
 int Map_mading(char* Board, int Ymax, int Xmax, int x, int y, int Nb_ile) {
-    (Board + Ymax*x + y) = '1';
-    int end = 0; int Type_bridge = Random(1) + 1;
+    *(Board + Ymax*x + y) = '1';
+    int end = 0; int Type_bridge_precedent; int Direction_available[4]; bool a = true; 
     while (end < Nb_ile) {
-        int Dpont = Random(3);// vérifie si c possible d'avancé dans la direction 
         int* tab = Space_next_bridge(Board, x, y, Xmax, Ymax);
-        int Type_bridge_suivant = Random(1) + 1;
-        if ((tab + Dpont) >= ) {
-            int lenght = Random(tab + Dpont);
-            for (int i = 0; i <= lenght; i++) {
-                //fonction victor
-                Place_bridge_on_map(Board, Ymax, x, y, Type_bridge_suivant);
+        for (int i = 0; i < 4; i++) {
+            if (*(tab + i) >= 2) {
+                Direction_available[i] = 1;
+            }
+            else {
+                Direction_available[i] = 0;
             }
         }
-        else {
-            break;
+        int D_pont;
+        while(a){
+            D_pont = Random(3);
+            if (Direction_available[D_pont] == 1) {
+                a = false;
+            }
         }
+        int Type_bridge = Random(1) + 1;
+        int length = Random(tab[D_pont]);
+        for (int i = 0; i <= length; i++) {
+            //fonction victor
+            Place_bridge_on_map(Board, Ymax, x, y, Type_bridge);
+        }
+        
         //fonction victor 
-        (Board + Ymaxx + y) = Type_bridge_suivant + Type_bridge;
-        Type_bridge = Type_bridge_suivant;
+        *(Board + Ymax*x + y) = Type_bridge + Type_bridge_precedent;
+        Type_bridge_precedent = Type_bridge;
     }
 }
