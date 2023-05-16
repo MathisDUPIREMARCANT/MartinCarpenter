@@ -133,5 +133,6 @@ int Map_mading(char* Board, Coord posMax, Coord pos, int Nb_ile) {
         Next_Coord(&pos, D_pont);
         *(Board + posMax.y*pos.x + pos.y) = Type_bridge + Type_bridge_precedent;
         Type_bridge_precedent = Type_bridge;
+        end++;
     }
 }
