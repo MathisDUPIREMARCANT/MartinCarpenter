@@ -18,15 +18,15 @@ int Random(int maximum) {
     return rand() % (maximum + 1);
 }
 
-void Place_bridge_on_map(char* Board, int Ymax, Coord pos, int type_bridge){
+void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
 
     if(type_bridge == 1){
-        *(Board + Ymax*pos.x + pos.y) = '~';
+        *(Board + posMax.y*pos.x + pos.y) = '~';
     }
    
     if(type_bridge == 2){
-        *(Board + Ymax*pos.x + pos.y) = '#';
+        *(Board + posMax.y *pos.x + pos.y) = '#';
     }
 };
 
@@ -96,17 +96,18 @@ Coord* Next_Coord(Coord* pos, int direction) {
         pos->y -= 1;
         break;
     case 3:
+        //O
         pos->x -= 1;
         //pos->y = pos->y;
         break;
     }
 }
 
-int Map_mading(char* Board, int Ymax, int Xmax, int x, int y, int Nb_ile) {
-    *(Board + Ymax*x + y) = '1';
-    int end = 0; int Type_bridge_precedent; int Direction_available[4]; bool a = true; 
+int Map_mading(char* Board, Coord posMax, Coord pos, int Nb_ile) {
+    *(Board + posMax.y*pos.x + pos.y) = '1';
+    int end = 0; int Type_bridge_precedent; int Direction_available[4];int a = 1; 
     while (end < Nb_ile) {
-        int* tab = Space_next_bridge(Board, x, y, Xmax, Ymax);
+        int* tab = Space_next_bridge(Board, pos, posMax);
         for (int i = 0; i < 4; i++) {
             if (*(tab + i) >= 2) {
                 Direction_available[i] = 1;
@@ -119,18 +120,18 @@ int Map_mading(char* Board, int Ymax, int Xmax, int x, int y, int Nb_ile) {
         while(a){
             D_pont = Random(3);
             if (Direction_available[D_pont] == 1) {
-                a = false;
+                a = 0;
             }
         }
         int Type_bridge = Random(1) + 1;
         int length = Random(tab[D_pont]);
         for (int i = 0; i <= length; i++) {
-            //fonction victor
-            Place_bridge_on_map(Board, Ymax, x, y, Type_bridge);
+            Next_Coord(&pos, D_pont);
+            Place_bridge_on_map(Board, posMax, pos, Type_bridge);
         }
         
-        //fonction victor 
-        *(Board + Ymax*x + y) = Type_bridge + Type_bridge_precedent;
+        Next_Coord(&pos, D_pont);
+        *(Board + posMax.y*pos.x + pos.y) = Type_bridge + Type_bridge_precedent;
         Type_bridge_precedent = Type_bridge;
     }
 }
