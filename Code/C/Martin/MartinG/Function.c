@@ -105,7 +105,7 @@ Coord* Next_Coord(Coord* pos, int direction) {
 
 int Map_mading(char* Board, Coord posMax, Coord pos, int Nb_ile) {
     *(Board + posMax.y*pos.x + pos.y) = '1';
-    int end = 0; int Type_bridge_precedent; int Direction_available[4];int a = 1; 
+    int end = 0; int Type_bridge_precedent = 0; int Direction_available[4];int a = 1; 
     while (end < Nb_ile) {
         int* tab = Space_next_bridge(Board, pos, posMax);
         for (int i = 0; i < 4; i++) {
