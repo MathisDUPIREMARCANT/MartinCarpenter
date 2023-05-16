@@ -56,10 +56,22 @@ session_start() ;
     >PLAY</a>
     </button>
 
-    <button class="bouton" type=submit>
-    <a class='al' href="WEB/rules.php"
-    >Rules</a>
+    <button class="bouton" type="submit" onclick="showPopup()">
+    <a class="al" href="WEB/rules.php">Rules</a>
     </button>
+
+    <div id="popup" style="display: none;">
+        <!-- Contenu de votre pop-up -->
+        Texte du pop-up
+    </div>
+
+    <script>
+        function showPopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "block";
+        }
+    </script>
+
         
     <button class="bouton" type=submit>
     <a class='al' href="WEB/sign_in_up.php"
