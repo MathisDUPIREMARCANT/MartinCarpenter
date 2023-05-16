@@ -19,18 +19,23 @@
 </head>
 <body> 
     <header>
-     <button class="pause" type=submit>
-        <a href="WEB/user.php">
-        <img class="avatarimg" src="WEB/image/avatar.png"  >
-        </a>
-    </button>
-    
+     
+        <button class="choiceButton" onclick="redirectTo('storymod.php')">Story Mod</button>
+        <button class="choiceButton" onclick="redirectTo('easymod.php')">Easy Mod</button>
+        <button class="choiceButton" onclick="redirectTo('mediummod.php')">Medium Mod</button>
+        <button class="choiceButton" onclick="redirectTo('hardmod.php')">Hard Mod</button>
+
+
     </header>
 
-
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
 
 
 
 
 </body>
-   
+</html> 
