@@ -31,12 +31,17 @@ void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
 
     if(type_bridge == 1){
-        *(Board + posMax.y*pos.x + pos.y) = '~';
+        *(Board + posMax.x*pos.y + pos.x) = '~';
     }
    
     if(type_bridge == 2){
-        *(Board + posMax.y *pos.x + pos.y) = '#';
+        *(Board + posMax.x *pos.y + pos.x) = '#';
     }
+};
+
+void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight) {
+    /*Place a bridge on the board in (x,y)*/
+    *(Board + posMax.x * pos.y + pos.x) = weight + '0';
 };
 
 int Space_next_bridge(char* Board, Coord pos, Coord posMax){
