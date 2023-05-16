@@ -1,14 +1,21 @@
 #include "Header.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-char * Init_boardGame(Coord pos){
+
+char* Init_board_Game(Coord pos){
     /*Initialize the board and fill it with '*' 
     Returns the pointer of the Board*/
-
-    char* Board = malloc((pos.x * pos.y) * sizeof(char));
-    for(int i = 0; i < (pos.x * pos.y); i++){
-        *(Board + i) = "*";
+    
+    char* Board = NULL;
+    Board = (char*)malloc(((pos.x * pos.y)+1) * sizeof(char));
+    if (Board != NULL) {
+        for (int x = 0; x < pos.x; x++) {
+            for (int y = 0; y < pos.y; y++) {
+                *(Board + (pos.x * y) + x) =  '*';
+            }
+        }
     }
     return Board;
 }
@@ -105,7 +112,7 @@ Coord* Next_Coord(Coord* pos, int direction) {
 }
 
 int Map_mading(char* Board, Coord posMax, Coord pos, int Nb_ile) {
-    *(Board + posMax.y*pos.x + pos.y) = '1';
+    *(Board + (posMax.y*pos.x) + pos.y) = '1';
     int end = 0; int Type_bridge = Random(1)+1; int Type_bridge_precedent = 1; int Direction_available[4];int a = 1;
     while (end < Nb_ile) {
         int* tab = Space_next_bridge(Board, pos, posMax);
@@ -142,9 +149,9 @@ int Map_mading(char* Board, Coord posMax, Coord pos, int Nb_ile) {
 void Affichage_board(char* Board, Coord Taille) {
     int i = 0;
     for (i; i < (Taille.x * Taille.y); i++) {
-        if (i % 8 == 0) {
+        if (i % Taille.x == 0) {
             printf("\n");
         }
-        printf("%c", *(Board + i));
+        printf("%c", Board[i]);
     }
 }
