@@ -1,4 +1,6 @@
 #include "Header.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 char * Init_boardGame(Coord pos){
     /*Initialize the board and fill it with '*' 
@@ -134,5 +136,15 @@ int Map_mading(char* Board, Coord posMax, Coord pos, int Nb_ile) {
         int Type_bridge = Random(1) + 1;
         Type_bridge_precedent = Type_bridge;
         end++;
+    }
+}
+
+void Affichage_board(char* Board, Coord Taille) {
+    int i = 0;
+    for (i; i < (Taille.x * Taille.y); i++) {
+        if (i % 8 == 0) {
+            printf("\n");
+        }
+        printf("%c", *(Board + i));
     }
 }
