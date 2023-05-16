@@ -16,5 +16,264 @@
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
+    <link rel="stylesheet" href="CSS/Rules.css">
 </head>
+
+<body>
+<header>
+        <div class="buttonhead">
+    <button class="arrow" type=submit>
+        <a href="../index.php">
+        <img class="arrowimg" src="image/arrow.png"  >
+        </a>
+    </button>
+    </div>
+</header>
+<main>
+
+    <div  class="rule1">
+    The object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    fThe object of the game is to connect islands with bridges !
+    feefefefefefefe
+    fcloseff
+
+    fclosefff
+    f
+</div>
+
+</main>
    

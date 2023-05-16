@@ -20,7 +20,7 @@ session_start() ;
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
-    <link rel="stylesheet" href="WEB/CSS/header.css">
+    <link rel="stylesheet" href="WEB/CSS/index.css">
 </head>
 
 <body>
