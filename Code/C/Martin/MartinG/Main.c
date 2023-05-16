@@ -12,6 +12,7 @@ void main(int argc, char* argv[]) {
 	int startx = Random(Xmax-1);
 	int starty = Random(Ymax-1);
 
+	int i;
 	
 
 }
