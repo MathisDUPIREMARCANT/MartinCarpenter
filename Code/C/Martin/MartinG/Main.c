@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Header.h"
+#include "Function.c"
 
 
 void main(int argc, char* argv[]) {
@@ -10,7 +12,7 @@ void main(int argc, char* argv[]) {
 	char* Board = Init_board_Game(Xmax, Ymax);
 
 	int startx = Random(Xmax-1);
-	int starty = Random(Ymax-1);
+	int starty = Random(Ymax - 1);
 
 	int i;
 	
