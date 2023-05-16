@@ -16,17 +16,27 @@
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
+    <link rel="stylesheet" href="CSS/gamehome.css">
 </head>
 <body> 
     <header>
+    <div class="buttonhead">
+    <button class="arrow" type=submit>
+        <a href="../index.php">
+        <img class="arrowimg" src="image/arrow.png"  >
+        </a>
+    </button>
+    </div>
+</header>
+    <main class="main">
      
-        <button class="choiceButton" onclick="redirectTo('storymod.php')">Story Mod</button>
-        <button class="choiceButton" onclick="redirectTo('easymod.php')">Easy Mod</button>
-        <button class="choiceButton" onclick="redirectTo('mediummod.php')">Medium Mod</button>
-        <button class="choiceButton" onclick="redirectTo('hardmod.php')">Hard Mod</button>
+        <button class="story" onclick="redirectTo('storymod.php')">Story Mod</button>
+        <button class="easy" onclick="redirectTo('easymod.php')">Easy Mod</button>
+        <button class="medium" onclick="redirectTo('mediummod.php')">Medium Mod</button>
+        <button class="hard" onclick="redirectTo('hardmod.php')">Hard Mod</button>
 
 
-    </header>
+</main>
 
     <script>
         function redirectTo(url) {

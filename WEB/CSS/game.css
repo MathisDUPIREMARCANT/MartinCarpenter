@@ -1,0 +1,17 @@
+.pause{
+    position: fixed;
+    background-color: rgb(0, 105, 128);
+    border-color: aqua;
+    margin-left: 91%;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.pauseimg{
+    width: 60px;
+}
+.buttonhead{
+display:flex;
+}
