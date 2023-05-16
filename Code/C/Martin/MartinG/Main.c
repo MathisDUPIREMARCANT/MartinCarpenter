@@ -18,13 +18,13 @@ void main(int argc, char* argv[]) {
 	pos2.x = 4; pos2.y = 5;
 	char* Board = Init_board_Game(posMax);
 	//Map_mading(Board, posMax, pos, nombre_iles);
-	Affichage_board(Board, posMax);
+	Print_board(Board, posMax);
 
 	Place_bridge_on_map(Board, posMax, pos, 2);
 	Place_island_on_map(Board, posMax, pos2, 2);
 	printf("\n");
 
-	Affichage_board(Board, posMax);
+	Print_board(Board, posMax);
 	
 	
 

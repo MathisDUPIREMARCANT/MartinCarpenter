@@ -1,7 +1,7 @@
 #include "Header.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
 void from_C_to_Json_ile(Island ile) {
     printf("Island : [ x : %d, y : %d, coord : %d,%d, number : %d]", ile.pos.x, ile.pos.y, ile.number);
     
@@ -32,3 +32,4 @@ void from_C_to_Json(Bridge* liste_pont[], Island* liste_ile[], int nb_pont, int 
 	printf("    ]\n");
 	printf("}\n");
 }
+*/
