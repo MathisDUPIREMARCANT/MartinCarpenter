@@ -1,0 +1,36 @@
+
+.arrow{
+    background-color: rgb(134, 218, 237);
+    border-color: rgb(158, 233, 233);
+    display: flex;
+    position: fixed;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.arrowimg{
+    width: 50px;
+}
+.buttonhead{
+    display: flex;
+}
+.story{
+    display: block;
+    margin : auto;
+    margin-bottom: 100px;
+    width: 250px;
+    height: 100px;
+}
+.main{
+    margin-top: 150px;
+}
+.easy,.medium,.hard{
+    width: 225px;
+    height: 80px;
+    margin-left: 100px;
+}
+.easy{
+    margin-left: 190px;
+}
