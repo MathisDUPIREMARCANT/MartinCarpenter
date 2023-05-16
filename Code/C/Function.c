@@ -31,6 +31,9 @@ int Place_bridge_on_map(char* Board, int Ymax, int x, int y, int type_bridge){
 int Space_next_bridge(char* Board, int x, int y){
     /*Returns a list of spaces available between position x,y and each side
     In the order (N,E,S,O)*/
+    int N = 0; int E = 0;
+    int S = 0; int O = 0;
 
+    while()
 
 }
