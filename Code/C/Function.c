@@ -27,3 +27,7 @@ int Place_bridge_on_map(char* Board, int Ymax, int x, int y, int type_bridge){
         *(Board + Ymax*x + y) = '#';
     }
 };
+
+int Space_next_bridge(char* Board, int x, int y){
+    
+}
