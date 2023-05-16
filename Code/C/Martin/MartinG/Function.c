@@ -77,7 +77,6 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 }
 
 Coord* Next_Coord(Coord* pos, int direction) {
-    Coord nPos;
     switch (direction) {
     case 0:
         //N
