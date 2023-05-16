@@ -1,9 +1,11 @@
-char * Init_boardGame(int x, int y){
+#include "Header.h"
+
+char * Init_boardGame(Coord pos){
     /*Initialize the board and fill it with '*' 
     Returns the pointer of the Board*/
 
-    char* Board = malloc((x * y) * sizeof(char));
-    for(int i = 0; i < (x*y); i++){
+    char* Board = malloc((pos.x * pos.y) * sizeof(char));
+    for(int i = 0; i < (pos.x * pos.y); i++){
         *(Board + i) = "*";
     }
     return Board;
@@ -16,53 +18,53 @@ int Random(int maximum) {
     return rand() % (maximum + 1);
 }
 
-int Place_bridge_on_map(char* Board, int Ymax, int x, int y, int type_bridge){
+void Place_bridge_on_map(char* Board, int Ymax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
 
     if(type_bridge == 1){
-        *(Board + Ymax*x + y) = '~';
+        *(Board + Ymax*pos.x + pos.y) = '~';
     }
    
     if(type_bridge == 2){
-        *(Board + Ymax*x + y) = '#';
+        *(Board + Ymax*pos.x + pos.y) = '#';
     }
 };
 
-int Space_next_bridge(char* Board, int x, int y, int Xmax, int Ymax){
+int Space_next_bridge(char* Board, Coord pos, Coord posMax){
     /*Returns a list of spaces available between position x,y and each side
     In the order (N,E,S,O)*/
     int N = 0; int E = 0;
     int S = 0; int O = 0;
-    int xcopy = x;
-    int ycopy = y;
+    int xcopy = pos.x;
+    int ycopy = pos.y;
 
-    while(y>0 && strcmp(*(Board + Ymax*x + y), '*')){
+    while(pos.y>0 && strcmp(*(Board + posMax.y*pos.x + pos.y), '*')){
         N += 1;
         y -= 1;
     }
 
-    x = xcopy;
-    y = ycopy;
+    pos.x = xcopy;
+    pos.y = ycopy;
 
-    while(x < Xmax && strcmp(*(Board + Ymax * x + y), '*')){
+    while(pos.x < posMax.x && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
         E += 1;
-        x += 1;
+        pos.x += 1;
     }
 
-    x = xcopy;
-    y = ycopy;
+    pos.x = xcopy;
+    pos.y = ycopy;
 
-    while(y < Ymax && strcmp(*(Board + Ymax * x + y), '*')){
+    while(pos.y < posMax.y && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
         S += 1;
-        y += 1;
+        pos.y += 1;
     }
 
-    x = xcopy;
-    y = ycopy;
+    pos.x = xcopy;
+    pos.y = ycopy;
 
-    while(x>0 && strcmp(*(Board + Ymax * x + y), '*')){
+    while(pos.x>0 && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
         O += 1;
-        x -= 1;
+        pos.x -= 1;
     }
 
     int space[4];
