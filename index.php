@@ -34,7 +34,7 @@ session_start() ;
       <source src="WEB/image/fond.mp4" type="video/mp4" ></video
     >
     <header>
-        <div class="boutonhead">
+        <div class="buttonhead">
     <button class="avatar" type=submit>
         <a href="WEB/user.php">
         <img class="avatarimg" src="WEB/image/avatar.png"  >
@@ -45,12 +45,12 @@ session_start() ;
     <img class="settingimg" src="WEB/image/para.png" >
     </a>
     </button>
-    <button class="bouton" type="submit" onclick="showPopup()">
+   <!-- <button class="button" type="submit" onclick="showPopup()">
     <a class="al" href="WEB/rules.php">Rules</a>
     </button>
 
     <div id="popup" style="display: none;">
-        <!-- Contenu de votre pop-up -->
+         Contenu de votre pop-up 
         Texte du pop-up
     </div>
 
@@ -59,30 +59,30 @@ session_start() ;
             var popup = document.getElementById("popup");
             popup.style.display = "block";
         }
-    </script>
+    </script>-->
 </div>
     </header>
     <main>
 
 
-    <div class="boutons">
-    <button class="bouton" type=""submit">
+    <div class="buttons">
+    <button class="button" type="submit">
     <a class='al' href="WEB/game.php"
     >PLAY</a>
     </button>
 
-    <button class="bouton" type="submit" >
+    <button class="button" type="submit" >
     <a class="al" href="WEB/rules.php">Rules</a>
     </button>
 
 
         
-    <button class="bouton" type="submit">
+    <button class="button" type="submit">
     <a class='al' href="WEB/sign_in_up.php"
     >CONNEXION</a>
     </button>
 
-    <button class="bouton" type="submit">
+    <button class="button" type="submit">
     <a class='al' href="WEB/sign_in_up.php"
     >Inscription</a>
     </button>
