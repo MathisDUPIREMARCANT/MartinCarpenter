@@ -40,7 +40,7 @@
             </button>
 
             <button class="setting" type="submit">
-                <a class="al" href="setting.php">Setting</a>
+                <a class="al" href="settingenjeux/settingeasymod.php">Setting</a>
             </button>
         </div>
 
