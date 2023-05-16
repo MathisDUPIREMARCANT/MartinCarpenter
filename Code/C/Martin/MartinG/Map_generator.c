@@ -4,6 +4,9 @@
 #include <string.h>
 
 int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_ile) {
+
+    
+
     *(Board + (posMax.y * pos.x) + pos.y) = '1';
     int end = 0; int Type_bridge = Random(1) + 1; int Type_bridge_precedent = 1; int Direction_available[4]; int a = 1;
     while (end < Nb_ile) {

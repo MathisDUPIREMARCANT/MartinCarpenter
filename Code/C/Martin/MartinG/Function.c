@@ -54,7 +54,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 
     while(pos.y>0 && strcmp(*(Board + posMax.y*pos.x + pos.y), '*')){
         N += 1;
-        pos.y -= 1;
+        Next_Coord(&pos, 0);
     }
 
     pos.x = xcopy;
@@ -62,7 +62,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 
     while(pos.x < posMax.x && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
         E += 1;
-        pos.x += 1;
+        Next_Coord(&pos, 1);
     }
 
     pos.x = xcopy;
@@ -70,7 +70,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 
     while(pos.y < posMax.y && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
         S += 1;
-        pos.y += 1;
+        Next_Coord(&pos, 2);
     }
 
     pos.x = xcopy;
@@ -78,7 +78,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 
     while(pos.x>0 && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
         O += 1;
-        pos.x -= 1;
+        Next_Coord(&pos, 3);
     }
 
     int space[4];
@@ -91,6 +91,8 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 }
 
 Coord* Next_Coord(Coord* pos, int direction) {
+    /*Modifies the coordinates according to the argument passed as a parameter
+    (0:N, 1:E, 2:S, 3:O)*/
     switch (direction) {
     case 0:
         //N
@@ -116,7 +118,7 @@ Coord* Next_Coord(Coord* pos, int direction) {
     }
 }
 
-void Affichage_board(char* Board, Coord Taille) {
+void Print_board(char* Board, Coord Taille) {
     int i = 0;
     for (i; i < (Taille.x * Taille.y); i++) {
         if (i % Taille.x == 0) {
