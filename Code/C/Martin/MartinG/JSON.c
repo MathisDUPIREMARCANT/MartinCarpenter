@@ -1,8 +1,7 @@
 #include "Header.h"
-#include "Function.c"
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
 void from_C_to_Json_ile(Island ile) {
     printf("Island : [ x : %d, y : %d, coord : %d,%d, number : %d]", ile.pos.x, ile.pos.y, ile.number);
     

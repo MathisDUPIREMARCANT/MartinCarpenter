@@ -16,14 +16,17 @@
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
+    <link rel="stylesheet" href="CSS/pause.css">
+    <link rel="stylesheet" href="CSS/game.css">
 </head>
 <body> 
     <header>
      
+    <div class="buttonhead">
         <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
             <a class="al"><img class="pauseimg" src="image/butonpause.png"></a>
         </button>
-
+        </div>
         <div id="popup" style="display: none;">
             <button class="retry" type="submit">
                 <a class="al" href="WEB/game.php">Retry</a>
