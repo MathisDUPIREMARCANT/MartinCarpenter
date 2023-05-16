@@ -43,6 +43,15 @@ int Map_mading(char* Board, int Ymax, int Xmax, int x, int y,  int Nb_ile){
     int end = 0;
     while(end < Nb_ile){
         int Dpont = rand(3);
-        if 
+        int* tab = Space_next_bridge(Board,x,y,Xmax,Ymax);
+        if(*(tab + Dpont) >= 3){
+            int lenght = Random(1);
+            for(int i = 0; i<= lenght; i++){
+                Place_bridge_on_map(Board )
+            }
+        }
+        else{
+
+        }
     }
 }
