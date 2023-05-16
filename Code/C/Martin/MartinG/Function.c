@@ -40,7 +40,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 
     while(pos.y>0 && strcmp(*(Board + posMax.y*pos.x + pos.y), '*')){
         N += 1;
-        y -= 1;
+        pos.y -= 1;
     }
 
     pos.x = xcopy;
@@ -74,6 +74,32 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
     space[3] = O;
 
     return  space;
+}
+
+Coord* Next_Coord(Coord* pos, int direction) {
+    Coord nPos;
+    switch (direction) {
+    case 0:
+        //N
+        //pos->x = pos->x;
+        pos->y += 1;
+        break;
+    case 1:
+        //E
+        pos->x += 1;
+        //pos->y = pos->y;
+        
+        break;
+    case 2:
+        //S
+        //pos->x = pos->x;
+        pos->y -= 1;
+        break;
+    case 3:
+        pos->x -= 1;
+        //pos->y = pos->y;
+        break;
+    }
 }
 
 int Map_mading(char* Board, int Ymax, int Xmax, int x, int y, int Nb_ile) {

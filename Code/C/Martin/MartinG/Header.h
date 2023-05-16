@@ -15,8 +15,8 @@ typedef struct Island{
     int number;
 }Island;
 
-void Next_Coord(Coord pos, int direction);
 void Place_bridge_on_map(char* Board, int Ymax, Coord pos, int type_bridge);
 int Space_next_bridge(char* Board, Coord pos, Coord posMax);
 int Random(int maximum);
 char* Init_boardGame(Coord pos);
+Coord* Next_Coord(Coord* pos, int direction);
