@@ -130,6 +130,7 @@
     <ClCompile Include="Function.c" />
     <ClCompile Include="JSON.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Map_generator.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
