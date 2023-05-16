@@ -1,0 +1,33 @@
+.arrow{
+    background-color: rgb(134, 218, 237);
+    border-color: rgb(158, 233, 233);
+    display: flex;
+    position: fixed;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.arrowimg{
+    width: 50px;
+}
+.rule1{
+    border-style:solid;
+	padding:10px;
+	width:400px;
+	margin: auto;
+	height:500px;
+	overflow-y:scroll;
+	scrollbar-width:none;
+    
+}
+.buttonhead{
+    display: flex;
+}
+
+.form{
+    display: flex;
+    position: fixed;
+
+}
