@@ -9,9 +9,9 @@ void main(int argc, char* argv[]) {
 	int nb_max_liaisons = *(argv[3]);
 	char* Board = Init_board_Game(Xmax, Ymax);
 
-	int startx = Random(Xmax);
-	int starty = Random(Ymax);
+	int startx = Random(Xmax-1);
+	int starty = Random(Ymax-1);
 
-
+	
 
 }
