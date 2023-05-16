@@ -19,3 +19,12 @@ int Place_bridge_on_map(char* Board, int Ymax, int x, int y, int type_bridge){
         *(Board + Ymax*x + y) = '#';
     }
 };
+
+int Map_mading(char* Board, int Ymax, int Xmax, int x, int y,  int Nb_ile){
+    *(Board + Ymax*x + y) = '1';
+    int end = 0;
+    while(end < Nb_ile){
+        int Dpont = rand(3);
+        if 
+    }
+}
