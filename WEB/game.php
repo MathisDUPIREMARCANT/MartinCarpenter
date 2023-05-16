@@ -16,21 +16,36 @@
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
+    <link rel="stylesheet" href="CSS/gamehome.css">
 </head>
 <body> 
     <header>
-     <button class="pause" type=submit>
-        <a href="WEB/user.php">
-        <img class="avatarimg" src="WEB/image/avatar.png"  >
+    <div class="buttonhead">
+    <button class="arrow" type=submit>
+        <a href="../index.php">
+        <img class="arrowimg" src="image/arrow.png"  >
         </a>
     </button>
-    
-    </header>
+    </div>
+</header>
+    <main class="main">
+     
+        <button class="story" onclick="redirectTo('storymod.php')">Story Mod</button>
+        <button class="easy" onclick="redirectTo('easymod.php')">Easy Mod</button>
+        <button class="medium" onclick="redirectTo('mediummod.php')">Medium Mod</button>
+        <button class="hard" onclick="redirectTo('hardmod.php')">Hard Mod</button>
 
 
+</main>
+
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
 
 
 
 
 </body>
-   
+</html> 

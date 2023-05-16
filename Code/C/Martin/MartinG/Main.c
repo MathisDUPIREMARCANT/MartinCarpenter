@@ -1,18 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Header.h"
+
 
 
 void main(int argc, char* argv[]) {
-	int nombre_iles = *(argv[0]);
-	int Xmax = *(argv[1]);
-	int Ymax = *(argv[2]);
-	int nb_max_liaisons = *(argv[3]);
-	char* Board = Init_board_Game(Xmax, Ymax);
+	//int nombre_iles = *(argv[0]);
 
-	int startx = Random(Xmax-1);
-	int starty = Random(Ymax-1);
+	Coord posMax;
+	Coord pos;
 
-	int i;
+	posMax.x = 5;//*(argv[1]);
+	posMax.y = 6;//*(argv[2]);
+	pos.x = Random(posMax.x - 1); pos.y = Random(posMax.y - 1);
+	char* Board = Init_board_Game(posMax);
+	if (Board != NULL) {
+		//Map_mading(Board, posMax, pos, nombre_iles);
+		Affichage_board(Board, posMax);
+	}
+
+	
 	
 
 }

@@ -1,12 +1,21 @@
 #include "Header.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-char * Init_boardGame(Coord pos){
+
+char* Init_board_Game(Coord pos){
     /*Initialize the board and fill it with '*' 
     Returns the pointer of the Board*/
-
-    char* Board = malloc((pos.x * pos.y) * sizeof(char));
-    for(int i = 0; i < (pos.x * pos.y); i++){
-        *(Board + i) = "*";
+    
+    char* Board = NULL;
+    Board = (char*)malloc(((pos.x * pos.y)+1) * sizeof(char));
+    if (Board != NULL) {
+        for (int x = 0; x < pos.x; x++) {
+            for (int y = 0; y < pos.y; y++) {
+                *(Board + (pos.x * y) + x) =  '*';
+            }
+        }
     }
     return Board;
 }
@@ -18,15 +27,15 @@ int Random(int maximum) {
     return rand() % (maximum + 1);
 }
 
-void Place_bridge_on_map(char* Board, int Ymax, Coord pos, int type_bridge){
+void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
 
     if(type_bridge == 1){
-        *(Board + Ymax*pos.x + pos.y) = '~';
+        *(Board + posMax.y*pos.x + pos.y) = '~';
     }
    
     if(type_bridge == 2){
-        *(Board + Ymax*pos.x + pos.y) = '#';
+        *(Board + posMax.y *pos.x + pos.y) = '#';
     }
 };
 
@@ -40,7 +49,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
 
     while(pos.y>0 && strcmp(*(Board + posMax.y*pos.x + pos.y), '*')){
         N += 1;
-        y -= 1;
+        pos.y -= 1;
     }
 
     pos.x = xcopy;
@@ -76,25 +85,73 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax){
     return  space;
 }
 
-int Map_mading(char* Board, int Ymax, int Xmax, int x, int y, int Nb_ile) {
-    (Board + Ymax*x + y) = '1';
-    int end = 0; int Type_bridge = Random(1) + 1;
+Coord* Next_Coord(Coord* pos, int direction) {
+    switch (direction) {
+    case 0:
+        //N
+        //pos->x = pos->x;
+        pos->y += 1;
+        break;
+    case 1:
+        //E
+        pos->x += 1;
+        //pos->y = pos->y;
+        
+        break;
+    case 2:
+        //S
+        //pos->x = pos->x;
+        pos->y -= 1;
+        break;
+    case 3:
+        //O
+        pos->x -= 1;
+        //pos->y = pos->y;
+        break;
+    }
+}
+
+int Map_mading(char* Board, Coord posMax, Coord pos, int Nb_ile) {
+    *(Board + (posMax.y*pos.x) + pos.y) = '1';
+    int end = 0; int Type_bridge = Random(1)+1; int Type_bridge_precedent = 1; int Direction_available[4];int a = 1;
     while (end < Nb_ile) {
-        int Dpont = Random(3);// vérifie si c possible d'avancé dans la direction 
-        int* tab = Space_next_bridge(Board, x, y, Xmax, Ymax);
-        int Type_bridge_suivant = Random(1) + 1;
-        if ((tab + Dpont) >= ) {
-            int lenght = Random(tab + Dpont);
-            for (int i = 0; i <= lenght; i++) {
-                //fonction victor
-                Place_bridge_on_map(Board, Ymax, x, y, Type_bridge_suivant);
+        int* tab = Space_next_bridge(Board, pos, posMax);
+        for (int i = 0; i < 4; i++) {
+            if (*(tab + i) >= 2) {
+                Direction_available[i] = 1;
+            }
+            else {
+                Direction_available[i] = 0;
             }
         }
-        else {
-            break;
+        int D_pont;
+        while(a){
+            D_pont = Random(3);
+            if (Direction_available[D_pont] == 1) {
+                a = 0;
+            }
         }
-        //fonction victor 
-        (Board + Ymaxx + y) = Type_bridge_suivant + Type_bridge;
-        Type_bridge = Type_bridge_suivant;
+        
+        int length = Random(tab[D_pont]);
+        for (int i = 0; i <= length; i++) {
+            Next_Coord(&pos, D_pont);
+            Place_bridge_on_map(Board, posMax, pos, Type_bridge);
+        }
+        
+        Next_Coord(&pos, D_pont);
+        *(Board + posMax.y*pos.x + pos.y) = Type_bridge + Type_bridge_precedent;
+        int Type_bridge = Random(1) + 1;
+        Type_bridge_precedent = Type_bridge;
+        end++;
+    }
+}
+
+void Affichage_board(char* Board, Coord Taille) {
+    int i = 0;
+    for (i; i < (Taille.x * Taille.y); i++) {
+        if (i % Taille.x == 0) {
+            printf("\n");
+        }
+        printf("%c", Board[i]);
     }
 }
