@@ -45,17 +45,6 @@ session_start() ;
     <img class="settingimg" src="WEB/image/para.png" >
     </a>
     </button>
-</div>
-    </header>
-    <main>
-
-
-    <div class="boutons">
-    <button class="bouton" type=submit>
-    <a class='al' href="WEB/game.php"
-    >PLAY</a>
-    </button>
-
     <button class="bouton" type="submit" onclick="showPopup()">
     <a class="al" href="WEB/rules.php">Rules</a>
     </button>
@@ -71,14 +60,29 @@ session_start() ;
             popup.style.display = "block";
         }
     </script>
+</div>
+    </header>
+    <main>
+
+
+    <div class="boutons">
+    <button class="bouton" type=""submit">
+    <a class='al' href="WEB/game.php"
+    >PLAY</a>
+    </button>
+
+    <button class="bouton" type="submit" >
+    <a class="al" href="WEB/rules.php">Rules</a>
+    </button>
+
 
         
-    <button class="bouton" type=submit>
+    <button class="bouton" type="submit">
     <a class='al' href="WEB/sign_in_up.php"
     >CONNEXION</a>
     </button>
 
-    <button class="bouton" type=submit>
+    <button class="bouton" type="submit">
     <a class='al' href="WEB/sign_in_up.php"
     >Inscription</a>
     </button>
