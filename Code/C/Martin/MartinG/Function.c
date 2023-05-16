@@ -30,12 +30,12 @@ int Random(int maximum) {
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
 
-    if(type_bridge == 1){
-        *(Board + posMax.x*pos.y + pos.x) = '~';
+    if(type_bridge == 0){
+        *(Board + posMax.x * pos.y + pos.x) = '~';
     }
    
-    if(type_bridge == 2){
-        *(Board + posMax.x *pos.y + pos.x) = '#';
+    if(type_bridge == 1){
+        *(Board + posMax.x * pos.y + pos.x) = '#';
     }
 };
 
@@ -44,48 +44,46 @@ void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight) {
     *(Board + posMax.x * pos.y + pos.x) = weight + '0';
 };
 
-int Space_next_bridge(char* Board, Coord pos, Coord posMax){
+int* Space_next_bridge(char* Board, Coord pos, Coord posMax){
     /*Returns a list of spaces available between position x,y and each side
     In the order (N,E,S,O)*/
-    int N = 0; int E = 0;
-    int S = 0; int O = 0;
+    int space[4];
+    space[0] = 0;
+    space[1] = 0;
+    space[2] = 0;
+    space[3] = 0;
+
     int xcopy = pos.x;
     int ycopy = pos.y;
 
-    while(pos.y>0 && strcmp(*(Board + posMax.y*pos.x + pos.y), '*')){
-        N += 1;
+    while(pos.y>0 && *(Board + posMax.x*pos.y + pos.x) == '*'){
+        space[0] ++;
         Next_Coord(&pos, 0);
     }
 
     pos.x = xcopy;
     pos.y = ycopy;
 
-    while(pos.x < posMax.x && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
-        E += 1;
+    while(pos.x < posMax.x && *(Board + posMax.x * pos.y + pos.x) == '*'){
+        space[1] ++;
         Next_Coord(&pos, 1);
     }
 
     pos.x = xcopy;
     pos.y = ycopy;
 
-    while(pos.y < posMax.y && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
-        S += 1;
+    while(pos.y < posMax.y && *(Board + posMax.x * pos.y + pos.x) == '*'){
+        space[2] ++;
         Next_Coord(&pos, 2);
     }
 
     pos.x = xcopy;
     pos.y = ycopy;
 
-    while(pos.x>0 && strcmp(*(Board + posMax.y * pos.x + pos.y), '*')){
-        O += 1;
+    while(pos.x>0 && *(Board + posMax.x * pos.y + pos.x) == '*'){
+        space[3] ++;
         Next_Coord(&pos, 3);
     }
-
-    int space[4];
-    space[0] = N;
-    space[1] = E;
-    space[2] = S;
-    space[3] = O;
 
     return  space;
 }
