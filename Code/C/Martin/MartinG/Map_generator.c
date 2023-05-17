@@ -18,6 +18,9 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
     int Type_bridge = 0;
     int Type_island;
     int Direction_available[4];
+
+    int Island_act = 0;
+    int Bridges_act = 0;
     
 
     while (end < Nb_island) {
@@ -73,6 +76,9 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             }
 
             Place_island_on_map(Board, posMax, pos, Type_island);
+
+            Islands[Island_act].pos = pos;
+
             
             
         end++;
