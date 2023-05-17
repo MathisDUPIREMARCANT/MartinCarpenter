@@ -14,7 +14,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
     *(Board + (posMax.x * pos.y) + pos.x) = '1';
     int end = 0;
    
-    int Type_bridge = Random(1);
+    int Type_bridge = Random(0,1);
     int Type_bridge_precedent = 0;
     int Direction_available[4];
     
@@ -25,7 +25,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         int a = 1;
         int spa[4];
 
-        for (int i = 1; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             spa[i] = Space_next_bridge(Board, pos, posMax, i);
         }
         
@@ -33,7 +33,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         for(int i = 0; i < 4; i++){
             printf("%d\n", spa[i]);
 
-            if (spa[i] >= 2) {
+            if (spa[i] >= 1) {
                 Direction_available[i] = 1;
             }
             else {
@@ -44,15 +44,15 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
 
         while (a) {
-            D_pont = Random(3);
+            D_pont = Random(0,3);
             if (Direction_available[D_pont] == 1) {
                 a = 0;
             }
         }
 
             int length;
-            length = Random(spa[D_pont]-1);
-            int Type_bridge = Random(1);
+            length = Random(1,spa[D_pont]-1);
+            int Type_bridge = Random(0,1);
             for (int i = 0; i < length; i++) {
                 Next_Coord(&pos, D_pont);
                 Place_bridge_on_map(Board, posMax, pos, Type_bridge);

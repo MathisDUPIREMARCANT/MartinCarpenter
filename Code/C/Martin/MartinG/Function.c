@@ -20,12 +20,20 @@ char* Init_board_Game(Coord pos){
     return Board;
 }
 
-int Random(int maximum) {
+int Random(int min,int max) {
     /*Returns a random number between 0 and maximum*/
+   
+        if (max < min) {
+            printf("Error : invalid data.\n");
+            return -1;
+        }
 
-    srand(time(0));
-    return rand() % (maximum + 1);
-}
+        int num;
+        num = rand() % (max - min + 1) + min;
+        return num;
+    }
+    
+
 
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
@@ -51,7 +59,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     switch (Direction) {
 
     case(0):
-        while (pos.y-1 > -1 && *(Board + (posMax.x * pos.y-1) + pos.x) == '*') {
+        while (pos.y-1 > 0 && *(Board + (posMax.x * pos.y-1) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 0);
         }break;
@@ -69,7 +77,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
         }break;
         
     case(3):
-        while (pos.x-1 > -1 && *(Board + (posMax.x * pos.y) + pos.x-1) == '*' ) {
+        while (pos.x-1 > 0 && *(Board + (posMax.x * pos.y) + pos.x-1) == '*' ) {
             space++;
             Next_Coord(&pos, 3);
         }break;
