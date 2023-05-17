@@ -20,14 +20,20 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
     
 
     while (end < Nb_island) {
-        int* space = Space_next_bridge(Board, pos, posMax);
-        int* spacopy = Table_copy(space, 4);
+        //int* space = Space_next_bridge(Board, pos, posMax);
+       // int* spacopy = Table_copy(space, 4);
+
+        int spa[4];
+
+        for (int i = 0; i < 4; i++) {
+            spa[i] = Space_next_bridge(Board, pos, posMax, i);
+        }
         
 
         for(int i = 0; i < 4; i++){
-        
+            printf("%d\n", spa[i]);
 
-            if (*(space+i) >= 2) {
+            if (spa[i] >= 2) {
                 Direction_available[i] = 1;
             }
             else {
@@ -35,6 +41,8 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             }
         }
         int D_pont;
+
+
         while (a) {
             D_pont = Random(3);
             if (Direction_available[D_pont] == 1) {
@@ -42,16 +50,18 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             }
         }
 
-        int length = Random(spacopy[D_pont]);
-        for (int i = 0; i <= length; i++) {
-            Next_Coord(&pos, D_pont);
-            Place_bridge_on_map(Board, posMax, pos, Type_bridge);
-        }
+            int length;
+            length = Random(spa[D_pont]);
 
-        Next_Coord(&pos, D_pont);
-        *(Board + posMax.x * pos.y + pos.x) = Type_bridge + Type_bridge_precedent;
-        int Type_bridge = Random(1) + 1;
-        Type_bridge_precedent = Type_bridge;
+            for (int i = 0; i <= length; i++) {
+                Next_Coord(&pos, D_pont);
+                Place_bridge_on_map(Board, posMax, pos, Type_bridge);
+            }
+
+            Next_Coord(&pos, D_pont);
+            *(Board + posMax.x * pos.y + pos.x) = Type_bridge + Type_bridge_precedent;
+            int Type_bridge = Random(1) + 1;
+            Type_bridge_precedent = Type_bridge;
         end++;
     }
 }
