@@ -10,8 +10,8 @@ void main(int argc, char* argv[]) {
 	Coord posMax;
 	Coord pos; Coord pos2;
 
-	posMax.x = 5;//*(argv[1]);
-	posMax.y = 6;//*(argv[2]);
+	posMax.x = 15;//*(argv[1]);
+	posMax.y = 20;//*(argv[2]);
 	
 
 	pos.x = 2; pos.y = 3;
@@ -29,7 +29,7 @@ void main(int argc, char* argv[]) {
 	printf("\n");
 
 	char* Board2 = Init_board_Game(posMax);
-	Map_gen(Board2, posMax, pos, 5);
+	Map_gen(Board2, posMax, pos, 15);
 	
 	printf("\n");
 
