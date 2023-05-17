@@ -20,7 +20,7 @@ void main(int argc, char* argv[]) {
 	
 	Print_board(Board, posMax);
 
-	Place_bridge_on_map(Board, posMax, pos, 2);
+	Place_bridge_on_map(Board, posMax, pos, 1);
 	Place_island_on_map(Board, posMax, pos2, 2);
 	printf("\n");
 
