@@ -57,11 +57,15 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             int length;
             length = Random(1,spa[D_pont]-1);
+
+            Bridges[Bridges_act].length = length;
+            Bridges[Bridges_act].size = Type_bridge;
+            Bridges[Bridges_act].direction = 0;
+
             for (int i = 0; i < length; i++) {
                 Next_Coord(&pos, D_pont);
                 Place_bridge_on_map(Board, posMax, pos, Type_bridge);
-
-
+                Bridges[Bridges_act].pos[i] = pos;
             }
 
             Next_Coord(&pos, D_pont);
@@ -78,10 +82,12 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             Place_island_on_map(Board, posMax, pos, Type_island);
 
             Islands[Island_act].pos = pos;
+            Islands[Island_act].number = Type_island;
 
             
-            
+            Island_act++;
+            Bridges_act++;
         end++;
-        Print_board(Board, posMax);
+        from_C_to_Json(Bridges, Islands, Bridges_act, Islands, posMax);
     }
 }

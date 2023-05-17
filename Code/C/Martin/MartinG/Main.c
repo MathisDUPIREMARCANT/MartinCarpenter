@@ -31,6 +31,7 @@ void main(int argc, char* argv[]) {
 	char* Board2 = Init_board_Game(posMax);
 	Map_gen(Board2, posMax, pos, 20);
 	
+	
 	printf("\n");
 
 	Print_board(Board2, posMax);
