@@ -11,7 +11,7 @@ void from_C_to_Json_pont(Bridge pont) {
 	
 	printf("{ \n \"width\" : %d, \"lenght\" : %d, \"direction\" : %d, \"Placement\" : [", pont.size, pont.lenght, pont.direction);
 	for (int i = 0; i < pont.lenght; i++) {
-		printf("%d", *(coordPtr + i));
+		printf("%d, %d", pont.pos[i].x, pont.pos[i].y);
 	}
 	printf("] \n }");
 }
@@ -23,7 +23,7 @@ void from_C_to_Json(Bridge* liste_pont, Island* liste_ile, int nb_pont, int nb_i
 		from_C_to_Json_ile(liste_ile[i]);
 		if (i < nb_ile - 1) {
 			printf(",\n");
-		}
+		} 
 	}
 	printf("    ],\n");
 	printf("    \"Grid\": [\n { \"size\" : [%d, %d] ", taille[0], taille[1]);
