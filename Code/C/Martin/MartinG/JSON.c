@@ -11,7 +11,7 @@ void from_C_to_Json_pont(Bridge pont) {
 	
 	printf("{ \n \"width\" : %d, \"length\" : %d, \"direction\" : %d, \"Placement\" : [", pont.size, pont.length, pont.direction);
 	for (int i = 0; i < pont.length; i++) {
-		printf("%d, %d", (coordPtr + i)->x, (coordPtr + i)->y);
+		printf("[%d, %d]", (coordPtr + i)->x, (coordPtr + i)->y);
 	}
 	printf("] \n }");
 }
