@@ -31,7 +31,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         
 
         for(int i = 0; i < 4; i++){
-            printf("%d\n", spa[i]);
+            printf("\n%d\n", spa[i]);
 
             if (spa[i] >= 1) {
                 Direction_available[i] = 1;
