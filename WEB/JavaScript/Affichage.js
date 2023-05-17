@@ -23,11 +23,14 @@ huge = {
             "width": 1,
             "length": 2,
             "direction": 0, // 0-horizontal & 1-vertical
-            "Placement": [[3, 2], [3, 3]]
+            "Placement": [[3, 2]]
         }
     ]
 };
 
+
+
+  
 function generate_table(rows, columns) {
     // Obtenir la référence du body
     var body = document.getElementsByTagName("body")[0];
@@ -103,14 +106,34 @@ function generate_table(rows, columns) {
     document.getElementById("bangerang").appendChild(tbl);
 }
 
-generate_table(7, 7);
+// Ajoutez cette fonction pour rendre les éléments de tableau (td) recevables lors du glisser-déposer
+function makeCellsReceivable() {
+    var cells = document.getElementsByClassName("case");
+    
+    // Convertit la collection HTML en tableau
+    var cellsArray = Array.from(cells);
+    
+    // Ajoutez les gestionnaires d'événements pour chaque cellule
+    cellsArray.forEach(function(cell) {
+      cell.addEventListener("dragover", function(event) {
+        event.preventDefault();
+      });
+    
+      cell.addEventListener("drop", function(event) {
+        event.preventDefault();
+        var imageId = event.dataTransfer.getData("text/plain");
+        var image = document.getElementById(imageId);
+        cell.appendChild(image);
+      });
+    });
+  }
+  
+  // Appeler cette fonction après avoir généré le tableau
+  generate_table(7, 7);
+  makeCellsReceivable();
+  
 
 
-
-
-var cell = document.createElement("td");
-var cellText = document.createTextNode("2");
-cell.appendChild(cellText);
 
   
  /* 
