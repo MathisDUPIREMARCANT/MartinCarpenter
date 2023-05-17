@@ -20,12 +20,15 @@ char* Init_board_Game(Coord pos){
     return Board;
 }
 
-int Random(int maximum) {
-    /*Returns a random number between 0 and maximum*/
+int Random(int min,int max) {
+    /*Returns a random number between minimum and maximum*/
+    int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max+1 - (double)min)) + min;
+    return(u);
+    
 
-    srand(time(0));
-    return rand() % (maximum + 1);
 }
+    
+
 
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
@@ -44,45 +47,35 @@ void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight) {
     *(Board + posMax.x * pos.y + pos.x) = weight + '0';
 };
 
-int* Space_next_bridge(char* Board, Coord pos, Coord posMax){
+int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     /*Returns a list of spaces available between position x,y and each side
     In the order (N,E,S,O)*/
-    int space[4];
-    space[0] = 0;
-    space[1] = 0;
-    space[2] = 0;
-    space[3] = 0;
+    int space = 0;
+    switch (Direction) {
 
-    int xcopy = pos.x;
-    int ycopy = pos.y;
+    case(0):
+        while (pos.y-1 > 0 && *(Board + (posMax.x * (pos.y-1)) + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 0);
+        }break;
 
-    while(pos.y>0 && *(Board + posMax.x*pos.y + pos.x) == '*'){
-        space[0] ++;
-        Next_Coord(&pos, 0);
-    }
+    case(1):
+        while (pos.x+1 < posMax.x-1 && *(Board + (posMax.x * pos.y) + pos.x+1)== '*') {
+            space++;
+            Next_Coord(&pos, 1);
+        }break;
 
-    pos.x = xcopy;
-    pos.y = ycopy;
-
-    while(pos.x < posMax.x && *(Board + posMax.x * pos.y + pos.x) == '*'){
-        space[1] ++;
-        Next_Coord(&pos, 1);
-    }
-
-    pos.x = xcopy;
-    pos.y = ycopy;
-
-    while(pos.y < posMax.y && *(Board + posMax.x * pos.y + pos.x) == '*'){
-        space[2] ++;
-        Next_Coord(&pos, 2);
-    }
-
-    pos.x = xcopy;
-    pos.y = ycopy;
-
-    while(pos.x>0 && *(Board + posMax.x * pos.y + pos.x) == '*'){
-        space[3] ++;
-        Next_Coord(&pos, 3);
+    case(2):
+        while (pos.y+1 < posMax.y-1 && *(Board + (posMax.x * (pos.y+1)) + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 2);
+        }break;
+        
+    case(3):
+        while (pos.x-1 > 0 && *(Board + (posMax.x * pos.y) + pos.x-1) == '*' ) {
+            space++;
+            Next_Coord(&pos, 3);
+        }break;
     }
 
     return  space;
@@ -95,7 +88,7 @@ Coord* Next_Coord(Coord* pos, int direction) {
     case 0:
         //N
         //pos->x = pos->x;
-        pos->y += 1;
+        pos->y -= 1;
         break;
     case 1:
         //E
@@ -106,7 +99,7 @@ Coord* Next_Coord(Coord* pos, int direction) {
     case 2:
         //S
         //pos->x = pos->x;
-        pos->y -= 1;
+        pos->y += 1;
         break;
     case 3:
         //O

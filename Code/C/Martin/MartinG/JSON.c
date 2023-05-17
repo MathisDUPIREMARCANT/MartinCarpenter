@@ -3,32 +3,40 @@
 #include <stdlib.h>
 
 void from_C_to_Json_ile(Island ile) {
-    printf("Island : [ x : %d, y : %d, coord : %d,%d, number : %d]", ile.pos.x, ile.pos.y, ile.number);
+    printf("		{\"links\" : % d,			\"Placement\" : [%d, %d]		}", ile.pos.x, ile.pos.y, ile.number);
     
 }
 void from_C_to_Json_pont(Bridge pont) {
-    printf("Bridge : [ width : %d, lenght : %d, coord : %d,%d, direction : %c]", pont.size, pont.lenght, pont.pos.x, pont.pos.y, pont.direction);
+	Coord* coordPtr = &pont.pos;
+	
+	printf("		{ 		\"width\" : %d, 		\"length\" : %d, 		\"direction\" : %d,		 \"Placement\" : [", pont.size, pont.length, pont.direction);
+	for (int i = 0; i < pont.length; i++) {
+		printf("[%d, %d]", (coordPtr + i)->x, (coordPtr + i)->y);
+	}
+	printf("] 	}");
 }
 
-void from_C_to_Json(Bridge* liste_pont, Island* liste_ile, int nb_pont, int nb_ile, int taille[]) {
-	printf("{\n");
-	printf("    \"Island\" : [\n");
+void from_C_to_Json(Bridge* liste_pont, Island* liste_ile, int nb_pont, int nb_ile, Coord posMax) {
+	printf("{");
+	printf("	\"Islands\" : [");
 	for (int i = 0; i < nb_ile; i++) {
 		from_C_to_Json_ile(liste_ile[i]);
 		if (i < nb_ile - 1) {
-			printf(",\n");
-		}
+			printf(",");
+		} 
 	}
-	printf("    ],\n");
-	printf("    \"Grid\": [\n { \"size\" : [%d, %d] ", taille[0], taille[1]);
-	printf("    ]\n");
-	printf("    \"Bridge\" : [\n");
+	printf("    ],");
+	printf("    \"Grid\": [		{			\"size\" : [%d, %d]		} ", posMax.x, posMax.y);
+	printf("    ],");
+	printf("    \"Bridges\" : [");
 	for (int i = 0; i < nb_pont; i++) {
 		from_C_to_Json_pont(liste_pont[i]);
 		if (i < nb_pont - 1) {
-			printf(",\n");
+			printf(",");
 		}
 	}
-	printf("    ]\n");
-	printf("}\n");
+	printf("    ]");
+	printf("}");
+	
+	
 }
