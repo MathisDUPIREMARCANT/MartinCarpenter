@@ -50,6 +50,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             }
         }
 
+        if (spa != 0) {
             int length;
             length = Random(spa[D_pont]);
 
@@ -62,6 +63,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             *(Board + posMax.x * pos.y + pos.x) = Type_bridge + Type_bridge_precedent;
             int Type_bridge = Random(1) + 1;
             Type_bridge_precedent = Type_bridge;
+        }
         end++;
     }
 }
