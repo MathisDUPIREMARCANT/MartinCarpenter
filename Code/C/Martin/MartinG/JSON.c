@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void from_C_to_Json_ile(Island ile) {
-    printf("		{\"links\" : % d,			\"Placement\" : [%d, %d]		}", ile.pos.x, ile.pos.y, ile.number);
+    printf("		{\"links\" : %d,			\"Placement\" : [%d, %d]		}", ile.pos.x, ile.pos.y, ile.number);
     
 }
 void from_C_to_Json_pont(Bridge pont) {
@@ -20,7 +20,7 @@ void from_C_to_Json(Bridge* liste_pont, Island* liste_ile, int nb_pont, int nb_i
 	printf("{");
 	printf("	\"Islands\" : [");
 	for (int i = 0; i < nb_ile; i++) {
-		from_C_to_Json_ile(liste_ile[i]);
+		from_C_to_Json_ile(*(liste_ile + i));
 		if (i < nb_ile - 1) {
 			printf(",");
 		} 

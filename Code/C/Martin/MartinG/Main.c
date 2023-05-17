@@ -32,4 +32,6 @@ void main(int argc, char* argv[]) {
 	char* Board = Init_board_Game(posMax);
 	Map_gen(Board, posMax, pos, 10);	
 
+	free(Board);
+
 }
