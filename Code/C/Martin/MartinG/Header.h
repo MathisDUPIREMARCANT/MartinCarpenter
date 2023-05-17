@@ -25,4 +25,4 @@ int* Table_copy(int* table, int length);
 int Random(int min, int max);
 char* Init_board_Game(Coord pos);
 Coord* Next_Coord(Coord* pos, int direction);
-
+int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int* Nb_island, int length);

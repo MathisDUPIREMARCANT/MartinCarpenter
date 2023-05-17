@@ -6,7 +6,7 @@
 
 void main(int argc, char* argv[]) {
 	//int nombre_iles = *(argv[0]);
-
+	srand(time(NULL));
 	Coord posMax;
 	Coord pos; Coord pos2;
 
@@ -17,7 +17,7 @@ void main(int argc, char* argv[]) {
 	pos.x = 2; pos.y = 3;
 	/*pos2.x = 4; pos2.y = 5;
 	char* Board = Init_board_Game(posMax);
-	srand(time(NULL));
+	
 
 	Print_board(Board, posMax);
 
@@ -30,8 +30,8 @@ void main(int argc, char* argv[]) {
 
 	*/
 	char* Board = Init_board_Game(posMax);
-	Map_gen(Board, posMax, pos, 10);	
-
+	Map_gen(Board, posMax, pos,4);	
+	Print_board(Board, posMax);
 	free(Board);
 
 }

@@ -54,12 +54,20 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
         while (a) {
             D_pont = Random(0,3);
-            printf("%d", D_pont);
+            printf("\n%d", D_pont);
             if (Direction_available[D_pont] == 1) {
                 a = 0;
             }
         }
-
+        /*for (int i = 0;i < 4;i++) {
+            if (i != D_pont && Direction_available[i] == 1 && end != 1) {
+                printf("i pour la rami : %d",i);
+                int length;
+                length = Random(1, spa[i]-1);
+                Nb_island = Ramification(Board, pos, posMax, i, Nb_island, length);
+                i = 4;
+            }
+        }*/
         int length;
         length = Random(1,spa[D_pont]-1);
 
@@ -97,7 +105,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
     end++;
         
     }
-    from_C_to_Json(Bridges, Islands, Bridges_act, Islands, posMax);
+    //from_C_to_Json(Bridges, Islands, Bridges_act, Islands, posMax);
 
     //free(Bridges);
     free(Islands);
