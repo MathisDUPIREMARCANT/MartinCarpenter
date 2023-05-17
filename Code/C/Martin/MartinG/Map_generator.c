@@ -53,7 +53,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             int length;
             length = Random(spa[D_pont]);
             int Type_bridge = Random(1);
-            for (int i = 0; i <= length; i++) {
+            for (int i = 0; i < length; i++) {
                 Next_Coord(&pos, D_pont);
                 Place_bridge_on_map(Board, posMax, pos, Type_bridge);
 
@@ -61,7 +61,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             }
 
             Next_Coord(&pos, D_pont);
-            Place_island_on_map(Board, posMax, pos, Type_bridge + Type_bridge_precedent);
+            Place_island_on_map(Board, posMax, pos, Type_bridge + Type_bridge_precedent +2);
             
             Type_bridge_precedent = Type_bridge;
         end++;
