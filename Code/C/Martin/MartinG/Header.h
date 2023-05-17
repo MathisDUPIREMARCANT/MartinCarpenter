@@ -19,6 +19,8 @@ void Print_board(char* Board, Coord Taille);
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge);
 void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight);
 void from_C_to_Json(Bridge* liste_pont, Island* liste_ile, int nb_pont, int nb_ile, Coord posMax);
+void from_C_to_Json_island(Island island);
+void from_C_to_Json_bridge(Bridge bridge);
 int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island);
 int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction);
 int* Table_copy(int* table, int length);
