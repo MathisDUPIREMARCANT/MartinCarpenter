@@ -29,10 +29,8 @@ session_start() ;
       muted=""
       autoplay="autoplay"
       playsinline
-      loop
-    >
-      <source src="WEB/image/fond.mp4" type="video/mp4" ></video
-    >
+      loop>
+      <source src="WEB/image/background.mp4" type="video/mp4" ></video>
     <header>
         <div class="buttonhead">
     <button class="avatar" type=submit>
