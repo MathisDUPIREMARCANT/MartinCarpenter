@@ -125,3 +125,12 @@ void Print_board(char* Board, Coord Taille) {
         printf("%c", Board[i]);
     }
 }
+
+int* Table_copy(int* table, int length) {
+    int* pt;
+    pt = (int*)malloc(4 * sizeof(int));
+    for (int i = 0; i < length; i++) {
+        pt[i] = table[i];
+    }
+    return pt;
+}

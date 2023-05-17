@@ -21,8 +21,8 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
     while (end < Nb_island) {
         int* space = Space_next_bridge(Board, pos, posMax);
-        int* spacopy;
-        strcpy_s(&spacopy, 4 * sizeof(int), space);
+        int* spacopy = Table_copy(space, 4);
+        
 
         for(int i = 0; i < 4; i++){
         
