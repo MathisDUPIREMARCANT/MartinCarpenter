@@ -21,17 +21,10 @@ char* Init_board_Game(Coord pos){
 }
 
 int Random(int min,int max) {
-    /*Returns a random number between 0 and maximum*/
-   
-        if (max < min) {
-            printf("Error : invalid data.\n");
-            return -1;
-        }
-
-        int num;
-        num = rand() % (max - min + 1) + min;
-        return num;
-    }
+    /*Returns a random number between minimum and maximum*/
+    int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max - (double)min)) + min;
+    return(u);
+}
     
 
 
@@ -59,7 +52,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     switch (Direction) {
 
     case(0):
-        while (pos.y-1 > 0 && *(Board + (posMax.x * pos.y-1) + pos.x) == '*') {
+        while (pos.y-1 > 0 && *(Board + (posMax.x * (pos.y-1)) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 0);
         }break;
@@ -71,7 +64,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
         }break;
 
     case(2):
-        while (pos.y+1 < posMax.y-1 && *(Board + (posMax.x * pos.y+1) + pos.x) == '*') {
+        while (pos.y+1 < posMax.y-1 && *(Board + (posMax.x * (pos.y+1)) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 2);
         }break;
