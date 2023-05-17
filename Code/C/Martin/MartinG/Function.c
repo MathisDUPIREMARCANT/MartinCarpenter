@@ -20,12 +20,15 @@ char* Init_board_Game(Coord pos){
     return Board;
 }
 
-int Random(int maximum) {
-    /*Returns a random number between 0 and maximum*/
+int Random(int min,int max) {
+    /*Returns a random number between minimum and maximum*/
+    int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max+1 - (double)min)) + min;
+    return(u);
+    
 
-    srand(time(0));
-    return rand() % (maximum + 1);
 }
+    
+
 
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     /*Place a bridge on the board in (x,y)*/
@@ -48,29 +51,28 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     /*Returns a list of spaces available between position x,y and each side
     In the order (N,E,S,O)*/
     int space = 0;
-
     switch (Direction) {
 
     case(0):
-        while (pos.y > 0 && *(Board + posMax.x * pos.y + pos.x) == '*') {
+        while (pos.y-1 > 0 && *(Board + (posMax.x * (pos.y-1)) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 0);
         }break;
 
     case(1):
-        while (pos.x < posMax.x && *(Board + posMax.x * pos.y + pos.x) == '*') {
+        while (pos.x+1 < posMax.x-1 && *(Board + (posMax.x * pos.y) + pos.x+1)== '*') {
             space++;
             Next_Coord(&pos, 1);
         }break;
 
     case(2):
-        while (pos.y < posMax.y && *(Board + posMax.x * pos.y + pos.x) == '*') {
+        while (pos.y+1 < posMax.y-1 && *(Board + (posMax.x * (pos.y+1)) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 2);
         }break;
-
+        
     case(3):
-        while (pos.x > 0 && *(Board + posMax.x * pos.y + pos.x) == '*') {
+        while (pos.x-1 > 0 && *(Board + (posMax.x * pos.y) + pos.x-1) == '*' ) {
             space++;
             Next_Coord(&pos, 3);
         }break;
@@ -86,7 +88,7 @@ Coord* Next_Coord(Coord* pos, int direction) {
     case 0:
         //N
         //pos->x = pos->x;
-        pos->y += 1;
+        pos->y -= 1;
         break;
     case 1:
         //E
@@ -97,7 +99,7 @@ Coord* Next_Coord(Coord* pos, int direction) {
     case 2:
         //S
         //pos->x = pos->x;
-        pos->y -= 1;
+        pos->y += 1;
         break;
     case 3:
         //O

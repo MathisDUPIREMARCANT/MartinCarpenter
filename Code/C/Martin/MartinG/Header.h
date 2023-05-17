@@ -5,7 +5,7 @@ typedef struct coord{
 
 typedef struct bridge {
     int size;
-    int lenght;
+    int length;
     Coord pos;
     int direction;
 }Bridge;
@@ -21,7 +21,7 @@ void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight);
 int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island);
 int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction);
 int* Table_copy(int* table, int length);
-int Random(int maximum);
+int Random(int min, int max);
 char* Init_board_Game(Coord pos);
 Coord* Next_Coord(Coord* pos, int direction);
 
