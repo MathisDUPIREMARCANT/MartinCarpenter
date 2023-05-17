@@ -5,7 +5,7 @@ typedef struct coord{
 
 typedef struct bridge {
     int size;
-    int lenght;
+    int length;
     Coord pos;
     int direction;
 }Bridge;
