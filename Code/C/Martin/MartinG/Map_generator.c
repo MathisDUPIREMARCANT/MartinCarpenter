@@ -108,6 +108,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             end++;
 
         }
+        Print_board(Board, posMax);
         From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
 
         Free_game(Bridges, Islands);
