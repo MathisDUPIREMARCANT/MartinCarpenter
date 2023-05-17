@@ -15,8 +15,8 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
     if (Islands != NULL && Bridges != NULL) {
 
 
-        int Island_act = 0;
-        int Bridges_act = 0;
+        int Island_current = 0;
+        int Bridge_current = 0;
 
 
         int end = 1;
@@ -26,10 +26,10 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         int Direction_available[4];
 
         *(Board + (posMax.x * pos.y) + pos.x) = '1';
-        Islands[Island_act].number = 1;
-        Islands[Island_act].pos = pos;
+        Islands[Island_current].number = 1;
+        Islands[Island_current].pos = pos;
 
-        Island_act++;
+        Island_current++;
 
 
         while (end < Nb_island) {
@@ -42,7 +42,6 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
 
             for (int i = 0; i < 4; i++) {
-                //            printf("%d\n", spa[i]);
 
                 if (spa[i] >= 1) {
                     Direction_available[i] = 1;
@@ -73,17 +72,17 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             int length;
             length = Random(1, spa[D_pont] - 1);
 
-            Bridges[Bridges_act].length = length;
-            Bridges[Bridges_act].size = Type_bridge;
-            Bridges[Bridges_act].direction = 0; //ENUM
+            Bridges[Bridge_current].length = length;
+            Bridges[Bridge_current].size = Type_bridge;
+            Bridges[Bridge_current].direction = 0; //ENUM
 
-            Bridges[Bridges_act].pos = (Coord*)malloc(length * sizeof(Coord));
+            Bridges[Bridge_current].pos = (Coord*)malloc(length * sizeof(Coord));
 
             for (int i = 0; i < length; i++) {
                 Next_Coord(&pos, D_pont);
                 Place_bridge_on_map(Board, posMax, pos, Type_bridge);
-                Bridges[Bridges_act].pos[i].x = pos.x;
-                Bridges[Bridges_act].pos[i].y = pos.y;
+                Bridges[Bridge_current].pos[i].x = pos.x;
+                Bridges[Bridge_current].pos[i].y = pos.y;
             }
 
             Next_Coord(&pos, D_pont);
@@ -99,19 +98,18 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             Place_island_on_map(Board, posMax, pos, Type_island);
 
-            Islands[Island_act].pos.x = pos.x;
-            Islands[Island_act].pos.y = pos.y;
-            Islands[Island_act].number = Type_island;
+            Islands[Island_current].pos.x = pos.x;
+            Islands[Island_current].pos.y = pos.y;
+            Islands[Island_current].number = Type_island;
 
 
-            Island_act++;
-            Bridges_act++;
+            Island_current++;
+            Bridge_current++;
             end++;
 
         }
-        from_C_to_Json(Bridges, Islands, Bridges_act, Island_act, posMax);
+        From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
 
-        //free(Bridges);
-        free(Islands);
+        Free_game(Bridges, Islands);
     }
 }

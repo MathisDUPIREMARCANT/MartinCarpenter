@@ -149,3 +149,8 @@ int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int* Nb_is
     Place_island_on_map(Board, posMax, pos, (Type_bridgebis + 1));
     return (Nb_island - 1);
 }
+
+void Free_game(Bridge* bridge, Island* island) {
+    free(island);
+    free(bridge);
+}
