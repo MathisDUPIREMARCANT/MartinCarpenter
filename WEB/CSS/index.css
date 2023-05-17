@@ -1,44 +1,90 @@
 .setting{
-    position: fixed;
-    background-color: rgb(0, 105, 128);
-    border-color: aqua;
-    margin-left: 90%;
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
+    position: absolute;
+    height: 10.1vw;
+    left: 200vh;
+    top: 2vw;
+    background: url(../image/boutonsetting.png);
+    background-size: 10.7vw;
+    mix-blend-mode: hard-light;
+border-style: none;
 }
 .settingimg{
-    width: 70px;
+    width: 10vw;
 }
 .buttonhead{
 display:flex;
 }
 .avatar{
-    background-color: rgb(42, 134, 150);
-    border-color: aqua;
-
-    
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
-   
+    height: 125px;
+    width: 131px;
+    left: 59px;
+    top: 45px;
+    border-radius: 200%;
+    -webkit-border-radius: 200%;
+    -moz-border-radius: 200%;
+    -ms-border-radius: 200%;
+    -o-border-radius: 200%;
 }
 .avatarimg{
-    width: 70px;
+    width: 100px;
 }
-.button{
-    display: block;
-    margin : auto;
-    margin-bottom: 10px;
-    width: 190px;
-    height: 50px;
+.Titre{
+    /* Martin Carpenter */
+position: absolute;
+width: 70vw;
+height: 40vh;
+left: 22vw;
+top: 1vh;
+
+font-family: 'Inter', 'Clarendon';
+font-style: normal;
+font-weight: 400;
+font-size: 8vw;
+line-height: 116px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #FFFFFF;
+
+mix-blend-mode: normal;
+-webkit-text-stroke: 0.3vw; 
+-webkit-text-stroke-color: #C1E9F9;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.Button{
+display: flex;
+box-sizing: border-box;
+width: 30vw;
+height:15vh;
+background: rgba(37, 141, 210, 0.63);
+mix-blend-mode: normal;
+border: 0.8vw solid #FDEB96;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 50px;
+margin-bottom: 2vw;
+}
+.writebutton{
+display: flex;
+width: 10vw;
+height: 5vh;
+margin-left: 10vh;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 3vw;
+line-height: 10vh;
+text-align:center;
+color: #FFFFFF;
+-webkit-text-stroke: 0.1vw; 
+-webkit-text-stroke-color: #C1E9F9;
+text-decoration: none;
+
 }
 .buttons{
-    margin-top: 150px;
+    position: absolute;
+    left: 30vw;
+    top: 40vh;
 }
 #background-video {/*vidéo d'arrière plan*/
     height: 100vh;
@@ -53,8 +99,10 @@ display:flex;
     z-index: -1;
 }
 .audio{
-    width: 70px;
-    height: 50px;
-    margin-top: 80px;
-    margin-left: 10px;
+    width: 5vw;
+    height: 10vh;
+ margin-top:9vh;
+    margin-left: 1vw;
+    mix-blend-mode: overlay;
 }
+

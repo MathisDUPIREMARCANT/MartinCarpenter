@@ -1,9 +1,9 @@
 :root{
     --font-style: 'Nunito Sans', sans-serif;
-    --orange_isen:#F06B42;
+    --orange_isen:#F4BC5F;
     --white:#FFFFFF;
-    --violet_isen:#3F2A56;
-    --violet_clair:#847494;
+    --violet_isen:#707F3C;
+    --violet_clair:#707F3C;
 }
 
 * {
@@ -16,9 +16,9 @@
 body {
     margin: 0;
     color: white;
-    background: url("../image/fondsigninup.jpg");
+    background: url("../image/background2.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:100%;
     font-family: 'Montserrat', monospace;
     font-weight: bold;
 }
@@ -45,7 +45,6 @@ a {
 .container {
     width: 100%;
     margin: auto;
-    margin-top: 5%;
     max-width: 525px;
     min-height: 670px;
     position: relative;
@@ -224,6 +223,7 @@ a {
 
 .footer {
     text-align: center;
+
 }
 
 
@@ -559,7 +559,7 @@ display: block;
 /* Ajustement pour les écrans de 27 pouces et plus grands */
 @media screen and (min-width: 2560px) {
     .container {
-        margin-top: 15%;
+        margin-top: 5%;
         max-width: 44vw;
         min-height: 54vh;
 
@@ -615,7 +615,7 @@ display: block;
 /* Ajustement pour les écrans de 24 pouces */
 @media screen and (min-width: 1920px) and (max-width: 2559px) {
     .container {
-        margin-top: 25%;
+        margin-top: 5%;
         max-width: 50vw;
         min-height: 50vh;
     }
@@ -646,7 +646,7 @@ display: block;
     .container {
         max-width: 525px;
         min-height: 95vh;
-        margin-top: 1%;
+        margin-top: 5%;
     }
     
     .login-container {
@@ -674,7 +674,7 @@ display: block;
     .container {
         max-width: 525px;
         min-height: 95vh;
-        margin-top: 1%;
+        margin-top: 2%;
     }
     
     .login-container {
@@ -814,3 +814,48 @@ display: block;
         margin: 20px 0 20px 0;
     }
 } 
+#email,#username,#pass1,#pass2{
+   background-color: #a6ba5c;
+    background-blend-mode: screen;
+border-radius: 50px;
+width: 300px;
+height: 40px;
+margin-left: 50px;
+
+}
+#user,#pass{
+    background-color: #a6ba5c;
+    background-blend-mode: screen;
+    border-radius: 50px;
+    width: 300px;
+    height: 50px;
+    margin-left: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+#user{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#remember-me{
+    margin-left: 90px;
+    
+}
+.back{
+    position: absolute;
+    width: 85px;
+    height: 80px;
+    left: 17px;
+    top: 7px;
+    background: url(../image/arrow.png);
+    background-size: 80px;
+    border-style: none;
+}
+.backimg{
+    width: 50px; 
+    
+}
+

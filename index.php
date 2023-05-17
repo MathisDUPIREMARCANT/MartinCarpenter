@@ -21,6 +21,7 @@ session_start() ;
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
     <!--Browser icon-->
     <link rel="stylesheet" href="WEB/CSS/index.css">
+    <link rel="stylesheet" href="WEB/CSS/grid.css">
 </head>
 
 <body >
@@ -31,47 +32,55 @@ session_start() ;
       playsinline
       loop>
       <source src="WEB/image/background.mp4" type="video/mp4" ></video>
+      <div class="Container_grid">
+    <div class="Header_grid">
     <header>
         <div class="buttonhead">
     <button class="avatar" type=submit>
         <a href="WEB/user.php">
         <img class="avatarimg" src="WEB/image/avatar.png"  >
         </a>
-    
    <button class="setting" type="submit" onclick="showPopup()">
-    <a class="al"- href="WEB/setting.php" ><img class="settingimg" src="WEB/image/para.png" ></a>
+    <a class="al"- href="WEB/setting.php" ><img class="settingimg" src="WEB/image/vide.png"  ></a>
     </button>
-
-    
-</div>
+    </div>
     </header>
+    </div>
+    <div class="Main_grid">
     <main>
-
+<div class="Titre">Martin Carpenter</div>
 
     <div class="buttons">
-    <button class="button" type="submit">
-    <a class='al' href="WEB/game.php"
+    <button class="Button" type="submit">
+    <a class='writebutton' href="WEB/game.php"
     >PLAY</a>
     </button>
 
-    <button class="button" type="submit" >
-    <a class="al" href="WEB/rules.php">Rules</a>
+    <button class="Button" type="submit" >
+    <a class="writebutton" href="WEB/rules.php">Rules</a>
     </button>
 
 
         
-    <button class="button" type="submit">
-    <a class='al' href="WEB/sign_in_up.php"
+    <button class="Button" type="submit">
+    <a class='writebutton' href="WEB/sign_in_up.php"
     >CONNEXION</a>
     </button>
 
     
 </div>
     </main>
+</div>
+    <div class="Footer_grid">
     <footer >
+
     <audio class="audio" controls>
-            <source src="WEB/image/music.mp3" type="video/mp4">
+            <source  src="WEB/image/music.mp3" type="video/mp4">
     </audio>
+
+    </button>
     </footer>
+</div>
 </body>
+</div>
 </html>

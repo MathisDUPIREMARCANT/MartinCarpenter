@@ -19,21 +19,38 @@
     <link rel="stylesheet" href="CSS/gamehome.css">
 </head>
 <body> 
+<video
+      id="background-video"
+      muted=""
+      autoplay="autoplay"
+      playsinline
+      loop>
+      <source src="image/background.mp4" type="video/mp4" ></video>
     <header>
     <div class="buttonhead">
-    <button class="arrow" type=submit>
+    <button class="back" type=submit>
         <a href="../index.php">
-        <img class="arrowimg" src="image/arrow.png"  >
+        <img class="backimg" src="image/arrow.png"  >
         </a>
     </button>
+    <button class="setting" type="submit" onclick="showPopup()">
+    <a class="al"- href="WEB/setting.php" ><img class="settingimg" src="image/vide.png"  ></a>
+    </button>
+
     </div>
 </header>
     <main class="main">
      
-        <button class="story" onclick="redirectTo('storymod.php')">Story Mod</button>
-        <button class="easy" onclick="redirectTo('easymod.php')">Easy Mod</button>
-        <button class="medium" onclick="redirectTo('mediummod.php')">Medium Mod</button>
-        <button class="hard" onclick="redirectTo('hardmod.php')">Hard Mod</button>
+        <button class="story" onclick="redirectTo('storymod.php')"><a class="textstory">Story Mod</a></button>
+        <div class="games">
+        <button class="easy" onclick="redirectTo('easymod.php')"><a class="texteasy">Easy Mod</a></button>
+        <button class="medium" onclick="redirectTo('mediummod.php')"><a class="textmedium">Medium Mod</a></button>
+        <button class="hard" onclick="redirectTo('hardmod.php')"><a class="texthard">Hard Mod</a></button>
+        </div>
+        <div class="creationgames">
+        <button class="Create" onclick="redirectTo('createmod.php')"><a class="textcreate">Create Mod</a></button>
+        <button class="Level" onclick="redirectTo('level.php')"><a class="textlevel">My Level</a></button>
+        </div>
 
 
 </main>

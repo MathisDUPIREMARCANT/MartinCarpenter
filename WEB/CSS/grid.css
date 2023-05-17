@@ -1,0 +1,260 @@
+/*CSS pour le grid*/
+.Container_grid {
+  /*pour téléphone*/
+  display: -ms-grid;
+  display: grid; /*format grille*/
+  -ms-grid-columns: 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /*taille des colonnes*/
+  -ms-grid-rows: -webkit-min-content 0px auto 0px auto 0px auto 0px -webkit-min-content;
+  -ms-grid-rows: min-content 0px auto 0px auto 0px auto 0px min-content;
+  grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
+  grid-template-rows: min-content 1fr min-content; /*taille des lignes*/
+  gap: 0px 0px; /*pas d'écart entre les cases de la grille*/
+  grid-auto-flow: row;
+  grid-template-areas: /*dispotion des areas*/
+    "Header_grid Header_grid Header_grid Header_grid Header_grid"
+    "Main_grid Main_grid Main_grid Main_grid Main_grid"
+    "Footer_grid Footer_grid Footer_grid Footer_grid Footer_grid";
+}
+
+.Header_grid {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 9;
+  grid-area: Header_grid;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.Footer_grid {
+  -ms-grid-row: 9;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 9;
+  grid-area: Footer_grid;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+.Bienvenue{
+  white-space: nowrap;
+}
+.Main_grid {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 9;
+  grid-area: Main_grid;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  font-size: 20px;
+  color: rgb(255, 254, 254);
+  padding-top: 72px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+
+
+
+@media only screen and (min-width: 430px) {
+  /*entre tablette et téléphone*/
+  .Container_grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: -webkit-min-content 0px auto 0px 1fr 0px 1fr 0px 20%;
+    -ms-grid-rows: min-content 0px auto 0px 1fr 0px 1fr 0px 20%;
+    grid-template-rows: -webkit-min-content auto 1fr 1fr 20%;
+    grid-template-rows: min-content auto 1fr 1fr 20%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Header_grid Header_grid Header_grid Header_grid Header_grid"
+      "Main_grid Main_grid Main_grid Aside Aside"
+      "Main_grid Main_grid Main_grid Aside Aside"
+      "Main_grid Main_grid Main_grid Image_grid Image_grid"
+      "Footer_grid Footer_grid Footer_grid Footer_grid Footer_grid";
+  }
+
+  .Header_grid {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Header_grid;
+    font-size: 1rem;
+  }
+
+  .Footer_grid {
+    -ms-grid-row: 9;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Footer_grid;
+  }
+
+  .Main_grid {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Main_grid;
+  }
+
+  .Aside {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Aside;
+    padding: 50% 5% 0 5%;
+  }
+
+  .Image_grid {
+    -ms-grid-row: 7;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Image_grid;
+  }
+
+  /*le bouton pour remonter en haut de page qui était en display flex box dans le footer passe en position fix pour ne plus bouger*/
+  .BT{
+    position: fixed;
+    right: 0vw;
+    bottom: 0vw;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .Container_grid {
+    /*Pour TABLETTE*/
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: -webkit-min-content 0px auto 0px 1fr 0px 1fr 0px 20%;
+    -ms-grid-rows: min-content 0px auto 0px 1fr 0px 1fr 0px 20%;
+    grid-template-rows: -webkit-min-content auto 1fr 1fr 20%;
+    grid-template-rows: min-content auto 1fr 1fr 20%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Header_grid Header_grid Header_grid Header_grid Header_grid"
+      "Main_grid Main_grid Main_grid Aside Aside"
+      "Main_grid Main_grid Main_grid Aside Aside"
+      "Main_grid Main_grid Main_grid Image_grid Image_grid"
+      "Footer_grid Footer_grid Footer_grid Footer_grid Footer_grid";
+    /*Afin d'étirer la balise sur l'ensemble du viewport: vh (Viewport Height)*/
+  }
+
+  .Header_grid {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Header_grid;
+  }
+
+  .Footer_grid {
+    -ms-grid-row: 9;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Footer_grid;
+  }
+
+  .Main_grid {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Main_grid;
+  }
+
+  .Aside {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Aside;
+    padding: 50% 10% 0 10%;
+  }
+
+  .Image_grid {
+    -ms-grid-row: 7;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Image_grid;
+  }
+}
+
+@media only screen and (min-width: 984px) {
+  .Container_grid {
+    /*pour ordinateur*/
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: -webkit-min-content 0px auto 0px 1fr 0px 55vh 0px auto;
+    -ms-grid-rows: min-content 0px auto 0px 1fr 0px 55vh 0px auto;
+    grid-template-rows: -webkit-min-content auto 1fr 55vh auto;
+    grid-template-rows: min-content auto 1fr 55vh auto;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Header_grid Header_grid Header_grid Header_grid Header_grid"
+      "Main_grid Main_grid Main_grid Aside Aside"
+      "Main_grid Main_grid Main_grid Aside Aside"
+      "Main_grid Main_grid Main_grid Image_grid Image_grid"
+      "Footer_grid Footer_grid Footer_grid Footer_grid Footer_grid";
+  }
+  .Header_grid {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Header_grid;
+  }
+
+  .Footer_grid {
+    -ms-grid-row: 9;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Footer_grid;
+  }
+
+  .Main_grid {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Main_grid;
+  }
+
+  .Aside {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Aside;
+    padding: 50% 2vw 0 2vw;
+  }
+
+  .Image_grid {
+    -ms-grid-row: 7;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 9;
+    grid-area: Image_grid;
+  }
+  
+  .footcont{
+    font-size: 19px;
+  }
+}
+
+/*On crée un format pour les ordinateur portable plus large, on va changer les marges et les tailles de texte*/
+@media only screen and (min-width:1440px) {
+  .Aside{
+    padding: 25% 10% 0 10%;
+  }
+
+  button{
+    font-size: 25px;
+  }
+
+  .Main_grid{
+    font-size: 30px ;
+  }
+}
