@@ -33,7 +33,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
         for(int i = 0; i < 4; i++){
             printf("%d\n", spa[i]);
-
+            
             if (spa[i] >= 1) {
                 Direction_available[i] = 1;
             }
@@ -46,6 +46,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
         while (a) {
             D_pont = Random(0,3);
+            printf("%d", D_pont);
             if (Direction_available[D_pont] == 1) {
                 a = 0;
             }
@@ -67,7 +68,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             Type_bridge = Random(0, 1);
             Type_island = Type_bridge_previous + Type_bridge + 2;
 
-            if (end == Nb_island - 2) {
+            if (end == Nb_island - 1) {
                 Type_island = Type_bridge_previous + 1;
             }
 

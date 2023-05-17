@@ -22,8 +22,10 @@ char* Init_board_Game(Coord pos){
 
 int Random(int min,int max) {
     /*Returns a random number between minimum and maximum*/
-    int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max - (double)min)) + min;
+    int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max+1 - (double)min)) + min;
     return(u);
+    
+
 }
     
 

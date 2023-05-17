@@ -17,7 +17,8 @@ void main(int argc, char* argv[]) {
 	pos.x = 2; pos.y = 3;
 	pos2.x = 4; pos2.y = 5;
 	char* Board = Init_board_Game(posMax);
-	
+	srand(time(NULL));
+
 	Print_board(Board, posMax);
 
 	Place_bridge_on_map(Board, posMax, pos, 1);
@@ -28,7 +29,7 @@ void main(int argc, char* argv[]) {
 	printf("\n");
 
 	char* Board2 = Init_board_Game(posMax);
-	Map_gen(Board2, posMax, pos, 3);
+	Map_gen(Board2, posMax, pos, 5);
 	
 	printf("\n");
 
