@@ -61,7 +61,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             }
 
             Next_Coord(&pos, D_pont);
-            Place_island_on_map(Board, posMax, pos, Type_bridge + Type_bridge_precedent);
+            Place_island_on_map(Board, posMax, pos, Type_bridge + Type_bridge_precedent +2);
             
             Type_bridge_precedent = Type_bridge;
         end++;
