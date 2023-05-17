@@ -1,16 +1,22 @@
 #include "Header.h"
 #include <stdio.h>
 #include <stdlib.h>
-/*
+
 void from_C_to_Json_ile(Island ile) {
-    printf("x : % d, y : % d, number : % d]", ile.pos.x, ile.pos.y, ile.number);
+    printf("{\"links\" : % d, \"Placement\" : [%d, %d]\n}", ile.pos.x, ile.pos.y, ile.number);
     
 }
 void from_C_to_Json_pont(Bridge pont) {
-    printf("width : % d, lenght : % d, coord : % d, % d, direction : %d]", pont.size, pont.lenght, pont.pos.x, pont.pos.y, pont.direction);
+	Coord* coordPtr = &pont.pos;
+	
+	printf("{ \n \"width\" : %d, \"lenght\" : %d, \"direction\" : %d, \"Placement\" : [", pont.size, pont.lenght, pont.direction);
+	for (int i = 0; i < pont.lenght; i++) {
+		printf("%d", *(coordPtr + i));
+	}
+	printf("] \n }");
 }
 
-void from_C_to_Json(Bridge* liste_pont[], Island* liste_ile[], int nb_pont, int nb_ile, int taille[]) {
+void from_C_to_Json(Bridge* liste_pont, Island* liste_ile, int nb_pont, int nb_ile, int taille[]) {
 	printf("{\n");
 	printf("    \"Island\" : [\n");
 	for (int i = 0; i < nb_ile; i++) {
@@ -31,4 +37,5 @@ void from_C_to_Json(Bridge* liste_pont[], Island* liste_ile[], int nb_pont, int 
 	}
 	printf("    ]\n");
 	printf("}\n");
-}*/
+}
+*/

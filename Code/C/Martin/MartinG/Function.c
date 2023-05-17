@@ -44,45 +44,36 @@ void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight) {
     *(Board + posMax.x * pos.y + pos.x) = weight + '0';
 };
 
-int* Space_next_bridge(char* Board, Coord pos, Coord posMax){
+int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     /*Returns a list of spaces available between position x,y and each side
     In the order (N,E,S,O)*/
-    int space[4];
-    space[0] = 0;
-    space[1] = 0;
-    space[2] = 0;
-    space[3] = 0;
+    int space = 0;
 
-    int xcopy = pos.x;
-    int ycopy = pos.y;
+    switch (Direction) {
 
-    while(pos.y>0 && *(Board + posMax.x*pos.y + pos.x) == '*'){
-        space[0] ++;
-        Next_Coord(&pos, 0);
-    }
+    case(0):
+        while (pos.y > 0 && *(Board + posMax.x * pos.y + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 0);
+        }break;
 
-    pos.x = xcopy;
-    pos.y = ycopy;
+    case(1):
+        while (pos.x < posMax.x && *(Board + posMax.x * pos.y + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 1);
+        }break;
 
-    while(pos.x < posMax.x && *(Board + posMax.x * pos.y + pos.x) == '*'){
-        space[1] ++;
-        Next_Coord(&pos, 1);
-    }
+    case(2):
+        while (pos.y < posMax.y && *(Board + posMax.x * pos.y + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 2);
+        }break;
 
-    pos.x = xcopy;
-    pos.y = ycopy;
-
-    while(pos.y < posMax.y && *(Board + posMax.x * pos.y + pos.x) == '*'){
-        space[2] ++;
-        Next_Coord(&pos, 2);
-    }
-
-    pos.x = xcopy;
-    pos.y = ycopy;
-
-    while(pos.x>0 && *(Board + posMax.x * pos.y + pos.x) == '*'){
-        space[3] ++;
-        Next_Coord(&pos, 3);
+    case(3):
+        while (pos.x > 0 && *(Board + posMax.x * pos.y + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 3);
+        }break;
     }
 
     return  space;
@@ -124,4 +115,13 @@ void Print_board(char* Board, Coord Taille) {
         }
         printf("%c", Board[i]);
     }
+}
+
+int* Table_copy(int* table, int length) {
+    int* pt;
+    pt = (int*)malloc(4 * sizeof(int));
+    for (int i = 0; i < length; i++) {
+        pt[i] = table[i];
+    }
+    return pt;
 }
