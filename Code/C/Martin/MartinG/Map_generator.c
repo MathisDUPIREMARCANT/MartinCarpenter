@@ -32,7 +32,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         Island_current++;
 
 
-        while (end < Nb_island) {
+        while (Island_current < Nb_island) {
             int a = 1;
             int spa[4];
 
@@ -77,7 +77,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
                 Bridges[Bridge_current].length = length;
                 Bridges[Bridge_current].size = Type_bridge;
-                Bridges[Bridge_current].direction = 0; //ENUM
+                Bridges[Bridge_current].direction = D_pont%2; //ENUM
 
                 Bridges[Bridge_current].pos = (Coord*)malloc(length * sizeof(Coord));
 
@@ -112,8 +112,8 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             
         }
-                Print_board(Board, posMax);
-                From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
+               // Print_board(Board, posMax);
+               From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
 
                 Free_game(Bridges, Islands);
                 return 0;
