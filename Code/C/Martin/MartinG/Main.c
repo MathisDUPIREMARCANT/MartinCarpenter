@@ -15,9 +15,9 @@ void main(int argc, char* argv[]) {
 	char* Board = Init_board_Game(posMax);
 
 
-	int test = Map_gen(Board, posMax, pos,10);	
+	Map_gen(Board, posMax, pos,10);	
 
-	while(test == -1){ test = Map_gen(Board, posMax, pos, 10); }
+	//while(test == -1){ test = Map_gen(Board, posMax, pos, 10); }
 
 	Print_board(Board, posMax);
 	free(Board);
