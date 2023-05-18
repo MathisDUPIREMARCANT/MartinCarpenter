@@ -54,25 +54,29 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     switch (Direction) {
 
     case(0):
-        while (pos.y-1 > 0 && *(Board + (posMax.x * (pos.y-1)) + pos.x) == '*') {
+        Next_Coord(&pos, 0);
+        while (pos.y > 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 0);
         }break;
 
     case(1):
-        while (pos.x+1 < posMax.x-1 && *(Board + (posMax.x * pos.y) + pos.x+1)== '*') {
+        Next_Coord(&pos, 1);
+        while (pos.x < posMax.x && *(Board + (posMax.x * pos.y) + pos.x)== '*') {
             space++;
             Next_Coord(&pos, 1);
         }break;
 
     case(2):
-        while (pos.y+1 < posMax.y-1 && *(Board + (posMax.x * (pos.y+1)) + pos.x) == '*') {
+        Next_Coord(&pos, 2);
+        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 2);
         }break;
         
     case(3):
-        while (pos.x-1 > 0 && *(Board + (posMax.x * pos.y) + pos.x-1) == '*' ) {
+        Next_Coord(&pos, 3);
+        while (pos.x > 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*' ) {
             space++;
             Next_Coord(&pos, 3);
         }break;
@@ -127,6 +131,7 @@ int* Table_copy(int* table, int length) {
     }
     return pt;
 }
+
 int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int* Nb_island, int length) {
     int Type_bridgebis = Random(0, 1);
     printf("\n type bridge rami : %d", Type_bridgebis);
@@ -153,4 +158,12 @@ int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int* Nb_is
 void Free_game(Bridge* bridge, Island* island) {
     free(island);
     free(bridge);
+}
+
+int No_valid_direction(int* tab, int length) {
+
+    for (int i = 0; i < length; i++) {
+        if (tab[i]) { return 0; }
+    }
+    return 1;
 }

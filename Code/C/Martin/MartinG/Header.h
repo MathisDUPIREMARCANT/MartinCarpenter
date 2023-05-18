@@ -26,6 +26,7 @@ void Print_board(char* Board, Coord Taille);
 
 
 int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island);
+int No_valid_direction(int* tab, int length);
 int Random(int min, int max);
 int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int* Nb_island, int length);
 int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction);

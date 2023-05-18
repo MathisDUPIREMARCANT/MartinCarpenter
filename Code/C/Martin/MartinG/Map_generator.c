@@ -52,65 +52,72 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             }
             int D_pont;
 
-
-            while (a) {
-                D_pont = Random(0, 3);
-                printf("\n%d", D_pont);
-                if (Direction_available[D_pont] == 1) {
-                    a = 0;
-                }
+            if (No_valid_direction(Direction_available, 4)) {
+                return -1;
             }
-            /*for (int i = 0;i < 4;i++) {
-                if (i != D_pont && Direction_available[i] == 1 && end != 1) {
-                    printf("i pour la rami : %d",i);
-                    int length;
-                    length = Random(1, spa[i]-1);
-                    Nb_island = Ramification(Board, pos, posMax, i, Nb_island, length);
-                    i = 4;
+
+                while (a) {
+                    D_pont = Random(0, 3);
+                    printf("\n%d", D_pont);
+                    if (Direction_available[D_pont] == 1) {
+                        a = 0;
+                    }
                 }
-            }*/
-            int length;
-            length = Random(1, spa[D_pont] - 1);
+                /*for (int i = 0;i < 4;i++) {
+                    if (i != D_pont && Direction_available[i] == 1 && end != 1) {
+                        printf("i pour la rami : %d",i);
+                        int length;
+                        length = Random(1, spa[i]-1);
+                        Nb_island = Ramification(Board, pos, posMax, i, Nb_island, length);
+                        i = 4;
+                    }
+                }*/
+                int length;
+                length = Random(1, spa[D_pont] - 1);
 
-            Bridges[Bridge_current].length = length;
-            Bridges[Bridge_current].size = Type_bridge;
-            Bridges[Bridge_current].direction = 0; //ENUM
+                Bridges[Bridge_current].length = length;
+                Bridges[Bridge_current].size = Type_bridge;
+                Bridges[Bridge_current].direction = 0; //ENUM
 
-            Bridges[Bridge_current].pos = (Coord*)malloc(length * sizeof(Coord));
+                Bridges[Bridge_current].pos = (Coord*)malloc(length * sizeof(Coord));
 
-            for (int i = 0; i < length; i++) {
+                for (int i = 0; i < length; i++) {
+                    Next_Coord(&pos, D_pont);
+                    Place_bridge_on_map(Board, posMax, pos, Type_bridge);
+                    Bridges[Bridge_current].pos[i].x = pos.x;
+                    Bridges[Bridge_current].pos[i].y = pos.y;
+                }
+
                 Next_Coord(&pos, D_pont);
-                Place_bridge_on_map(Board, posMax, pos, Type_bridge);
-                Bridges[Bridge_current].pos[i].x = pos.x;
-                Bridges[Bridge_current].pos[i].y = pos.y;
-            }
-
-            Next_Coord(&pos, D_pont);
 
 
-            Type_bridge_previous = Type_bridge;
-            Type_bridge = Random(0, 1);
-            Type_island = Type_bridge_previous + Type_bridge + 2;
+                Type_bridge_previous = Type_bridge;
+                Type_bridge = Random(0, 1);
+                Type_island = Type_bridge_previous + Type_bridge + 2;
 
-            if (end == Nb_island - 1) {
-                Type_island = Type_bridge_previous + 1;
-            }
+                if (end == Nb_island - 1) {
+                    Type_island = Type_bridge_previous + 1;
+                }
 
-            Place_island_on_map(Board, posMax, pos, Type_island);
+                Place_island_on_map(Board, posMax, pos, Type_island);
 
-            Islands[Island_current].pos.x = pos.x;
-            Islands[Island_current].pos.y = pos.y;
-            Islands[Island_current].number = Type_island;
+                Islands[Island_current].pos.x = pos.x;
+                Islands[Island_current].pos.y = pos.y;
+                Islands[Island_current].number = Type_island;
 
 
-            Island_current++;
-            Bridge_current++;
-            end++;
+                Island_current++;
+                Bridge_current++;
+                end++;
 
+            
         }
-        Print_board(Board, posMax);
-        From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
+                Print_board(Board, posMax);
+                From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
 
-        Free_game(Bridges, Islands);
+                Free_game(Bridges, Islands);
+                return 0;
+            
+        
     }
 }
