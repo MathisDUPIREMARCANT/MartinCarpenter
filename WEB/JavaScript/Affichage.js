@@ -56,8 +56,9 @@ function generate_table(rows, columns) {
             }
 
             if (foundIsland) {
-                var cellText = document.createTextNode(huge.Islands[k].links);
-                cell.appendChild(cellText);
+                var islandImage = document.createElement("img");
+                islandImage.src = "../image/logo.ico"; // Remplacez par le chemin de l'image souhaitée
+                cell.appendChild(islandImage);
             } else {
                 // Vérifier si un pont se trouve à la position actuelle
                 var bridgeFound = false;
@@ -71,22 +72,21 @@ function generate_table(rows, columns) {
                         }
                     }
                     if (bridgeFound) {
-                        var bridgeText = "";
-                        if (bridge.direction === 1) { // Vertical bridge
+                        var bridgeImage = document.createElement("img");
+                        if (bridge.direction === 1) { // Pont vertical
                             if (bridge.width === 1) {
-                                bridgeText = "||";
+                                bridgeImage.src = "../image/butonpause.png"; 
                             } else {
-                                bridgeText = "|";
+                                bridgeImage.src = "../image/hammer-symbol-color-png (1).png";
                             }
-                        } else { // Horizontal bridge
+                        } else { // Pont horizontal
                             if (bridge.width === 1) {
-                                bridgeText = "=";
+                                bridgeImage.src = "../image/arrow.png"; 
                             } else {
-                                bridgeText = "-";
+                                bridgeImage.src = "../image/para.png"; 
                             }
                         }
-                        var bridgeTextNode = document.createTextNode(bridgeText);
-                        cell.appendChild(bridgeTextNode);
+                        cell.appendChild(bridgeImage);
                         break;
                     }
                 }
@@ -105,54 +105,71 @@ function generate_table(rows, columns) {
     // Ajouter <table> au body
     document.getElementById("bangerang").appendChild(tbl);
 }
-
-// Ajoutez cette fonction pour rendre les éléments de tableau (td) recevables lors du glisser-déposer
-function makeCellsReceivable() {
-    var cells = document.getElementsByClassName("case");
-    
-    // Convertit la collection HTML en tableau
-    var cellsArray = Array.from(cells);
-    
-    // Ajoutez les gestionnaires d'événements pour chaque cellule
-    cellsArray.forEach(function(cell) {
-      cell.addEventListener("dragover", function(event) {
-        event.preventDefault();
-      });
-    
-      cell.addEventListener("drop", function(event) {
-        event.preventDefault();
-        var imageId = event.dataTransfer.getData("text/plain");
-        var image = document.getElementById(imageId);
-        cell.appendChild(image);
-      });
-    });
-  }
-  
   // Appeler cette fonction après avoir généré le tableau
   generate_table(7, 7);
-  makeCellsReceivable();
-  
+ // Cette fonction sera appelée lorsqu'un élément de glisser-déposer commence
+ function dragStart(event) {
+    var img = new Image();
+    img.src = event.target.src;
+    event.dataTransfer.setDragImage(img, 0, 0);
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+// Cette fonction sera appelée lorsqu'un élément est déplacé sur une cellule du tableau JS
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+// Cette fonction sera appelée lorsqu'une image est déposée sur une autre image
+function dropOnImage(event) {
+    event.stopPropagation(); // Stoppe la propagation de l'événement
+}
+
+// Ajouter cette fonction à toutes les images dans le tableau JS
+var images = document.getElementsByTagName('img');
+for (var i = 0; i < images.length; i++) {
+    images[i].addEventListener('drop', dropOnImage);
+}
 
 
+// Cette fonction sera appelée lorsqu'un élément est déposé sur une cellule du tableau JS
+function drop(event) {
+    event.preventDefault();
 
-  
- /* 
-var e = document.getElementById('bangerang');
-e.style.display = 'grid';
-e.style.gridTemplateColumns = 'repeat(5, 100px);';
-e.style.gridtemplateRows = 'repeat(5, 100px)';
-e.style.gridGap = '1px';
-e.style.backgroundColor = 'red';
-e.style.width = '500px';
-e.style.height = '500px';
-*/
-
-
-
-
-if (huge.Islands[0].links == 2) {
-    for (var i = 0; i < huge.Islands.length; i++) {
-        document.getElementById("banger").innerHTML += "<br>" + huge.Islands[i].Placement[1]  + "<img src='https://static.vecteezy.com/system/resources/previews/001/192/291/non_2x/circle-png.png' alt='Mountain' style='width:50px; position:relative; right:34px; top:14px' />";
+    // Vérifie si la cellule cible contient déjà une image
+    if (event.target.getElementsByTagName('img').length > 0) {
+        return; // Interrompt le processus de dépôt si une image est déjà présente
     }
 
+    var data = event.dataTransfer.getData("text");
+    var img = document.getElementById(data);
+    var cloneImg = img.cloneNode(true); // clone l'image
+    cloneImg.id = "clone_" + Math.floor(Math.random() * 10000); // attribuer un id unique au clone
+    cloneImg.draggable = true;
+    cloneImg.addEventListener('dragstart', dragStart);
+    cloneImg.addEventListener('drop', dropOnImage); // Empêche le dépôt d'une image sur une autre image
+
+    // Vérifie si l'image provient du tableau HTML
+    if (img.parentNode.id === "cell1") {
+        event.target.appendChild(cloneImg); // ajoute le clone à la nouvelle cellule
+    } else {
+        event.target.appendChild(img); // déplace l'image si elle ne provient pas du tableau HTML
+        img.addEventListener('drop', dropOnImage); // Empêche le dépôt d'une image sur une autre image
+    }
 }
+
+// Assignez ces fonctions à tous les éléments img dans le tableau HTML
+var images = document.getElementsByTagName('img');
+for (var i = 0; i < images.length; i++) {
+    images[i].draggable = true;
+    images[i].addEventListener('dragstart', dragStart);
+}
+
+// Assignez ces fonctions à toutes les cellules du tableau JS
+var cells = document.getElementsByTagName('td');
+for (var i = 0; i < cells.length; i++) {
+    cells[i].addEventListener('drop', drop);
+    cells[i].addEventListener('dragover', allowDrop);
+}
+
+
