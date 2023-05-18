@@ -28,6 +28,11 @@
         <br><br> <br>  
     </form> 
 <?php
+//on recupere les valeurs du formulaire
+$nb_iles = $_POST['nb_iles'];
+$nb_colonnes = $_POST['nb_colonnes'];
+$nb_lignes = $_POST['nb_lignes'];
+
 $command = 'MartinG2.exe';
 
 $output = exec($command);
@@ -38,6 +43,7 @@ $texte_js = json_encode($texte_php);
 ?>
 <!-- on affiche le texte js avec du JS -->
 <div id="bangerang"></div>
+<div id="bangerang2"></div>
 <script type="text/javascript">
     var texte_js = <?php echo $texte_js; ?>;
     var huge = JSON.parse(texte_js);
@@ -120,7 +126,51 @@ $texte_js = json_encode($texte_php);
   //on recupere la taille du tableau
     var rows = huge.Grid[0].size[0];
     var columns = huge.Grid[0].size[1];
-  generate_table(rows, columns);
+    generate_table(rows, columns);
+  //on reprend la fonction mais sans afficher les ponts
+    function generate_table_no_bridges(rows, columns) {
+        // Obtenir la référence du body
+        var body = document.getElementsByTagName("body")[0];
+    
+        // Créer les éléments <table> et <tbody>
+        var tbl = document.createElement("table");
+        var tblBody = document.createElement("tbody");
+    
+        // Créer les cellules
+        for (var i = 0; i < rows; i++) {
+            var row = document.createElement("tr");
+    
+            for (var j = 0; j < columns; j++) {
+                var cell = document.createElement("td");
+    
+                // Vérifier si l'île se trouve à la position actuelle
+                var foundIsland = false;
+                for (var k = 0; k < huge.Islands.length; k++) {
+                    if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                        foundIsland = true;
+                        break;
+                    }
+                }
+    
+                if (foundIsland) {
+                    var islandImage = document.createElement("img"); //A REMPLACER EN FONCTION DU NOMBRE DE LINKS
+                    islandImage.src = "../image/logo.ico"; // Remplacez par le chemin de l'image souhaitée
+                    cell.appendChild(islandImage);
+                }
+                row.appendChild(cell);
+            cell.setAttribute("class", 'case');
+            cell.setAttribute("id", '0');
+        }
+
+        tblBody.appendChild(row);
+    }
+
+    // Ajouter <tbody> à <table>
+    tbl.appendChild(tblBody);
+    // Ajouter <table> au body
+    document.getElementById("bangerang2").appendChild(tbl);
+}
+generate_table_no_bridges(rows, columns);
 </script>
 
 
