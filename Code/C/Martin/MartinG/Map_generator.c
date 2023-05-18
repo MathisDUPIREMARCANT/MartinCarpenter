@@ -43,7 +43,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             for (int i = 0; i < 4; i++) {
 
-                if (spa[i] >= 1) {
+                if (spa[i] > 1) {
                     Direction_available[i] = 1;
                 }
                 else {
