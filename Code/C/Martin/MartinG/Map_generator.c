@@ -65,10 +65,43 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                 }
                 for (int i = 0;i < 4;i++) {
                     if (i != D_pont && Direction_available[i] == 1 && end != 1 && end != Nb_island - 1) {
-                        int length_ramification;
+                        int length_ramification; int Type_bridge_ramification; int Type_island_ramification;
                         length_ramification = Random(1, spa[i] - 1);
-                        Nb_island = Ramification(Board, pos, posMax, i, Nb_island, length_ramification, Type_island);
+                        Nb_island = Ramification(Board, pos, posMax, i, Nb_island, length_ramification, Type_island, &Type_bridge_ramification, &Type_island_ramification);
+                        
+                        
+                        Bridges[Bridge_current].length = length_ramification;
+                        Bridges[Bridge_current].size = Type_bridge_ramification;
+                        Bridges[Bridge_current].direction = i % 2;
+
+                        Bridges[Bridge_current].pos = (Coord*)malloc(length_ramification * sizeof(Coord));
+
+                        for (int j = 0; j < length_ramification; j++) {
+                            Next_Coord(&pos, i);
+                            Bridges[Bridge_current].pos[j].x = pos.x;
+                            Bridges[Bridge_current].pos[j].y = pos.y;
+                        }
+                        Next_Coord(&pos, i);
+                        Islands[Island_current].pos.x = pos.x;
+                        Islands[Island_current].pos.y = pos.y;
+                        Islands[Island_current].number = Type_island_ramification;
+                        Island_current++;
+                        Bridge_current++;
+                        for (int h = 0; h <= length_ramification;h++) {
+                            switch (i){
+                            case 0:
+                                Next_Coord(&pos, 2);
+                            case 1:
+                                Next_Coord(&pos, 3);
+                            case 2:
+                                Next_Coord(&pos, 0);
+                            case 3:
+                                Next_Coord(&pos, 1);
+                            }
+
+                        }
                         i = 4;
+
                     }
                 }
                 int length;
@@ -111,11 +144,11 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             
         }
-               Print_board(Board, posMax);
-               From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
+    Print_board(Board, posMax);
+    From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
 
-                Free_game(Bridges, Islands);
-                return 0;
+    Free_game(Bridges, Islands);
+    return 0;
             
         
     }

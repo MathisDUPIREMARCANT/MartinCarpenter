@@ -140,9 +140,8 @@ int* Table_copy(int* table, int length) {
     return pt;
 }
 
-int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int Nb_island, int length, int Islands) {
+int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int Nb_island, int length, int Islands, int* Type_bridge_ramification, int* Type_island_ramification) {
     int Type_bridgebis = Random(0, 1);
-    int New_island = 0;
 
     Place_island_on_map(Board, posMax, pos, Islands + Type_bridgebis + 1);
     for (int i = 0; i < length; i++) {
@@ -152,6 +151,8 @@ int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int Nb_isl
     Next_Coord(&pos, Direction);
     Place_island_on_map(Board, posMax, pos, Type_bridgebis + 1);
 
+    *Type_bridge_ramification = Type_bridgebis;
+    *Type_island_ramification = Type_bridgebis+1;
 
     return (Nb_island - 1);
 }
