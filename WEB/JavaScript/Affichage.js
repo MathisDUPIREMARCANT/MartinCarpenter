@@ -23,7 +23,7 @@ huge = {
             "width": 1,
             "length": 2,
             "direction": 0, // 0-horizontal & 1-vertical
-            "Placement": [[3, 2]]
+            "Placement": [[3, 2], [3, 3]]
         }
     ]
 };
@@ -107,6 +107,10 @@ function generate_table(rows, columns) {
 }
   // Appeler cette fonction après avoir généré le tableau
   generate_table(7, 7);
+
+
+
+
  // Cette fonction sera appelée lorsqu'un élément de glisser-déposer commence
  function dragStart(event) {
     var img = new Image();

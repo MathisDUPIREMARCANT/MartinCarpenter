@@ -11,7 +11,12 @@ void From_C_to_Json_bridge(Bridge bridge) {
 	
 	printf("		{ 		\"width\" : %d, 		\"length\" : %d, 		\"direction\" : %d,		 \"Placement\" : [", bridge.size, bridge.length, bridge.direction);
 	for (int i = 0; i < bridge.length; i++) {
-		printf("[%d, %d]", bridge.pos[i].x, bridge.pos[i].y);
+		if (i < bridge.length - 1) {
+			printf("[%d, %d],", bridge.pos[i].x, bridge.pos[i].y);
+		}
+		else {
+			printf("[%d, %d]", bridge.pos[i].x, bridge.pos[i].y);
+		}
 	}
 	printf("] 	}");
 }

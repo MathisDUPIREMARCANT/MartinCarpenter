@@ -20,12 +20,12 @@ void main(int argc, char* argv[]) {
 
 
 	int test = Map_gen(Board, posMax, pos, I);	
-	printf("\n\nTest : %d\n", test);
+	//printf("\n\nTest : %d\n", test);
 
 	while (test == -1) { 
 		Board = Init_board_Game(posMax);
 		test = Map_gen(Board, posMax, pos, I); 
-		printf("\n\nTest : %d\n", test);
+		//printf("\n\nTest : %d\n", test);
 	}
 
 	//Print_board(Board, posMax);

@@ -58,7 +58,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
                 while (a) {
                     D_pont = Random(0, 3);
-                    printf("\n%d", D_pont);
+                    //printf("\n%d", D_pont);
                     if (Direction_available[D_pont] == 1) {
                         a = 0;
                     }
