@@ -54,28 +54,40 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     switch (Direction) {
 
     case(0):
-        while (pos.y-1 > 0 && *(Board + (posMax.x * (pos.y-1)) + pos.x) == '*') {
+        Next_Coord(&pos, 0);
+        while (pos.y > 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 0);
-        }break;
+        }
+        Next_Coord(&pos, 2); 
+        break;
 
     case(1):
-        while (pos.x+1 < posMax.x-1 && *(Board + (posMax.x * pos.y) + pos.x+1)== '*') {
+        Next_Coord(&pos, 1);
+        while (pos.x < posMax.x && *(Board + (posMax.x * pos.y) + pos.x)== '*') {
             space++;
             Next_Coord(&pos, 1);
-        }break;
+        }
+        Next_Coord(&pos, 3);
+        break;
 
     case(2):
-        while (pos.y+1 < posMax.y-1 && *(Board + (posMax.x * (pos.y+1)) + pos.x) == '*') {
+        Next_Coord(&pos, 2);
+        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 2);
-        }break;
+        }
+        Next_Coord(&pos, 0);
+        break;
         
     case(3):
-        while (pos.x-1 > 0 && *(Board + (posMax.x * pos.y) + pos.x-1) == '*' ) {
+        Next_Coord(&pos, 3);
+        while (pos.x > 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*' ) {
             space++;
             Next_Coord(&pos, 3);
-        }break;
+        }
+        Next_Coord(&pos, 1);
+        break;
     }
 
     return  space;
@@ -126,4 +138,40 @@ int* Table_copy(int* table, int length) {
         pt[i] = table[i];
     }
     return pt;
+}
+
+int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int* Nb_island, int length) {
+    int Type_bridgebis = Random(0, 1);
+    printf("\n type bridge rami : %d", Type_bridgebis);
+    int New_island = 0;
+    if (Type_bridgebis == 0) {
+        New_island = Type_bridgebis +1;
+        printf("\nREZARAZER");
+    }
+    else {
+        New_island = Type_bridgebis + 2;
+        printf("\nFSDQFSQf");
+    }
+    Place_island_on_map(Board, posMax, pos, New_island);
+    for (int i = 0; i < length; i++) {
+        Next_Coord(&pos, Direction);
+        Place_bridge_on_map(Board, posMax, pos, Type_bridgebis);
+
+    }
+    Next_Coord(&pos, Direction);
+    Place_island_on_map(Board, posMax, pos, (Type_bridgebis + 1));
+    return (Nb_island - 1);
+}
+
+void Free_game(Bridge* bridge, Island* island) {
+    free(island);
+    free(bridge);
+}
+
+int No_valid_direction(int* tab, int length) {
+
+    for (int i = 0; i < length; i++) {
+        if (tab[i]) { return 0; }
+    }
+    return 1;
 }

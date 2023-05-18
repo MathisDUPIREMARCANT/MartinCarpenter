@@ -7,6 +7,15 @@
         <link rel="stylesheet" href="css/sign_in_up.css">
     </head>
     <body>
+        <header>
+        <div class="buttonhead">
+        <button class="back" type="submit" onclick="showPopup()">
+    <a class="al"- href="../index.php" ><img class="backimg" src="image/vide.png"  ></a>
+    </button>
+
+    
+</div>
+    </header>
         <?php
             session_start();
             if(empty($_SESSION["username"])){
@@ -101,7 +110,7 @@
                                 data-type="password" autocomplete="new-password" required>
                         </div>
                         <div class="group">
-                            <input placeholder="Repeat password" id="pass" name="pass" type="password" class="input"
+                            <input placeholder="Repeat password" id="pass2" name="pass" type="password" class="input"
                                 data-type="password" autocomplete="new-password" required>
                         </div>
                         <div class="group">

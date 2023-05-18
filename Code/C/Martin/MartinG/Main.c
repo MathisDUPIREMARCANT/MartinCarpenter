@@ -2,38 +2,33 @@
 #include <stdlib.h>
 #include "Header.h"
 
+#define I 15
+#define X 15
+#define Y 20
+
 
 
 void main(int argc, char* argv[]) {
-	//int nombre_iles = *(argv[0]);
 
-	Coord posMax;
-	Coord pos; Coord pos2;
-
-	posMax.x = 15;//*(argv[1]);
-	posMax.y = 20;//*(argv[2]);
-	
-
-	pos.x = 2; pos.y = 3;
-	pos2.x = 4; pos2.y = 5;
-	char* Board = Init_board_Game(posMax);
 	srand(time(NULL));
-
-	Print_board(Board, posMax);
-
-	Place_bridge_on_map(Board, posMax, pos, 1);
-	Place_island_on_map(Board, posMax, pos2, 2);
-	printf("\n");
-
-	Print_board(Board, posMax);
-	printf("\n");
-
-	char* Board2 = Init_board_Game(posMax);
-	Map_gen(Board2, posMax, pos, 15);
 	
-	printf("\n");
+	//int nombre_iles = *(argv[0]);
+	Coord posMax = { X, Y }; //{ *(argv[1]), *(argv[2])} 
+	Coord pos = { Random(0, posMax.x), Random(0, posMax.y) };
 
-	Print_board(Board2, posMax);
-	
+	char* Board = Init_board_Game(posMax);
+
+
+	int test = Map_gen(Board, posMax, pos, I);	
+	printf("\n\nTest : %d\n", test);
+
+	while (test == -1) { 
+		Board = Init_board_Game(posMax);
+		test = Map_gen(Board, posMax, pos, I); 
+		printf("\n\nTest : %d\n", test);
+	}
+
+	//Print_board(Board, posMax);
+	free(Board);
 
 }
