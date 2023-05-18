@@ -28,7 +28,7 @@ void main(int argc, char* argv[]) {
 		printf("\n\nTest : %d\n", test);
 	}
 
-	Print_board(Board, posMax);
+	//Print_board(Board, posMax);
 	free(Board);
 
 }
