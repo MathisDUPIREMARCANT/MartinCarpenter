@@ -1,32 +1,12 @@
-huge = {
-    "Islands": [
-        {
-            "links": 2,
-            "Placement": [0, 2]
-        },
-        {
-            "links": 1,
-            "Placement": [4, 1]
-        },
-        {
-            "links": 3,
-            "Placement": [5, 2]
-        }
-    ],
-    "Grid": [
-        {
-            "size": [7, 7]
-        }
-    ],
-    "Bridges": [
-        {
-            "width": 1,
-            "length": 2,
-            "direction": 0, // 0-horizontal & 1-vertical
-            "Placement": [[3, 2], [3, 3]]
-        }
-    ]
-};
+huge = {        "Islands" : [           {"links" : 1,                   "Placement" : [14, 9]           },
+{"links" : 3,                   "Placement" : [14, 1]           },              {"links" : 3,                   "Placement" : [10, 1]           },              {"links" : 2,                   "Placement" : [2, 1]            },             {"links" : 2,                    "Placement" : [2, 8]            },              {"links" : 3,                   "Placement" : [2, 10]           },              {"links" : 3,                   "Placement" : [2, 12]           },             {"links" : 3,                    "Placement" : [2, 18]           },              {"links" : 3,                   "Placement" : [5, 18]           },              {"links" : 1,                   "Placement" : [7, 18]           }    ],    "Grid": [            {                       "size" : [15, 20]               }     ],    "Bridges" : [               {
+"width" : 0,            "length" : 7,           "direction" : 0,                 "Placement" : [[14, 8],[14, 7],[14, 6],[14, 5],[14, 4],[14, 3],[14, 2]]        },              {               "width" : 1,            "length" : 3,          "direction" : 1,          "Placement" : [[13, 1],[12, 1],[11, 1]]        },              {               "width" : 0,
+"length" : 7,           "direction" : 1,                 "Placement" : [[9, 1],[8, 1],[7, 1],[6, 1],[5, 1],[4, 1],[3, 1]]       },              {               "width" : 0,            "length" : 6,           "direction" : 0,                "Placement" : [[2, 2],[2, 3],[2, 4],[2, 5],[2, 6],[2, 7]]       },              {               "width" : 0,           "length" : 1,            "direction" : 0,                 "Placement" : [[2, 9]]         },              {              "width" : 1,             "length" : 1,           "direction" : 0,                 "Placement" : [[2, 11]]        },
+{               "width" : 0,            "length" : 5,           "direction" : 0,                 "Placement" : [[2, 13],[2, 14],[2, 15],[2, 16],[2, 17]]        },              {               "width" : 1,            "length" : 2,          "direction" : 1,          "Placement" : [[3, 18],[4, 18]]        },              {               "width" : 0,           "length" : 1,            "direction" : 1,                 "Placement" : [[6, 18]]        }    ],
+    "PlacedBridges":{}};
+
+
+
 
 
 function generate_table(rows, columns) {
