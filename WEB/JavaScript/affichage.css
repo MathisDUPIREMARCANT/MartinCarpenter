@@ -11,6 +11,6 @@ table {
   }
   /* on change le curseur par une image sur toute la page */
  body {
-    cursor: url('../image/hammer-symbol-color-png\ \(1\).png'), auto;
+    /*cursor: url('../image/hammer-symbol-color-png\ \(1\).png'), auto;*/
   }
   

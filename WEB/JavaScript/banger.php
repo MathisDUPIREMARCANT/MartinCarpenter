@@ -67,10 +67,29 @@ $texte_js = json_encode($texte_php);
             }
 
             if (foundIsland) {
-                var islandImage = document.createElement("img"); //A REMPLACER EN FONCTION DU NOMBRE DE LINKS
-                islandImage.src = "../image/logo.ico"; // Remplacez par le chemin de l'image souhaitée
-                cell.appendChild(islandImage);
-            } else {
+    //on creer une image pour chaque ile en fonction du nombre de link (1 a 6)
+    var islandImage = document.createElement("img");
+
+    if (huge.Islands[k].links == 1) {
+        islandImage.src = "../image/images_temporaires/3167v-chiffre-1.jpeg";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 2) {
+        islandImage.src = "../image/images_temporaires/chiffre-2-en-aluminium-decoupe-coloris-et-dimensions-au-choix.jpg";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 3) {
+        islandImage.src = "../image/images_temporaires/chiffre-3-en-alu-couleur-et-dimensions-au-choix.jpg";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 4) {
+        islandImage.src = "../image/images_temporaires/chiffre-4-en-aluminium-5-coloris-et-2-dimensions-possibles.jpg";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 5) {
+        islandImage.src = "../image/images_temporaires/chiffre-5-en-aluminium-5-coloris-au-choix-100-ou-150-mm-de-haut.jpg";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 6) {
+        islandImage.src = "../image/images_temporaires/6.jpg";
+        cell.appendChild(islandImage);
+    }
+} else {
                 // Vérifier si un pont se trouve à la position actuelle
                 var bridgeFound = false;
                 for (var l = 0; l < huge.Bridges.length; l++) {
@@ -86,15 +105,15 @@ $texte_js = json_encode($texte_php);
                         var bridgeImage = document.createElement("img");
                         if (bridge.direction === 1) { // Pont vertical
                             if (bridge.width === 1) {
-                                bridgeImage.src = "../image/butonpause.png"; 
+                                bridgeImage.src = "../image/images_temporaires/pause.png"; 
                             } else {
-                                bridgeImage.src = "../image/hammer-symbol-color-png (1).png";
+                                bridgeImage.src = "../image/images_temporaires/traitv.png";
                             }
                         } else { // Pont horizontal
                             if (bridge.width === 1) {
-                                bridgeImage.src = "../image/arrow.png"; 
+                                bridgeImage.src = "../image/images_temporaires/egal.webp"; 
                             } else {
-                                bridgeImage.src = "../image/para.png"; 
+                                bridgeImage.src = "../image/images_temporaires/icone-trait-noir.png"; 
                             }
                         }
                         cell.appendChild(bridgeImage);
@@ -121,6 +140,52 @@ $texte_js = json_encode($texte_php);
     var rows = huge.Grid[0].size[0];
     var columns = huge.Grid[0].size[1];
   generate_table(rows, columns);
+
+  //on creer une fonction pour afficher le niveau sans les ponts
+    function generate_table_no_solution(rows, columns) {
+        // Obtenir la référence du body
+        var body = document.getElementsByTagName("body")[0];
+    
+        // Créer les éléments <table> et <tbody>
+        var tbl = document.createElement("table");
+        var tblBody = document.createElement("tbody");
+    
+        // Créer les cellules
+        for (var i = 0; i < rows; i++) {
+            var row = document.createElement("tr");
+    
+            for (var j = 0; j < columns; j++) {
+                var cell = document.createElement("td");
+    
+                // Vérifier si l'île se trouve à la position actuelle
+                var foundIsland = false;
+                for (var k = 0; k < huge.Islands.length; k++) {
+                    if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                        foundIsland = true;
+                        break;
+                    }
+                }
+    
+                if (foundIsland) {
+                    var islandImage = document.createElement("img"); //A REMPLACER EN FONCTION DU NOMBRE DE LINKS
+                    islandImage.src = "../image/logo.ico"; // Remplacez par le chemin de l'image souhaitée
+                    cell.appendChild(islandImage);
+                }
+                row.appendChild(cell);
+            cell.setAttribute("class", 'case');
+            cell.setAttribute("id", '0');
+        }
+
+        tblBody.appendChild(row);
+    }
+
+    // Ajouter <tbody> à <table>
+    tbl.appendChild(tblBody);
+    // Ajouter <table> au body
+    document.getElementById("bangerang").appendChild(tbl);
+}
+    generate_table_no_solution(rows, columns);
+
 </script>
 
 
