@@ -43,8 +43,10 @@ void From_C_to_Json(Bridge* Bridges, Island* Islands, int Nb_bridge, int Nb_isla
 			printf(",");
 		}
 	}
-	printf("    ]");
+	printf("    ],");
+	printf("\n    \"PlacedBridges\":[]");
 	printf("}");
+
 	
 	
 }
