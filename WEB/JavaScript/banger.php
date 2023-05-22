@@ -13,6 +13,10 @@
             width: 50px;
             height: 50px;
         }
+        td{
+            width: 50px;
+            height: 50px;
+        }
     </style>
 
 <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
@@ -40,6 +44,39 @@ $texte_js = json_encode($texte_php);
 <script type="text/javascript">
     var texte_js = <?php echo $texte_js; ?>;
     var huge = JSON.parse(texte_js);
+huge = {    "Islands": [
+        {
+            "links": 2,
+            "Placement": [0, 2]
+        },
+        {
+            "links": 1,
+            "Placement": [4, 1]
+        },
+        {
+            "links": 3,
+            "Placement": [5, 2]
+        },
+        {
+            "links": 3,
+            "Placement": [4, 5]
+        }
+    ],
+    "Grid": [
+        {
+            "size": [7, 7]
+        }
+    ],
+    "Bridges": [
+        {
+            "width": 0,
+            "length": 3,
+            "direction": 0, // 0-horizontal & 1-vertical
+            "Placement": [[4, 2], [4, 3],[4, 4]]
+        }
+    ],
+    "PlacedBridges": {} 
+};
    /*
     function generate_table(rows, columns) {
     // Obtenir la référence du body
@@ -336,47 +373,62 @@ function canPlaceBridge(island1, island2) {
     return true;
 }
 
+
+
+
+
+
+
+
 function placeBridge(island1, island2) {
     var bridgeOrientation = island1.Placement[0] === island2.Placement[0] ? 1 : 2; // 1 pour horizontal, 2 pour vertical
     console.log('Placement du pont, île1 : ', island1, ', île2 : ', island2);
-    // Iterating over all cells between the two islands
-    for (let r = Math.min(island1.Placement[0], island2.Placement[0]); r <= Math.max(island1.Placement[0], island2.Placement[0]); r++) {
-        for (let c = Math.min(island1.Placement[1], island2.Placement[1]); c <= Math.max(island1.Placement[1], island2.Placement[1]); c++) {
-            // If this cell is a part of the bridge
-            if ((r === island1.Placement[0] && r === island2.Placement[0]) || // Horizontal bridge
-                (c === island1.Placement[1] && c === island2.Placement[1])) { // Vertical bridge
 
-                // Here, before adding the bridge, we should check if the cell is not an island
-                var isIsland = false;
-                for (var i = 0; i < huge.Islands.length; i++) {
-                    if (huge.Islands[i].Placement[0] === r && huge.Islands[i].Placement[1] === c) {
-                        isIsland = true;
-                        break;
-                    }
-                }
+    // Longueur du pont
+    let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1.Placement[0]) - 
+                            (bridgeOrientation === 1 ? island2.Placement[1] : island2.Placement[0])) + 1;
 
-                // If the cell is not an island, then add the bridge
-                if (!isIsland) {
-                    var cellId = "cell-" + r + "-" + c;
-                    var cellElement = document.getElementById(cellId);
-                    console.log('cellId: ', cellId); // For debugging
-                    console.log('Cell element: ', cellElement); // For debugging
-                    var bridgeData = huge.PlacedBridges[cellId] || { count: 0, orientation: bridgeOrientation };
-                    bridgeData.count += 1;
-                    huge.PlacedBridges[cellId] = bridgeData;
-                    var bridgeImage = document.createElement("img");
-                    if (island1.Placement[0] === island2.Placement[0]) { // Si c'est un pont horizontal
-                        bridgeImage.src = "../image/images_temporaires/icone-trait-noir.png"; 
-                    } else { // Sinon, c'est un pont vertical
-                        bridgeImage.src = "../image/images_temporaires/traitv.png"; 
-                    }
-                    cellElement.appendChild(bridgeImage);
-                     
-                }
+    // Placer le pont
+    for (let i = 0; i < bridgeLength; i++) {
+        var row = bridgeOrientation === 1 ? island1.Placement[0] : Math.min(island1.Placement[0], island2.Placement[0]) + i;
+        var col = bridgeOrientation === 2 ? island1.Placement[1] : Math.min(island1.Placement[1], island2.Placement[1]) + i;
+
+        // Vérifier si la cellule n'est pas une île
+        var isIsland = false;
+        for (var j = 0; j < huge.Islands.length; j++) {
+            if (huge.Islands[j].Placement[0] === row && huge.Islands[j].Placement[1] === col) {
+                isIsland = true;
+                break;
             }
+        }
+
+        // Si la cellule n'est pas une île, alors ajouter le pont
+        if (!isIsland) {
+            var cellId = "cell-" + row + "-" + col;
+            var cellElement = document.getElementById(cellId);
+            console.log('cellId: ', cellId); // For debugging
+            console.log('Cell element: ', cellElement); // For debugging
+            var bridgeData = huge.PlacedBridges[cellId] || { count: 0, orientation: bridgeOrientation, Placement: [] };
+            bridgeData.count += 1;
+            bridgeData.Placement.push([row, col]);
+            huge.PlacedBridges[cellId] = bridgeData;
+            var bridgeImage = document.createElement("img");
+            if (bridgeOrientation === 1) { // Si c'est un pont horizontal
+                bridgeImage.src = "../image/images_temporaires/icone-trait-noir.png"; 
+            } else { // Sinon, c'est un pont vertical
+                bridgeImage.src = "../image/images_temporaires/traitv.png"; 
+            }
+            cellElement.appendChild(bridgeImage);
+
+            console.log(huge.PlacedBridges); // For debugging
+            console.log(huge.Bridges)
+            //on affiche avec console.log la position du premier pont de placedBridges
+            console.log(huge.PlacedBridges[cellId].Placement[0]);
         }
     }
 }
+
+
 
 
 
