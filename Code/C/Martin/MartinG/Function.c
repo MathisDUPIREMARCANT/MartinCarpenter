@@ -140,21 +140,38 @@ int* Table_copy(int* table, int length) {
     return pt;
 }
 
-int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int Nb_island, int length, int Islands, int* Type_bridge_ramification, int* Type_island_ramification) {
+void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island* Islands, int* Island_current, int* Bridge_current, int Direction, int length) {
     int Type_bridgebis = Random(0, 1);
 
-    Place_island_on_map(Board, posMax, pos, Islands + Type_bridgebis + 1);
+    Islands[*Island_current-1].number += Type_bridgebis + 1;
+
+    Place_island_on_map(Board, posMax, pos, Islands[*Island_current-1].number);
+
+
+    Bridges[*Bridge_current].length = length;
+    Bridges[*Bridge_current].size = Type_bridgebis;
+    Bridges[*Bridge_current].direction = Direction % 2; //ENUM
+
+    Bridges[*Bridge_current].pos = (Coord*)malloc(length * sizeof(Coord));
+
     for (int i = 0; i < length; i++) {
         Next_Coord(&pos, Direction);
         Place_bridge_on_map(Board, posMax, pos, Type_bridgebis);
+        Bridges[*Bridge_current].pos[i].x = pos.x;
+        Bridges[*Bridge_current].pos[i].y = pos.y;
     }
+
     Next_Coord(&pos, Direction);
     Place_island_on_map(Board, posMax, pos, Type_bridgebis + 1);
 
-    *Type_bridge_ramification = Type_bridgebis;
-    *Type_island_ramification = Type_bridgebis+1;
+    Islands[*Island_current].pos.x = pos.x;
+    Islands[*Island_current].pos.y = pos.y;
+    Islands[*Island_current].number = Type_bridgebis + 1;
 
-    return (Nb_island - 1);
+
+    *Island_current++;
+    *Bridge_current++;
+
 }
 
 void Free_game(Bridge* bridge, Island* island) {
