@@ -127,7 +127,7 @@ void Print_board(char* Board, Coord Taille) {
         if (i % Taille.x == 0) {
             printf("\n");
         }
-        printf("%c", Board[i]);
+        //printf("%c", Board[i]);
     }
 }
 
@@ -140,26 +140,20 @@ int* Table_copy(int* table, int length) {
     return pt;
 }
 
-int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int* Nb_island, int length) {
+int Ramification(char* Board, Coord pos, Coord posMax, int Direction, int Nb_island, int length, int Islands, int* Type_bridge_ramification, int* Type_island_ramification) {
     int Type_bridgebis = Random(0, 1);
-    printf("\n type bridge rami : %d", Type_bridgebis);
-    int New_island = 0;
-    if (Type_bridgebis == 0) {
-        New_island = Type_bridgebis +1;
-        printf("\nREZARAZER");
-    }
-    else {
-        New_island = Type_bridgebis + 2;
-        printf("\nFSDQFSQf");
-    }
-    Place_island_on_map(Board, posMax, pos, New_island);
+
+    Place_island_on_map(Board, posMax, pos, Islands + Type_bridgebis + 1);
     for (int i = 0; i < length; i++) {
         Next_Coord(&pos, Direction);
         Place_bridge_on_map(Board, posMax, pos, Type_bridgebis);
-
     }
     Next_Coord(&pos, Direction);
-    Place_island_on_map(Board, posMax, pos, (Type_bridgebis + 1));
+    Place_island_on_map(Board, posMax, pos, Type_bridgebis + 1);
+
+    *Type_bridge_ramification = Type_bridgebis;
+    *Type_island_ramification = Type_bridgebis+1;
+
     return (Nb_island - 1);
 }
 
