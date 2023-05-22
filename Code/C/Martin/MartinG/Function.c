@@ -127,7 +127,7 @@ void Print_board(char* Board, Coord Taille) {
         if (i % Taille.x == 0) {
             printf("\n");
         }
-        //printf("%c", Board[i]);
+        printf("%c", Board[i]);
     }
 }
 
