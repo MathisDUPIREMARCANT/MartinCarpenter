@@ -1,0 +1,1 @@
+int Solveur(char* B)
