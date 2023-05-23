@@ -21,6 +21,12 @@
     <ClCompile Include="Solveur.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Function.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Jamesfunction.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">

@@ -151,5 +151,5 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         return 0;
 
 
-    }
+    
 }
