@@ -79,7 +79,7 @@
                             }
                             ?>
                     <div class="group">
-                        <input placeholder="Username" id="user" name="email" type="email" class="input"
+                        <input placeholder="Email" id="user" name="email" type="email" class="input"
                             autocomplete="username" required pattern="[a-zA-Z.-]+@([a-z.A-Z]*)(junia.com)$">
                     </div>
                     <div class="group">

@@ -31,7 +31,7 @@
                     <img class="backimg" src="image/arrow.png">
                 </a>
             </button>
-            <a class="al" - href="setting.php">
+            <a class="al" - href="settingingames/settinghomegame.php">
                 <img class="settingimg" src="image/boutonsetting.png" />
             </a>
 
@@ -47,9 +47,9 @@
             <button class="Buttonhard" onclick="redirectTo('hardmod.php')"><a class="texthard">Hard Mod</a></button>
         </div>
         <div class="creationgames">
-            <button class="Button" onclick="redirectTo('createmod.php')"><a class="textcreate">Create
+            <button class="Buttoncreate" onclick="redirectTo('createmod.php')"><a class="textcreate">Create
                     Mod</a></button>
-            <button class="Level" onclick="redirectTo('level.php')"><a class="textlevel">My Level</a></button>
+            <button class="ButtonLevel" onclick="redirectTo('level.php')"><a class="textlevel">My Level</a></button>
         </div>
 
 

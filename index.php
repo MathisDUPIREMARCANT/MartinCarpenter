@@ -34,7 +34,7 @@ session_start() ;
         <div class="buttonhead">
             <button class="avatar" type=submit>
                 <a href="WEB/user.php">
-                    <img class="avatarimg" src="WEB/image/avatar.png" />
+                    <img class="avatarimg" src="WEB/image/martin.png" />
                 </a>
             </button>
 

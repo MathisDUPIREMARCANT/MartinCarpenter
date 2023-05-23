@@ -3,10 +3,12 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-    </head>
-    <body>
-        <?php
+
+<head>
+</head>
+
+<body>
+    <?php
             require_once("fonctions.php");
             //detection pb mot de passe ou email
             if (
@@ -43,8 +45,9 @@ session_start();
                 //on met dans la colonne photo_profil le chemin vers l'image par défaut
                 //on met le mail dans une session pour pouvoir l'utiliser dans la page confirmation.php
                 $_SESSION['email'] = $email;
-                header("Location: ../index.php");
+                header("Location: ../../index.php");
             }
         ?>
-    </body>
+</body>
+
 </html>
