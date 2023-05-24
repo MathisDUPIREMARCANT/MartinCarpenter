@@ -127,8 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Function.c" />
+    <ClCompile Include="Jamesfunction.c" />
     <ClCompile Include="Main.c" />
-    <ClCompile Include="Solveur.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />

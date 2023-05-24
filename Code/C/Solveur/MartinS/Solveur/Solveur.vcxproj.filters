@@ -18,7 +18,10 @@
     <ClCompile Include="Main.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Solveur.c">
+    <ClCompile Include="Function.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Jamesfunction.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

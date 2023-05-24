@@ -23,7 +23,7 @@ void From_C_to_Json_island(Island island);
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge);
 void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight);
 void Print_board(char* Board, Coord Taille);
-void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island* Islands, int* Island_current, int* Bridge_current, int Direction, int length);
+void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island* Islands, int Island_current, int Bridge_current, int Direction, int length);
 
 
 int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island);
