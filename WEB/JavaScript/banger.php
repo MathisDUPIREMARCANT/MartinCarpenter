@@ -30,7 +30,7 @@
         <br><br> <br>  
     </form>
 <?php
-$command = 'MartinG6.exe';
+$command = 'MartinG8.exe';
 
 
 $output = exec($command);
@@ -44,66 +44,9 @@ $texte_js = json_encode($texte_php);
 <script type="text/javascript">
     var texte_js = <?php echo $texte_js; ?>;
     var huge = JSON.parse(texte_js);
-   /* huge = {
-    "Islands": [
-        {
-            "links": 2,
-            "Placement": [0, 2]
-        },
-        {
-            "links": 1,
-            "Placement": [4, 1]
-        },
-        {
-            "links": 3,
-            "Placement": [5, 2]
-        },
-        {
-            "links": 3,
-            "Placement": [4, 5]
-       
-        }
-        ,
-        {
-            "links": 3,
-            "Placement": [5, 5]
-       
-        } ,
-        {
-            "links": 3,
-            "Placement": [0, 6]
-       
-        }
-    ],
-    "Grid": [
-        {
-            "size": [7, 7]
-        }
-    ],
-    "Bridges": [
-        {
-            "width": 0,
-            "length": 3,
-            "direction": 0, // 0-horizontal & 1-vertical
-            "Placement": [[4, 2], [4, 3],[4, 4]]
-        },
-        {
-            "width": 0,
-            "length": 2,
-            "direction": 0, // 0-horizontal & 1-vertical
-            "Placement": [[5, 3],[5, 4]]
-        },
-        {
-            "width": 1,
-            "length": 3,
-            "direction": 0, // 0-horizontal & 1-vertical
-            "Placement": [[0, 3],[0, 4],[0, 5]]
-        }
-    ],
-    "PlacedBridges": {}
-};*/
-
-
+  // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
+//{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },
+//{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
     var rows = huge.Grid[0].size[0];
 var columns = huge.Grid[0].size[1];
 function generate_table_no_solution(rows, columns) {
@@ -194,9 +137,6 @@ function handleIslandClick(event) {
     var row = parseInt(islandImage.getAttribute("data-row"));
     var col = parseInt(islandImage.getAttribute("data-col"));
 
-
-
-
     var island;
     for (var i = 0; i < huge.Islands.length; i++) {
         if (huge.Islands[i].Placement[0] === row && huge.Islands[i].Placement[1] === col) {
@@ -217,7 +157,6 @@ function handleIslandClick(event) {
         currentBridge.end = null;
     }
 }
-
 
 function getIslandAt(coordinates) {
     for (var i = 0; i < huge.Islands.length; i++) {
@@ -359,19 +298,46 @@ function placeBridge(island1, island2) {
             bridgeData.count += 1;
             bridgeData.Placement.push([row, col]);
             huge.PlacedBridges[cellId] = bridgeData;
+
             //on rempli un tableau de tableau qui correspond au bridgedtaa.placement pour pouvoir le comparer avec huge.bridges
             check_win();
             //on stocke les valeur de huge.bridges dans un dictionnaire en fonction de leur witdh
-            
-           
-
             var bridgeImage = document.createElement("img");
             if (bridgeOrientation === 1) { // Si c'est un pont horizontal
                 bridgeImage.src = "../image/images_temporaires/icone-trait-noir.png";
             } else { // Sinon, c'est un pont vertical
                 bridgeImage.src = "../image/images_temporaires/traitv.png";
             }
-            cellElement.appendChild(bridgeImage);
+            var removeBridges = function(event) {
+                for (let key in huge.PlacedBridges) {
+    let bridge = huge.PlacedBridges[key];
+    for (let i = 0; i < bridge.Placement.length; i++) {
+        if (bridge.Placement[i][0] === row || bridge.Placement[i][1] === col) {
+            let bridgeRow = bridge.Placement[i][0];
+            let bridgeCol = bridge.Placement[i][1]; 
+            let bridgeCellId = "cell-" + bridgeRow + "-" + bridgeCol;
+            let bridgeCellElement = document.getElementById(bridgeCellId);
+            // Supprimez les éléments du pont de la cellule
+            while (bridgeCellElement.firstChild) {
+                bridgeCellElement.removeChild(bridgeCellElement.firstChild);
+            }
+            // supprimer les coordonnées de placement du pont
+            bridge.Placement.splice(i, 1);
+            i--; // adjust index due to splice
+        }
+    }
+    // si toutes les coordonnées de placement du pont ont été supprimées, supprimer le pont
+    if (bridge.Placement.length === 0) {
+        delete huge.PlacedBridges[key];
+    }
+}
+
+};
+
+// Ajoutez l'écouteur d'événements à l'élément du pont
+bridgeImage.addEventListener("click", removeBridges);
+
+cellElement.appendChild(bridgeImage);
 
 
             console.log('lololol',huge.PlacedBridges); // For debugging
@@ -393,12 +359,6 @@ function placeBridge(island1, island2) {
 
         }
     }
-
-
-        console.log('caca', huge.userPlacedBridges);
-        console.log('caca2', huge.userPlacedBridges2);
-
-
 }
 
 
