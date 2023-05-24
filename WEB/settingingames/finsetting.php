@@ -1,5 +1,6 @@
 <label> Game board color choice : </label>
-<select class="bouton" id="bouton" name="Choixtheme">
+<select name="Choixtheme">
+    <option value="">Choose color ↓</option>
     <option value="orange">Mercure (Orange)</option>
     <option value="vert">Venus (Vert)</option>
     <option value="bleu">Terre (Bleu)</option>
@@ -11,6 +12,11 @@
 </select>
 <input type="submit" class="bouton" id="bouton" name="theme" Value="Appliquer" />
 </form>
+<?php
+if(isset($_COOKIE['Colorgame'])==true){
+    echo"<div class='color'> The color of the game grid has been changed to $_COOKIE[Colorgame]! </div>";
+}
+    ?>
 </div>
 <div class="Credit">
     Credit:

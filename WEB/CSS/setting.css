@@ -34,7 +34,15 @@
       height: 100%;
       width: 100%;
     }
-  
+  .color{
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5vw;
+    line-height: 10vh;
+    color: #ffffff;
+    text-decoration: none;
+  }
   body {
     margin: 0;
     color: white;
