@@ -39,7 +39,7 @@ $nb_iles = $_POST['nb_iles'];
 $nb_colonnes = $_POST['nb_colonnes'];
 $nb_lignes = $_POST['nb_lignes'];
 
-$command = 'MartinG.exe' . $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+$command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
 $output = exec($command);
 }
 ?>
