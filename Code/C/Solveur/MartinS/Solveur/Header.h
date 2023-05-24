@@ -18,7 +18,7 @@ typedef struct island {
 }Island;
 
 
-int Bridge_mandatory(char* Board, Coord pos, Coord posMax);
+int Bridge_mandatory(char* Board, Coord pos, Coord posMax, int dir, int* Type_bridge);
 int Is_not_Island(char* Board, Coord pos, Coord posMax);
 int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction);
 int Island_on_map(char* Board, Coord pos, Coord posMax);
