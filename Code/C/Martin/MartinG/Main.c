@@ -29,6 +29,6 @@ void main(int argc, char* argv[]) {
 	}
 
 	//Print_board(Board, posMax);
-	free(Board);
+	//free(Board);
 
 }
