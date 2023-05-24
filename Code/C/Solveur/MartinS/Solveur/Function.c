@@ -100,17 +100,12 @@ int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
 
 
 int Island_on_map(char* Board, Coord pos, Coord posMax) {
-    //Island* Islands;
+    
     int Island_current = 0;
-
-    //Islands = (Island*)malloc(Nb_max * sizeof(Island));
 
     for (int x = 0; x < posMax.x ; x++) {
         for (int y = 0; y < posMax.y ; y++) {
-            if (*(Board + (posMax.x * y) + x) != '*' || *(Board + (posMax.x * y) + x) != '~' || *(Board + (posMax.x * y) + x) != '#') {
-                /*Islands[Island_current].pos.x = i;
-                Islands[Island_current].pos.y = j;
-                Islands[Island_current].number = *(Board + (posMax.x * j) + i);*/
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#')) {
                 Island_current++;
             }
         }
@@ -124,4 +119,42 @@ int Random(int min, int max) {
     int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max + 1 - (double)min)) + min;
     return(u);
 }
+
+int Verif_solved(char* Board, int Nb_Island, Coord posMax) {
+    int incr = 0;
+    for (int x = 0; x < posMax.x; x++) {
+        for (int y = 0; y < posMax.y; y++) {
+            if (*(Board + (posMax.x * y) + x) == 0) {
+                incr++;
+            }
+        }
+    }
+    if (incr == Nb_Island) {
+        return 1;
+    }
+    return 0;
+};
+
+
+int Bridge_mandatory(char* Board, Coord pos, Coord posMax, int dir, int* Type_bridge) {
+    Coord pos_copy = pos;
+    Next_Coord(&pos_copy, dir);
+    while (Is_not_Island(Board, pos_copy, posMax)) {
+        Next_Coord(&pos_copy, dir);
+    }
+    Next_Coord(&pos_copy, dir);
+    int cmp = 0;
+    for (int j = 0;j < 4;j++) {
+        if (Island_in_a_direction(Board, pos_copy, posMax, j) >= 1) {
+            cmp++;
+        }
+    }
+    if (cmp == 1) {
+        Next_Coord(&pos_copy, dir);
+        *Type_bridge = *(Board + (posMax.x * pos_copy.y) + pos_copy.x) - 1;
+        return 1;
+    }
+    return 0;
+}
+
 

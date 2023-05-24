@@ -9,10 +9,11 @@ void main() {
 
 
 	Coord posMax = { Y, X }; //{ *(argv[1]), *(argv[2])} 
-	Coord pos = { Random(0, posMax.x), Random(0, posMax.y) };
+	
+	Coord pos;
 	//
-	char* board[Y * X] = { "*****1~3****#****4****#****4#2*****" };
-
+	char board[Y * X] = { "*****1*3*********4*********4*2*****" };
+	pos = Find_Island(board, posMax);
 	solveur(board, pos, posMax);
 
 }

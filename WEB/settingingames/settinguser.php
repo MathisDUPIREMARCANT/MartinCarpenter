@@ -6,11 +6,13 @@
                 <img class="backimg" src="../image/arrow.png">
             </a>
         </button>
-        <button class="user">
-            <a href="../user.php">
-                <img class="userimg" src="../image/martin.png">
-            </a>
-        </button>
+        <a class="user" href="../user.php">
+            <img class="userimg" src="../image/martin.png">
+        </a>
     </div>
 </header>
-<?php include("finsetting.php"); ?>
+<main class="main">
+    <div class=" Choix">
+
+        <form method="post" class="formLetter" id="formLetter" action="settinguser.php">
+            <?php include("finsetting.php"); ?>

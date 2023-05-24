@@ -54,15 +54,31 @@ session_start();
                     Personal Best:
                     <br>
                     Email :
+                    <br>
+                    Username :
                 </div>
-                <div>
-                    <a class="logout" href="logout.php">Logout
+                <div class="logout">
+                    <a class="textlogout" href=" logout.php">Logout
                     </a>
                 </div>
             </div>
             <div class="classement">
                 <div class="compte">
                     Compte:
+                </div>
+                <div class="list">
+                    <div class="line2">
+                        <ul>
+                            <li>dadou</li>
+                            <li>leloup</li>
+                        </ul>
+                    </div>
+                    <div class="line3">
+                        <ul>
+                            <li>dadou</li>
+                            <li>leloup</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

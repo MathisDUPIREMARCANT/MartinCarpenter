@@ -17,7 +17,14 @@
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
-    <link rel="stylesheet" href="CSS/create.css">
+    <link rel="stylesheet" href="CSS/game.css">
+    <?php
+    if(isset($_COOKIE['Colorgame'])==TRUE){
+    $style=$_COOKIE['Colorgame']; //on récupère le theme choisi enregistré dans le cookie
+    echo"
+    <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
+    }
+    ?>
 </head>
 
 <body>
@@ -76,19 +83,16 @@
             </button>
 
             <button class="Button" type="submit">
-                <a class="al" href="settingingames/settingcreatemod.php">Setting</a>
+                <a class="al" href="settingingames/settingrandommod.php">Setting</a>
             </button>
         </div>
     </header>
     <main Id="main" class="main">
-        <div class="choice">
-        </div>
-        <div class="game">
+        <div Id="game" class="game">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
         </div>
-
     </main>
 </body>
 

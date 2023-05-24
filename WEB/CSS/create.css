@@ -37,11 +37,10 @@
     display: flex;
     width: 100vw;
     justify-content: space-between;
-    margin-top: 2vh;
+    margin-top: 5vh;
     height: 70px;
   }
-  .main{
-    justify-content: center;
+  .main{justify-content:space-around;
     display: flex;
     align-items: center;
 }
@@ -70,7 +69,7 @@
     height: 250px;
     display: flex;
     width: 200px;
-    margin-top: 48vh;
+    margin-top: 45vh;
 }
 .body {
     width: 100vw;
@@ -109,6 +108,18 @@
     position: absolute;
     left: 30vw;
 
+}
+.choice{
+    width: 20vw;
+    background-color: #ffd001ee;
+    height: 50vh;
+    margin-right: 4vh;
+    border:0.4vw solid #66AC37;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 .save{
     width: 100%;

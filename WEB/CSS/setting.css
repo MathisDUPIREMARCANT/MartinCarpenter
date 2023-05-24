@@ -2,9 +2,8 @@
   position: absolute;
   width: 85px;
   height: 80px;
-
   background: url(../image/arrow.png);
-
+  background-size: 80px;
   border-style: none;
 }
 
@@ -20,21 +19,30 @@
   height: 105px;
   }
   .user{
-    height: 60px;
-    width: 60px;
+    height: 80px;
+    width: 80px;
     margin-left: 85vw;
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     -ms-border-radius: 100%;
     -o-border-radius: 100%;
+    background-color: aliceblue;
   
   }
   .userimg{
       height: 100%;
       width: 100%;
     }
-  
+  .color{
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5vw;
+    line-height: 10vh;
+    color: #ffffff;
+    text-decoration: none;
+  }
   body {
     margin: 0;
     color: white;
