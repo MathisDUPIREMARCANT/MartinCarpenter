@@ -12,19 +12,19 @@ void main(int argc, char* argv[]) {
 
 	srand(time(NULL));
 	
-	//int nombre_iles = *(argv[0]);
-	Coord posMax = { X, Y }; //{ *(argv[1]), *(argv[2])} 
+	int nombre_iles = *(argv[0]);
+	Coord posMax = { *(argv[1]), *(argv[2]) };
 	Coord pos = { Random(0, posMax.x), Random(0, posMax.y) };
 
 	char* Board = Init_board_Game(posMax);
 
 
-	int test = Map_gen(Board, posMax, pos, I);	
+	int test = Map_gen(Board, posMax, pos, nombre_iles);	
 	//printf("\n\nTest : %d\n", test);
 
 	while (test == -1) { 
 		Board = Init_board_Game(posMax);
-		test = Map_gen(Board, posMax, pos, I); 
+		test = Map_gen(Board, posMax, pos, nombre_iles); 
 		//printf("\n\nTest : %d\n", test);
 	}
 
