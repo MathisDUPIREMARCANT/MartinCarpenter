@@ -55,11 +55,26 @@ height: 105px;
     font-style: normal;
     font-weight: 400;
     font-size: 2vw;
-    line-height: 10vh;
+    line-height: 9vh;
     text-align: center;
     color: #ffffff;
     text-decoration: none;
   
+}
+.rules{
+    height: 20vw;
+    width: 20vw;
+}
+.rules3{
+    height: 10vw;
+    width: 10vw;
+}
+.rules2{
+    height: 15vw;
+    width: 15vw;
+}
+.rules4{
+    margin-top: 5vh;
 }
 .buttonhead{
     display: flex;
