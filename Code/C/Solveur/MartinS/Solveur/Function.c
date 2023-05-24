@@ -99,32 +99,29 @@ int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
 }
 
 
-Island Island_on_map(char* Board, Coord pos, Coord posMax) {
-    Island* Islands;
+int Island_on_map(char* Board, Coord pos, Coord posMax) {
+    //Island* Islands;
     int Island_current = 0;
 
-    Islands = (Island*)malloc(Nb_max * sizeof(Island));
+    //Islands = (Island*)malloc(Nb_max * sizeof(Island));
 
-    for (int i = 0; i < posMax.x ; i++) {
-        for (int j = 0; j < posMax.y ; i++) {
-            if (*(Board + (posMax.x * j) + i) != '*' && *(Board + (posMax.x * j) + i) != '~' && *(Board + (posMax.x * j) + i) != '#') {
-                Islands[Island_current].pos.x = i;
+    for (int x = 0; x < posMax.x ; x++) {
+        for (int y = 0; y < posMax.y ; y++) {
+            if (*(Board + (posMax.x * y) + x) != '*' || *(Board + (posMax.x * y) + x) != '~' || *(Board + (posMax.x * y) + x) != '#') {
+                /*Islands[Island_current].pos.x = i;
                 Islands[Island_current].pos.y = j;
-                Islands[Island_current].number = *(Board + (posMax.x * j) + i);
+                Islands[Island_current].number = *(Board + (posMax.x * j) + i);*/
                 Island_current++;
             }
         }
-        
     }
 
-    for (int i = 0; i < Island_current; i++) {
-        int Direction = 0;
-
-    }
-
-
-
+    return Island_current;
 };
 
-
+int Random(int min, int max) {
+    /*Returns a random number between minimum and maximum*/
+    int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max + 1 - (double)min)) + min;
+    return(u);
+}
 

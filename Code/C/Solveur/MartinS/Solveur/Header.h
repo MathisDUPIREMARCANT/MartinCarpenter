@@ -17,9 +17,11 @@ typedef struct island {
     int number;
 }Island;
 
-int Is_not_island(char* Board, Coord pos, Coord posMax);
+int Is_not_Island(char* Board, Coord pos, Coord posMax);
 int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction);
+int Island_on_map(char* Board, Coord pos, Coord posMax);
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge);
 
-
+int Random(int min, int max);
+int solveur(char* Board, Coord pos, Coord posMax);
 Coord* Next_Coord(Coord* pos, int direction);

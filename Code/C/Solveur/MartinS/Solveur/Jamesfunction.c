@@ -6,15 +6,14 @@
 
 
 int solveur(char* Board, Coord pos, Coord posMax) {
-    
+    int Nb_Island = 0;
+    Nb_Island = Island_on_map(Board, pos, posMax);
+
+    printf("%d", Nb_Island);
 
     
 
-    for (int i = 0; i < (posMax.x * posMax.y); i++) {
-        if (!Is_not_island) {
-
-        }
-    }
+    
 
 
 
