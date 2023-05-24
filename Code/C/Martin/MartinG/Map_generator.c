@@ -63,10 +63,10 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                     a = 0;
                 }
             }
-            for (int i = 0;i < 4;i++) {
+            for (int i = 0; i < 4; i++) {
                 if (i != D_pont && Direction_available[i] == 1 && end != 1 && end != Nb_island - 1) {
                     int Length_ramification = Random(1, spa[i] - 1);
-                    
+
                     Ramification(Board, pos, posMax, Bridges, Islands, &Island_current, &Bridge_current, i, Length_ramification);
                     //Il me semble qu'il faut huste mettre Ramification si tu decommente ce qu'il y a en dessous 
                     /*
@@ -149,7 +149,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
         Free_game(Bridges, Islands);
         return 0;
-
+    }
 
     
 }
