@@ -2,13 +2,14 @@
 <header>
     <div class="buttonhead">
         <button class=" back" type=submit>
-            <a href="../user.php">
+            <a href="../createmod.php">
                 <img class="backimg" src="../image/arrow.png">
             </a>
         </button>
         <a class="user" href="../user.php">
             <img class="userimg" src="../image/martin.png">
         </a>
+        </button>
     </div>
 </header>
 <?php include("finsetting.php"); ?>
