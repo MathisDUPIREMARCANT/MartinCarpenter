@@ -140,37 +140,37 @@ int* Table_copy(int* table, int length) {
     return pt;
 }
 
-void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island* Islands, int* Island_current, int* Bridge_current, int Direction, int length) {
+void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island* Islands, int Island_current, int Bridge_current, int Direction, int length) {
     int Type_bridgebis = Random(0, 1);
 
-    Islands[*Island_current-1].number += Type_bridgebis + 1;
+    Islands[Island_current-1].number += Type_bridgebis + 1;
 
-    Place_island_on_map(Board, posMax, pos, Islands[*Island_current-1].number);
+    Place_island_on_map(Board, posMax, pos, Islands[Island_current-1].number);
 
 
-    Bridges[*Bridge_current].length = length;
-    Bridges[*Bridge_current].size = Type_bridgebis;
-    Bridges[*Bridge_current].direction = Direction % 2; //ENUM
+    Bridges[Bridge_current].length = length;
+    Bridges[Bridge_current].size = Type_bridgebis;
+    Bridges[Bridge_current].direction = Direction % 2; //ENUM
 
-    Bridges[*Bridge_current].pos = (Coord*)malloc(length * sizeof(Coord));
+    Bridges[Bridge_current].pos = (Coord*)malloc(length * sizeof(Coord));
 
     for (int i = 0; i < length; i++) {
         Next_Coord(&pos, Direction);
         Place_bridge_on_map(Board, posMax, pos, Type_bridgebis);
-        Bridges[*Bridge_current].pos[i].x = pos.x;
-        Bridges[*Bridge_current].pos[i].y = pos.y;
+        Bridges[Bridge_current].pos[i].x = pos.x;
+        Bridges[Bridge_current].pos[i].y = pos.y;
     }
 
     Next_Coord(&pos, Direction);
     Place_island_on_map(Board, posMax, pos, Type_bridgebis + 1);
 
-    Islands[*Island_current].pos.x = pos.x;
-    Islands[*Island_current].pos.y = pos.y;
-    Islands[*Island_current].number = Type_bridgebis + 1;
+    Islands[Island_current].pos.x = pos.x;
+    Islands[Island_current].pos.y = pos.y;
+    Islands[Island_current].number = Type_bridgebis + 1;
 
 
-    *Island_current++;
-    *Bridge_current++;
+    Island_current++;
+    Bridge_current++;
 
 }
 

@@ -67,7 +67,9 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                 if (i != D_pont && Direction_available[i] == 1 && end != 1 && end != Nb_island - 1) {
                     int Length_ramification = Random(1, spa[i] - 1);
 
-                    Ramification(Board, pos, posMax, Bridges, Islands, &Island_current, &Bridge_current, i, Length_ramification);
+                    Ramification(Board, pos, posMax, Bridges, Islands, Island_current, Bridge_current, i, Length_ramification);
+                    Island_current++;
+                    Bridge_current++;
                     //Il me semble qu'il faut huste mettre Ramification si tu decommente ce qu'il y a en dessous 
                     /*
                     Bridges[Bridge_current].length = length_ramification;
@@ -144,10 +146,11 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
 
         }
-        Print_board(Board, posMax);
+        //Print_board(Board, posMax);
         From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
-
-        Free_game(Bridges, Islands);
+        free(Bridges);
+        free(Islands);
+        //Free_game(Bridges, Islands);
         return 0;
     }
 
