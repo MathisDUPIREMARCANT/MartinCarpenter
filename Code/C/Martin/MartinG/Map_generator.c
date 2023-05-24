@@ -19,7 +19,6 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         int Bridge_current = 0;
 
 
-        int end = 1;
         int Type_bridge_previous;
         int Type_bridge = 0;
         int Type_island;
@@ -64,7 +63,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                 }
             }
             for (int i = 0; i < 4; i++) {
-                if (i != D_pont && Direction_available[i] == 1 && end != 1 && end != Nb_island - 1) {
+                if (i != D_pont && Direction_available[i] == 1 && Island_current != 1 && Island_current != Nb_island - 1) {
                     int Length_ramification = Random(1, spa[i] - 1);
 
                     Ramification(Board, pos, posMax, Bridges, Islands, Island_current, Bridge_current, i, Length_ramification);
@@ -129,7 +128,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
             Type_bridge = Random(0, 1);
             Type_island = Type_bridge_previous + Type_bridge + 2;
 
-            if (end == Nb_island - 1) {
+            if (Island_current == Nb_island - 1) {
                 Type_island = Type_bridge_previous + 1;
             }
 
@@ -142,12 +141,11 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             Island_current++;
             Bridge_current++;
-            end++;
 
 
         }
-        //Print_board(Board, posMax);
-        From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
+        Print_board(Board, posMax);
+        //From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
         //free(Bridges);
         //free(Islands);
         //Free_game(Bridges, Islands);
