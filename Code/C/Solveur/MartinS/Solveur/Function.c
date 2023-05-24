@@ -119,17 +119,42 @@ int Random(int min, int max) {
     int u = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)max + 1 - (double)min)) + min;
     return(u);
 }
-/*
+
 int Verif_solved(char* Board, int Nb_Island, Coord posMax) {
+    int incr = 0;
     for (int x = 0; x < posMax.x; x++) {
         for (int y = 0; y < posMax.y; y++) {
-            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#')) {
-                Island_current++;
+            if (*(Board + (posMax.x * y) + x) == 0) {
+                incr++;
             }
         }
     }
-
-    return Island_current;
+    if (incr == Nb_Island) {
+        return 1;
+    }
+    return 0;
 };
+
+
+int Bridge_mandatory(char* Board, Coord pos, Coord posMax, int dir) {
+    int Direction[3] = { 4,0,0 };
+    Coord pos_copy = pos;
+    Next_Coord(&pos_copy, dir);
+    while (Is_not_Island(Board, pos_copy, posMax)) {
+        Next_Coord(&pos_copy, dir);
+    }
+    Next_Coord(&pos_copy, dir);
+    int cmp = 0;
+    for (int j = 0;j < 4;j++) {
+        if (Island_in_a_direction(Board, pos_copy, posMax, j) >= 1) {
+            cmp++;
+        }
+    }
+    if (cmp == 1) {
+        Next_Coord(&pos_copy, dir);
+        Direction[1] = *(Board + (posMax.x * pos_copy.y) + pos_copy.x) - 1;
+        Direction[2] = 1;
+    }
 }
-*/
+
+
