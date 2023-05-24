@@ -36,6 +36,8 @@
         boutonPause.style.display = "none";
         var main = document.getElementById("main");
         main.style.display = "none";
+        var savepos = document.getElementById("savepos");
+        savepos.style.display = "none";
     }
 
     function showButton() {
@@ -43,6 +45,8 @@
         boutonPause.style.display = "block";
         var main = document.getElementById("main");
         main.style.display = "flex";
+        var savepos = document.getElementById("savepos");
+        savepos.style.display = "block";
     }
     </script>
     <video id="background-video" autoplay="autoplay" playsinline loop>
@@ -54,7 +58,7 @@
             <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
                 <a class="al"><img class="pauseimg" src="image/buttonpause.png"></a>
             </button>
-            <a class="savepos">
+            <a id="savepos" class="savepos">
                 <img class="save" src="image/save.png" />
             </a>
         </div>

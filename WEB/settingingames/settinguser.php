@@ -11,4 +11,8 @@
         </a>
     </div>
 </header>
-<?php include("finsetting.php"); ?>
+<main class="main">
+    <div class=" Choix">
+
+        <form method="post" class="formLetter" id="formLetter" action="settinguser.php">
+            <?php include("finsetting.php"); ?>

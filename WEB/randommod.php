@@ -18,6 +18,13 @@
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/game.css">
+    <?php
+    if(isset($_COOKIE['Colorgame'])==TRUE){
+    $style=$_COOKIE['Colorgame']; //on récupère le theme choisi enregistré dans le cookie
+    echo"
+    <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
+    }
+    ?>
 </head>
 
 <body>
@@ -36,6 +43,8 @@
         boutonPause.style.display = "none";
         var main = document.getElementById("main");
         main.style.display = "none";
+        var savepos = document.getElementById("savepos");
+        savepos.style.display = "none";
     }
 
     function showButton() {
@@ -43,6 +52,8 @@
         boutonPause.style.display = "block";
         var main = document.getElementById("main");
         main.style.display = "flex";
+        var savepos = document.getElementById("savepos");
+        savepos.style.display = "block";
     }
     </script>
     <video id="background-video" autoplay="autoplay" playsinline loop>
@@ -54,6 +65,9 @@
             <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
                 <a class="al"><img class="pauseimg" src="image/buttonpause.png"></a>
             </button>
+            <a id="savepos" class="savepos">
+                <img class="save" src="image/save.png" />
+            </a>
         </div>
         <div id="popup" style="display: none;">
             <button class="Button" type="submit">
@@ -74,7 +88,7 @@
         </div>
     </header>
     <main Id="main" class="main">
-        <div class="game">
+        <div Id="game" class="game">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
