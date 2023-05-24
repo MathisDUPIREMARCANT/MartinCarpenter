@@ -38,7 +38,7 @@ session_start() ;
                 </a>
             </button>
 
-            <a class="al" - href="WEB/setting.php">
+            <a class="al" - href="WEB/settingingames/setting.php">
                 <img class="settingimg" src="WEB/image/boutonsetting.png" />
             </a>
 
