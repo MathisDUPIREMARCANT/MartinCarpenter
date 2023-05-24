@@ -17,7 +17,7 @@
     <!--Page authors-->
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
-    <link rel="stylesheet" href="CSS/create.css">
+    <link rel="stylesheet" href="CSS/game.css">
 </head>
 
 <body>
@@ -54,9 +54,6 @@
             <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
                 <a class="al"><img class="pauseimg" src="image/buttonpause.png"></a>
             </button>
-            <a class="savepos">
-                <img class="save" src="image/save.png" />
-            </a>
         </div>
         <div id="popup" style="display: none;">
             <button class="Button" type="submit">
@@ -72,19 +69,16 @@
             </button>
 
             <button class="Button" type="submit">
-                <a class="al" href="settingingames/settingcreatemod.php">Setting</a>
+                <a class="al" href="settingingames/settingrandommod.php">Setting</a>
             </button>
         </div>
     </header>
     <main Id="main" class="main">
-        <div class="choice">
-        </div>
         <div class="game">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
         </div>
-
     </main>
 </body>
 

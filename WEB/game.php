@@ -41,10 +41,10 @@
         <button class="Buttonstory" onclick="redirectTo('storymod.php')"><a class="textstory">Story
                 Mod</a></button>
         <div class="games">
-            <button class="Buttoneasy" onclick="redirectTo('easymod.php')"><a class="texteasy">Easy Mod</a></button>
-            <button class="Buttonmedium" onclick="redirectTo('mediummod.php')"><a class="textmedium">Medium
+            <button class="Buttoneasy" onclick="redirectTo('randommod.php')"><a class="texteasy">Easy Mod</a></button>
+            <button class="Buttonmedium" onclick="redirectTo('randommod.php')"><a class="textmedium">Medium
                     Mod</a></button>
-            <button class="Buttonhard" onclick="redirectTo('hardmod.php')"><a class="texthard">Hard Mod</a></button>
+            <button class="Buttonhard" onclick="redirectTo('randommod.php')"><a class="texthard">Hard Mod</a></button>
         </div>
         <div class="creationgames">
             <button class="Buttoncreate" onclick="redirectTo('createmod.php')"><a class="textcreate">Create
