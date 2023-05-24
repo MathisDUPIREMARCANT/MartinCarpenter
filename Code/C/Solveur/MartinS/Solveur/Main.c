@@ -11,7 +11,7 @@ void main() {
 	Coord posMax = { Y, X }; //{ *(argv[1]), *(argv[2])} 
 	Coord pos = { Random(0, posMax.x), Random(0, posMax.y) };
 	//
-	char* board[Y * X] = { "*****1~3****#****4****#****4#2*****" };
+	char board[Y * X] = { "*****1*3*********4*********4*2*****" };
 
 	solveur(board, pos, posMax);
 
