@@ -5,11 +5,14 @@
 
 void Solver(char* Board, Coord posMax, Coord pos, int Direction[4]) {
 
+	int* Next_possibilities = (int*)malloc(12 * sizeof(int) * 4);
+
 	if (pos == NULL) { pos = { 0,0 }; }
 
 	if (Direction != NULL) {
 
 		Coord Copy_pos;
+		int Type_island = 0;
 		
 		for (int i = 0; i < 4; i++) {
 			Copy_pos.x = pos.x;
@@ -17,6 +20,7 @@ void Solver(char* Board, Coord posMax, Coord pos, int Direction[4]) {
 
 			if (Direction[i]) {
 				int Length;
+				Type_island += Direction[i];
 
 				Length = Length_next_island(Board, posMax, pos, i);
 
@@ -27,57 +31,12 @@ void Solver(char* Board, Coord posMax, Coord pos, int Direction[4]) {
 				Place_island_on_map(Board, posMax, Copy_pos, Direction[i]);
 			}
 		}
+
+		Place_island_on_map(Board, posMax, pos, Type_island);
 	}
+
+    Nb_islands = Island_on_map(Board, pos, posMax);
+    pos = Find_Island(Board, posMax);
+
+
 }
-
-Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, Type_bridge) {
-	for (int i = 0; i < Length; i++) {
-		Next_Coord(&pos, D_pont);
-		Place_bridge_on_map(Board, posMax, pos, Type_bridge);
-	}
-}
-
-Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
-    int space = 0;
-    switch (Direction) {
-
-    case(0):
-        Next_Coord(&pos, 0);
-        while (pos.y > 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*') {
-            space++;
-            Next_Coord(&pos, 0);
-        }
-        Next_Coord(&pos, 2);
-        break;
-
-    case(1):
-        Next_Coord(&pos, 1);
-        while (pos.x < posMax.x && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
-            space++;
-            Next_Coord(&pos, 1);
-        }
-        Next_Coord(&pos, 3);
-        break;
-
-    case(2):
-        Next_Coord(&pos, 2);
-        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
-            space++;
-            Next_Coord(&pos, 2);
-        }
-        Next_Coord(&pos, 0);
-        break;
-
-    case(3):
-        Next_Coord(&pos, 3);
-        while (pos.x > 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
-            space++;
-            Next_Coord(&pos, 3);
-        }
-        Next_Coord(&pos, 1);
-        break;
-    }
-
-    return  space;
-}
-
