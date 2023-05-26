@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,7 +22,7 @@
         </div>
     </header>
     <?php
-            session_start();
+            
             if(empty($_SESSION["username"])){
                 if(isset($_GET["inscrip"]) && (($_GET["inscrip"] == 0) || ($_GET["inscrip"] == 1) || ($_GET["inscrip"] == 2))){ 
                     $page_inscription = 10;

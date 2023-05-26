@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +21,13 @@
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/create.css">
+    <?php
+    if(isset($_COOKIE['Colorgame'])==TRUE){
+    $style=$_COOKIE['Colorgame']; //on récupère le theme choisi enregistré dans le cookie
+    echo"
+    <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
+    }
+    ?>
 </head>
 
 <body>
@@ -83,7 +93,7 @@
     <main Id="main" class="main">
         <div class="choice">
         </div>
-        <div class="game">
+        <div id="game" class="game">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
