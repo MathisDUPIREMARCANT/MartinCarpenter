@@ -1,3 +1,9 @@
+*{
+  scrollbar-width:none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
 .back{
   position: absolute;
   width: 85px;
@@ -15,7 +21,7 @@
   display: flex;
   width: 100vw;
   justify-content: space-between;
-  margin-top: 3vh;
+ 
   height: 105px;
   }
   .user{
@@ -35,7 +41,8 @@
       width: 100%;
     }
   .color{
-    font-size: 1.5vh;
+    font-size: 1.5vw;
+    line-height: 2;
   }
   body {
     margin: 0;
@@ -51,10 +58,10 @@
   background-color: #9acdcef6;
   border-radius: 30px;
   margin: auto;
-  height: 40vh;
+  height: 45vh;
   width: 40vw;
   padding-left: 4vw;
-  padding-top: 2vw;
+  padding-top: 1.5vw;
   margin-right: 2vw;
   margin-bottom: 3vh;
   -webkit-border-radius: 30px;
@@ -64,14 +71,53 @@
   font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 3vw;
+    font-size: 2vw;
     line-height: 3vh;
     
     color: #ffffff;
     text-decoration: none;
 }
+
+.button{
+  border: 0.3vw solid white;
+      border-radius: 20px;
+      background-color: #C6EAE8;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 200;
+      font-size: 2vw;
+      color: #ffffff;
+      margin-top: 7px;
+      text-decoration: none;
+}
 .choice{
-  width: 30vw;
+  width: 35vw;
+  border: 0.3vw solid white;
+  border-radius: 20px;
+  background-color:#538E8A;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.5vw;
+  color: #ffffff;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+
+.choice2{
+  width: 35vw;
+  border: 0.3vw solid white;
+  border-radius: 20px;
+  background-color:#538E8A;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.5vw;
+  color: #ffffff;
+  text-decoration: none;
+  margin-top: 5px;
+
 }
 .up{
   display: flex;
@@ -155,8 +201,8 @@
 }
 
 .footitem {
-  text-align: left;
-  position: relative;
+  width: 40vw;
+  height: 45vh;
 }
 
 .container { /*container du premier footitem qu'on va aussi mettre en display flex*/
@@ -167,8 +213,8 @@
 .btn {
   /*propriété bouton social media*/
   display: inline-block;
-  width: 65px;
-  height: 65px;
+  width: 7vw;
+  height: 7.1vw;
   background: #fff;
   -webkit-box-shadow: 0px 5px 15px -5px #aaa;
   box-shadow: 0px 5px 15px -5px #aaa;
@@ -182,8 +228,9 @@
 .btn i {
   position: relative;
   z-index: 4;
-  top: 20px;
-  font-size: 26px;
+  margin-top: 5vh;
+  font-size: 7vh;
+  text-align: center;
   -webkit-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
@@ -262,11 +309,19 @@
 }
 /*CSS footer debut*/
 .H2 {
-  display: inline-block;
+  font-size: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 5%;
   min-width: 150px;
-  font-size: x-large;
+
   font-weight: bold;
+  background-color: #fdec96f6;
+  border: 0.3vw solid white;
+  height: 5vh;
+  border-radius: 20px;
+  text-align: center;
 }
 
 /*On utilise la meme techinique que dans la nav bar, lorsqu'on coche un input on va déclencher un événement, ici une animation, on n'affiche donc pas les inputs*/
@@ -274,12 +329,7 @@
 
 
 
-@media only screen and (min-width: 430px) {
-  /*Adaptation pour un taille compris entre un téléphone et une tablette*/
-  .footitem {
-    width: 30%;
-  }
-}
+
 
 @media only screen and (min-width: 984px) {
   /*Adaptation ordinateur*/
@@ -288,9 +338,7 @@
     position: relative;
   }
 
-  .footitem {
-    text-align: left;
-  }
+  
 
   #footsec {
     position: relative;

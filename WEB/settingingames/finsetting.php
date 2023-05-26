@@ -15,7 +15,8 @@ if(isset($_COOKIE['Colorgame'])){
     echo"<div class='color'> The color of the game grid has been changed to $_COOKIE[Colorgame]! </div>";
 }
     ?><br>
-<label> Button color choice : </label><br> <select class="choice" name="ChoiceButton">
+    <div  class="ch2">
+<label> Button color choice : </label><br> <select class="choice2" name="ChoiceButton">
     <option value="">Choose color ↓</option>
     <option value="rouge">Rouge</option>
     <option value="orange">Orange</option>
@@ -26,13 +27,15 @@ if(isset($_COOKIE['Colorgame'])){
     <option value="rose">Rose</option>
     <option value="gris">Gris</option>
 </select>
+
 <?php
 if(isset($_COOKIE['ColorButton'])){
-    echo"<div class='color'> The color of the button has been changed to $_COOKIE[Colorbutton]! </div>";
+    echo"<div class='color'> The color of the button has been changed to $_COOKIE[ColorButton]! </div>";
 }
     ?>
-<input type="submit" class="bouton" id="bouton" name="theme" Value="Appliquer" />
+<input type="submit" class="button"  name="theme" Value="Appliquer" />
 </form>
+</div>
 </div>
 </div>
 <div class="Credit">

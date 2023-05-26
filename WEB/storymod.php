@@ -22,10 +22,10 @@ session_start();
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/choiceoflevel.css">
     <?php
-        if(isset($_COOKIE['Colorgame'])==TRUE){
-            $style=$_COOKIE['Colorgame']; //on récupère le theme choisi enregistré dans le cookie
+        if(isset($_COOKIE['ColorButton'])==TRUE){
+            $style=$_COOKIE['ColorButton']; //on récupère le theme choisi enregistré dans le cookie
             echo"
-            <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
+            <link rel='stylesheet' href='CSS/Changecolorbutton/$style.css' />";
             }
         ?>
 </head>

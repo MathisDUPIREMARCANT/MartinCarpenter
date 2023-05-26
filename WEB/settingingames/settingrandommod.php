@@ -41,11 +41,11 @@ header('location:settingrandommod.php');
                 <a href="https://instagram.com/nasa?igshid=YmMyMTA2M2Y=" class="btn"><i
                         class="fab fa-instagram"></i></a>
                 <!--Affiche l'image du réseaux instagram-->
-                <a href="https://www.youtube.com/@NASA" class="btn"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.youtube.com/@NASA" class="btn"><i class="fab fa-discord"></i></a>
                 <!--Affiche l'image du réseaux youtube-->
 
             </div>
         </div>
         <div class=" Choix">
-            <form method="post" class="formLetter" id="formLetter" action="settingrandommod.php">
+            <form method="post" class="form"  id="formLetter" action="settingrandommod.php">
                 <?php include("finsetting.php"); ?>
