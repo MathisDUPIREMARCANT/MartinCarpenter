@@ -35,13 +35,7 @@
       width: 100%;
     }
   .color{
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.5vw;
-    line-height: 10vh;
-    color: #ffffff;
-    text-decoration: none;
+    font-size: 1.5vh;
   }
   body {
     margin: 0;
@@ -57,7 +51,7 @@
   background-color: #9acdcef6;
   border-radius: 30px;
   margin: auto;
-  height: 35vh;
+  height: 40vh;
   width: 40vw;
   padding-left: 4vw;
   padding-top: 2vw;
@@ -71,10 +65,17 @@
     font-style: normal;
     font-weight: 400;
     font-size: 3vw;
-    line-height: 10vh;
+    line-height: 3vh;
     
     color: #ffffff;
     text-decoration: none;
+}
+.choice{
+  width: 30vw;
+}
+.up{
+  display: flex;
+
 }
 .Credit{
   border:0.3vw solid #FFFFFF;
@@ -96,4 +97,255 @@
     
     color: #ffffff;
     text-decoration: none;
+}
+/*CSS footer */
+
+.footcont {/*contener pour un diplay grid de 4 footiem*/
+  /*propriété footer*/
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: auto;
+  width: auto;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: white;
+  /*On utilise la même animation que dans la nav bar */
+  background: -o-linear-gradient(
+    135deg,
+    #360929,
+    var(--violet-MAIN),
+    #280130,
+    #431c5a,
+    #34213f
+  );
+  background: linear-gradient(
+    -45deg,
+    #360929,
+    var(--violet-MAIN),
+    #280130,
+    #431c5a,
+    #34213f
+  );
+  background-size: 400% 400%;
+  -webkit-animation: gradient 10s ease infinite;
+  animation: gradient 10s ease infinite;
+  border-radius: 50px 0 0 0;
+  -webkit-box-shadow: 0px 0px 20px black;
+  box-shadow: 0px 0px 20px black;
+}
+
+.footitem > ul > li > a:hover {
+  text-decoration: underline;
+}
+
+.footitem > ul > li > a {
+  text-decoration: none;
+  color: white;
+}
+
+.footitem {
+  text-align: left;
+  position: relative;
+}
+
+.container { /*container du premier footitem qu'on va aussi mettre en display flex*/
+  max-width: 1200px;
+  text-align: center;
+}
+
+.btn {
+  /*propriété bouton social media*/
+  display: inline-block;
+  width: 65px;
+  height: 65px;
+  background: #fff;
+  -webkit-box-shadow: 0px 5px 15px -5px #aaa;
+  box-shadow: 0px 5px 15px -5px #aaa;
+  margin: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  color: #ff00dc59;
+}
+
+.btn i {
+  position: relative;
+  z-index: 4;
+  top: 20px;
+  font-size: 26px;
+  -webkit-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+/*Pour le hover des boutons nous avons d'abord crée un carré de couleur liénaire, tourné de 45 deg, non visible,
+  qui lorsqu'on survole un btn va se déplacer au dessus du btn et apparaitre.*/
+.btn::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgb(69, 182, 252)),
+    color-stop(rgb(131 58 180)),
+    to(#1f7ef2)
+  );
+  background: -o-linear-gradient(rgb(69, 182, 252), rgb(131 58 180), #1f7ef2);
+  background: linear-gradient(rgb(69, 182, 252), rgb(131 58 180), #1f7ef2);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg); 
+  left: -110%;
+  top: 90%;
+}
+
+.btn:hover i {
+  color: #fff;
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+.btn:hover::before {
+  -webkit-animation: socialButtons 0.7s 1;
+  animation: socialButtons 0.7s 1;
+  left: -10%;
+  top: -10%;
+}
+
+/*Animation qui va déplacer le carré tourné de 45 deg de gauche a droite puis revenir au milieu*/
+@-webkit-keyframes socialButtons {
+  0% {
+    left: -110%;
+    top: 90%;
+  }
+
+  50% {
+    left: 10%;
+    top: -30%;
+  }
+
+  100% {
+    top: -10%;
+    left: -10%;
+  }
+}
+
+@keyframes socialButtons {
+  0% {
+    left: -110%;
+    top: 90%;
+  }
+
+  50% {
+    left: 10%;
+    top: -30%;
+  }
+
+  100% {
+    top: -10%;
+    left: -10%;
+  }
+}
+/*CSS footer debut*/
+.H2 {
+  display: inline-block;
+  margin-left: 5%;
+  min-width: 150px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+/*On utilise la meme techinique que dans la nav bar, lorsqu'on coche un input on va déclencher un événement, ici une animation, on n'affiche donc pas les inputs*/
+
+
+
+
+@media only screen and (min-width: 430px) {
+  /*Adaptation pour un taille compris entre un téléphone et une tablette*/
+  .footitem {
+    width: 30%;
+  }
+}
+
+@media only screen and (min-width: 984px) {
+  /*Adaptation ordinateur*/
+  .footcont {
+    height: 300px;
+    position: relative;
+  }
+
+  .footitem {
+    text-align: left;
+  }
+
+  #footsec {
+    position: relative;
+    top: -15px;
+    left: 30px;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+  }
+
+  
+
+
+  /*style de l'image relier au label suivez nous*/
+  #ilink {
+    position: absolute;
+    top: 35px;
+    left: -17px;
+    display: inline;
+    position: relative;
+    text-align: center;
+    font-size: 26px;
+  }
+
+  label {
+    width: 260px;
+    line-height: 10px;
+  }
+
+  .container {
+    margin-top: 35px;
+  }
+
+ 
+/*animation pour le background du footer*/
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
