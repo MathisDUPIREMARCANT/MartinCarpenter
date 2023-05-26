@@ -22,7 +22,7 @@ void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight) {
     *(Board + posMax.x * pos.y + pos.x) = weight + '0';
 };
 
-Coord* Next_Coord(Coord* pos, int direction) {
+void Next_Coord(Coord* pos, int direction) {
     /*Modifies the coordinates according to the argument passed as a parameter
     (0:N, 1:E, 2:S, 3:O)*/
     switch (direction) {
