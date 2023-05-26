@@ -35,7 +35,7 @@ void Solver(char* Board, Coord posMax, Coord pos, int Direction[4]) {
 		Place_island_on_map(Board, posMax, pos, Type_island);
 	}
 
-    Nb_islands = Island_on_map(Board, pos, posMax);
+    int Nb_islands = Island_on_map(Board, pos, posMax);
     pos = Find_Island(Board, posMax);
 
 	int Nb_combinaison;

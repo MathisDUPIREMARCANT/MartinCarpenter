@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Header.h"
+#include <time.h>
 
 #define I 15
 #define X 15

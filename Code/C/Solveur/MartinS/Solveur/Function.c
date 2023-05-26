@@ -178,10 +178,10 @@ Coord Find_Island(char* Board, Coord posMax) {
 }
 
 
-Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, Type_bridge) {
+Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge) {
     for (int i = 0; i < Length; i++) {
-        Next_Coord(&pos, D_pont);
-        Place_bridge_on_map(Board, posMax, pos, Type_bridge);
+        Next_Coord(pos, Direction);
+        Place_bridge_on_map(Board, posMax, *pos, Type_bridge);
     }
 }
 

@@ -93,7 +93,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
     return  space;
 }
 
-Coord* Next_Coord(Coord* pos, int direction) {
+void Next_Coord(Coord* pos, int direction) {
     /*Modifies the coordinates according to the argument passed as a parameter
     (0:N, 1:E, 2:S, 3:O)*/
     switch (direction) {
@@ -134,8 +134,10 @@ void Print_board(char* Board, Coord Taille) {
 int* Table_copy(int* table, int length) {
     int* pt;
     pt = (int*)malloc(4 * sizeof(int));
-    for (int i = 0; i < length; i++) {
-        pt[i] = table[i];
+    if (pt != NULL) {
+        for (int i = 0; i < length; i++) {
+            pt[i] = table[i];
+        }
     }
     return pt;
 }
