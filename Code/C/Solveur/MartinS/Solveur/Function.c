@@ -178,3 +178,54 @@ Coord Find_Island(char* Board, Coord posMax) {
 }
 
 
+Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, Type_bridge) {
+    for (int i = 0; i < Length; i++) {
+        Next_Coord(&pos, D_pont);
+        Place_bridge_on_map(Board, posMax, pos, Type_bridge);
+    }
+}
+
+Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
+    int space = 0;
+    switch (Direction) {
+
+    case(0):
+        Next_Coord(&pos, 0);
+        while (pos.y > 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 0);
+        }
+        Next_Coord(&pos, 2);
+        break;
+
+    case(1):
+        Next_Coord(&pos, 1);
+        while (pos.x < posMax.x && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 1);
+        }
+        Next_Coord(&pos, 3);
+        break;
+
+    case(2):
+        Next_Coord(&pos, 2);
+        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 2);
+        }
+        Next_Coord(&pos, 0);
+        break;
+
+    case(3):
+        Next_Coord(&pos, 3);
+        while (pos.x > 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+            space++;
+            Next_Coord(&pos, 3);
+        }
+        Next_Coord(&pos, 1);
+        break;
+    }
+
+    return  space;
+}
+
