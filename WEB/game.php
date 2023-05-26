@@ -40,7 +40,7 @@
     <main class="main">
         <button class="Buttonstory" onclick="redirectTo('storymod.php')"><a class="textstory">Story
                 Mod</a></button>
-        <div class="games">
+        <div class=" games">
             <button class="Buttoneasy" onclick="redirectTo('randommod.php')"><a class="texteasy">Easy Mod</a></button>
             <button class="Buttonmedium" onclick="redirectTo('randommod.php')"><a class="textmedium">Medium
                     Mod</a></button>

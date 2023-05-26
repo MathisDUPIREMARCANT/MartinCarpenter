@@ -1,4 +1,10 @@
 <?php include("debutsetting.php"); ?>
+<?php 
+if(isset($_POST['theme'])){
+setcookie("Colorgame",$_POST['Choixtheme'],time()+(365*24*3600),'/', '',false,true);
+header('location:settinguser.php');	
+}
+?>
 <header>
     <div class="buttonhead">
         <button class=" back" type=submit>
