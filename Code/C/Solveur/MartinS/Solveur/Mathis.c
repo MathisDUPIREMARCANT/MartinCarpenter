@@ -18,7 +18,7 @@ void Solver(char* Board, Coord posMax, Coord pos, int Direction[4]) {
 			if (Direction[i]) {
 				int Length;
 
-				Length = Length_next_island();
+				Length = Length_next_island(Board, posMax, pos, i);
 
 				Create_bridge(Board, posMax, &Copy_pos, Length, i, i%2);
 
@@ -35,5 +35,9 @@ Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, 
 		Next_Coord(&pos, D_pont);
 		Place_bridge_on_map(Board, posMax, pos, Type_bridge);
 	}
+}
+
+Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
+
 }
 
