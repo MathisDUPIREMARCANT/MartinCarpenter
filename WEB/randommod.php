@@ -92,7 +92,7 @@ session_start();
         </div>
     </header>
     <main Id="main" class="main">
-        <div Id="game" class="game">
+        <div id="game" class="game">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>

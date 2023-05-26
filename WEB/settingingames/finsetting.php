@@ -13,7 +13,7 @@
 <input type="submit" class="bouton" id="bouton" name="theme" Value="Appliquer" />
 </form>
 <?php
-if(isset($_COOKIE['Colorgame'])==true){
+if(isset($_COOKIE['Colorgame'])){
     echo"<div class='color'> The color of the game grid has been changed to $_COOKIE[Colorgame]! </div>";
 }
     ?>
