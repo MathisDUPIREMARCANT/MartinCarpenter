@@ -22,6 +22,13 @@ session_start() ;
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="WEB/CSS/index.css">
+    <?php
+        if(isset($_COOKIE['ColorButton'])==TRUE){
+        $style=$_COOKIE['ColorButton']; //on récupère le theme choisi enregistré dans le cookie
+        echo"
+        <link rel='stylesheet' href='WEB/CSS/Changecolorbutton/$style.css' />";
+        }
+        ?>
 </head>
 
 <body class="body">
@@ -50,18 +57,18 @@ session_start() ;
             <div class="Titre">Martin Carpenter</div>
 
             <div class="buttons">
-                <button class="Button" type="submit">
-                    <a class='writebutton' href="WEB/game.php">Play</a>
+                <button id="Button" class="Button" type="submit">
+                    <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
                 </button>
 
-                <button class="Button" type="submit">
-                    <a class="writebutton" href="WEB/rules.php">Rules</a>
+                <button id="Button" class="Button" type="submit">
+                    <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
                 </button>
 
 
 
-                <button class="Button" type="submit">
-                    <a class='writebutton' href="WEB/sign_in_up.php">Connexion</a>
+                <button id="Button" class="Button" type="submit">
+                    <a id="writebutton" class='writebutton' href="WEB/sign_in_up.php">Connexion</a>
                 </button>
 
 

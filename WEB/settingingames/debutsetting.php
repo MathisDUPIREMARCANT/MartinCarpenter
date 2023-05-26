@@ -19,6 +19,7 @@
     <!--Browser icon-->
     <script src="https://kit.fontawesome.com/0e1c95535d.js" crossorigin="anonymous"></script>
 
+
     <link rel="stylesheet" href="../CSS/setting.css">
 </head>
 

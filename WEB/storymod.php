@@ -21,6 +21,13 @@ session_start();
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/choiceoflevel.css">
+    <?php
+        if(isset($_COOKIE['Colorgame'])==TRUE){
+            $style=$_COOKIE['Colorgame']; //on récupère le theme choisi enregistré dans le cookie
+            echo"
+            <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
+            }
+        ?>
 </head>
 
 <body>
@@ -41,102 +48,102 @@ session_start();
         </div>
     </header>
     <main class="main">
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 1
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 2
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 3
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 4
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 5
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 6
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 7
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 8
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 9
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 10
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 11
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 12
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 13
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 14
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 15
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 16
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 17
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 18
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 19
             </a>
         </button>
-        <button class="niveau" type=submit>
+        <button id="niveau" class="niveau" type=submit>
             <a>
                 20
             </a>
