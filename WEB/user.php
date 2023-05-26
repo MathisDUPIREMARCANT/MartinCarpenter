@@ -1,6 +1,20 @@
 <?php
 session_start();
+try{
+    require("traitement/DB_connect.php");             
+    $reqPrep1="SELECT username,email,password,score FROM users WHERE username='$_SESSION[username]'";
+    $req1 =$conn->prepare($reqPrep1);
+    $req1->execute();
+    $resultat = $req1->fetchAll();
+    $conn= NULL;
+}
+catch(Exception $e){
+    
+    die("Erreur : " . $e->getMessage());
+}
+
 if(isset($_SESSION['username'])){
+foreach($resultat as $row){
     echo'
     <!DOCTYPE html>
     <html lang="en">
@@ -48,14 +62,12 @@ if(isset($_SESSION['username'])){
                 <div class="Compte">
     
                     <div class="name">
-                        Name
+                        '.$row["username"].'
                     </div>
                     <div class="line">
-                        Personal Best:
+                        Personal Best: '.$row["score"].'
                         <br>
-                        Email :
-                        <br>
-                        Username :
+                        Email : '.$row["email"].'
                     </div>
                     <div class="logout">
                         <a class="textlogout" href=" logout.php">Logout
@@ -85,6 +97,7 @@ if(isset($_SESSION['username'])){
         </main>
     </body>
     </html>';
+}
 }
 else{
     header("Location: sign_in_up.php?fail=2");
