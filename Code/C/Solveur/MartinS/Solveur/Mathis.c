@@ -38,5 +38,8 @@ void Solver(char* Board, Coord posMax, Coord pos, int Direction[4]) {
     Nb_islands = Island_on_map(Board, pos, posMax);
     pos = Find_Island(Board, posMax);
 
+	for (int i = 0; i < 12; i++) {
+
+	}
 
 }
