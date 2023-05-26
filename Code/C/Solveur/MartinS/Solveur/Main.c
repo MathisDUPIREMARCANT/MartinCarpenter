@@ -6,7 +6,7 @@
 #define Y 7
 void main() {
 
-
+	char** Result;
 
 	Coord posMax = { Y, X }; //{ *(argv[1]), *(argv[2])} 
 	
@@ -16,5 +16,5 @@ void main() {
 	pos.x = 0;
 	pos.y = 0;
 	//solveur(board, pos, posMax);
-	Solver(Board, posMax, pos, NULL);
+	Solver(Result, Board, posMax, pos, NULL);
 }

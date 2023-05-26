@@ -199,7 +199,6 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
             space++;
             Next_Coord(&pos, 0);
         }
-        Next_Coord(&pos, 2);
         break;
 
     case(1):
@@ -208,7 +207,6 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
             space++;
             Next_Coord(&pos, 1);
         }
-        Next_Coord(&pos, 3);
         break;
 
     case(2):
@@ -217,7 +215,6 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
             space++;
             Next_Coord(&pos, 2);
         }
-        Next_Coord(&pos, 0);
         break;
 
     case(3):
@@ -226,7 +223,6 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
             space++;
             Next_Coord(&pos, 3);
         }
-        Next_Coord(&pos, 1);
         break;
     }
 

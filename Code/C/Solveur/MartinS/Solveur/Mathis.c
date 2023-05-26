@@ -24,15 +24,15 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 
 					Length = Length_next_island(Board, posMax, pos, i);
 
-					Create_bridge(Board, posMax, &Copy_pos, Length, i, i % 2);
+					Create_bridge(Board, posMax, &Copy_pos, Length, i, Direction[i]);
 
 					Next_Coord(&Copy_pos, i);
 
-					Place_island_on_map(Board, posMax, Copy_pos, Direction[i]);
+					Place_island_on_map(Board, posMax, Copy_pos, Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]);
 				}
 			}
 
-			Place_island_on_map(Board, posMax, pos, Type_island);
+			Place_island_on_map(Board, posMax, pos, Peek_island_number(Board, posMax, Copy_pos, 0, 0) - Type_island);
 		}
 
 		int Nb_islands = Island_on_map(Board, pos, posMax);
@@ -43,5 +43,30 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 		for (int i = 0; i < Nb_combinaison; i++) {
 			Solver(Result, Board, posMax, pos, Next_possibilities[i]);
 		}
+	}
+}
+
+Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length) {
+
+	if (Length == 0) { return atoi(*(Board + (posMax.x * (pos.y) + pos.x))); }
+
+
+	switch (Direction) {
+
+	case(0):
+		return atoi(*(Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
+		break;
+
+	case(1):
+		return atoi(*(Board + (posMax.x * (pos.y) + pos.x + Length + 1)));
+		break;
+
+	case(2):
+		return atoi(*(Board + (posMax.x * (pos.y + (Length + 1)) + pos.x)));
+		break;
+
+	case(3):
+		return atoi(*(Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
+		break;
 	}
 }
