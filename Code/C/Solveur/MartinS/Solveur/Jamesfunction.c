@@ -22,15 +22,11 @@ int solveur(char* Board, Coord pos, Coord posMax) {
                         Next_Coord(&pos_copy, i);
                         Place_bridge_on_map(Board, posMax, pos_copy, *Type_bridge);
                     }
+                    Next_Coord(&pos_copy, i);
+                    Place_island_on_map(Board, pos_copy, posMax, 0);
+                    Place_island_on_map(Board, pos, posMax, *(Board + (posMax.x * pos.y) + pos.x) - *Type_bridge +1);
                 }
             }
-
-
-
-
-
-
-
         }
 
 
