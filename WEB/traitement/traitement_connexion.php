@@ -51,6 +51,13 @@
                     $_SESSION['username'] = $donnees['username'];
                     $_SESSION['email'] = $email;
                     $username = $_SESSION['username']; 
+                    //selectionne score et progression de l'utilisateur
+                    $req = "SELECT `score`, `progression` FROM `users` WHERE `username` = '$username'";
+                    $requete = $conn->prepare($req);
+                    $requete->execute();
+                    $donnees = $requete->fetch();
+                    $_SESSION['score'] = $donnees['score'];
+                    $_SESSION['progression'] = $donnees['progression'];
                     //set cookies 
                     if (isset($_POST['remember-me'])) {
                         // L'utilisateur a coché "Se souvenir de moi"
