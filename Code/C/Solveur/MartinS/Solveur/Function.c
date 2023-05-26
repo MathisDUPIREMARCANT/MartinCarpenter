@@ -17,6 +17,11 @@ void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge) 
     }
 };
 
+void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight) {
+    /*Place a bridge on the board in (x,y)*/
+    *(Board + posMax.x * pos.y + pos.x) = weight + '0';
+};
+
 Coord* Next_Coord(Coord* pos, int direction) {
     /*Modifies the coordinates according to the argument passed as a parameter
     (0:N, 1:E, 2:S, 3:O)*/
@@ -150,11 +155,26 @@ int Bridge_mandatory(char* Board, Coord pos, Coord posMax, int dir, int* Type_br
         }
     }
     if (cmp == 1) {
-        Next_Coord(&pos_copy, dir);
         *Type_bridge = *(Board + (posMax.x * pos_copy.y) + pos_copy.x) - 1;
         return 1;
     }
     return 0;
+}
+
+
+Coord Find_Island(char* Board, Coord posMax) {
+    Coord pos;
+    for (int x = 0; x < posMax.x; x++) {
+        for (int y = 0; y < posMax.y; y++) {
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#')) {
+                pos.x = x;
+                pos.y = y;
+                x = posMax.x;
+                y = posMax.y;
+            }
+        }
+    }
+    return pos;
 }
 
 
