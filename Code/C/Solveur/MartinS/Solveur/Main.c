@@ -12,8 +12,9 @@ void main() {
 	
 	Coord pos;
 	//
-	char board[Y * X] = { "*****1*3*********4*********4*2*****" };
-	pos = Find_Island(board, posMax);
-	solveur(board, pos, posMax);
-
+	char Board[Y * X] = { "*****1*3*********4*********4*2*****" };
+	pos.x = 0;
+	pos.y = 0;
+	//solveur(board, pos, posMax);
+	Solver(Board, posMax, pos, NULL);
 }

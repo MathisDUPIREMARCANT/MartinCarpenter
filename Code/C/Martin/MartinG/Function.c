@@ -9,7 +9,7 @@ char* Init_board_Game(Coord pos){
     Returns the pointer of the Board*/
     
     char* Board = NULL;
-    Board = (char*)malloc(((pos.x * pos.y)+1) * sizeof(char));
+    Board = (char*)malloc(((pos.x * pos.y)) * sizeof(char));
     if (Board != NULL) {
         for (int x = 0; x < pos.x; x++) {
             for (int y = 0; y < pos.y; y++) {

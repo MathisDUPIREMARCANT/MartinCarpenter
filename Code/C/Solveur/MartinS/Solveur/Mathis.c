@@ -3,45 +3,45 @@
 #include <stdio.h>
 #include <string.h>
 
-void Solver(char* Board, Coord posMax, Coord pos, int Direction[4]) {
+void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4]) {
 
 	int* Next_possibilities = (int*)malloc(12 * sizeof(int) * 4);
 
-	if (pos == NULL) { pos = { 0,0 }; }
+	if (Next_possibilities != NULL) {
 
-	if (Direction != NULL) {
+		if (Direction != NULL) {
 
-		Coord Copy_pos;
-		int Type_island = 0;
-		
-		for (int i = 0; i < 4; i++) {
-			Copy_pos.x = pos.x;
-			Copy_pos.y = pos.y;
+			Coord Copy_pos;
+			int Type_island = 0;
 
-			if (Direction[i]) {
-				int Length;
-				Type_island += Direction[i];
+			for (int i = 0; i < 4; i++) {
+				Copy_pos.x = pos.x;
+				Copy_pos.y = pos.y;
 
-				Length = Length_next_island(Board, posMax, pos, i);
+				if (Direction[i]) {
+					int Length;
+					Type_island += Direction[i];
 
-				Create_bridge(Board, posMax, &Copy_pos, Length, i, i%2);
+					Length = Length_next_island(Board, posMax, pos, i);
 
-				Next_Coord(&Copy_pos, i);
+					Create_bridge(Board, posMax, &Copy_pos, Length, i, i % 2);
 
-				Place_island_on_map(Board, posMax, Copy_pos, Direction[i]);
+					Next_Coord(&Copy_pos, i);
+
+					Place_island_on_map(Board, posMax, Copy_pos, Direction[i]);
+				}
 			}
+
+			Place_island_on_map(Board, posMax, pos, Type_island);
 		}
 
-		Place_island_on_map(Board, posMax, pos, Type_island);
+		int Nb_islands = Island_on_map(Board, pos, posMax);
+		pos = Find_Island(Board, posMax);
+
+		int Nb_combinaison = 2;
+
+		for (int i = 0; i < Nb_combinaison; i++) {
+			Solver(Result, Board, posMax, pos, Next_possibilities[i]);
+		}
 	}
-
-    int Nb_islands = Island_on_map(Board, pos, posMax);
-    pos = Find_Island(Board, posMax);
-
-	int Nb_combinaison;
-
-	for (int i = 0; i < Nb_combinaison; i++) {
-		Solver(Board, posMax, pos, Next_possibilities[i]);
-	}
-
 }
