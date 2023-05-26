@@ -57,14 +57,15 @@ int Is_not_Island(char* Board, Coord pos, Coord posMax) {
     return 0;
 }
 
-int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
+int Weigth_Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
     int Island = 0;
     switch (Direction) {
     case(0):
         Next_Coord(&pos, 0);
         while (pos.y > 0) {
             if (Is_not_Island(Board, pos, posMax)) {
-                Island++;
+                Island = *(Board + (posMax.x * (pos.y)) + pos.x);
+                pos.y = 0;
             }
             Next_Coord(&pos, 0);
         }
@@ -74,7 +75,8 @@ int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
         Next_Coord(&pos, 1);
         while (pos.x < posMax.x) {
             if (Is_not_Island(Board, pos, posMax)) {
-                Island++;
+                Island = *(Board + (posMax.x * (pos.y)) + pos.x);
+                pos.x = posMax.x;
             }
             Next_Coord(&pos, 1);
         }
@@ -84,7 +86,8 @@ int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
         Next_Coord(&pos, 2);
         while (pos.y < posMax.y) {
             if (Is_not_Island(Board, pos, posMax)) {
-                Island++;
+                Island = *(Board + (posMax.x * (pos.y)) + pos.x);
+                pos.y = posMax.y;
             }
             Next_Coord(&pos, 2);
         }
@@ -94,7 +97,8 @@ int Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
         Next_Coord(&pos, 3);
         while (pos.x > 0) {
             if (Is_not_Island(Board, pos, posMax)) {
-                Island++;
+                Island = *(Board + (posMax.x * (pos.y)) + pos.x);
+                pos.x = 0;
             }
             Next_Coord(&pos, 3);
         }
@@ -178,14 +182,14 @@ Coord Find_Island(char* Board, Coord posMax) {
 }
 
 
-Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge) {
+void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge) {
     for (int i = 0; i < Length; i++) {
         Next_Coord(pos, Direction);
         Place_bridge_on_map(Board, posMax, *pos, Type_bridge);
     }
 }
 
-Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
+int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
     int space = 0;
     switch (Direction) {
 
@@ -227,5 +231,72 @@ Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
     }
 
     return  space;
+}
+
+
+int Denombrement(char* board, Coord pos, Coord posMax, int* possibilite[]) {
+    int tab[4] = 0;
+    int to_Add_tab[4];
+    int Nb_element_in_tab = 0;
+    int Island_weight = *(board + (posMax.x * (pos.y)) + pos.x);
+    int incr = 0;
+    for (int i = 0; i < 4; i++) {
+        tab[i] = Next_Island_in_a_direction(board, pos, posMax, i);
+        to_Add_tab[i] = 0; //Tableau d'une possibilité
+        if (tab[i] != 0) {
+            Nb_element_in_tab++;
+        }
+    }
+    //Cas ou pont = poids de l'ile 
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4;j++) {
+            to_Add_tab[j] = 0;
+        }
+        if (tab[i] = Island_weight) {
+            switch (i) {
+            case(0):
+                to_Add_tab[i] = Island_weight;
+                *possibilite[incr] = to_Add_tab;
+                incr++;
+                break;
+            case(1):
+                to_Add_tab[i] = Island_weight;
+                *possibilite[incr] = to_Add_tab;
+                incr++;
+                break;
+
+            case(2):
+                to_Add_tab[i] = Island_weight;
+                *possibilite[incr] = to_Add_tab;
+                incr++;
+                break;
+            case(3):
+                to_Add_tab[i] = Island_weight;
+                *possibilite[incr] = to_Add_tab;
+                incr++;
+                break;
+            }
+        }
+    }
+    // Si le nombre de l'île = le nombre de liaison 
+    if (Island_weight == Nb_element_in_tab) {
+        for (int i = 0;i < 4; i++) {
+            if (tab[i] != 0) {
+                to_Add_tab[i] = 1;
+            }
+        }
+        *possibilite[incr] = to_Add_tab;
+        incr++;
+    }
+    if (Island_weight >= Nb_element_in_tab) {
+
+        for (int i = 0; i < Island_weight; i++) {
+
+        }
+    }
+    switch () {
+    case(0):
+        to_Add_tab[i]
+    }
 }
 
