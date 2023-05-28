@@ -40,8 +40,12 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 
 		int Nb_combinaison = 2;
 
+		char* Board_copy;
+
+		strcpy(Board_copy, Board);
+
 		for (int i = 0; i < Nb_combinaison; i++) {
-			Solver(Result, Board, posMax, pos, Next_possibilities[i]);
+			Solver(Result, Board_copy, posMax, pos, Next_possibilities[i]);
 		}
 	}
 }
@@ -70,3 +74,5 @@ Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Leng
 		break;
 	}
 }
+
+
