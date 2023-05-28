@@ -38,6 +38,7 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 		int Nb_islands = Island_on_map(Board, pos, posMax);
 		pos = Find_Island(Board, posMax);
 
+		//il manque les differentes iles autour pour pouvoir faire les combinaisons
 		int Nb_combinaison = 2;
 
 		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
