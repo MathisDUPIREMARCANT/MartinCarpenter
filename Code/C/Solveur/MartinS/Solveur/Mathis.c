@@ -40,9 +40,11 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 
 		int Nb_combinaison = 2;
 
-		char* Board_copy;
+		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
 
-		strcpy(Board_copy, Board);
+		if (Board_copy != NULL) { 
+			strcpy(Board_copy, Board); 
+		}
 
 		for (int i = 0; i < Nb_combinaison; i++) {
 			Solver(Result, Board_copy, posMax, pos, Next_possibilities[i]);

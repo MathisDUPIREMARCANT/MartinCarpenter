@@ -27,6 +27,9 @@
     <ClCompile Include="Mathis.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Json.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
