@@ -6,16 +6,15 @@
 #define Y 7
 void main() {
 
-	char** Result;
-
-	Coord posMax = { Y, X }; //{ *(argv[1]), *(argv[2])} 
+	Coord posMax = { X, Y }; //{ *(argv[1]), *(argv[2])} 
 	Coord pos;
 	
-	//Result = (char**)malloc(sizeof(char*));
+	char** Result = (char**)malloc(sizeof(char*));
 
-	char Board[Y * X] = { "*****1*3*********4*********4*2*****" };
+	char Board[X * Y] = { "*1******2************3*4***********" };
 	pos.x = 0;
 	pos.y = 0;
 	//solveur(board, pos, posMax);
 	Solver(Result, Board, posMax, pos, NULL);
+	
 }
