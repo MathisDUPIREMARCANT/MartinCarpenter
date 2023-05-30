@@ -41,12 +41,12 @@ session_start() ;
         <div class="buttonhead">
             <button class="avatar" type=submit>
                 <a href="WEB/user.php">
-                    <img class="avatarimg" src="WEB/image/martin.png" />
+                    <img class="avatarimg" src="WEB/image/button/martin.png" />
                 </a>
             </button>
 
             <a class="al" - href="WEB/settingingames/setting.php">
-                <img class="settingimg" src="WEB/image/boutonsetting.png" />
+                <img class="settingimg" src="WEB/image/button/boutonsetting.png" />
             </a>
 
         </div>

@@ -33,11 +33,11 @@ if(isset($_SESSION['username'])){
         <div class="buttonhead">
             <button class="back" type=submit>
                 <a href="../index.php">
-                    <img class="backimg" src="image/arrow.png">
+                    <img class="backimg" src="image/button/arrow.png">
                 </a>
             </button>
             <a class="al" - href="settingingames/settinghomegame.php">
-                <img class="settingimg" src="image/boutonsetting.png" />
+                <img class="settingimg" src="image/button/boutonsetting.png" />
             </a>
 
         </div>

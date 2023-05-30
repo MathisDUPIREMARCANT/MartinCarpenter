@@ -1,7 +1,7 @@
 .pause{
     position: fixed;
     border: none;
-    background: url("../image/buttonpause.png");
+    background: url("../image/button/buttonpause.png");
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

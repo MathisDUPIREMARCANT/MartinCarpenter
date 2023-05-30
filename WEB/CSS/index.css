@@ -32,7 +32,10 @@
   -moz-border-radius: 100%;
   -ms-border-radius: 100%;
   -o-border-radius: 100%;
+  background-color:#fdfdfd;
+  border: 0.2vw solid rgb(255, 242, 0);
 }
+
 .avatarimg {
   height: 100%;
   width: 100%;
@@ -73,6 +76,10 @@
   border-radius: 50px;
   margin-bottom: 2vw;
 }
+.Button:hover{
+  border: 0.6vw solid #fdeb96;
+
+}
 .writebutton {
   display: flex;
   font-family: "Inter";
@@ -85,6 +92,10 @@
   -webkit-text-stroke: 0.1vw;
   -webkit-text-stroke-color: #c1e9f9;
   text-decoration: none;
+}
+.writebutton:hover{
+  font-size: 3.5vw;
+
 }
 .buttons {
   position: absolute;

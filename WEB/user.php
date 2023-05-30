@@ -43,11 +43,11 @@ foreach($resultat as $row){
             <div class="buttonhead">
                 <button class="back" type=submit>
                     <a href="../index.php">
-                        <img class="backimg" src="image/arrow.png">
+                        <img class="backimg" src="image/button/arrow.png">
                     </a>
                 </button>
                 <a class="al" - href="settingingames/settinguser.php">
-                    <img class="settingimg" src="image/boutonsetting.png" />
+                    <img class="settingimg" src="image/button/boutonsetting.png" />
                 </a>
     
             </div>
@@ -55,7 +55,7 @@ foreach($resultat as $row){
         <main>
             <div class="cont">
                 <div class="user">
-                    <img class="imgmartin" src="image/martin.png" alt="">
+                    <img class="imgmartin" src="image/button/martin.png" alt="">
                 </div>
             </div>
             <div class="cont2">

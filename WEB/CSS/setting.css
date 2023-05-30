@@ -8,7 +8,7 @@
   position: absolute;
   width: 85px;
   height: 80px;
-  background: url(../image/arrow.png);
+  background: url(../image/button/arrow.png);
   background-size: 80px;
   border-style: none;
 }
@@ -33,7 +33,8 @@
     -moz-border-radius: 100%;
     -ms-border-radius: 100%;
     -o-border-radius: 100%;
-    background-color: aliceblue;
+    background-color:#fefefe;
+    border: 0.2vw solid rgb(255, 242, 0);
   
   }
   .userimg{
@@ -90,6 +91,9 @@
       margin-top: 7px;
       text-decoration: none;
 }
+.button:hover{
+  background-color: #538E8A;
+}
 .choice{
   width: 35vw;
   border: 0.3vw solid white;
@@ -138,8 +142,8 @@
   font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 3vw;
-    line-height: 10vh;
+    font-size: 2.5vw;
+    line-height: 8vh;
     
     color: #ffffff;
     text-decoration: none;
@@ -169,19 +173,19 @@
   /*On utilise la même animation que dans la nav bar */
   background: -o-linear-gradient(
     135deg,
-    #360929,
+    #093610,
     var(--violet-MAIN),
-    #280130,
-    #431c5a,
-    #34213f
+    #01300e,
+    #1c5a2f,
+    #213f27
   );
   background: linear-gradient(
     -45deg,
-    #360929,
+    #093610,
     var(--violet-MAIN),
-    #280130,
-    #431c5a,
-    #34213f
+    #013009,
+    #1c5a1d,
+    #213f28
   );
   background-size: 400% 400%;
   -webkit-animation: gradient 10s ease infinite;
@@ -222,7 +226,7 @@
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  color: #ff00dc59;
+  color: #00ff2659;
 }
 
 .btn i {
@@ -246,12 +250,12 @@
     linear,
     left top,
     left bottom,
-    from(rgb(69, 182, 252)),
-    color-stop(rgb(131 58 180)),
-    to(#1f7ef2)
+    from(rgb(69, 252, 93)),
+    color-stop(rgb(58, 180, 72)),
+    to(#2df21f)
   );
-  background: -o-linear-gradient(rgb(69, 182, 252), rgb(131 58 180), #1f7ef2);
-  background: linear-gradient(rgb(69, 182, 252), rgb(131 58 180), #1f7ef2);
+  background: -o-linear-gradient(rgb(69, 252, 121), rgb(58, 180, 84), #1ff242);
+  background: linear-gradient(rgb(69, 252, 78), rgb(58, 180, 66), #1ff246);
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg); 

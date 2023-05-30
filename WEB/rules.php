@@ -31,11 +31,11 @@ session_start();
         <div class="buttonhead">
             <button class="back" type=submit>
                 <a href="../index.php">
-                    <img class="backimg" src="image/arrow.png">
+                    <img class="backimg" src="image/button/arrow.png">
                 </a>
             </button>
             <a class="al" - href="settingingames/settinghomegame.php">
-                <img class="settingimg" src="image/boutonsetting.png" />
+                <img class="settingimg" src="image/button/boutonsetting.png" />
             </a>
 
 
@@ -54,20 +54,20 @@ session_start();
         <div class="rules4" >
             Click on an island to connect it to another
         </div>
-        <img class="rules" src="image/rulespointeuriles.png"  >
+        <img class="rules" src="image/rules/rulespointeuriles.png"  >
         <div >
             Each island must be connected to another with a bridge 
         </div>
-        <img class="3rules" src="image/rulesiles+pont.png"  >
+        <img class="3rules" src="image/rules/rulesiles+pont.png"  >
         <div >
             The number of palm trees indicates the number of bridges available for an island 
         </div>
-        <img class="rules2" src="image/ile1.png"  >
-        <img class="rules2" src="image/ile2.png"  >
-        <img class="rules2" src="image/ile3.png"  >
-        <img class="rules2" src="image/ile4.png"  >
-        <img class="rules2" src="image/ile5.png"  >
-        <img class="rules2" src="image/ile6.png"  >
+        <img class="rules2" src="image/iles/ile1.png"  >
+        <img class="rules2" src="image/iles/ile2.png"  >
+        <img class="rules2" src="image/iles/ile3.png"  >
+        <img class="rules2" src="image/iles/ile4.png"  >
+        <img class="rules2" src="image/iles/ile5.png"  >
+        <img class="rules2" src="image/iles/ile6.png"  >
         <div >
             Connect all the islands to finish the level by respecting the number of bridges.
             You can choose your game mode .<br>
@@ -76,7 +76,13 @@ session_start();
             The creative mode allows you to create your own level, you have to fill in the grid with the islands in the menu once the level is finished, click on the diskette, go back to the mod choice and select "my level".
 
         </div>
+        
+    
     </div>
+    <div class="martinplace">
+        <img class="martin" src="image/martin1.png">
+    </div>
+   
     
 
     </main>
