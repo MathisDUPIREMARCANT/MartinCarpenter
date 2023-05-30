@@ -40,6 +40,12 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 		pos = Find_Island(Board, posMax);
 
 		//il manque les differentes iles autour pour pouvoir faire les combinaisons
+		int Direction_available[4];
+
+		for (int i = 0; i < 4; i++) {
+			Direction_available[i] = Peek_island_number(Board, posMax, pos, i, Length_next_island(Board, posMax, pos, i));
+		}
+
 		int Nb_combinaison = 2;
 
 		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
