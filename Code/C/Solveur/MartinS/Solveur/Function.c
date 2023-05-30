@@ -114,7 +114,7 @@ int Island_on_map(char* Board, Coord pos, Coord posMax) {
 
     for (int y = 0; y < posMax.y ; y++) {
         for (int x = 0; x < posMax.x ; x++) {
-            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#')) {
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
                 Island_current++;
             }
         }
@@ -146,10 +146,10 @@ int Verif_solved(char* Board, int Nb_Island, Coord posMax) {
 
 
 Coord Find_Island(char* Board, Coord posMax) {
-    Coord pos;
+    Coord pos = { 0, 0 };
     for (int x = 0; x < posMax.x; x++) {
         for (int y = 0; y < posMax.y; y++) {
-            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#')) {
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
                 pos.x = x;
                 pos.y = y;
                 x = posMax.x;
@@ -168,6 +168,7 @@ void Print_board(char* Board, Coord Taille) {
         }
         printf("%c", Board[i]);
     }
+    printf("\n");
 }
 
 void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge) {
@@ -218,20 +219,30 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
 }
 
 
-int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction[]) {
-    int weight_island = *(board + (posMax.x * pos.y) + pos.x);
+int Enumeration(char* board, Coord pos, Coord posMax, int* result, int* direction) {
+    int weight_island = atoi((board + (posMax.x * pos.y) + pos.x));
     int Nb_possibility = 0 ;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
                 for (int l = 0; l < 3; l++) {
-                    if (i <= direction[0] && j <= direction[1] && k <= direction[2] && l <= direction[3] && (i + j + k + l) <= weight_island) {
+                    i;
+                    j;
+                    k;
+                    l;
+
+                    if (i <= direction[0] && j <= direction[1] && k <= direction[2] && l <= direction[3] && (i + j + k + l) == weight_island) {
                         *(result + (Nb_possibility * 4) + 0) = i;
                         *(result + (Nb_possibility * 4) + 1) = j;
                         *(result + (Nb_possibility * 4) + 2) = k;
                         *(result + (Nb_possibility * 4) + 3) = l;
                         Nb_possibility++;
-                        realloc(result, sizeof(int) * Nb_possibility * 4);
+
+                        //int* buffer = realloc(result, sizeof(int) * (Nb_possibility + 1) * 4);
+                        //if (buffer != NULL) {
+                         //   free(result);
+                          //  result = buffer; 
+                        //}
                         
                     }
                     
@@ -242,3 +253,8 @@ int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction
     return Nb_possibility;
 }
 
+void Copy_board(char* destination, char* source, int count) {
+    for (int i = 0; i < count; i++) {
+        destination[i] = source[i];
+    }
+}

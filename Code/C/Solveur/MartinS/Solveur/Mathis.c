@@ -3,14 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 
-void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4]) {
+void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction) {
 
-	int* Next_possibilities = (int*)malloc(12 * sizeof(int) * 4);
 	int Direction_available[4];
+	int* result = malloc(sizeof(int) * 4 * 81);
 
 	Print_board(Board, posMax);
 
-	if (Next_possibilities != NULL) {
+	if (result != NULL) {
 
 		if (Direction != NULL) {
 
@@ -27,21 +27,30 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 
 					Length = Length_next_island(Board, posMax, pos, i);
 
-					Create_bridge(Board, posMax, &Copy_pos, Length, i, Direction[i]);
+					Create_bridge(Board, posMax, &Copy_pos, Length, i, Direction[i]-1);
 
 					Next_Coord(&Copy_pos, i);
 
 					Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
 
-					if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
+
+					Print_board(Board, posMax);
+					//if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
 					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
 			}
 
 			Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
 		}
+		Print_board(Board, posMax);
 
 		int Nb_islands = Island_on_map(Board, pos, posMax);
+
+		if (Nb_islands == 0) {
+			*(Result) = Board;
+			return;
+		}
+
 		pos = Find_Island(Board, posMax);
 
 		//il manque les differentes iles autour pour pouvoir faire les combinaisons
@@ -52,17 +61,22 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 		}
 
 
-		int* result = malloc(sizeof(int) * 4);
-		int Nb_combinaison = Enumeration(Board, pos, posMax, result, Direction_available) ;
+		int* result = malloc(sizeof(int) * 4 * 81);
+		int Nb_combinaison = Enumeration(Board, pos, posMax, result, &Direction_available) ;
 
 		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
 
 		if (Board_copy != NULL) { 
-			strcpy_s(Board_copy, sizeof(char) * posMax.x * posMax.y,  Board); 
+			//strncpy(Board_copy, Board, posMax.x * posMax.y); 
+			//strncpy_s(Board_copy, sizeof(char) * posMax.x * posMax.y, Board, posMax.x * posMax.y);
+			Copy_board(Board_copy, Board, posMax.x * posMax.y);
 		}
 
-		for (int i = 0; i < Nb_combinaison; i++) {
-			Solver(Result, Board_copy, posMax, pos, Next_possibilities[i]);
+
+
+		for (int y = 0; y < Nb_combinaison; y++) {
+
+			Solver(Result, Board_copy, posMax, pos, result + (4 * (Nb_combinaison - 1)));
 		}
 	}
 }
