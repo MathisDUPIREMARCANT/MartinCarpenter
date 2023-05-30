@@ -18,4 +18,5 @@ void main() {
 	pos.y = 0;
 	//solveur(board, pos, posMax);
 	Solver(Result, Board, posMax, pos, NULL);
+	
 }
