@@ -6,6 +6,7 @@
 void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4]) {
 
 	int* Next_possibilities = (int*)malloc(12 * sizeof(int) * 4);
+	int Direction_available[4];
 
 	if (Next_possibilities != NULL) {
 
@@ -29,6 +30,8 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 					Next_Coord(&Copy_pos, i);
 
 					Place_island_on_map(Board, posMax, Copy_pos, Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]);
+
+					if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
 					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
 			}
@@ -40,7 +43,7 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 		pos = Find_Island(Board, posMax);
 
 		//il manque les differentes iles autour pour pouvoir faire les combinaisons
-		int Direction_available[4];
+		
 
 		for (int i = 0; i < 4; i++) {
 			Direction_available[i] = Peek_island_number(Board, posMax, pos, i, Length_next_island(Board, posMax, pos, i));

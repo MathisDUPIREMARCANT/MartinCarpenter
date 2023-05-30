@@ -16,6 +16,8 @@ function generate_table(rows, columns) {
     // Créer les éléments <table> et <tbody>
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
+    tbl.style.width = "50px";
+    tbl.style.height = "50px";
 
     // Créer les cellules
     for (var i = 0; i < rows; i++) {
@@ -104,9 +106,13 @@ function generate_table(rows, columns) {
 }
   // Appeler cette fonction après avoir généré le tableau
   //on recupere la taille du tableau
+  cell.style.width = "50px";
+cell.style.height = "50px";
+
     var rows = huge.Grid[0].size[0];
     var columns = huge.Grid[0].size[1];
   generate_table(rows, columns);
+
 
 
   function generate_table_no_solution(rows, columns) {
