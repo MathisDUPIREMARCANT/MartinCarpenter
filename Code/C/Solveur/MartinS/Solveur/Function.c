@@ -210,6 +210,30 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
 
 
 int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction[], int number_island) {
-    
+    int weight_island = *(board + (posMax.x * pos.y) + pos.x);
+    int weight_top = Weigth_Island_in_a_direction(board, pos, posMax, 0);
+    int weight_right = Weigth_Island_in_a_direction(board, pos, posMax, 1);
+    int weight_south = Weigth_Island_in_a_direction(board, pos, posMax, 2);
+    int weight_west = Weigth_Island_in_a_direction(board, pos, posMax, 3);
+    int Nb_possibility = 0 ;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                for (int l = 0; l < 3; l++) {
+                    if (i <= weight_top && j <= weight_right && k <= weight_south && l <= weight_west && (i + j + k + l) <= weight_island) {
+                        *(result + (Nb_possibility * 4) + 0) = i;
+                        *(result + (Nb_possibility * 4) + 1) = j;
+                        *(result + (Nb_possibility * 4) + 2) = k;
+                        *(result + (Nb_possibility * 4) + 3) = l;
+                        Nb_possibility++;
+                        realloc(result, sizeof(int) * Nb_possibility * 4);
+                        
+                    }
+                    
+                }
+            } 
+        }
+    }
+
 }
 
