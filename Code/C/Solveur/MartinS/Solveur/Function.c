@@ -160,6 +160,15 @@ Coord Find_Island(char* Board, Coord posMax) {
     return pos;
 }
 
+void Print_board(char* Board, Coord Taille) {
+    int i = 0;
+    for (i; i < (Taille.x * Taille.y); i++) {
+        if (i % Taille.x == 0) {
+            printf("\n");
+        }
+        printf("%c", Board[i]);
+    }
+}
 
 void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge) {
     for (int i = 0; i < Length; i++) {
