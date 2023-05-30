@@ -33,6 +33,7 @@ void From_C_to_Json_island(Island island);
 void Next_Coord(Coord* pos, int direction);
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge);
 void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight);
+void Print_board(char* Board, Coord Taille);
 void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4]);
 
 Coord Find_Island(char* Board, Coord posMax);
