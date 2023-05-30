@@ -145,27 +145,6 @@ int Verif_solved(char* Board, int Nb_Island, Coord posMax) {
 };
 
 
-int Bridge_mandatory(char* Board, Coord pos, Coord posMax, int dir, int* Type_bridge) {
-    Coord pos_copy = pos;
-    Next_Coord(&pos_copy, dir);
-    while (Is_not_Island(Board, pos_copy, posMax)) {
-        Next_Coord(&pos_copy, dir);
-    }
-    Next_Coord(&pos_copy, dir);
-    int cmp = 0;
-    for (int j = 0;j < 4;j++) {
-        if (Island_in_a_direction(Board, pos_copy, posMax, j) >= 1) {
-            cmp++;
-        }
-    }
-    if (cmp == 1) {
-        *Type_bridge = *(Board + (posMax.x * pos_copy.y) + pos_copy.x) - 1;
-        return 1;
-    }
-    return 0;
-}
-
-
 Coord Find_Island(char* Board, Coord posMax) {
     Coord pos;
     for (int x = 0; x < posMax.x; x++) {
