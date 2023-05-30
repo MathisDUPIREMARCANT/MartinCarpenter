@@ -271,6 +271,51 @@ function check_win(){
 
 }
 
+
+function removeBridge(island1, island2) {
+    // Trouvez les indices des îles dans le tableau huge.Islands
+    var island1Index = huge.Islands.indexOf(island1);
+    var island2Index = huge.Islands.indexOf(island2);
+
+    // Parcourir toutes les cellules dans huge.PlacedBridges
+    for (var cellId in huge.PlacedBridges) {
+        // Si la cellule contient un pont entre ces deux îles, décrémentez le count ou supprimez le pont
+        var bridgeData = huge.PlacedBridges[cellId];
+        if (bridgeData.islandPair.includes(island1Index) && bridgeData.islandPair.includes(island2Index)) {
+            
+            // Si c'est un double pont, décrémentez le count et supprimez seulement une image de pont
+            if (bridgeData.count > 1) {
+                bridgeData.count--;
+
+                // Supprimer un pont du DOM
+                var cellElement = document.getElementById(cellId);
+                var bridgeImage = cellElement.getElementsByTagName('img')[0];
+                cellElement.removeChild(bridgeImage);
+            } 
+            // Si c'est un pont simple, supprimez-le comme avant
+            else {
+                // Supprimer le pont du DOM
+                var cellElement = document.getElementById(cellId);
+                while (cellElement.firstChild) {
+                    cellElement.removeChild(cellElement.firstChild);
+                }
+
+                // Supprimer le pont des données
+                delete huge.PlacedBridges[cellId];
+
+            }
+        }
+        
+    }
+
+    // Mise à jour de huge.userPlacedBridges
+    huge.userPlacedBridges = [];
+    for (var key in huge.PlacedBridges) {
+        huge.userPlacedBridges.push(huge.PlacedBridges[key].Placement);
+    }
+    check_win();
+}
+
 function placeBridge(island1, island2) {
     var bridgeOrientation = island1.Placement[0] === island2.Placement[0] ? 1 : 2; // 1 pour horizontal, 2 pour vertical
     console.log('Placement du pont, île1 : ', island1, ', île2 : ', island2);
@@ -307,9 +352,15 @@ function placeBridge(island1, island2) {
             bridgeData.count += 1;
             bridgeData.Placement.push([row, col]);
             huge.PlacedBridges[cellId] = bridgeData;
+            console.log('absolute', huge.userPlacedBridges)
+        // Trouvez les indices des îles dans le tableau huge.Islands
+        var island1Index = huge.Islands.indexOf(island1);
+        var island2Index = huge.Islands.indexOf(island2);
 
+        // Stockez ces indices au lieu des objets îles eux-mêmes
+        bridgeData.islandPair = [island1Index, island2Index];
             //on rempli un tableau de tableau qui correspond au bridgedtaa.placement pour pouvoir le comparer avec huge.bridges
-            check_win();
+
             //on stocke les valeur de huge.bridges dans un dictionnaire en fonction de leur witdh
             var bridgeImage = document.createElement("img");
             if (bridgeOrientation === 1) { // Si c'est un pont horizontal
@@ -317,38 +368,14 @@ function placeBridge(island1, island2) {
             } else { // Sinon, c'est un pont vertical
                 bridgeImage.src = "../image/images_temporaires/traitv.png";
             }
-            var removeBridges = function(event) {
-                for (let key in huge.PlacedBridges) {
-    let bridge = huge.PlacedBridges[key];
-    for (let i = 0; i < bridge.Placement.length; i++) {
-        if (bridge.Placement[i][0] === row || bridge.Placement[i][1] === col) {
-            let bridgeRow = bridge.Placement[i][0];
-            let bridgeCol = bridge.Placement[i][1]; 
-            let bridgeCellId = "cell-" + bridgeRow + "-" + bridgeCol;
-            let bridgeCellElement = document.getElementById(bridgeCellId);
-            // Supprimez les éléments du pont de la cellule
-            while (bridgeCellElement.firstChild) {
-                bridgeCellElement.removeChild(bridgeCellElement.firstChild);
-            }
-            // supprimer les coordonnées de placement du pont
-            bridge.Placement.splice(i, 1);
-            i--; // adjust index due to splice
-        }
-    }
-    // si toutes les coordonnées de placement du pont ont été supprimées, supprimer le pont
-    if (bridge.Placement.length === 0) {
-        delete huge.PlacedBridges[key];
-    }
-}
-
-};
-
-// Ajoutez l'écouteur d'événements à l'élément du pont
-bridgeImage.addEventListener("click", removeBridges);
-
+            //on creer une fonction pour supprimer les ponts quand l'on clique dessus
 cellElement.appendChild(bridgeImage);
 
-
+// ...
+//on creer une fonction pour supprimer les ponts quand l'on clique dessus
+bridgeImage.addEventListener('click', () => removeBridge(island1, island2));
+cellElement.appendChild(bridgeImage);
+// ...
             console.log('lololol',huge.PlacedBridges); // For debugging
             console.log(huge.Bridges)
             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
@@ -358,20 +385,13 @@ cellElement.appendChild(bridgeImage);
                 //on definit un witdh de 0
                 huge.userPlacedBridges.width = 0;
             }
-           
-            //si dans l'objet huge.userPlacedBridges, il y a un tableau qui contient 2 fois la même position, alors on supprime ce tableau
-            //if (huge.userPlacedBridges)
-
-
+            check_win();
            
 
 
         }
     }
 }
-
-
-
 
 
 
