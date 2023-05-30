@@ -8,6 +8,8 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 	int* Next_possibilities = (int*)malloc(12 * sizeof(int) * 4);
 	int Direction_available[4];
 
+	Print_board(Board, posMax);
+
 	if (Next_possibilities != NULL) {
 
 		if (Direction != NULL) {
@@ -29,14 +31,14 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 
 					Next_Coord(&Copy_pos, i);
 
-					Place_island_on_map(Board, posMax, Copy_pos, Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]);
+					Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
 
 					if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
 					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
 			}
 
-			Place_island_on_map(Board, posMax, pos, Peek_island_number(Board, posMax, Copy_pos, 0, 0) - Type_island);
+			Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
 		}
 
 		int Nb_islands = Island_on_map(Board, pos, posMax);
@@ -49,7 +51,9 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 			Direction_available[i] = Peek_island_number(Board, posMax, pos, i, Length_next_island(Board, posMax, pos, i));
 		}
 
-		int Nb_combinaison = 2;
+
+		int* result = malloc(sizeof(int) * 4);
+		int Nb_combinaison = Enumeration(Board, pos, posMax, result, Direction_available) ;
 
 		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
 
@@ -65,25 +69,22 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 
 Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length) {
 
-	if (Length == 0) { return atoi(*(Board + (posMax.x * (pos.y) + pos.x))); }
-
-
 	switch (Direction) {
 
 	case(0):
-		return atoi(*(Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
+		return atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
 		break;
 
 	case(1):
-		return atoi(*(Board + (posMax.x * (pos.y) + pos.x + Length + 1)));
+		return atoi((Board + (posMax.x * (pos.y) + pos.x + Length + 1)));
 		break;
 
 	case(2):
-		return atoi(*(Board + (posMax.x * (pos.y + (Length + 1)) + pos.x)));
+		return atoi((Board + (posMax.x * (pos.y + (Length + 1)) + pos.x)));
 		break;
 
 	case(3):
-		return atoi(*(Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
+		return atoi((Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
 		break;
 	}
 }

@@ -112,8 +112,8 @@ int Island_on_map(char* Board, Coord pos, Coord posMax) {
     
     int Island_current = 0;
 
-    for (int x = 0; x < posMax.x ; x++) {
-        for (int y = 0; y < posMax.y ; y++) {
+    for (int y = 0; y < posMax.y ; y++) {
+        for (int x = 0; x < posMax.x ; x++) {
             if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#')) {
                 Island_current++;
             }
@@ -243,6 +243,6 @@ int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction
             } 
         }
     }
-
+    return Nb_possibility;
 }
 
