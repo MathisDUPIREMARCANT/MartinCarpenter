@@ -54,7 +54,7 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
 
 		if (Board_copy != NULL) { 
-			strcpy(Board_copy, Board); 
+			strcpy_s(Board_copy, sizeof(char) * posMax.x * posMax.y,  Board); 
 		}
 
 		for (int i = 0; i < Nb_combinaison; i++) {
