@@ -19,7 +19,7 @@ typedef struct island {
 
 
 int Bridge_mandatory(char* Board, Coord pos, Coord posMax, int dir, int* Type_bridge);
-int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction[], int number_island);
+int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction[]);
 int Is_not_Island(char* Board, Coord pos, Coord posMax);
 int Weigth_Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction);
 int Island_on_map(char* Board, Coord pos, Coord posMax);

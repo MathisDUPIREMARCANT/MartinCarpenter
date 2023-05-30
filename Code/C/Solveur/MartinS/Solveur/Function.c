@@ -209,7 +209,7 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
 }
 
 
-int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction[], int number_island) {
+int Enumeration(char* board, Coord pos, Coord posMax, int* result, int direction[]) {
     int weight_island = *(board + (posMax.x * pos.y) + pos.x);
     int weight_top = Weigth_Island_in_a_direction(board, pos, posMax, 0);
     int weight_right = Weigth_Island_in_a_direction(board, pos, posMax, 1);
