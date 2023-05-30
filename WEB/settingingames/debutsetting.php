@@ -19,12 +19,8 @@
     <!--Browser icon-->
     <script src="https://kit.fontawesome.com/0e1c95535d.js" crossorigin="anonymous"></script>
 
+
     <link rel="stylesheet" href="../CSS/setting.css">
-    <?php 
-if(isset($_POST['theme'])){
-setcookie("Colorgame",$_POST['Choixtheme'],time()+(365*24*3600),'/', '',false,true);
-}
-?>
 </head>
 
 <body>

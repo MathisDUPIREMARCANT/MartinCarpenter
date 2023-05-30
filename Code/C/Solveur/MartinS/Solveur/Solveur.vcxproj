@@ -129,7 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Function.c" />
     <ClCompile Include="Jamesfunction.c" />
+    <ClCompile Include="Json.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Mathis.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />

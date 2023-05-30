@@ -69,38 +69,6 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                     Ramification(Board, pos, posMax, Bridges, Islands, Island_current, Bridge_current, i, Length_ramification);
                     Island_current++;
                     Bridge_current++;
-                    //Il me semble qu'il faut huste mettre Ramification si tu decommente ce qu'il y a en dessous 
-                    /*
-                    Bridges[Bridge_current].length = length_ramification;
-                    Bridges[Bridge_current].size = Type_bridge_ramification;
-                    Bridges[Bridge_current].direction = i % 2;
-
-                    Bridges[Bridge_current].pos = (Coord*)malloc(length_ramification * sizeof(Coord));
-
-                    for (int j = 0; j < length_ramification; j++) {
-                        Next_Coord(&pos, i);
-                        Bridges[Bridge_current].pos[j].x = pos.x;
-                        Bridges[Bridge_current].pos[j].y = pos.y;
-                    }
-                    Next_Coord(&pos, i);
-                    Islands[Island_current].pos.x = pos.x;
-                    Islands[Island_current].pos.y = pos.y;
-                    Islands[Island_current].number = Type_island_ramification;
-                    Island_current++;
-                    Bridge_current++;
-                    for (int h = 0; h <= length_ramification;h++) {
-                        switch (i) {
-                        case 0:
-                            Next_Coord(&pos, 2);
-                        case 1:
-                            Next_Coord(&pos, 3);
-                        case 2:
-                            Next_Coord(&pos, 0);
-                        case 3:
-                            Next_Coord(&pos, 1);
-                        }
-
-                    }*/
                     i = 4;
 
                 }
@@ -144,8 +112,8 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
 
         }
-        //Print_board(Board, posMax);
-        From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
+        Print_board(Board, posMax);
+        //From_C_to_Json(Bridges, Islands, Bridge_current, Island_current, posMax);
         //free(Bridges);
         //free(Islands);
         //Free_game(Bridges, Islands);

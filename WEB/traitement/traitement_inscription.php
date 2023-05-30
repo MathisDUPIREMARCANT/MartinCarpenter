@@ -40,7 +40,7 @@ session_start();
             }
             if($donnees['nb_email'] == 0){
                 $username = $_POST['username'];
-                $requete = $conn->prepare('INSERT INTO `users`(`email`, `password`, `username`) VALUES(?, ?, ?)');
+                $requete = $conn->prepare('INSERT INTO `users`(`email`, `password`, `username`, `score`, `progression`) VALUES(?, ?, ?, 0, 0)');
                 $requete->execute(array($email, $password, $username));
                 //on met dans la colonne photo_profil le chemin vers l'image par défaut
                 //on met le mail dans une session pour pouvoir l'utiliser dans la page confirmation.php

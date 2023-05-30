@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +21,18 @@
     <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/create.css">
+    <?php
+    if(isset($_COOKIE['ColorButton'])==TRUE){
+        $style=$_COOKIE['ColorButton']; //on récupère le theme choisi enregistré dans le cookie
+        echo"
+        <link rel='stylesheet' href='CSS/Changecolorbutton/$style.css' />";
+        }
+        if(isset($_COOKIE['Colorgame'])==TRUE){
+            $style=$_COOKIE['Colorgame']; //on récupère le theme choisi enregistré dans le cookie
+            echo"
+            <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
+            }
+    ?>
 </head>
 
 <body>
@@ -63,27 +78,27 @@
             </a>
         </div>
         <div id="popup" style="display: none;">
-            <button class="Button" type="submit">
-                <a class="al" href="game.php">Retry</a>
+            <button id="Button" class="Button" type="submit">
+                <a id="al" class="al" href="game.php">Retry</a>
             </button>
 
-            <button class="Button" type="submit">
-                <a class="al" href="../index.php">Back Home</a>
+            <button id="Button" class="Button" type="submit">
+                <a id="al" class="al" href="../index.php">Back Home</a>
             </button>
 
-            <button class="Button" type="submit" onclick="togglePopup(); showButton()">
-                <a class="al">Resume</a>
+            <button id="Button" class="Button" type="submit" onclick="togglePopup(); showButton()">
+                <a id="al" class="al">Resume</a>
             </button>
 
-            <button class="Button" type="submit">
-                <a class="al" href="settingingames/settingcreatemod.php">Setting</a>
+            <button id="Button" class="Button" type="submit">
+                <a id="al" class="al" href="settingingames/settingcreatemod.php">Setting</a>
             </button>
         </div>
     </header>
     <main Id="main" class="main">
         <div class="choice">
         </div>
-        <div class="game">
+        <div id="game" class="game">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>

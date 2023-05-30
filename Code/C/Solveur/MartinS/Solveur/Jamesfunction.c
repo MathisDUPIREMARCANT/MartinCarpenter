@@ -11,33 +11,7 @@ int solveur(char* Board, Coord pos, Coord posMax) {
 
     printf("%d", Nb_Island);
 
-    while (!Verif_solved(Board, Nb_Island, posMax)) {
-        // Regarde si le pont est obligatoire dans une des directions 
-        for (int i = 0; i < 4; i++) {
-            if (Island_in_a_direction(Board, pos, posMax, i) == 1) {
-                int* Type_bridge;
-                if (Bridge_mandatory(Board, pos, posMax, i, &Type_bridge)) {
-                    Coord pos_copy = pos;
-                    while (Is_not_Island(Board, pos_copy, posMax)) {
-                        Next_Coord(&pos_copy, i);
-                        Place_bridge_on_map(Board, posMax, pos_copy, *Type_bridge);
-                    }
-                }
-            }
-
-
-
-
-
-
-
-        }
-
-
-
-
-    }
-
+    
     
 
     
