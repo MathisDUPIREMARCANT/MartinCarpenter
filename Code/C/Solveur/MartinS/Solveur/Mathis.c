@@ -8,7 +8,7 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 	int Direction_available[4];
 	int* result = malloc(sizeof(int) * 4 * 81);
 
-	Print_board(Board, posMax);
+
 
 	if (result != NULL) {
 
@@ -34,7 +34,6 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 					Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
 
 
-					Print_board(Board, posMax);
 					//if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
 					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
@@ -43,7 +42,6 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 			Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
 		}
 		Print_board(Board, posMax);
-
 		int Nb_islands = Island_on_map(Board, pos, posMax);
 
 		if (Nb_islands == 0) {
@@ -73,10 +71,10 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 		}
 
 
-
 		for (int y = 0; y < Nb_combinaison; y++) {
 
 			Solver(Result, Board_copy, posMax, pos, result + (4 * (Nb_combinaison - 1)));
+			return;
 		}
 	}
 }
