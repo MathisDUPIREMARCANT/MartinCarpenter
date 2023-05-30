@@ -3,10 +3,12 @@
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-    </head>
-    <body>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
     <?php
         //appel de la base de donnée 
         require_once("DB_connect.php");
@@ -69,5 +71,6 @@
                 } 
             }
         ?>
-    </body>
+</body>
+
 </html>

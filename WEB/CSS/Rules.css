@@ -1,27 +1,80 @@
-.arrow{
-    background-color: rgb(134, 218, 237);
-    border-color: rgb(158, 233, 233);
-    display: flex;
-    position: fixed;
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
+.back{
+    position: absolute;
+    width: 85px;
+    height: 80px;
+    left: 17px;
+    top: 7px;
+    background: url(../image/arrow.png);
+    background-size: 80px;
+    border-style: none;
 }
-.arrowimg{
-    width: 50px;
+.backimg{
+    width: 50px; 
+    
 }
-.rule1{
-    border-style:solid;
+#background-video {/*vidéo d'arrière plan*/
+height: 100vh;
+width: 100vw;
+-o-object-fit: cover;
+object-fit: cover;
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+z-index: -1;
+}
+.settingimg {
+width: 100%;
+height: 100%;
+mix-blend-mode: hard-light;
+}
+.al {
+height: 10.1vw;
+width: 10vw;
+margin-left: 87vw;
+}
+.buttonhead {
+display: flex;
+width: 100vw;
+justify-content: space-between;
+margin-top: 5vh;
+height: 105px;
+}
+
+.rule1{     
+    border:0.5vw solid #247DBF ;
 	padding:10px;
-	width:400px;
-	margin: auto;
-	height:500px;
+    width: 70vw;
+    margin: auto;
+    height: 70vh;
 	overflow-y:scroll;
 	scrollbar-width:none;
-    margin-top: 50px;
+    background-color:#19608fe7 ;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2vw;
+    line-height: 9vh;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
   
+}
+.rules{
+    height: 20vw;
+    width: 20vw;
+}
+.rules3{
+    height: 10vw;
+    width: 10vw;
+}
+.rules2{
+    height: 15vw;
+    width: 15vw;
+}
+.rules4{
+    margin-top: 5vh;
 }
 .buttonhead{
     display: flex;

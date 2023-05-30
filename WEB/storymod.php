@@ -1,77 +1,154 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" >
-    
+    <meta charset="utf-8">
+
     <title>Martin Carpenter</title>
-   
-    <meta name="description" content="Martin carpenter Games" >
+
+    <meta name="description" content="Martin carpenter Games">
     <!--page description-->
-    <meta name="keywords" content="Martin Carpenter,Games,level" >
+    <meta name="keywords" content="Martin Carpenter,Games,level">
     <!--Page keywords-->
-    <meta name="viewport"content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Setting up a web page visibility zone for the user-->
-    
-    <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir" >
+
+    <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
     <!--Page authors-->
-    <link rel="icon" type="image/x-con" href="WEB/image/logo.ico" >
+    <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
     <!--Browser icon-->
-    <link rel="stylesheet" href="CSS/pause.css">
-    <link rel="stylesheet" href="CSS/game.css">
+    <link rel="stylesheet" href="CSS/choiceoflevel.css">
+    <?php
+        if(isset($_COOKIE['ColorButton'])==TRUE){
+            $style=$_COOKIE['ColorButton']; //on récupère le theme choisi enregistré dans le cookie
+            echo"
+            <link rel='stylesheet' href='CSS/Changecolorbutton/$style.css' />";
+            }
+        ?>
 </head>
-<body> 
+
+<body>
+    <video id="background-video" muted="" autoplay="autoplay" playsinline loop>
+        <source src="image/background.mp4" type="video/mp4">
+    </video>
     <header>
-     
-    <div class="buttonhead">
-        <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
-            <a class="al"><img class="pauseimg" src="image/butonpause.png"></a>
-        </button>
+        <div class="buttonhead">
+            <button class="back" type=submit>
+                <a href="game.php">
+                    <img class="backimg" src="image/arrow.png">
+                </a>
+            </button>
+            <a class="al" - href="settingingames/settinglevelchoice.php">
+                <img class="settingimg" src="image/boutonsetting.png" />
+            </a>
+
         </div>
-        <div id="popup" style="display: none;">
-            <button class="retry" type="submit">
-                <a class="al" href="WEB/game.php">Retry</a>
-            </button>
-
-            <button class="back" type="submit">
-                <a class="al" href="../index.php">Back</a>
-            </button>
-
-            <button class="resume" type="submit" onclick="togglePopup(); showButton()">
-                <a class="al">Resume</a>
-            </button>
-
-            <button class="setting" type="submit">
-                <a class="al" href="setting.php">Setting</a>
-            </button>
-        </div>
-
-        <script>
-            function togglePopup() {
-                var popup = document.getElementById("popup");
-                if (popup.style.display === "none") {
-                    popup.style.display = "block";
-                } else {
-                    popup.style.display = "none";
-                }
-            }
-
-            function hideButton() {
-                var boutonPause = document.getElementById("boutonPause");
-                boutonPause.style.display = "none";
-            }
-
-            function showButton() {
-                var boutonPause = document.getElementById("boutonPause");
-                boutonPause.style.display = "block";
-            }
-        </script>
-
     </header>
-
-
-
-
-
-
+    <main class="main">
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                1
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                2
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                3
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                4
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                5
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                6
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                7
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                8
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                9
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                10
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                11
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                12
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                13
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                14
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                15
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                16
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                17
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                18
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                19
+            </a>
+        </button>
+        <button id="niveau" class="niveau" type=submit>
+            <a>
+                20
+            </a>
+        </button>
+    </main>
 </body>
-</html> 
+
+</html>
