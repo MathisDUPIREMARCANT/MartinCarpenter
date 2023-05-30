@@ -30,6 +30,8 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4
 					Next_Coord(&Copy_pos, i);
 
 					Place_island_on_map(Board, posMax, Copy_pos, Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]);
+
+					if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
 					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
 			}
