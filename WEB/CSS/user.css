@@ -10,7 +10,7 @@
     height: 80px;
     left: 17px;
     top: 7px;
-    background: url(../image/arrow.png);
+    background: url(../image/button/arrow.png);
     background-size: 80px;
     border-style: none;
 }
@@ -21,7 +21,7 @@
 .settingimg {
 width: 100%;
 height: 100%;
-mix-blend-mode: hard-light;
+
 }
 .al {
 height: 10.1vw;
@@ -51,6 +51,7 @@ body {
 }
 .user{
     background-color: aliceblue;
+    border: 1vw solid rgb(251, 184, 58);
     height: 40vh;
     width: 40vh;
     border-radius: 100%;

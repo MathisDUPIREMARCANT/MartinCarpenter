@@ -72,10 +72,10 @@ session_start();
     <header>
         <div class="buttonhead">
             <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
-                <a class="al"><img class="pauseimg" src="image/buttonpause.png"></a>
+                <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
             <a id="savepos" class="savepos">
-                <img class="save" src="image/save.png" />
+                <img class="save" src="image/button/save.png" />
             </a>
         </div>
         <div id="popup" style="display: none;">

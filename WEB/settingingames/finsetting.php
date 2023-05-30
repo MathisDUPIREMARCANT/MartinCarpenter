@@ -39,7 +39,7 @@ if(isset($_COOKIE['ColorButton'])){
 </div>
 </div>
 <div class="Credit">
-    Credit:
+    Credit: CHTI'MI - SAINT-MAXENT Juliette - CLAUS Damia - DUPIRE-MARCANT Mathis - TASSIN Clément - LEMOINE James - VANDEVOIR Victor
 </div>
 </main>
 </body>

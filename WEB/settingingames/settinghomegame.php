@@ -10,12 +10,12 @@ header('location:settinghomegame.php');
     <div class="buttonhead">
         <button class=" back" type=submit>
             <a href="../game.php">
-                <img class="backimg" src="../image/arrow.png">
+                <img class="backimg" src="../image/button/arrow.png">
             </a>
         </button>
         <button class="user">
             <a href="../user.php">
-                <img class="userimg" src="../image/martin.png">
+                <img class="userimg" src="../image/button/martin.png">
             </a>
         </button>
     </div>

@@ -1,10 +1,17 @@
+*{
+    scrollbar-width:none;
+}
+*::-webkit-scrollbar {
+    display: none;
+  }
+
 .back{
     position: absolute;
     width: 85px;
     height: 80px;
     left: 17px;
     top: 7px;
-    background: url(../image/arrow.png);
+    background: url(../image/button/arrow.png);
     background-size: 80px;
     border-style: none;
 }
@@ -78,5 +85,11 @@ height: 105px;
 }
 .buttonhead{
     display: flex;
+}
+.martinplace{
+    height: 250px;
+    display: flex;
+    width: 200px;
+    margin-top: 0vh;
 }
 

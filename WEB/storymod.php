@@ -38,11 +38,11 @@ session_start();
         <div class="buttonhead">
             <button class="back" type=submit>
                 <a href="game.php">
-                    <img class="backimg" src="image/arrow.png">
+                    <img class="backimg" src="image/button/arrow.png">
                 </a>
             </button>
             <a class="al" - href="settingingames/settinglevelchoice.php">
-                <img class="settingimg" src="image/boutonsetting.png" />
+                <img class="settingimg" src="image/button/boutonsetting.png" />
             </a>
 
         </div>
