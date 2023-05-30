@@ -19,7 +19,7 @@ void main() {
 	Solver(Result, Board, posMax, pos, NULL);
 	if (Result != NULL) {
 		for (int i = 0; i < 2; i++) {
-			Print_board(Result[i], posMax);
+			//Print_board(Result[i], posMax);
 		}
 	}
 }
