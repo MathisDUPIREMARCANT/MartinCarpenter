@@ -28,7 +28,7 @@ session_start();
     <header>
         <div class="buttonhead">
             <button class="back" type="submit" onclick="showPopup()">
-                <a class="al" - href="../index.php"><img class="backimg" src="image/vide.png"></a>
+                <a class="al" - href="../index.php"><img class="backimg" src="image/button/vide.png"></a>
             </button>
         </div>
     </header>
@@ -36,6 +36,12 @@ session_start();
         <div class="level">
             <div class="Title">
                 Personnal level
+            </div>
+            <div class="Title2">
+                Workshop
+            </div>
+            <div class="levels">
+
             </div>
             <div class="levels">
 
