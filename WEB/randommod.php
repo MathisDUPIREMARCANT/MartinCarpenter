@@ -140,6 +140,11 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
     //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
         var rows = huge.Grid[0].size[0];
     var columns = huge.Grid[0].size[1];
+
+    var gameDiv = document.getElementById('game');
+var gameDivWidth = gameDiv.clientWidth;
+var gameDivHeight = gameDiv.clientHeight;
+
     function generate_table_no_solution(rows, columns) {
         // Obtenir la référence du body
         var body = document.getElementsByTagName("body")[0];
@@ -148,16 +153,28 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
         // Créer les éléments <table> et <tbody>
         var tbl = document.createElement("table");
         var tblBody = document.createElement("tbody");
-    
-    
+        tbl.style.border = "0.4vw solid #19608F";
+    tbl.style.borderRadius = "20px";
+    tbl.style.backgroundColor = "#247cbfe7";
+    tbl.style.width = "70vw";
+    tbl.style.height = "70vh";
+    tbl.style.overflow = "auto"; // allows the table to scroll if necessary
+
+
+
+        // Set table dimensions to match game div
+        tbl.style.width = gameDivWidth + 'px';
+    tbl.style.height = gameDivHeight + 'px';
+
         // Créer les cellules
         for (var i = 0; i < rows; i++) {
             var row = document.createElement("tr");
-    
-    
             for (var j = 0; j < columns; j++) {
                 var cell = document.createElement('td');
                 cell.setAttribute('id', `cell-${i}-${j}`);
+                cell.style.width = (gameDivWidth / columns) + 'px';
+            cell.style.height = (gameDivHeight / rows) + 'px';
+
                 // Vérifier si l'île se trouve à la position actuelle
                 var foundIsland = false;
                 for (var k = 0; k < huge.Islands.length; k++) {
@@ -169,7 +186,7 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
     
     
                 if (foundIsland) {
-                    var islandImage = document.createElement("img"); //A REMPLACER EN FONCTION DU NOMBRE DE LINKS
+                    var islandImage = document.createElement("img"); 
                     islandImage.setAttribute("id", "island-" + i + "-" + j);
                     if (huge.Islands[k].links == 1) {
                         islandImage.src = "../WEB/image/iles/ile1.png";
@@ -541,112 +558,6 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
         }
         check_win();
     }
-/*
-    function generate_table(rows, columns) {
-        // Obtenir la référence du body
-        var body = document.getElementsByTagName("body")[0];
-    
-    
-        // Créer les éléments <table> et <tbody>
-        var tbl = document.createElement("table");
-        var tblBody = document.createElement("tbody");
-    
-    
-        // Créer les cellules
-        for (var i = 0; i < rows; i++) {
-            var row = document.createElement("tr");
-    
-    
-            for (var j = 0; j < columns; j++) {
-                var cell = document.createElement("td");
-    
-    
-                // Vérifier si l'île se trouve à la position actuelle
-                var foundIsland = false;
-                for (var k = 0; k < huge.Islands.length; k++) {
-                    if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
-                        foundIsland = true;
-                        break;
-                    }
-                }
-    
-    
-                if (foundIsland) {
-        //on creer une image pour chaque ile en fonction du nombre de link (1 a 6)
-        var islandImage = document.createElement("img");
-    
-    
-        if (huge.Islands[k].links == 1) {
-            islandImage.src = "../image/images_temporaires/3167v-chiffre-1.jpeg";
-            cell.appendChild(islandImage);
-        } else if (huge.Islands[k].links == 2) {
-            islandImage.src = "../image/images_temporaires/chiffre-2-en-aluminium-decoupe-coloris-et-dimensions-au-choix.jpg";
-            cell.appendChild(islandImage);
-        } else if (huge.Islands[k].links == 3) {
-            islandImage.src = "../image/images_temporaires/chiffre-3-en-alu-couleur-et-dimensions-au-choix.jpg";
-            cell.appendChild(islandImage);
-        } else if (huge.Islands[k].links == 4) {
-            islandImage.src = "../image/images_temporaires/chiffre-4-en-aluminium-5-coloris-et-2-dimensions-possibles.jpg";
-            cell.appendChild(islandImage);
-        } else if (huge.Islands[k].links == 5) {
-            islandImage.src = "../image/images_temporaires/chiffre-5-en-aluminium-5-coloris-au-choix-100-ou-150-mm-de-haut.jpg";
-            cell.appendChild(islandImage);
-        } else if (huge.Islands[k].links == 6) {
-            islandImage.src = "../image/images_temporaires/6.jpg";
-            cell.appendChild(islandImage);
-        }
-    } else {
-                    // Vérifier si un pont se trouve à la position actuelle
-                    var bridgeFound = false;
-                    for (var l = 0; l < huge.Bridges.length; l++) {
-                        var bridge = huge.Bridges[l];
-                        for (var m = 0; m < bridge.Placement.length; m++) {
-                            var bridgePlacement = bridge.Placement[m];
-                            if (bridgePlacement[0] === i && bridgePlacement[1] === j) {
-                                bridgeFound = true;
-                                break;
-                            }
-                        }
-                        if (bridgeFound) {
-                            var bridgeImage = document.createElement("img");
-                            if (bridge.direction === 1) { // Pont vertical
-                                if (bridge.width === 1) {
-                                    bridgeImage.src = "../image/images_temporaires/pause.png";
-                                } else {
-                                    bridgeImage.src = "../image/images_temporaires/traitv.png";
-                                }
-                            } else { // Pont horizontal
-                                if (bridge.width === 1) {
-                                    bridgeImage.src = "../image/images_temporaires/egal.webp";
-                                } else {
-                                    bridgeImage.src = "../image/images_temporaires/icone-trait-noir.png";
-                                }
-                            }
-                            cell.appendChild(bridgeImage);
-                            break;
-                        }
-                    }
-                }
-    
-    
-                row.appendChild(cell);
-                cell.setAttribute("class", 'case');
-                cell.setAttribute("id", '0');
-            }
-    
-    
-            tblBody.appendChild(row);
-        }
-    
-    
-        // Ajouter <tbody> à <table>
-        tbl.appendChild(tblBody);
-        // Ajouter <table> au body
-        document.getElementById("bangerang").appendChild(tbl);
-    }
-      // Appeler cette fonction après avoir généré le tableau
-      //on recupere la taille du tableau
-      generate_table(rows, columns);*/
     </script>
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
