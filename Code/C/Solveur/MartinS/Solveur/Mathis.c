@@ -5,9 +5,6 @@
 
 void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction) {
 
-	printf("\nL appel de fonction :");
-	Print_board(Board, posMax);
-
 	int Direction_available[4];
 	int* result = malloc(sizeof(int) * 4 * 81);
 
@@ -46,9 +43,7 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 
 			Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
 		}
-		printf("\nApres placement des ponts :");
-		Print_board(Board, posMax);
-		//Print_board(Board, posMax);
+
 		int Nb_islands = Island_on_map(Board, pos, posMax);
 
 		if (Nb_islands == 0) {
@@ -57,8 +52,6 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 		}
 
 		pos = Find_Island(Board, posMax);
-
-		//il manque les differentes iles autour pour pouvoir faire les combinaisons
 		
 
 		for (int i = 0; i < 4; i++) {
@@ -71,22 +64,15 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 
 		if (Nb_combinaison == 0 && atoi(Board + (pos.y * posMax.x) + pos.x)) { return; }
 
-		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
-
-		if (Board_copy != NULL) { 
-			//strncpy(Board_copy, Board, posMax.x * posMax.y); 
-			//strncpy_s(Board_copy, sizeof(char) * posMax.x * posMax.y, Board, posMax.x * posMax.y);
-			Copy_board(Board_copy, Board, posMax.x * posMax.y);
-		}
-
 
 		for (int y = 0; y < Nb_combinaison; y++) {
+			char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
 
-			
-			Solver(Result, Board_copy, posMax, pos, result + (4 * (Nb_combinaison - 1)));
-			printf("\nApres les autres appels");
-			Print_board(Board_copy, posMax);
-			
+			if (Board_copy != NULL) {
+				Copy_board(Board_copy, Board, posMax.x * posMax.y);
+			}
+
+			Solver(Result, Board_copy, posMax, pos, result + (4 * y));		
 		}
 		return;
 	}

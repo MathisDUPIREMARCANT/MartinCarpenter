@@ -76,3 +76,8 @@ height: 105px;
     color: #ffffff;
     text-decoration: none;
 }
+.niveau:hover{
+    border: 0.2vw solid #fdeb96;
+    background: rgba(22, 82, 123, 0.63);
+    font-size: 4.1vw;
+  }
