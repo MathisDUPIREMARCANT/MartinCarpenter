@@ -8,6 +8,21 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+table {
+  border-collapse: collapse;
+  width: 70vw;
+  height: 93.3px;
+}
+td, tr {
+
+  width: 70vw;
+  height: 93.3px;
+
+}
+img {
+  width: 100px;
+  height: 100PX;
+}
 .pauseimg{
     width: 60px;
 }
@@ -44,6 +59,7 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 .game{
     background-color: #247cbfe7;
