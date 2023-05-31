@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 session_start();
 try{
     require("traitement/DB_connect.php");             
@@ -6,6 +8,10 @@ try{
     $req1 =$conn->prepare($reqPrep1);
     $req1->execute();
     $resultat = $req1->fetchAll();
+    $reqPrep2="SELECT score, username FROM users ORDER BY score DESC";
+    $req2 =$conn->prepare($reqPrep2);
+    $req2->execute();
+    $resultat2 = $req2->fetchAll();
     $conn= NULL;
 }
 catch(Exception $e){
@@ -33,7 +39,8 @@ foreach($resultat as $row){
     
         <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
         <!--Page authors-->
-        <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
+        <link rel="icon" type="image/x-con" href="WEB/image/logomartin.ico">
+        
         <!--Browser icon-->
         <link rel="stylesheet" href="CSS/user.css">
     </head>
@@ -74,6 +81,9 @@ foreach($resultat as $row){
                         </a>
                     </div>
                 </div>
+                ';
+            };
+                echo'
                 <div class="classement">
                     <div class="compte">
                         Compte:
@@ -81,14 +91,11 @@ foreach($resultat as $row){
                     <div class="list">
                         <div class="line2">
                             <ul>
-                                <li>dadou</li>
-                                <li>leloup</li>
-                            </ul>
-                        </div>
-                        <div class="line3">
-                            <ul>
-                                <li>dadou</li>
-                                <li>leloup</li>
+                           ';
+                           foreach($resultat2 as $row2){
+                            echo'
+                                <li>'.$row2["username"].'</li>
+                                <li>'.$row2["score"].'</li>
                             </ul>
                         </div>
                     </div>
@@ -96,8 +103,7 @@ foreach($resultat as $row){
             </div>
         </main>
     </body>
-    </html>';
-}
+    </html>';};
 }
 else{
     header("Location: sign_in_up.php?fail=2");

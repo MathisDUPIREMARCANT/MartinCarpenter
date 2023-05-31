@@ -147,8 +147,8 @@ int Verif_solved(char* Board, int Nb_Island, Coord posMax) {
 
 Coord Find_Island(char* Board, Coord posMax) {
     Coord pos = { 0, 0 };
-    for (int x = 0; x < posMax.x; x++) {
-        for (int y = 0; y < posMax.y; y++) {
+    for (int y = 0; y < posMax.y; y++) {
+        for (int x = 0; x < posMax.x; x++) {
             if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
                 pos.x = x;
                 pos.y = y;

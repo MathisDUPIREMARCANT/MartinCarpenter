@@ -20,7 +20,7 @@ if(isset($_SESSION['username'])){
 
     <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
     <!--Page authors-->
-    <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
+    <link rel="icon" type="image/x-con" href="WEB/image/logomartin.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/gamehome.css">
 </head>
@@ -53,7 +53,7 @@ if(isset($_SESSION['username'])){
         </div>
         <div class="creationgames">
             <button class="Buttoncreate" onclick="redirectTo(\'createmod.php\')"><a class="textcreate">Create
-                    Mod</a></button>
+                    level</a></button>
             <button class="ButtonLevel" onclick="redirectTo(\'level.php\')"><a class="textlevel">My Level</a></button>
         </div>
 

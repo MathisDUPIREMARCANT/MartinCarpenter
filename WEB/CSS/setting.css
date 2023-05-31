@@ -132,19 +132,19 @@
   background-color: #f4bb5fee;
   border-radius: 30px;
   margin: auto;
-  padding: 2vw;
+  padding: 1vw;
   width: 90vw;
-  height: 20vh;
+  height: 15vh;
+  margin-top: 4vh;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   -ms-border-radius: 30px;
   -o-border-radius: 30px;
   font-family: "Inter";
     font-style: normal;
-    font-weight: 400;
-    font-size: 2.5vw;
+    font-weight: 200;
+    font-size: 1.8vw;
     line-height: 8vh;
-    
     color: #ffffff;
     text-decoration: none;
 }
