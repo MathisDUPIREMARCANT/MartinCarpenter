@@ -135,21 +135,25 @@
   z-index: -1;
 }
 .audio {
-  width: 5vw;
+  width: 50px;
   height: 10vh;
-  margin-left: 3vw;
+  margin-left: 85vw;
   mix-blend-mode: overlay;
   
 }
 .Footer {
   display: flex;
   align-items: center;
-  width: 25vw;
+  width: 83vw;
   justify-content: space-between;
   margin-bottom: 10px;
   position: absolute;
   height: 105px;
   bottom: 0;
+}
+footer{
+  display: flex;
+  width: 100vw;
 }
 :picture-in-picture{
     display: none;

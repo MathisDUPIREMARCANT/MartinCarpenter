@@ -5,11 +5,11 @@
     left: 17px;
     top: 7px;
     background: url(../image/button/arrow.png);
-    background-size: 80px;
+  
     border-style: none;
 }
 .backimg{
-    width: 50px; 
+    width: 60px; 
     
 }
 body{
@@ -76,3 +76,8 @@ height: 105px;
     color: #ffffff;
     text-decoration: none;
 }
+.niveau:hover{
+    border: 0.2vw solid #fdeb96;
+    background: rgba(22, 82, 123, 0.63);
+    font-size: 4.1vw;
+  }

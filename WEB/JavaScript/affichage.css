@@ -1,14 +1,22 @@
 table {
     border-collapse: collapse;
-    width: 200px;
-    height: 200px;
   }
   
-  td{
+  td, tr {
     border: 1px solid black;
-    padding: 8px;
-    text-align: center;
+    width: 100px;
+    height: 100px;
+
   }
+  img {
+    width: 100px;
+    height: 100px;
+  
+}
+.error {
+  background-color: red;
+  /* Autres styles pour indiquer une erreur */
+}
   /* on change le curseur par une image sur toute la page */
  body {
     /*cursor: url('../image/hammer-symbol-color-png\ \(1\).png'), auto;*/

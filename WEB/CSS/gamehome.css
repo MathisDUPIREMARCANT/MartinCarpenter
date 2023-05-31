@@ -5,11 +5,11 @@
         left: 17px;
         top: 7px;
         background: url(../image/button/arrow.png);
-        background-size: 80px;
+       
         border-style: none;
     }
     .backimg{
-        width: 50px; 
+        width: 60px; 
         
 }
 body{
@@ -59,6 +59,10 @@ body{
     border-radius: 50px;
     margin-bottom: 10vh;
   }
+  .Buttonstory:hover{
+    border: 0.2vw solid #fdeb96;
+    background: rgba(22, 82, 123, 0.63);
+  }
 
 .textstory{
     font-family: "Inter";
@@ -70,7 +74,10 @@ body{
     color: #ffffff;
     text-decoration: none;
 }
-
+.textstory:hover{
+    font-size: 4.1vw;
+  
+  }
 .games{
     display: flex;
     margin: auto;
@@ -90,6 +97,10 @@ body{
     margin-bottom: 2vw;
 
 }
+.Buttoneasy:hover{
+    background: #64B26A;
+    border: 0.2vw solid rgba(106, 233, 110, 0.785);
+}
 .texteasy{
     font-family: 'Inter';
     font-style: normal;
@@ -100,6 +111,10 @@ body{
     color: #FFFFFF;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.texteasy:hover{
+    font-size: 4.1vw;
+  
+  }
 .Buttonmedium{
     margin: auto;
     box-sizing: border-box;
@@ -110,6 +125,10 @@ border: 0.2vw solid #B58041;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 50px;
 margin-bottom: 2vw;
+}
+.Buttonmedium:hover{
+    background: #B58041;
+    border: 0.2vw solid #e9a826dc;
 }
 .textmedium{
 
@@ -122,6 +141,9 @@ margin-bottom: 2vw;
     color: #FFFFFF;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.textmedium:hover{
+    font-size: 4.1vw;
+}
 .Buttonhard{
     box-sizing: border-box;
     width: 30vw;
@@ -131,8 +153,11 @@ margin-bottom: 2vw;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     margin-bottom: 2vw;
-    }
-
+}
+.Buttonhard:hover{
+    background: #971F1F;
+    border: 0.2vw solid  #ea1919c8;
+}
 .texthard{
     font-family: 'Inter';
     font-style: normal;
@@ -142,6 +167,9 @@ margin-bottom: 2vw;
     text-align: center;
     color: #FFFFFF;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.texthard:hover{
+    font-size: 4.1vw;
 }
 
 .creationgames{
@@ -160,6 +188,10 @@ margin-bottom: 2vw;
     border-radius: 50px;
     margin-bottom: 2vw;
 }
+.Buttoncreate:hover{
+    background: #487130f3;
+    border: 0.2vw solid #FDEB96;
+}
 .textcreate{
     font-family: 'Inter';
     font-style: normal;
@@ -169,6 +201,9 @@ margin-bottom: 2vw;
     text-align: center;
     color: #FFFFFF;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.textcreate:hover{
+    font-size: 4.1vw;
 }
 .ButtonLevel{
     margin: auto;
@@ -181,6 +216,10 @@ margin-bottom: 2vw;
     border-radius: 50px;
     margin-bottom: 2vw;
 }
+.ButtonLevel:hover{
+    background: #487130f3;
+    border: 0.2vw solid #FDEB96;
+}
 .textlevel{
     font-family: 'Inter';
     font-style: normal;
@@ -190,4 +229,7 @@ margin-bottom: 2vw;
     text-align: center;
     color: #FFFFFF;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.textlevel:hover{
+    font-size: 4.1vw;
 }

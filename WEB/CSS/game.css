@@ -8,6 +8,26 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+table {
+  border-collapse: collapse;
+  width: 70vw;
+  height: 70vh;
+}
+td{
+  width: 3vw;
+  height: 13vh;
+
+}
+
+tr{
+  width: 70vw;
+}
+img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin: auto;
+}
 .pauseimg{
     width: 60px;
 }
@@ -38,18 +58,20 @@
     width: 100vw;
     justify-content: space-between;
     margin-top: 2vh;
-    height: 70px;
+    height: 50px;
   }
   .main{
     justify-content: center;
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 .game{
     background-color: #247cbfe7;
     border: 0.4vw solid #19608F;
     border-radius:20px ;
     width: 70vw;
+    display: flex;
     height: 70vh;
     -webkit-border-radius:20px ;
     -moz-border-radius:20px ;

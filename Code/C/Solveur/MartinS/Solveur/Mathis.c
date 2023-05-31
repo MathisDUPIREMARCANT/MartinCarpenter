@@ -31,17 +31,19 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 
 					Next_Coord(&Copy_pos, i);
 
+					if ((atoi(Board + (Copy_pos.y * posMax.x) + Copy_pos.x) - Direction[i]) < 0) { return; }
+
 					Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
 
 
-					//if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
+					
 					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
 			}
 
 			Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
 		}
-		//Print_board(Board, posMax);
+
 		int Nb_islands = Island_on_map(Board, pos, posMax);
 
 		if (Nb_islands == 0) {
@@ -50,8 +52,6 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 		}
 
 		pos = Find_Island(Board, posMax);
-
-		//il manque les differentes iles autour pour pouvoir faire les combinaisons
 		
 
 		for (int i = 0; i < 4; i++) {
@@ -62,21 +62,17 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 		int* result = malloc(sizeof(int) * 4 * 81);
 		int Nb_combinaison = Enumeration(Board, pos, posMax, result, &Direction_available) ;
 
-		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
-
-		if (Board_copy != NULL) { 
-			//strncpy(Board_copy, Board, posMax.x * posMax.y); 
-			//strncpy_s(Board_copy, sizeof(char) * posMax.x * posMax.y, Board, posMax.x * posMax.y);
-			Copy_board(Board_copy, Board, posMax.x * posMax.y);
-		}
+		if (Nb_combinaison == 0 && atoi(Board + (pos.y * posMax.x) + pos.x)) { return; }
 
 
 		for (int y = 0; y < Nb_combinaison; y++) {
+			char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
 
-			
-			Solver(Result, Board_copy, posMax, pos, result + (4 * (Nb_combinaison - 1)));
-			Print_board(Board_copy, posMax);
-			
+			if (Board_copy != NULL) {
+				Copy_board(Board_copy, Board, posMax.x * posMax.y);
+			}
+
+			Solver(Result, Board_copy, posMax, pos, result + (4 * y));		
 		}
 		return;
 	}

@@ -42,49 +42,64 @@ session_start();
         </div>
     </header>
     <main class="main">
+        <div class="martinplace">
+            <img class="martin" src="image/martin1.png">
+        </div>
 
-    <div  class="rule1">
-        Martin was a carpenter with a passion for his craft.<br> He lived on a small picturesque island surrounded by other beautiful islands.
-        However, the inhabitants of these islands were often limited in their movements because of the lack of bridges between them.
-        One day, Martin had a brilliant idea.<br> He decided to use his carpentry skills to connect these islands with strong and safe bridges.
-        Martin immediately set to work, gathering his tools and wood, and began building his first bridge.
-        After much hard work, the first bridge was finally completed.It was beautiful, and the people of the islands could finally get from one island to the other.
-        After this first achievement, Martin decided to build many more bridges for the islanders.
-        You are Martin's carpenter's apprentice, here are the instructions to help him build the bridges:
-        <div class="rules4" >
-            Click on an island to connect it to another
-        </div>
-        <img class="rules" src="image/rules/rulespointeuriles.png"  >
-        <div >
-            Each island must be connected to another with a bridge 
-        </div>
-        <img class="3rules" src="image/rules/rulesiles+pont.png"  >
-        <div >
-            The number of palm trees indicates the number of bridges available for an island 
-        </div>
-        <img class="rules2" src="image/iles/ile1.png"  >
-        <img class="rules2" src="image/iles/ile2.png"  >
-        <img class="rules2" src="image/iles/ile3.png"  >
-        <img class="rules2" src="image/iles/ile4.png"  >
-        <img class="rules2" src="image/iles/ile5.png"  >
-        <img class="rules2" src="image/iles/ile6.png"  >
-        <div >
-            Connect all the islands to finish the level by respecting the number of bridges.
-            You can choose your game mode .<br>
-            Three random modes are available, easy, medium and hard. 
-            The story mode is available with 20 levels for which the difficulty increases as you go along. 
-            The creative mode allows you to create your own level, you have to fill in the grid with the islands in the menu once the level is finished, click on the diskette, go back to the mod choice and select "my level".
+        <div class="rule1">
+            Martin was a carpenter with a passion for his craft.<br> He lived on a small picturesque island
+            surrounded
+            by other beautiful islands.
+            However, the inhabitants of these islands were often limited in their movements because of the lack
+            of
+            bridges between them.
+            One day, Martin had a brilliant idea.<br> He decided to use his carpentry skills to connect these
+            islands
+            with strong and safe bridges.
+            Martin immediately set to work, gathering his tools and wood, and began building his first bridge.
+            After much hard work, the first bridge was finally completed.It was beautiful, and the people of the
+            islands
+            could finally get from one island to the other.
+            After this first achievement, Martin decided to build many more bridges for the islanders.
+            You are Martin's carpenter's apprentice, here are the instructions to help him build the bridges:
+            <div class="rules4">
+                Click on an island to connect it to another
+            </div>
+            <img class="rules" src="image/rules/rulespointeuriles.png">
+            <div>
+                Each island must be connected to another with a bridge
+            </div>
+            <img class="3rules" src="image/rules/rulesiles+pont.png">
+            <div>
+                The number of palm trees indicates the number of bridges available for an island
+            </div>
+            <img class="rules2" src="image/iles/ile1.png">
+            <img class="rules2" src="image/iles/ile2.png">
+            <img class="rules2" src="image/iles/ile3.png">
+            <img class="rules2" src="image/iles/ile4.png">
+            <img class="rules2" src="image/iles/ile5.png">
+            <img class="rules2" src="image/iles/ile6.png">
+            <div>
+                Connect all the islands to finish the level by respecting the number of bridges.
+                You can choose your game mode .<br>
+                Three random modes are available, easy, medium and hard.
+                The story mode is available with 20 levels for which the difficulty increases as you go along.
+                The creative mode allows you to create your own level, you have to fill in the grid with the
+                islands
+                in
+                the menu once the level is finished, click on the diskette, go back to the mod choice and select
+                "my
+                level".
+
+            </div>
+
 
         </div>
-        
-    
-    </div>
-    <div class="martinplace">
-        <img class="martin" src="image/martin1.png">
-    </div>
-   
-    
+
+
+
 
     </main>
 </body>
+
 </html>

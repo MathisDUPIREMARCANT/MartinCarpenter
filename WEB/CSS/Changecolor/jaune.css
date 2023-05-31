@@ -4,6 +4,7 @@
     border-radius:20px ;
     width: 70vw;
     height: 70vh;
+    display: flex;
     -webkit-border-radius:20px ;
     -moz-border-radius:20px ;
     -ms-border-radius:20px ;
