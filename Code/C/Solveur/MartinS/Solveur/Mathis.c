@@ -5,6 +5,9 @@
 
 void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction) {
 
+	printf("\nL appel de fonction :");
+	Print_board(Board, posMax);
+
 	int Direction_available[4];
 	int* result = malloc(sizeof(int) * 4 * 81);
 
@@ -31,16 +34,20 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 
 					Next_Coord(&Copy_pos, i);
 
+					if ((atoi(Board + (Copy_pos.y * posMax.x) + Copy_pos.x) - Direction[i]) < 0) { return; }
+
 					Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
 
 
-					//if ((Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i]) < 0) { return 0; }
+					
 					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
 			}
 
 			Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
 		}
+		printf("\nApres placement des ponts :");
+		Print_board(Board, posMax);
 		//Print_board(Board, posMax);
 		int Nb_islands = Island_on_map(Board, pos, posMax);
 
@@ -62,6 +69,8 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 		int* result = malloc(sizeof(int) * 4 * 81);
 		int Nb_combinaison = Enumeration(Board, pos, posMax, result, &Direction_available) ;
 
+		if (Nb_combinaison == 0 && atoi(Board + (pos.y * posMax.x) + pos.x)) { return; }
+
 		char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
 
 		if (Board_copy != NULL) { 
@@ -75,6 +84,7 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 
 			
 			Solver(Result, Board_copy, posMax, pos, result + (4 * (Nb_combinaison - 1)));
+			printf("\nApres les autres appels");
 			Print_board(Board_copy, posMax);
 			
 		}
