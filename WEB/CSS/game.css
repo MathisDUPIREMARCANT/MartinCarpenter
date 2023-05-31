@@ -120,6 +120,12 @@ img {
     -webkit-text-stroke-color: #c1e9f9;
     text-decoration: none;
   }
+  .img{
+    width: 10%;
+    height: 10%;
+    margin-top: auto;
+    
+  }
   #popup {
     position: absolute;
     left: 30vw;

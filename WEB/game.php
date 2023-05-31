@@ -53,7 +53,7 @@ if(isset($_SESSION['username'])){
         </div>
         <div class="creationgames">
             <button class="Buttoncreate" onclick="redirectTo(\'createmod.php\')"><a class="textcreate">Create
-                    Mod</a></button>
+                    level</a></button>
             <button class="ButtonLevel" onclick="redirectTo(\'level.php\')"><a class="textlevel">My Level</a></button>
         </div>
 

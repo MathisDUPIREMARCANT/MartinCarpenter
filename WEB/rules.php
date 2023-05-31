@@ -90,6 +90,7 @@ session_start();
                 the menu once the level is finished, click on the diskette, go back to the mod choice and select
                 "my
                 level".
+                If you like a level in easy, medium or hard mode, save it in your levels with the star diskette. 
 
             </div>
 
