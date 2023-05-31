@@ -56,20 +56,39 @@ session_start() ;
         <main>
             <div class="Titre">Martin Carpenter</div>
 
-            <div class="buttons">
-                <button id="Button" class="Button" type="submit">
+            <div class="buttons2">
+            <?php
+            if(isset($_SESSION['username'])){
+                ?><button id="Button2" class="Button2" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
                 </button>
 
-                <button id="Button" class="Button" type="submit">
+                <button id="Button2" class="Button2" type="submit">
+                    <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
+                </button>
+            </div>
+                <?php
+                }
+                else{
+                ?>              
+                <div class="buttons">
+                <button id="Button" class="Button2" type="submit">
+                    <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
+                </button>
+
+                <button id="Button" class="Button2" type="submit">
                     <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
                 </button>
 
 
-
+             
+                
                 <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/sign_in_up.php">Connexion</a>
                 </button>
+                </div>
+                <?php
+                ;}; ?>
 
 
             </div>
