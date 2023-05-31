@@ -24,6 +24,7 @@ table {
 td, tr {
   width: 1fr; /* takes up an equal share of the available space */
   height: 1fr; /* takes up an equal share of the available space */
+ 
 }
 
 
@@ -31,6 +32,8 @@ td, tr {
 img {
   max-width: 100%;
   max-height: 100%;
+  display: flex;
+  margin: auto;
 }
 
 .pauseimg{
