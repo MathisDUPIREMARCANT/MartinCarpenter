@@ -20,7 +20,7 @@ if(isset($_SESSION['username'])){
 
     <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
     <!--Page authors-->
-    <link rel="icon" type="image/x-con" href="WEB/image/logo.ico">
+    <link rel="icon" type="image/x-con" href="WEB/image/logomartin.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/gamehome.css">
 </head>
