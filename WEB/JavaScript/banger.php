@@ -10,12 +10,7 @@
 
 
 <body>
-    <style>
-        img {
-            width: 50px;
-            height: 50px;
-        }
-    </style>
+
 
 
 <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
@@ -90,22 +85,22 @@ function generate_table_no_solution(rows, columns) {
                 var islandImage = document.createElement("img"); //A REMPLACER EN FONCTION DU NOMBRE DE LINKS
                 islandImage.setAttribute("id", "island-" + i + "-" + j);
                 if (huge.Islands[k].links == 1) {
-                    islandImage.src = "../image/images_temporaires/3167v-chiffre-1.jpeg";
+                    islandImage.src = "../image/ile1.png";
                     cell.appendChild(islandImage);
                 } else if (huge.Islands[k].links == 2) {
-                    islandImage.src = "../image/images_temporaires/chiffre-2-en-aluminium-decoupe-coloris-et-dimensions-au-choix.jpg";
+                    islandImage.src = "../image/ile2.png";
                     cell.appendChild(islandImage);
                 } else if (huge.Islands[k].links == 3) {
-                    islandImage.src = "../image/images_temporaires/chiffre-3-en-alu-couleur-et-dimensions-au-choix.jpg";
+                    islandImage.src = "../image/ile3.png";
                     cell.appendChild(islandImage);
                 } else if (huge.Islands[k].links == 4) {
-                    islandImage.src = "../image/images_temporaires/chiffre-4-en-aluminium-5-coloris-et-2-dimensions-possibles.jpg";
+                    islandImage.src = "../image/ile4.png";
                     cell.appendChild(islandImage);
                 } else if (huge.Islands[k].links == 5) {
-                    islandImage.src = "../image/images_temporaires/chiffre-5-en-aluminium-5-coloris-au-choix-100-ou-150-mm-de-haut.jpg";
+                    islandImage.src = "../image/ile5.png";
                     cell.appendChild(islandImage);
                 } else if (huge.Islands[k].links == 6) {
-                    islandImage.src = "../image/images_temporaires/6.jpg";
+                    islandImage.src = "../image/ile6.png";
                     cell.appendChild(islandImage);
                 }
                 cell.appendChild(islandImage);
@@ -244,8 +239,19 @@ for(var j = 0; j < Object.keys(huge.Bridges).length ; j++){
     
     }
 }
-
 function check_win(){
+    for (var i = 0; i < huge.Islands.length; i++) {
+        var island = huge.Islands[i];
+        var bridges = getBridgesAroundIsland(island);
+        
+        if (bridges.length > island.links) {
+            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island.Placement[1]);
+            islandCell.classList.add("error"); // Ajouter la classe CSS "error" à la cellule de l'île
+        } else {
+            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island.Placement[1]);
+            islandCell.classList.remove("error"); // Supprimer la classe CSS "error" de la cellule de l'île
+        }
+    }
     let tmp = {"1": [], "2": []};
     for(var j = 0; j < Object.keys(huge.PlacedBridges).length ; j++){
         //on verifie la valeur du count
@@ -271,7 +277,6 @@ function check_win(){
 
 }
 
-
 function removeBridge(island1, island2) {
     // Trouvez les indices des îles dans le tableau huge.Islands
     var island1Index = huge.Islands.indexOf(island1);
@@ -285,6 +290,7 @@ function removeBridge(island1, island2) {
             
             // Si c'est un double pont, décrémentez le count et supprimez seulement une image de pont
             if (bridgeData.count > 1) {
+                bridgeData.count--;
                 bridgeData.count--;
 
                 // Supprimer un pont du DOM
@@ -313,7 +319,28 @@ function removeBridge(island1, island2) {
     for (var key in huge.PlacedBridges) {
         huge.userPlacedBridges.push(huge.PlacedBridges[key].Placement);
     }
+    console.log('BIG CACZ',huge.PlacedBridges); // For debugging
     check_win();
+}
+function getBridgesAroundIsland(row, col) {
+    var bridges = [];
+
+    for (var i = 0; i < huge.PlacedBridges.length; i++) {
+        var bridge = huge.PlacedBridges[i];
+        var bridgeStartRow = bridge.Placement[0][0];
+        var bridgeStartCol = bridge.Placement[0][1];
+        var bridgeEndRow = bridge.Placement[1][0];
+        var bridgeEndCol = bridge.Placement[1][1];
+
+        if (
+            (bridgeStartRow === row && bridgeStartCol === col) ||
+            (bridgeEndRow === row && bridgeEndCol === col)
+        ) {
+            bridges.push(bridge);
+        }
+    }
+
+    return bridges;
 }
 
 function placeBridge(island1, island2) {
@@ -363,10 +390,44 @@ function placeBridge(island1, island2) {
 
             //on stocke les valeur de huge.bridges dans un dictionnaire en fonction de leur witdh
             var bridgeImage = document.createElement("img");
+
+
             if (bridgeOrientation === 1) { // Si c'est un pont horizontal
-                bridgeImage.src = "../image/images_temporaires/icone-trait-noir.png";
+                bridgeImage.style.width = "100px"; // Largeur du pont en pixels
+            bridgeImage.style.height = "20px"; // Hauteur du pont en pixels
+                //si c'est un double pont
+                if (bridgeData.count > 1) {
+                    //on supprime l'image du pont
+                    //on verifie si il y a une image dans la cellule
+                    if (cellElement.firstChild) {
+                        cellElement.removeChild(cellElement.firstChild);
+                    }
+                    bridgeImage.style.width = "100px"; // Largeur du pont en pixels
+                    bridgeImage.style.height = "80px"; // Hauteur du pont en pixels
+                    bridgeImage.src = "bridge_h.png";
+                } else { // Sinon, c'est un pont simple
+                    bridgeImage.src = "bridge_h.png";
+                }
+
             } else { // Sinon, c'est un pont vertical
-                bridgeImage.src = "../image/images_temporaires/traitv.png";
+                bridgeImage.style.width = "20px"; // Largeur du pont en pixels
+            bridgeImage.style.height = "100px"; // Hauteur du pont en pixels
+            //on centre l'image par rapport a la droite
+            bridgeImage.style.marginLeft = "40%";
+
+                //si c'est un double pont
+                if (bridgeData.count > 1) {
+                    //on supprime l'image du pont
+                    if (cellElement.firstChild) {
+                        cellElement.removeChild(cellElement.firstChild);
+                    }
+                    bridgeImage.style.width = "80px"; // Largeur du pont en pixels
+                    bridgeImage.style.height = "100px"; // Hauteur du pont en pixels
+                    bridgeImage.style.marginLeft = "10%";
+                    bridgeImage.src = "bridge_V.png";
+                } else { // Sinon, c'est un pont simple
+                    bridgeImage.src = "bridge_V.png";
+                }
             }
             //on creer une fonction pour supprimer les ponts quand l'on clique dessus
 cellElement.appendChild(bridgeImage);
@@ -385,12 +446,13 @@ cellElement.appendChild(bridgeImage);
                 //on definit un witdh de 0
                 huge.userPlacedBridges.width = 0;
             }
-            check_win();
+
            
 
 
         }
     }
+    check_win();
 }
 
 

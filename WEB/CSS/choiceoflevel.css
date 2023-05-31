@@ -5,11 +5,11 @@
     left: 17px;
     top: 7px;
     background: url(../image/button/arrow.png);
-    background-size: 80px;
+  
     border-style: none;
 }
 .backimg{
-    width: 50px; 
+    width: 60px; 
     
 }
 body{
