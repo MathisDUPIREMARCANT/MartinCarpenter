@@ -4,7 +4,7 @@
     height: 80px;
     left: 17px;
     top: 7px;
-    background: url(../image/arrow.png);
+    background: url(../image/button/arrow.png);
     background-size: 80px;
     border-style: none;
 }
@@ -16,14 +16,15 @@ body {
     margin: 0;
     color: white;
     background: url("../image/background2.png") no-repeat center fixed;
-   background-size: cover;
+
+    background-size: cover;
     font-family: 'Montserrat', monospace;
     font-weight: bold;
 }
 .level{
     background-color:#939f5df0    ;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     border: 0.2vw solid #707F3C;
     width: 70vw;
     height: 70vh;
@@ -35,13 +36,13 @@ main{
     justify-content: center;
     margin-top: 20vh;
 }
-.Title{
+.Title,.Title2{
     margin: 3vh;
     background-color:#B7CB5A   ;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50vw;
+    width: 25vw;
     height: 10vh;
     border-radius: 20px;
     font-family: "Inter";
@@ -54,12 +55,18 @@ main{
     text-decoration: none;
     box-shadow: 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25);
 }
-.levels{
 
+.levels{
     padding: 10px;
-    width: 65vw;
+    width: 30vw;
     margin: auto;
-    height: 50vh;
+    height: 49vh;
     overflow-y: scroll;
-	scrollbar-width:none;
+    scrollbar-width:none;
+    border: 0.1vw solid #707F3C;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }

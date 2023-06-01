@@ -1,10 +1,85 @@
-/*huge = {        "Islands" : [           {"links" : 1,                   "Placement" : [14, 9]           },
-{"links" : 3,                   "Placement" : [14, 1]           },              {"links" : 3,                   "Placement" : [10, 1]           },              {"links" : 2,                   "Placement" : [2, 1]            },             {"links" : 2,                    "Placement" : [2, 8]            },              {"links" : 3,                   "Placement" : [2, 10]           },              {"links" : 3,                   "Placement" : [2, 12]           },             {"links" : 3,                    "Placement" : [2, 18]           },              {"links" : 3,                   "Placement" : [5, 18]           },              {"links" : 1,                   "Placement" : [7, 18]           }    ],    "Grid": [            {                       "size" : [15, 20]               }     ],    "Bridges" : [               {
-"width" : 0,            "length" : 7,           "direction" : 0,                 "Placement" : [[14, 8],[14, 7],[14, 6],[14, 5],[14, 4],[14, 3],[14, 2]]        },              {               "width" : 1,            "length" : 3,          "direction" : 1,          "Placement" : [[13, 1],[12, 1],[11, 1]]        },              {               "width" : 0,
-"length" : 7,           "direction" : 1,                 "Placement" : [[9, 1],[8, 1],[7, 1],[6, 1],[5, 1],[4, 1],[3, 1]]       },              {               "width" : 0,            "length" : 6,           "direction" : 0,                "Placement" : [[2, 2],[2, 3],[2, 4],[2, 5],[2, 6],[2, 7]]       },              {               "width" : 0,           "length" : 1,            "direction" : 0,                 "Placement" : [[2, 9]]         },              {              "width" : 1,             "length" : 1,           "direction" : 0,                 "Placement" : [[2, 11]]        },
-{               "width" : 0,            "length" : 5,           "direction" : 0,                 "Placement" : [[2, 13],[2, 14],[2, 15],[2, 16],[2, 17]]        },              {               "width" : 1,            "length" : 2,          "direction" : 1,          "Placement" : [[3, 18],[4, 18]]        },              {               "width" : 0,           "length" : 1,            "direction" : 1,                 "Placement" : [[6, 18]]        }    ],
-    "PlacedBridges":{}};/
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link id="css" rel="stylesheet" href="Affichage.css">
+</head>
+
+<body>
+    <style>
+    
+        img {
+            width: 50px;
+            height: 50px;
+        }
+        td,tr {
+            width: 50px;
+            height: 50px;
+        }
+ 
+    </style>
+    <div>
+        <h1 id="banger" style="position:relative; left: 40px;"></h1>
+        <!-- tableau pour stocker des images -->
+        <form action="Affichage.php" method="post">
+            <label for="nb_colonnes">Nombre de colonnes</label>
+            <input type="text" name="nb_colonnes" id="nb_colonnes">
+            <label for="nb_lignes">Nombre de lignes</label>
+            <input type="text" name="nb_lignes" id="nb_lignes">
+            <input type="submit" value="Valider">
+            <br><br> <br>  
+        </form>
+        <?php
+        if (isset($_POST['nb_lignes']) && isset($_POST['nb_colonnes'])){
+            $rows = $_POST['nb_lignes'];
+            $columns = $_POST['nb_colonnes'];
+            //on contvertit des variables php en js 
+            ?>
+            <script>
+var rows = <?php echo json_encode($rows); ?>;
+var columns = <?php echo json_encode($columns); ?>;
+</script>
+<?php
+        }
+        
+
+?>
+        <table border="1">
+            <tbody>
+                <tr>
+                <td class="source-table">
+    <img draggable="true" ondragstart="dragStart(event)" id="image1" class="original" src="../image/iles/ile1.png">
+</td>
+<td class="source-table">
+    <img draggable="true" ondragstart="dragStart(event)" id="image2" class="original" src="../image/iles/ile2.png">
+</td>
+<td class="source-table">
+    <img draggable="true" ondragstart="dragStart(event)" id="image3" class="original" src="../image/iles/ile3.png">
+</td>
+<td class="source-table"> 
+    <img draggable="true" ondragstart="dragStart(event)" id="image4" class="original" src="../image/iles/ile4.png">
+</td>
+<td class="source-table">
+    <img draggable="true" ondragstart="dragStart(event)" id="image5" class="original" src="../image/iles/ile5.png">
+</td>
+<td class="source-table">
+    <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original" src="../image/iles/ile6.png">
+</td>
+
+                </tr>
+            </tbody>
+        </table>
+        
+        <div id="bangerang"></div>
+
+        <script>huge = {
+    "Islands": [],
+    "Grid": [],
+    "Bridges": [],
+    "PlacedBridges": {}
+};
 
 
 
@@ -169,23 +244,20 @@ tbl.appendChild(tblBody);
 // Ajouter <table> au body
 document.getElementById("bangerang").appendChild(tbl);
 }
-//on contvertit des variables php en js 
 
-$nb_iles = $_POST['nb_iles'];
-$nb_colonnes = $_POST['nb_colonnes'];
+
 
 generate_table_no_solution(rows, columns);
 
 
 
- // Cette fonction sera appelée lorsqu'un élément de glisser-déposer commence
- function dragStart(event) {
+// Cette fonction sera appelée lorsqu'un élément de glisser-déposer commence
+function dragStart(event) {
     var img = new Image();
     img.src = event.target.src;
     event.dataTransfer.setDragImage(img, 0, 0);
     event.dataTransfer.setData("text", event.target.id);
 }
-
 // Cette fonction sera appelée lorsqu'un élément est déplacé sur une cellule du tableau JS
 function allowDrop(event) {
     event.preventDefault();
@@ -204,30 +276,79 @@ for (var i = 0; i < images.length; i++) {
 
 
 // Cette fonction sera appelée lorsqu'un élément est déposé sur une cellule du tableau JS
+
+
+// Cette fonction sera appelée lorsqu'un élément est déposé sur une cellule du tableau JS
 function drop(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    // Vérifie si la cellule cible contient déjà une image
-    if (event.target.getElementsByTagName('img').length > 0) {
-        return; // Interrompt le processus de dépôt si une image est déjà présente
-    }
 
-    var data = event.dataTransfer.getData("text");
-    var img = document.getElementById(data);
-    var cloneImg = img.cloneNode(true); // clone l'image
-    cloneImg.id = "clone_" + Math.floor(Math.random() * 10000); // attribuer un id unique au clone
-    cloneImg.draggable = true;
-    cloneImg.addEventListener('dragstart', dragStart);
-    cloneImg.addEventListener('drop', dropOnImage); // Empêche le dépôt d'une image sur une autre image
+  // Vérifie si la cellule cible contient déjà une image
+  if (event.target.getElementsByTagName("img").length > 0) {
+    return; // Interrompt le processus de dépôt si une image est déjà présente
+  }
 
-    // Vérifie si l'image provient du tableau HTML
-    if (img.parentNode.id === "cell1") {
-        event.target.appendChild(cloneImg); // ajoute le clone à la nouvelle cellule
-    } else {
-        event.target.appendChild(img); // déplace l'image si elle ne provient pas du tableau HTML
-        img.addEventListener('drop', dropOnImage); // Empêche le dépôt d'une image sur une autre image
-    }
+
+  var data = event.dataTransfer.getData("text");
+  var img = document.getElementById(data);
+  var cloneImg = img.cloneNode(true); // clone l'image
+  var newId = "clone_" + Math.floor(Math.random() * 10000); // attribuer un id unique au clone
+  cloneImg.id = newId;
+  cloneImg.draggable = true;
+  cloneImg.addEventListener("dragstart", dragStart);
+  cloneImg.addEventListener("drop", dropOnImage); // Empêche le dépôt d'une image sur une autre image
+
+
+  // Vérifie si l'image provient du tableau HTML
+  if (img.parentNode.classList.contains("source-table")) {
+    event.target.appendChild(cloneImg); // ajoute le clone à la nouvelle cellule
+  } else {
+    event.target.appendChild(img); // déplace l'image si elle ne provient pas du tableau HTML
+    img.addEventListener("drop", dropOnImage); // Empêche le dépôt d'une image sur une autre image
+  }
+
+
+  // Obtient la position de la cellule cible
+  var rowIndex = event.target.parentNode.rowIndex;
+  var cellIndex = event.target.cellIndex;
+
+
+  // Crée un nouvel objet île avec les informations de position et de liens
+  var links = getLinksFromImageId(data);
+  var island = {
+    id: newId,
+    Placement: [rowIndex, cellIndex],
+    links: links
+  };
+  huge.Islands.push(island);
+
+
+  console.log(huge.Islands);
+  console.log(convertToPixelArt());
 }
+
+
+// Fonction utilitaire pour obtenir le nombre de liens à partir de l'ID de l'image
+function getLinksFromImageId(imageId) {
+  switch (imageId) {
+    case "image1":
+      return 1;
+    case "image2":
+      return 2;
+    case "image3":
+      return 3;
+    case "image4":
+      return 4;
+    case "image5":
+      return 5;
+    case "image6":
+      return 6;
+    default:
+      return 0;
+  }
+}
+
+
 
 // Assignez ces fonctions à tous les éléments img dans le tableau HTML
 var images = document.getElementsByTagName('img');
@@ -242,5 +363,89 @@ for (var i = 0; i < cells.length; i++) {
     cells[i].addEventListener('drop', drop);
     cells[i].addEventListener('dragover', allowDrop);
 }
+function convertToPixelArt(rows, cols) {
+  // Créer une matrice vide de dimensions rows x cols
+  var matrix = [];
+  for (var i = 0; i < rows; i++) {
+    matrix[i] = [];
+    for (var j = 0; j < cols; j++) {
+      matrix[i][j] = "*"; // Définir chaque case comme un espace vide "*"
+    }
+  }
 
 
+  // Remplir la matrice avec les numéros d'île en fonction des positions et des liens
+  for (var i = 0; i < huge.Islands.length; i++) {
+    var island = huge.Islands[i];
+    var rowIndex = island.Placement[0];
+    var colIndex = island.Placement[1];
+    var islandNumber = island.links.toString(); // Convertir le nombre de liens en chaîne de caractères
+
+
+    // Si les coordonnées de l'île se trouvent à l'intérieur de la matrice
+    if(rowIndex < rows && colIndex < cols) {
+      matrix[rowIndex][colIndex] = islandNumber;
+    }
+  }
+
+
+  // Convertir la matrice en une chaîne de caractères représentant le pixel art de la carte
+  var pixelArt = "";
+  for (var i = 0; i < rows; i++) {
+    pixelArt += matrix[i].join("");
+  }
+  
+  return pixelArt;
+}
+console.log(convertToPixelArt(rows, columns));
+
+//fonction pour compter le nombre d'iles 
+function countIslands(rows, columns) {
+  var count = 0;
+  for (var i = 0; i < huge.Islands.length; i++) {
+    var island = huge.Islands[i];
+    var rowIndex = island.Placement[0];
+    var colIndex = island.Placement[1];
+    if(rowIndex < rows && colIndex < columns) {
+      count++;
+    }
+  }
+  return count;
+}
+
+// Conversion en pixel art
+
+
+
+function myFunction(){
+    var pixelArt = convertToPixelArt(rows, columns);
+    var iles = countIslands(rows, columns);
+var url = "Affichage.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" + encodeURIComponent(iles);
+
+window.location.href = url;
+}
+
+
+
+</script>
+
+<?php
+// Récupérer les paramètres de l'URL
+$rows = $_GET['rows'];
+$columns = $_GET['columns'];
+$pixelArt = $_GET['pixelArt'];
+$nbiles = $_GET['nbiles'];
+
+echo "Nombre de lignes : " . $rows . "<br>";
+echo "Nombre de colonnes : " . $columns . "<br>";
+echo "Pixel art : " . $pixelArt . "<br>";
+echo "Nombre d'îles : " . $nbiles . "<br>";
+
+//$command = 'MartinS.exe'. ' '. $rows . ' ' . $columns . ' ' . $nbiles . ' ' . $pixelArt;
+//$output = exec($command);
+?>
+
+<button onclick="myFunction()">Click me</button>
+</body>
+
+</html>

@@ -41,9 +41,11 @@ $output = exec($command);
 <?php
 $texte_php = $output;
 $texte_js = json_encode($texte_php);
+//on affiche le texte
+echo $texte_php;
 ?>
-<!-- on affiche le texte js avec du JS -->
-<div id="bangerang"></div>
+
+    <div id="bangerang"></div>
 <script type="text/javascript">
     var texte_js = <?php echo $texte_js; ?>;
     var huge = JSON.parse(texte_js);
