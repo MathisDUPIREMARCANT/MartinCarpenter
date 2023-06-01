@@ -72,11 +72,11 @@ session_start() ;
                 else{
                 ?>              
                 <div class="buttons">
-                <button id="Button" class="Button2" type="submit">
+                <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
                 </button>
 
-                <button id="Button" class="Button2" type="submit">
+                <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
                 </button>
 
