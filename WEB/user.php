@@ -99,7 +99,7 @@ foreach($resultat as $row){
                         if (count($results) > 0) {
                             // Affichage des données dans un tableau HTML
                            
-                            echo "<br><div class='fix'>Username    Score</div><br>
+                            echo "
                             <div class='line2'>";
                             
                             // Parcourir les résultats et afficher les données

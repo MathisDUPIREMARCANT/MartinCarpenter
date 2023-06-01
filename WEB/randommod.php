@@ -93,7 +93,7 @@ session_start();
             </button>
 
             <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php">Setting</a>
+                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings</a>
             </button>
         </div>
     </header>
