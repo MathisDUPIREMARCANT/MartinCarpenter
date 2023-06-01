@@ -81,6 +81,7 @@ session_start() ;
                 </button>
                 <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/sign_in_up.php">Connexion</a>
+                    <a></a>
                 </button>
             </div>
             <?php
@@ -94,7 +95,7 @@ session_start() ;
         <footer>
 
             <audio class="audio" controls>
-                <source src="WEB/image/music.mp3" type="video/mp4">
+            <source src="WEB/image/music.mp3" type="video/mp4">
             </audio>
 
             </button>
