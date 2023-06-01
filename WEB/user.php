@@ -2,17 +2,15 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 session_start();
+$conn = new mysqli('localhost', 'root', 'root', 'martin');
 try{
     require("traitement/DB_connect.php");             
     $reqPrep1="SELECT username,email,password,score FROM users WHERE username='$_SESSION[username]'";
     $req1 =$conn->prepare($reqPrep1);
     $req1->execute();
     $resultat = $req1->fetchAll();
-    $reqPrep2="SELECT score, username FROM users ORDER BY score DESC";
-    $req2 =$conn->prepare($reqPrep2);
-    $req2->execute();
-    $resultat2 = $req2->fetchAll();
-    $conn= NULL;
+    $sql = "SELECT score, username FROM users ORDER BY score DESC LIMIT 25";
+    $result = $conn->query($sql);
 }
 catch(Exception $e){
     
@@ -90,21 +88,43 @@ foreach($resultat as $row){
                     </div>
                     <div class="list">
                         <div class="line2">
-                            <ul>
+
                            ';
-                           foreach($resultat2 as $row2){
-                            echo'
-                                <li>'.$row2["username"].'</li>
-                                <li>'.$row2["score"].'</li>
+                           $stmt = $conn->query($sql);
+
+                        // Récupération des résultats dans un tableau
+                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        // Vérification des résultats de la requête
+                        if (count($results) > 0) {
+                            // Affichage des données dans un tableau HTML
+                           
+                            echo "<br>Username    Score<br>";
+                            
+                            // Parcourir les résultats et afficher les données
+                            foreach ($results as $row) {
+                                echo $row["username"]."  ";
+                                echo $row["score"]."  ";
+                                echo "<br>";
+                            }
+                            
+                         
+                        } else {
+                            echo "Aucun résultat trouvé.";
+                        }
+                           
+                           
+                                echo "</table>";
+                                echo'
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </main>
     </body>
     </html>';};
-}
+
 else{
     header("Location: sign_in_up.php");
     return;
