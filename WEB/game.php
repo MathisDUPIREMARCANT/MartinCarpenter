@@ -47,10 +47,10 @@ if(isset($_SESSION['username'])){
         <button class="Buttonstory" onclick="redirectTo(\'storymod.php\')"><a class="textstory">Story
                 Mod</a></button>
         <div class="games">
-            <button class="Buttoneasy" onclick="redirectTo(\'randommod.php\')"><a class="texteasy">Easy Mod</a></button>
-            <button class="Buttonmedium" onclick="redirectTo(\'randommod.php\')"><a class="textmedium">Medium
+            <button class="Buttoneasy" onclick="redirectTo(\'randommod.php?mod=easy\')"><a class="texteasy">Easy Mod</a></button>
+            <button class="Buttonmedium" onclick="redirectTo(\'randommod.php?mod=medium\')"><a class="textmedium">Medium
                     Mod</a></button>
-            <button class="Buttonhard" onclick="redirectTo(\'randommod.php\')"><a class="texthard">Hard Mod</a></button>
+            <button class="Buttonhard" onclick="redirectTo(\'randommod.php?mod=hard\')"><a class="texthard">Hard Mod</a></button>
         </div>
         <div class="creationgames">
             <button class="Buttoncreate" onclick="redirectTo(\'createmod.php\')"><a class="textcreate">Create
@@ -71,7 +71,7 @@ if(isset($_SESSION['username'])){
 </html>';
 }
 else{ 
-    header("Location: sign_in_up.php?fail=2");
+    header("Location: sign_in_up.php");
     return;
 }
 ?>

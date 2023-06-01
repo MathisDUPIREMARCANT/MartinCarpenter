@@ -15,8 +15,12 @@ void main(int argc, char *argv[]) {
 	int nombre_iles = atoi(argv[1]);
 	int nombre_x = atoi(argv[2]);
 	int nombre_y = atoi(argv[3]);
-	//int nombre_iles = *(argv[0]);
-	Coord posMax = { nombre_x, nombre_y}; //{ *(argv[1]), *(argv[2])} 
+
+	//int nombre_iles = 7;
+	//int nombre_x = 7;
+	//int nombre_y = 9;
+
+	Coord posMax = { nombre_x, nombre_y};
 	Coord pos = { Random(0, posMax.x), Random(0, posMax.y) };
 
 	char* Board = Init_board_Game(posMax);
@@ -31,7 +35,7 @@ void main(int argc, char *argv[]) {
 		//printf("\n\nTest : %d\n", test);
 	}
 
-	//Print_board(Board, posMax);
+	Print_board(Board, posMax);
 	//free(Board);
 
 }

@@ -57,7 +57,7 @@ session_start() ;
             <div class="Titre">Martin Carpenter</div>
 
             <div class="buttons2">
-            <?php
+                <?php
             if(isset($_SESSION['username'])){
                 ?><button id="Button2" class="Button2" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
@@ -67,11 +67,11 @@ session_start() ;
                     <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
                 </button>
             </div>
-                <?php
+            <?php
                 }
                 else{
-                ?>              
-                <div class="buttons">
+                ?>
+            <div class="buttons">
                 <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
                 </button>
@@ -79,26 +79,23 @@ session_start() ;
                 <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
                 </button>
-
-
-             
-                
                 <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/sign_in_up.php">Connexion</a>
+                    <a></a>
                 </button>
-                </div>
-                <?php
+            </div>
+            <?php
                 ;}; ?>
 
 
-            </div>
-        </main>
+    </div>
+    </main>
     </div>
     <div class="Footer">
         <footer>
 
             <audio class="audio" controls>
-                <source src="WEB/image/music.mp3" type="video/mp4">
+            <source src="WEB/image/music.mp3" type="video/mp4">
             </audio>
 
             </button>

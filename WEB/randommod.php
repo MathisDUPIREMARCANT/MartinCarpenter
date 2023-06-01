@@ -93,14 +93,14 @@ session_start();
             </button>
 
             <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php">Setting</a>
+                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings</a>
             </button>
         </div>
     </header>
     <main Id="main" class="main">
 
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
-        <form action="randommod.php" method="post">
+        <form action="randommod.php?mod=<?php $_GET['mod']?>" method="post">
             <label for="nb_iles">Nombre d'iles</label>
             <input type="text" name="nb_iles" id="nb_iles">
             <label for="nb_colonnes">Nombre de colonnes</label>
@@ -110,7 +110,6 @@ session_start();
             <input type="submit" value="Valider">
             <br><br> <br>
         </form>
-
         <div id="game" class="game">
             <?php         
 //on exec le .exe avec les parametres du formulaire
@@ -148,14 +147,49 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
             function generate_table_no_solution(rows, columns) {
                 // Obtenir la référence du body
                 var body = document.getElementsByTagName("body")[0];
-
-
                 // Créer les éléments <table> et <tbody>
                 var tbl = document.createElement("table");
                 var tblBody = document.createElement("tbody");
-                tbl.style.border = "0.4vw solid #19608F";
+
+                <?php if(isset($_COOKIE['Colorgame'])){
+                if($_COOKIE['Colorgame']=="red"){ 
+                echo"tbl.style.border = '0.4vw solid #f23e31';
+                tbl.style.backgroundColor = '#bf2424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="grey"){ 
+                echo"tbl.style.border = '0.4vw solid #cecaca';
+                tbl.style.backgroundColor = '#aa9a9a38';";
+                }
+                 elseif($_COOKIE['Colorgame']=="yellow"){ 
+                echo"tbl.style.border = '0.4vw solid #eff84aec';
+                tbl.style.backgroundColor = '#bfb224e7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="orange"){ 
+                echo"tbl.style.border = '0.4vw solid #f2ab31';
+                tbl.style.backgroundColor = '#bf8424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="pink"){ 
+                    echo"tbl.style.border = '0.4vw solid #f231c8';
+                    tbl.style.backgroundColor = '#bf24b2e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="green"){ 
+                echo"tbl.style.border = '0.4vw solid #34f231';
+                tbl.style.backgroundColor = '#24bf2ce7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="purple"){ 
+                echo"tbl.style.border = '0.4vw solid #9b31f2';
+                tbl.style.backgroundColor = '#8424bfe7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="blue"  ){ 
+                echo"tbl.style.border = '0.4vw solid #19608F';
+                tbl.style.backgroundColor = '#247cbfe7';";
+                }}
+                else{
+                    echo"tbl.style.border = '0.4vw solid #19608F';
+                    tbl.style.backgroundColor = '#247cbfe7';";
+                }?>
+
                 tbl.style.borderRadius = "20px";
-                tbl.style.backgroundColor = "#247cbfe7";
                 tbl.style.width = "70vw";
                 tbl.style.height = "70vh";
                 tbl.style.overflow = "auto"; // allows the table to scroll if necessary
@@ -269,7 +303,8 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
 
             function getIslandAt(coordinates) {
                 for (var i = 0; i < huge.Islands.length; i++) {
-                    if (huge.Islands[i].Placement[0] === coordinates[0] && huge.Islands[i].Placement[1] === coordinates[
+                    if (huge.Islands[i].Placement[0] === coordinates[0] && huge.Islands[i].Placement[1] ===
+                        coordinates[
                             1]) {
                         return huge.Islands[i];
                     }
@@ -279,7 +314,8 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
 
             function canPlaceBridge(island1, island2) {
                 // Vérifier si les îles sont sur la même ligne ou la même colonne
-                if (island1.Placement[0] !== island2.Placement[0] && island1.Placement[1] !== island2.Placement[1]) {
+                if (island1.Placement[0] !== island2.Placement[0] && island1.Placement[1] !== island2.Placement[
+                        1]) {
                     return false;
                 }
                 var bridgeOrientation = island1.Placement[0] === island2.Placement[0] ? 1 :
@@ -343,12 +379,14 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                     for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement.length; k++) {
 
                         //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                        tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(huge
+                        tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(
+                            huge
                             .Bridges)[j]].Placement[k]);
                     }
                 } else {
                     for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement.length; k++) {
-                        tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(huge
+                        tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(
+                            huge
                             .Bridges)[j]].Placement[k]);
                     }
 
@@ -361,13 +399,16 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                     var bridges = getBridgesAroundIsland(island);
 
                     if (bridges.length > island.links) {
-                        var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island.Placement[
-                            1]);
+                        var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
+                            .Placement[
+                                1]);
                         islandCell.classList.add("error"); // Ajouter la classe CSS "error" à la cellule de l'île
                     } else {
-                        var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island.Placement[
-                            1]);
-                        islandCell.classList.remove("error"); // Supprimer la classe CSS "error" de la cellule de l'île
+                        var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
+                            .Placement[
+                                1]);
+                        islandCell.classList.remove(
+                            "error"); // Supprimer la classe CSS "error" de la cellule de l'île
                     }
                 }
                 let tmp = {
@@ -378,11 +419,13 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                     //on verifie la valeur du count
                     if (huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count == 1) {
                         //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                        tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[Object
+                        tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[
+                            Object
                             .keys(huge.PlacedBridges)[j]].Placement[0]);
                     } else if (huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count == 2) {
                         console.log("pipi")
-                        tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[Object
+                        tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[
+                            Object
                             .keys(huge.PlacedBridges)[j]].Placement[0]);
                     }
 
@@ -394,7 +437,7 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                 tmp2["2"].sort();
 
                 if (JSON.stringify(tmp) === JSON.stringify(tmp2)) {
-                    alert("Vous avez gagné");
+                    document.location.href = "Win.php";
                 }
 
             }
@@ -408,7 +451,8 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                 for (var cellId in huge.PlacedBridges) {
                     // Si la cellule contient un pont entre ces deux îles, décrémentez le count ou supprimez le pont
                     var bridgeData = huge.PlacedBridges[cellId];
-                    if (bridgeData.islandPair.includes(island1Index) && bridgeData.islandPair.includes(island2Index)) {
+                    if (bridgeData.islandPair.includes(island1Index) && bridgeData.islandPair.includes(
+                            island2Index)) {
 
                         // Si c'est un double pont, décrémentez le count et supprimez seulement une image de pont
                         if (bridgeData.count > 1) {
@@ -473,15 +517,18 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
 
 
                 // Longueur du pont
-                let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1.Placement[0]) -
+                let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1.Placement[
+                        0]) -
                     (bridgeOrientation === 1 ? island2.Placement[1] : island2.Placement[0])) + 1;
 
 
                 // Placer le pont
                 for (let i = 0; i < bridgeLength; i++) {
-                    var row = bridgeOrientation === 1 ? island1.Placement[0] : Math.min(island1.Placement[0], island2
+                    var row = bridgeOrientation === 1 ? island1.Placement[0] : Math.min(island1.Placement[0],
+                        island2
                         .Placement[0]) + i;
-                    var col = bridgeOrientation === 2 ? island1.Placement[1] : Math.min(island1.Placement[1], island2
+                    var col = bridgeOrientation === 2 ? island1.Placement[1] : Math.min(island1.Placement[1],
+                        island2
                         .Placement[1]) + i;
 
 
@@ -550,7 +597,7 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                                 if (cellElement.firstChild) {
                                     cellElement.removeChild(cellElement.firstChild);
                                 }
-                                bridgeImage.style.width = "55%"; // Largeur du pont en pixels
+                                bridgeImage.style.width = "50%"; // Largeur du pont en pixels
                                 bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
                                 bridgeImage.src = "../WEB/image/iles/bridge_V.png";
                             } else { // Sinon, c'est un pont simple

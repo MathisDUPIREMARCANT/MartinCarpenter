@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction) {
+void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction, int* Nb_solution, int* Nb_bridge, Bridge* Bridges) {
 
 	int Direction_available[4];
 	int* result = malloc(sizeof(int) * 4 * 81);
@@ -34,10 +34,6 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 					if ((atoi(Board + (Copy_pos.y * posMax.x) + Copy_pos.x) - Direction[i]) < 0) { return; }
 
 					Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
-
-
-					
-					// if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
 				}
 			}
 
@@ -48,6 +44,11 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 
 		if (Nb_islands == 0) {
 			*(Result) = Board;
+			(*Nb_solution)++;
+			printf("Prout");
+			printf("\n");
+			Print_board(Board, posMax);
+			printf("\n");
 			return;
 		}
 
@@ -67,12 +68,14 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction)
 
 		for (int y = 0; y < Nb_combinaison; y++) {
 			char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
+			Bridge* Bridge_copy = (Bridge*)malloc(*Nb_bridge * sizeof(Bridge*));
 
-			if (Board_copy != NULL) {
+			if (Board_copy != NULL && Bridge_copy != NULL) {
 				Copy_board(Board_copy, Board, posMax.x * posMax.y);
+				Copy_bridges(Bridge_copy, Bridges, *Nb_bridge);
 			}
 
-			Solver(Result, Board_copy, posMax, pos, result + (4 * y));		
+			Solver(Result, Board_copy, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge, Bridge_copy);
 		}
 		return;
 	}
