@@ -34,11 +34,10 @@ void Next_Coord(Coord* pos, int direction);
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge);
 void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight);
 void Print_board(char* Board, Coord Taille);
-void Solver(char** Result, char* Board, Coord posMax, Coord pos, int Direction[4]);
+void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction, int* Nb_solution, int* Nb_bridge, Bridge* Bridges);
 
 Coord Find_Island(char* Board, Coord posMax);
 
 int Random(int min, int max);
-int solveur(char* Board, Coord pos, Coord posMax);
 int Verif_solved(char* Board, int Nb_Island, Coord posMax);
 
