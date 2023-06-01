@@ -110,7 +110,6 @@ session_start();
             <input type="submit" value="Valider">
             <br><br> <br>
         </form>
-
         <div id="game" class="game">
             <?php         
 //on exec le .exe avec les parametres du formulaire
@@ -148,40 +147,46 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
             function generate_table_no_solution(rows, columns) {
                 // Obtenir la référence du body
                 var body = document.getElementsByTagName("body")[0];
-
-
                 // Créer les éléments <table> et <tbody>
                 var tbl = document.createElement("table");
                 var tblBody = document.createElement("tbody");
-                tbl.style.border = "0.4vw solid #19608F";
-                tbl.style.backgroundColor = "#247cbfe7";
 
-                <?php if($_COOKIE['Colorgame']=="rouge"){ 
+                <?php if(isset($_COOKIE['Colorgame'])){
+                if($_COOKIE['Colorgame']=="rouge"){ 
                 echo"tbl.style.border = '0.4vw solid #f23e31';
                 tbl.style.backgroundColor = '#bf2424e7';";
-                }?>
-                <?php if($_COOKIE['Colorgame']=="gris"){ 
+                }
+                elseif($_COOKIE['Colorgame']=="gris"){ 
                 echo"tbl.style.border = '0.4vw solid #cecaca';
                 tbl.style.backgroundColor = '#aa9a9a38';";
-                }?>
-                <?php if($_COOKIE['Colorgame']=="jaune"){ 
+                }
+                 elseif($_COOKIE['Colorgame']=="jaune"){ 
                 echo"tbl.style.border = '0.4vw solid #eff84aec';
                 tbl.style.backgroundColor = '#bfb224e7';";
-                }?> <?php if($_COOKIE['Colorgame']=="orange"){ 
+                }
+                 elseif($_COOKIE['Colorgame']=="orange"){ 
                 echo"tbl.style.border = '0.4vw solid #f2ab31';
                 tbl.style.backgroundColor = '#bf8424e7';";
-                }?>
-                <?php if($_COOKIE['Colorgame']=="rose"){ 
+                }
+                elseif($_COOKIE['Colorgame']=="rose"){ 
                     echo"tbl.style.border = '0.4vw solid #f231c8';
                     tbl.style.backgroundColor = '#bf24b2e7';";
-                    }?>
-                <?php if($_COOKIE['Colorgame']=="vert"){ 
+                }
+                elseif($_COOKIE['Colorgame']=="vert"){ 
                 echo"tbl.style.border = '0.4vw solid #34f231';
                 tbl.style.backgroundColor = '#24bf2ce7';";
-                }?>
-                <?php if($_COOKIE['Colorgame']=="violet"){ 
+                }
+                 elseif($_COOKIE['Colorgame']=="violet"){ 
                 echo"tbl.style.border = '0.4vw solid #9b31f2';
                 tbl.style.backgroundColor = '#8424bfe7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="bleu"  ){ 
+                echo"tbl.style.border = '0.4vw solid #19608F';
+                tbl.style.backgroundColor = '#247cbfe7';";
+                }}
+                else{
+                    echo"tbl.style.border = '0.4vw solid #19608F';
+                    tbl.style.backgroundColor = '#247cbfe7';";
                 }?>
 
                 tbl.style.borderRadius = "20px";
@@ -579,7 +584,7 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                                 if (cellElement.firstChild) {
                                     cellElement.removeChild(cellElement.firstChild);
                                 }
-                                bridgeImage.style.width = "55%"; // Largeur du pont en pixels
+                                bridgeImage.style.width = "50%"; // Largeur du pont en pixels
                                 bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
                                 bridgeImage.src = "../WEB/image/iles/bridge_V.png";
                             } else { // Sinon, c'est un pont simple
