@@ -73,7 +73,7 @@ void From_C_to_Json(Bridge* Bridges, Island* Islands, int Nb_bridge, int Nb_isla
 		printf("{");
 		printf("	\"Islands\" : [");
 		for (int i = 0; i < Nb_island; i++) {
-			From_C_to_Json_island(Islands[i]);
+			From_C_to_Json_island_null(Islands[i]);
 			if (i < Nb_island - 1) {
 				printf(",");
 			}
@@ -83,7 +83,7 @@ void From_C_to_Json(Bridge* Bridges, Island* Islands, int Nb_bridge, int Nb_isla
 		printf("    ],");
 		printf("    \"Bridges\" : [");
 		for (int i = 0; i < Nb_bridge; i++) {
-			From_C_to_Json_bridge(Bridges[i]);
+			From_C_to_Json_bridge_null(Bridges[i]);
 
 			free(Bridges[i].pos); //free positions
 
