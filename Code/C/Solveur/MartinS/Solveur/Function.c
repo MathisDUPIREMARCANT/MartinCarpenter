@@ -260,8 +260,7 @@ void Copy_board(char* destination, char* source, int count) {
 }
 
 void fonction_mathis(Island* islands, Coord posMax, char* board, int* Nb_island) {
-    int incr = 0;
-    for (int i = 0; i < posMax.x; i++) {
+   for (int i = 0; i < posMax.x; i++) {
         for (int j = 0; j < posMax.y; j++) {
             if (*(board + (posMax.x * j) + i) != '*' || *(board + (posMax.x * j) + i) != '~' || *(board + (posMax.x * j) + i) != '#') {
                 islands[*Nb_island].pos.x = i;
