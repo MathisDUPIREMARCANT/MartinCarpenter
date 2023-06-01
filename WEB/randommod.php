@@ -154,8 +154,37 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                 var tbl = document.createElement("table");
                 var tblBody = document.createElement("tbody");
                 tbl.style.border = "0.4vw solid #19608F";
-                tbl.style.borderRadius = "20px";
                 tbl.style.backgroundColor = "#247cbfe7";
+
+                <?php if($_COOKIE['Colorgame']=="rouge"){ 
+                echo"tbl.style.border = '0.4vw solid #f23e31';
+                tbl.style.backgroundColor = '#bf2424e7';";
+                }?>
+                <?php if($_COOKIE['Colorgame']=="gris"){ 
+                echo"tbl.style.border = '0.4vw solid #cecaca';
+                tbl.style.backgroundColor = '#aa9a9a38';";
+                }?>
+                <?php if($_COOKIE['Colorgame']=="jaune"){ 
+                echo"tbl.style.border = '0.4vw solid #eff84aec';
+                tbl.style.backgroundColor = '#bfb224e7';";
+                }?> <?php if($_COOKIE['Colorgame']=="orange"){ 
+                echo"tbl.style.border = '0.4vw solid #f2ab31';
+                tbl.style.backgroundColor = '#bf8424e7';";
+                }?>
+                <?php if($_COOKIE['Colorgame']=="rose"){ 
+                    echo"tbl.style.border = '0.4vw solid #f231c8';
+                    tbl.style.backgroundColor = '#bf24b2e7';";
+                    }?>
+                <?php if($_COOKIE['Colorgame']=="vert"){ 
+                echo"tbl.style.border = '0.4vw solid #34f231';
+                tbl.style.backgroundColor = '#24bf2ce7';";
+                }?>
+                <?php if($_COOKIE['Colorgame']=="violet"){ 
+                echo"tbl.style.border = '0.4vw solid #9b31f2';
+                tbl.style.backgroundColor = '#8424bfe7';";
+                }?>
+
+                tbl.style.borderRadius = "20px";
                 tbl.style.width = "70vw";
                 tbl.style.height = "70vh";
                 tbl.style.overflow = "auto"; // allows the table to scroll if necessary
