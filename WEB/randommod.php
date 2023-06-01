@@ -524,7 +524,7 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
 
                         if (bridgeOrientation === 1) { // Si c'est un pont horizontal
                             bridgeImage.style.width = "100%"; // Largeur du pont en pixels
-                            bridgeImage.style.height = "30%"; // Hauteur du pont en pixels
+                            bridgeImage.style.height = "35%"; // Hauteur du pont en pixels
                             //si c'est un double pont
                             if (bridgeData.count > 1) {
                                 //on supprime l'image du pont

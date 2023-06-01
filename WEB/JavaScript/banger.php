@@ -396,7 +396,7 @@ function placeBridge(island1, island2) {
 
             if (bridgeOrientation === 1) { // Si c'est un pont horizontal
                 bridgeImage.style.width = "100px"; // Largeur du pont en pixels
-            bridgeImage.style.height = "20px"; // Hauteur du pont en pixels
+            bridgeImage.style.height = "40px"; // Hauteur du pont en pixels
                 //si c'est un double pont
                 if (bridgeData.count > 1) {
                     //on supprime l'image du pont
@@ -405,7 +405,7 @@ function placeBridge(island1, island2) {
                         cellElement.removeChild(cellElement.firstChild);
                     }
                     bridgeImage.style.width = "100px"; // Largeur du pont en pixels
-                    bridgeImage.style.height = "80px"; // Hauteur du pont en pixels
+                    bridgeImage.style.height = "40px"; // Hauteur du pont en pixels
                     bridgeImage.src = "bridge_h.png";
                 } else { // Sinon, c'est un pont simple
                     bridgeImage.src = "bridge_h.png";
