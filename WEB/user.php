@@ -120,7 +120,7 @@ foreach($resultat as $row){
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </main>
     </body>
     </html>';};
