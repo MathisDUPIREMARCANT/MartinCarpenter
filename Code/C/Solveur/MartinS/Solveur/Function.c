@@ -259,6 +259,19 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
+void fonction_mathis(Island* islands, Coord posMax, char* board, int* Nb_island) {
+   for (int i = 0; i < posMax.x; i++) {
+        for (int j = 0; j < posMax.y; j++) {
+            if (*(board + (posMax.x * j) + i) != '*' || *(board + (posMax.x * j) + i) != '~' || *(board + (posMax.x * j) + i) != '#') {
+                islands[*Nb_island].pos.x = i;
+                islands[*Nb_island].pos.y = j;
+                islands[*Nb_island].number = *(board + (posMax.x * j) + i);
+                (*Nb_island)++;
+            }
+        }
+    }
+}
+
 void Copy_bridges(Bridge* Bridge_copy, Bridge* Bridges, int Nb_bridge) {
     for (int i = 0; i < Nb_bridge; i++) {
         Bridge_copy[i].direction = Bridges[i].direction;

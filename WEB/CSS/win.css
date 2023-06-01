@@ -1,0 +1,95 @@
+*{
+    scrollbar-width:none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+  }
+.back{
+    position: absolute;
+    width: 85px;
+    height: 80px;
+    left: 17px;
+    top: 7px;
+    background: url(../image/button/arrow.png);
+    background-size: 80px;
+    border-style: none;
+}
+.backimg{
+    width: 50px; 
+    
+}
+#background-video {/*vidéo d'arrière plan*/
+    height: 100vh;
+    width: 100vw;
+    -o-object-fit: cover;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -2;
+    }
+#background-video2 {/*vidéo d'arrière plan*/
+        height: 100vh;
+        width: 100vw;
+        -o-object-fit: cover;
+        object-fit: cover;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        }
+.body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  main{
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+    width: 70vw;
+    height:70vh;
+    margin: auto;
+  }
+  .win{
+    margin: auto;
+    font-size: 10vh;
+    animation-name:win;
+    animation-duration:2s;
+    animation-iteration-count: infinite;
+    animation-direction:reverse;
+    
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3vw;
+    line-height: 10vh;
+    text-align: center;
+    color: #464711e5;
+    -webkit-text-stroke: 0.1vw;
+    -webkit-text-stroke-color: rgb(58, 58, 20);
+    text-decoration: none;
+  }
+  @keyframes win{
+    0% {
+      font-size: 10vh;
+    }
+    25%{
+        font-size: 15vh;
+    }
+    50%{
+    font-size: 10vh; 
+    }
+    75%{
+        font-size: 5vh;
+    }
+    100% {
+        font-size: 10vh;
+    }
+  }

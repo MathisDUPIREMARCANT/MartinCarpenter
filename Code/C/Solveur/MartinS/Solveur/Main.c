@@ -29,7 +29,8 @@ void main() {
 	int* Pt_island = &Nb_island;
 
 	Bridge* Bridges = (Bridge*)malloc(sizeof(Bridge*));
-	Island* Islands;
+	Nb_island = Island_on_map(Board, pos, posMax);
+	Island* Islands = (Island*)malloc(Nb_island * sizeof(Island*));
 
 
 

@@ -70,7 +70,7 @@ if(isset($_SESSION['username'])){
 </html>';
 }
 else{ 
-    header("Location: sign_in_up.php?fail=2");
+    header("Location: sign_in_up.php");
     return;
 }
 ?>
