@@ -258,3 +258,13 @@ void Copy_board(char* destination, char* source, int count) {
         destination[i] = source[i];
     }
 }
+
+void Copy_bridges(Bridge* Bridge_copy, Bridge* Bridges, int Nb_bridge) {
+    for (int i = 0; i < Nb_bridge; i++) {
+        Bridge_copy[i].direction = Bridges[i].direction;
+        Bridge_copy[i].length = Bridges[i].length;
+        Bridge_copy[i].pos->x = Bridges[i].pos->x;
+        Bridge_copy[i].pos->y = Bridges[i].pos->y;
+        Bridge_copy[i].size = Bridges[i].size;
+    }
+}

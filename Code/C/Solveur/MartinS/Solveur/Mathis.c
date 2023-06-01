@@ -68,12 +68,14 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction,
 
 		for (int y = 0; y < Nb_combinaison; y++) {
 			char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
+			Bridge* Bridge_copy = (Bridge*)malloc(*Nb_bridge * sizeof(Bridge*));
 
-			if (Board_copy != NULL) {
+			if (Board_copy != NULL && Bridge_copy != NULL) {
 				Copy_board(Board_copy, Board, posMax.x * posMax.y);
+				Copy_bridges(Bridge_copy, Bridges, *Nb_bridge);
 			}
 
-			Solver(Result, Board_copy, posMax, pos, result + (4 * y), Nb_solution);		
+			Solver(Result, Board_copy, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge, Bridge_copy);
 		}
 		return;
 	}
