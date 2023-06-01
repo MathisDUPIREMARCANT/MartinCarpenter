@@ -84,10 +84,10 @@ foreach($resultat as $row){
                 echo'
                 <div class="classement">
                     <div class="compte">
-                        Compte:
+                        Classement:
                     </div>
                     <div class="list">
-                        <div class="line2">
+                        
 
                            ';
                            $stmt = $conn->query($sql);
@@ -99,13 +99,16 @@ foreach($resultat as $row){
                         if (count($results) > 0) {
                             // Affichage des données dans un tableau HTML
                            
-                            echo "<br>Username    Score<br>";
+                            echo "<br><div class='fix'>Username    Score</div><br>
+                            <div class='line2'>";
                             
                             // Parcourir les résultats et afficher les données
+                            $i=1;
                             foreach ($results as $row) {
-                                echo $row["username"]."  ";
+                                echo $i.".       ". $row["username"]."  ";
                                 echo $row["score"]."  ";
                                 echo "<br>";
+                                $i++;
                             }
                             
                          
@@ -123,8 +126,8 @@ foreach($resultat as $row){
             
         </main>
     </body>
-    </html>';};
-
+    </html>';}
+                    
 else{
     header("Location: sign_in_up.php");
     return;
