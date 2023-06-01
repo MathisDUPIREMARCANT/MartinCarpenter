@@ -1,6 +1,8 @@
 <label> Game board color choice : </label>
 <select class="choice" name="Choixtheme">
-    <option value="">Choose color ↓</option>
+    <option value="bleu" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="bleu"){ echo"selected";}?>>
+        Bleu(couleur par défaut)
+    </option>
 
     <option value="rouge" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="rouge"){ echo"selected";}?>>
         Rouge</option>
@@ -10,9 +12,7 @@
         Jaune</option>
     <option value="vert" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="vert"){ echo"selected";}?>>
         Vert</option>
-    <option value="bleu" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="bleu"){ echo"selected";}?>>
-        Bleu(couleur par défaut)
-    </option>
+
     <option value="violet"
         <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="violet"){ echo"selected";}?>>Violet</option>
     <option value="rose" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="rose"){ echo"selected";}?>>
@@ -27,7 +27,10 @@ if(isset($_COOKIE['Colorgame'])){
     ?><br>
 <div class="ch2">
     <label> Button color choice : </label><br> <select class="choice2" name="ChoiceButton">
-        <option value="">Choose color ↓</option>
+        <option value="bleu"
+            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="bleu"){ echo"selected";}?>>Bleu(couleur
+            par défaut)
+        </option>
         <option value="rouge"
             <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="rouge"){ echo"selected";}?>>Rouge
         </option>
@@ -40,11 +43,7 @@ if(isset($_COOKIE['Colorgame'])){
         <option value="vert"
             <?php if(isset($_COOKIE['ColorButton'])&& $_COOKIE['ColorButton'] =="vert"){ echo"selected";}?>>Vert
         </option>
-        <option value="bleu"
-            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="bleu"){ echo"selected";}?>>Bleu(couleur
-            par
-            défaut)
-        </option>
+
         <option value="violet"
             <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="violet"){ echo"selected";}?>>Violet
         </option>
