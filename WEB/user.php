@@ -123,7 +123,8 @@ foreach($resultat as $row){
             
         </main>
     </body>
-    </html>';};
+    </html>
+    ';};
 
 
 
