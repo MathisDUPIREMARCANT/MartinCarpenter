@@ -105,7 +105,7 @@ foreach($resultat as $row){
                             // Parcourir les résultats et afficher les données
                             $i=1;
                             foreach ($results as $row) {
-                                echo $i.".       ". $row["username"]."  ";
+                                echo $i.".         ". $row["username"]."  ";
                                 echo $row["score"]."  ";
                                 echo "<br>";
                                 $i++;

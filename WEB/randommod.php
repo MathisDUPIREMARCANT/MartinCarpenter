@@ -152,15 +152,15 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                 var tblBody = document.createElement("tbody");
 
                 <?php if(isset($_COOKIE['Colorgame'])){
-                if($_COOKIE['Colorgame']=="rouge"){ 
+                if($_COOKIE['Colorgame']=="red"){ 
                 echo"tbl.style.border = '0.4vw solid #f23e31';
                 tbl.style.backgroundColor = '#bf2424e7';";
                 }
-                elseif($_COOKIE['Colorgame']=="gris"){ 
+                elseif($_COOKIE['Colorgame']=="grey"){ 
                 echo"tbl.style.border = '0.4vw solid #cecaca';
                 tbl.style.backgroundColor = '#aa9a9a38';";
                 }
-                 elseif($_COOKIE['Colorgame']=="jaune"){ 
+                 elseif($_COOKIE['Colorgame']=="yellow"){ 
                 echo"tbl.style.border = '0.4vw solid #eff84aec';
                 tbl.style.backgroundColor = '#bfb224e7';";
                 }
@@ -168,19 +168,19 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                 echo"tbl.style.border = '0.4vw solid #f2ab31';
                 tbl.style.backgroundColor = '#bf8424e7';";
                 }
-                elseif($_COOKIE['Colorgame']=="rose"){ 
+                elseif($_COOKIE['Colorgame']=="pink"){ 
                     echo"tbl.style.border = '0.4vw solid #f231c8';
                     tbl.style.backgroundColor = '#bf24b2e7';";
                 }
-                elseif($_COOKIE['Colorgame']=="vert"){ 
+                elseif($_COOKIE['Colorgame']=="green"){ 
                 echo"tbl.style.border = '0.4vw solid #34f231';
                 tbl.style.backgroundColor = '#24bf2ce7';";
                 }
-                 elseif($_COOKIE['Colorgame']=="violet"){ 
+                 elseif($_COOKIE['Colorgame']=="purple"){ 
                 echo"tbl.style.border = '0.4vw solid #9b31f2';
                 tbl.style.backgroundColor = '#8424bfe7';";
                 }
-                 elseif($_COOKIE['Colorgame']=="bleu"  ){ 
+                 elseif($_COOKIE['Colorgame']=="blue"  ){ 
                 echo"tbl.style.border = '0.4vw solid #19608F';
                 tbl.style.backgroundColor = '#247cbfe7';";
                 }}
