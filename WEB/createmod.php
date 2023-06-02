@@ -74,7 +74,7 @@ session_start();
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
             <a id="savepos" class="savepos">
-                <img class="save" src="image/button/save.png" />
+                <img class="save" src="image/button/save.png" onclick="myFunction()"/>
             </a>
         </div>
         <div id="popup" style="display: none;">
@@ -228,7 +228,12 @@ function allowDrop(event) {
 
 // Cette fonction sera appelée lorsqu'une image est déposée sur une autre image
 function dropOnImage(event) {
-    event.stopPropagation(); // Stoppe la propagation de l'événement
+  event.stopPropagation();
+// Vérifie si l'élément est la poubelle
+var poubelle = document.getElementById("poubelle");
+    if (event.target === poubelle) {
+        event.dataTransfer.dropEffect = "move"; // Indique que le glisser-déposer est autorisé
+    }
 }
 
 // Ajouter cette fonction à toutes les images dans le tableau JS
@@ -425,16 +430,10 @@ var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encod
 window.location.href = url;
 }
 
-var trashBin = document.querySelector('.poubelle img');
-trashBin.addEventListener('drop', function(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    var img = document.getElementById(data);
-    img.parentNode.removeChild(img);
-});
-trashBin.addEventListener('dragover', function(e) {
-    e.preventDefault();
-});
+var poubelle = document.getElementById("poubelle");
+poubelle.addEventListener("drop", dropOnImage);
+poubelle.addEventListener("dragover", allowDrop);
+
 
 
 </script>
@@ -456,22 +455,51 @@ echo "Nombre d'îles : " . $nbiles . "<br>";
 //$output = exec($command);
 ?>
 
-
-</body>
-
-</html>
-
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
          </div> 
          </div> 
         </div>
-        <button onclick="myFunction()">Click me</button>
         <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
-        <div class="poubelle">
-            <img class="poubelle" src="../WEB/image/button/TRASH.png">
-        </div>
+        <div id="poubelle" class="poubelle">
+    <img class="poubelle" src="../WEB/image/button/TRASH.png">
+</div>
+
+
+<script>
+// Obtenir la référence de l'élément poubelle
+var trashBin = document.getElementById('poubelle');
+// Autoriser le dépôt sur la poubelle
+trashBin.addEventListener('dragover', function(event) {
+    event.preventDefault(); // nécessaire pour permettre le drop
+});
+
+// Gérer le dépôt sur la poubelle
+trashBin.addEventListener('drop', function(event) {
+    event.preventDefault(); // empêche le navigateur d'ouvrir l'image
+    var id = event.dataTransfer.getData("text"); // obtenir l'id de l'image déplacée
+    var element = document.getElementById(id); // obtenir la référence de l'image
+    element.parentNode.removeChild(element); // supprimer l'image du DOM
+
+
+    // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
+    var islandIndex = huge.Islands.findIndex(function(island) {
+      return island.id === id;
+    });
+
+
+    // Si l'île est trouvée, la supprime de huge.Islands
+    if (islandIndex !== -1) {
+      huge.Islands.splice(islandIndex, 1);
+    }
+});
+
+
+</script>
+
+
+
     </main>
 </body>
 

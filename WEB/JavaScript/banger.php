@@ -39,6 +39,8 @@ $output = exec($command);
 }
 ?>
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 $texte_php = $output;
 $texte_js = json_encode($texte_php);
 //on affiche le texte
@@ -223,7 +225,7 @@ let userPlaced = {
 };
 
 tmp2 = {"1": [], "2": []};
-console.log('huge.Bridges', huge.Bridges);
+console.log('huge', huge);
 for(var j = 0; j < Object.keys(huge.Bridges).length ; j++){
     
     //on verifie la valeur du count
