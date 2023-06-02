@@ -464,8 +464,6 @@ if($mod == 'custom'){
                             var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
                                 .Placement[
                                     1]);
-                            islandCell.classList.remove(
-                                "error"); // Supprimer la classe CSS "error" de la cellule de l'île
                         }
                     }
                     let tmp = {
