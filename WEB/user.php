@@ -37,7 +37,7 @@ foreach($resultat as $row){
     
         <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
         <!--Page authors-->
-        <link rel="icon" type="image/x-con" href="WEB/image/logomartin.ico">
+        <link rel="icon" type="image/x-con" href="image/logomartin.ico">
         
         <!--Browser icon-->
         <link rel="stylesheet" href="CSS/user.css">
@@ -99,13 +99,13 @@ foreach($resultat as $row){
                         if (count($results) > 0) {
                             // Affichage des données dans un tableau HTML
                            
-                            echo "<br><div class='fix'>Username    Score</div><br>
+                            echo "
                             <div class='line2'>";
                             
                             // Parcourir les résultats et afficher les données
                             $i=1;
                             foreach ($results as $row) {
-                                echo $i.".       ". $row["username"]."  ";
+                                echo $i.".         ". $row["username"]."  ";
                                 echo $row["score"]."  ";
                                 echo "<br>";
                                 $i++;

@@ -350,7 +350,6 @@ function getLinksFromImageId(imageId) {
 
 
 
-// Assignez ces fonctions à tous les éléments img dans le tableau HTML
 var images = document.getElementsByTagName('img');
 for (var i = 0; i < images.length; i++) {
     images[i].draggable = true;
