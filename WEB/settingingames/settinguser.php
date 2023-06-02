@@ -29,18 +29,18 @@ header('location:settinguser.php');
                 <!--Container de l'animation -->
                 <a href="#"></a>
                 <!--Ligne pour effet footer-->
-                <a href="https://www.facebook.com/NASA" class="btn"><i class="fab fa-facebook-f"></i></a>
+                <a target ="blank" href="https://www.facebook.com/profile.php?id=100092500047448" class="btn"><i class="fab fa-facebook-f"></i></a>
                 <!--Affiche l'image du réseaux facebook-->
-                <a href="https://twitter.com/nasa?s=11&t=03SfB6n7oJmEwPq1Q9AWhQ" class="btn"><i
+                <a target ="blank" href="https://twitter.com/MartinKarp" class="btn"><i
                         class="fab fa-twitter"></i></a>
                 <!--Affiche l'image du réseaux Twitter-->
-                <a href="https://www.linkedin.com/company/nasa?original_referer=https%3A%2F%2Fwww.google.com%2F"
-                    class="btn"><i class="fa-brands fa-linkedin"></i></a>
+                <a target ="blank" href="https://discord.gg/wyAk6J2T"
+                    class="btn"><i class="fa-brands fa-discord"></i></a>
                 <!--Affiche l'image du réseaux linkedin-->
-                <a href="https://instagram.com/nasa?igshid=YmMyMTA2M2Y=" class="btn"><i
+                <a target ="blank" href="https://www.instagram.com/martin_big_carpenter/" class="btn"><i
                         class="fab fa-instagram"></i></a>
                 <!--Affiche l'image du réseaux instagram-->
-                <a href="https://www.youtube.com/@NASA" class="btn"><i class="fab fa-discord"></i></a>
+                <a target ="blank" href="https://youtube.com/@MartinBigCarpenter" class="btn"><i class="fab fa-youtube"></i></a>
                 <!--Affiche l'image du réseaux youtube-->
 
             </div>
