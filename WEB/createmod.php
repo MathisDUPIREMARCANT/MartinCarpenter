@@ -141,6 +141,7 @@ session_start();
             </div>
         </div>
 
+
         <div id="display">
 
             <h1 id="banger" style="position:relative; left: 40px;"></h1>
@@ -233,7 +234,7 @@ session_start();
                     echo"tbl.style.border = '0.4vw solid #19608F';
                     tbl.style.backgroundColor = '#247cbfe7';";
                 }?>
-                    tbl.style.width = "70vw";
+                    tbl.style.width = "80vw";
                     tbl.style.height = "60vh";
                     tbl.style.borderRadius = "20px";
                     tbl.style.overflow = "auto"; // allows the table to scroll if necessary

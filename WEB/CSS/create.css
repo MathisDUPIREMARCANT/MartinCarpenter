@@ -133,6 +133,7 @@
   display: flex;
   flex-direction: column; /* Affiche les lignes du tableau en colonne */
 }
+
 td, tr {
   border: 1px solid #19608F;
 }
@@ -222,6 +223,7 @@ form{
 
 #display{
   height: 60vh;
+  margin-left: 20vh;
 
 }
 .main{
@@ -238,7 +240,11 @@ form{
   width: 10%;
   height:70vh;
   justify-content: center;
-  position:sticky;
+  position:fixed;
+ margin-right: 85%;
+
   margin-top: 25vh;
-  border:0.2vw solid #19608F ;
+}
+tbody{
+  height: 30vh;
 }
