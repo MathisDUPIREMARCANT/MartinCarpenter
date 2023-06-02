@@ -9,6 +9,7 @@
         border-style: none;
     }
     .backimg{
+    
         width: 60px; 
         
 }
@@ -42,13 +43,10 @@ body{
     width: 100vw;
     justify-content: space-between;
     margin-top: 5vh;
-    height: 105px;
+    height: 100px;
   }
   .Buttonstory {
-    display: flex;
     margin: auto;
-    align-items: center;
-    justify-content: center;
     box-sizing: border-box;
     width: 30vw;
     height: 15vh;
@@ -176,6 +174,11 @@ margin-bottom: 2vw;
     display: flex;
     margin: auto;
     margin-top: 10vh;
+}
+.game{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
 }
 .Buttoncreate{
     margin: auto;
