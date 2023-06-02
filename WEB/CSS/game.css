@@ -129,9 +129,15 @@ img {
 .save{
     width: 100%;
     height: 100%;
+    
 }
 .savepos {
     height: 80px;
     width: 80px;
     margin-left: 80vw;
   }
+.img{
+  width: 5vw;
+  height: 100%;
+  margin-left: 15vw;
+}

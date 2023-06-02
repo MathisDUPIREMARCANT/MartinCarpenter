@@ -76,24 +76,32 @@ session_start();
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
             <a id="savepos" class="savepos">
-                <img class="save" src="image/button/save.png" />
+                <img class="save" src="image/button/savestar.png" />
             </a>
         </div>
         <div id="popup" style="display: none;">
             <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="game.php">Retry</a>
+                <a id="al" class="al" href="game.php">Retry &emsp; &#160; &#160;
+                    <img class="img" src="image/button/retry.png" />
+                </a>
             </button>
 
             <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="../index.php">Back Home</a>
+                <a id="al" class="al" href="../index.php">Back Home
+                    <img class="img" src="image/button/maison.png" />
+                </a>
             </button>
 
             <button id="Button" class="Button" type="submit" onclick="togglePopup(); showButton()">
-                <a id="al" class="al">Resume</a>
+                <a id="al" class="al">Resume  &emsp;                
+                    <img class="img" src="image/button/arrow.png" />
+                </a>
             </button>
 
             <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings</a>
+                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings   &emsp;              
+                    <img class="img" src="image/button/boutonsetting.png" />
+                </a>
             </button>
         </div>
     </header>
