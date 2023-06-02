@@ -12,13 +12,13 @@
 void main(int argc, char *argv[]) {
 
 	srand(time(NULL));
-	//int nombre_iles = atoi(argv[1]);
-	//int nombre_x = atoi(argv[2]);
-	//int nombre_y = atoi(argv[3]);
+	int nombre_iles = atoi(argv[1]);
+	int nombre_x = atoi(argv[2]);
+	int nombre_y = atoi(argv[3]);
 
-	int nombre_iles = 5;
-	int nombre_x = 5;
-	int nombre_y = 5;
+	//int nombre_iles = 5;
+	//int nombre_x = 5;
+	//int nombre_y = 5;
 
 	Coord posMax = { nombre_x, nombre_y};
 	Coord pos = { Random(0, posMax.x), Random(0, posMax.y) };
@@ -36,7 +36,7 @@ void main(int argc, char *argv[]) {
 		//printf("\n\nTest : %d\n", test);
 	}
 
-	Print_board(Board, posMax);
+	//Print_board(Board, posMax);
 	free(Board);
 
 }
