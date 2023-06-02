@@ -66,10 +66,10 @@
  height: 100%;
 }
 .martinplace{
-    height: 250px;
+    height: 150px;
     display: flex;
-    width: 200px;
-    margin-top: 45vh;
+    width: 100px;
+
 }
 .body {
     width: 100vw;
@@ -110,7 +110,7 @@
 
 }
 .choice {
-  width: 30%;
+  width: 100%;
   max-width: 8vw; /* Limite la largeur maximale de la DIV */
   background-color: #ffd001ee;
   height: auto;
@@ -120,7 +120,7 @@
   align-items: center;
   justify-content: center;
   overflow: auto; /* Ajoute une barre de défilement en cas de dépassement */
-  margin-top:15vh;
+
 }
 
 .choice table {
@@ -171,7 +171,7 @@ td,tr {
   .poubelle{
     width: 5vw;
     height: auto;
-    margin-top: 35vh;
+  
   }
   input{
     background-color: #fdeb96;
@@ -229,4 +229,16 @@ form{
     display: flex;
     align-items: center;
     height: 60vh;
+
+}
+.sticky{
+  flex-wrap: wrap;
+  display: flex;
+  align-content: center;
+  width: 10%;
+  height:70vh;
+  justify-content: center;
+  position:sticky;
+  margin-top: 25vh;
+  border:0.2vw solid #19608F ;
 }
