@@ -178,7 +178,7 @@ background-color: #ec7962e6;
 .line2{
     text-align:center;
     margin-left: 1vh;
-    height: 20vh;
+    height: 26vh;
     width: 45vh;
     border:0.3vw #985A4D;
     border-style:  hidden hidden hidden solid;
@@ -206,6 +206,16 @@ justify-content: center;
     font-size: 2vh;
     text-align: center;
     color: #ffffff;
+}
+.down{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2vh;
+    font-size: 1.5vw;
+    margin-bottom: 2vh;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
 }
 
 
