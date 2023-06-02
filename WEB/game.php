@@ -21,7 +21,7 @@ if(isset($_SESSION['username'])){
 
     <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
     <!--Page authors-->
-    <link rel="icon" type="image/x-con" href="WEB/image/logomartin.ico">
+    <link rel="icon" type="image/x-con" href="image/logomartin.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/gamehome.css">
 </head>
@@ -44,8 +44,12 @@ if(isset($_SESSION['username'])){
         </div>
     </header>
     <main class="main">
+    <div class="game">
         <button class="Buttonstory" onclick="redirectTo(\'storymod.php\')"><a class="textstory">Story
                 Mod</a></button>
+        <button class="Buttonstory" onclick="redirectTo(\'randommod.php?mod=custom\')"><a class="textstory">Custom
+            Mod</a></button>
+            </div>
         <div class="games">
             <button class="Buttoneasy" onclick="redirectTo(\'randommod.php?mod=easy\')"><a class="texteasy">Easy Mod</a></button>
             <button class="Buttonmedium" onclick="redirectTo(\'randommod.php?mod=medium\')"><a class="textmedium">Medium

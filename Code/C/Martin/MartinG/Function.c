@@ -71,7 +71,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
 
     case(2):
         Next_Coord(&pos, 2);
-        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+        while (pos.y < posMax.y-1 && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 2);
         }
