@@ -160,6 +160,9 @@ void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island*
     }
 
     Next_Coord(&pos, Direction);
+    if (*(Board + (posMax.x * pos.y) + pos.x) != '*') {
+        Type_bridgebis +=  atoi((Board + (posMax.x * pos.y) + pos.x));
+    }
     Place_island_on_map(Board, posMax, pos, Type_bridgebis + 1);
 
     Islands[Island_current].pos.x = pos.x;

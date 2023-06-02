@@ -69,7 +69,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                     Ramification(Board, pos, posMax, Bridges, Islands, Island_current, Bridge_current, i, Length_ramification);
                     Island_current++;
                     Bridge_current++;
-                    i = 4;
+                    
 
                 }
             }
@@ -109,7 +109,8 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             Island_current++;
             Bridge_current++;
-
+            printf("\n");
+            Print_board(Board, posMax);
 
         }
         //Print_board(Board, posMax);
