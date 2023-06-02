@@ -248,8 +248,9 @@ if($mod == 'custom'){
                     tbl.style.borderRadius = "20px";
                     tbl.style.width = "70vw";
                     tbl.style.height = "70vh";
-                    tbl.style.overflow = "auto"; // allows the table to scroll if necessary
-
+                    tbl.style.overflow = "scroll"; // allows the table to scroll if necessary
+                    
+                    
 
 
                     // Set table dimensions to match game div

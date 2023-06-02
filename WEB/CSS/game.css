@@ -78,10 +78,10 @@ img {
 }
 *::-webkit-scrollbar {
     display: none;
- 
+
   }
   body{
-    overflow: hidden;
+    overflow: scroll;
 }
 .martin{
  width: 100%;
@@ -183,6 +183,7 @@ label{
   text-align: center;
   color:rgba(37, 141, 210, 0.63);
   text-decoration: none;
+ 
 }
 form{
   height: 8vh;

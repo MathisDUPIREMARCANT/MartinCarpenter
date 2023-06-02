@@ -96,40 +96,51 @@ session_start();
         </div>
     </header>
     <main Id="main" class="main">
-        <div class="choice">
-            <table border="1">
-                <tbody>
-                    <tr>
-                        <td class="source-table">
-                            <img draggable="true" ondragstart="dragStart(event)" id="image1" class="original"
-                                src="../WEB/image/iles/ile1.png">
-                        </td>
-                        <td class="source-table">
-                            <img draggable="true" ondragstart="dragStart(event)" id="image2" class="original"
-                                src="../WEB/image/iles/ile2.png">
-                        </td>
-                        <td class="source-table">
-                            <img draggable="true" ondragstart="dragStart(event)" id="image3" class="original"
-                                src="../WEB/image/iles/ile3.png">
-                        </td>
-                        <td class="source-table">
-                            <img draggable="true" ondragstart="dragStart(event)" id="image4" class="original"
-                                src="../WEB/image/iles/ile4.png">
-                        </td>
-                        <td class="source-table">
-                            <img draggable="true" ondragstart="dragStart(event)" id="image5" class="original"
-                                src="../WEB/image/iles/ile5.png">
-                        </td>
-                        <td class="source-table">
-                            <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original"
-                                src="../WEB/image/iles/ile6.png">
-                        </td>
+        <div class="sticky">
+            <div class="choice">
+                <table border="1">
+                    <tbody>
+                        <tr>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image1" class="original"
+                                    src="../WEB/image/iles/ile1.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image2" class="original"
+                                    src="../WEB/image/iles/ile2.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image3" class="original"
+                                    src="../WEB/image/iles/ile3.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image4" class="original"
+                                    src="../WEB/image/iles/ile4.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image5" class="original"
+                                    src="../WEB/image/iles/ile5.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original"
+                                    src="../WEB/image/iles/ile6.png">
+                            </td>
 
 
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="martinplace">
+                <img class="martin" src="image/martin1.png">
+            </div>
+            <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
+            <div id="poubelle" class="poubelle">
+                <img class="poubelle" src="../WEB/image/button/TRASH.png">
+            </div>
         </div>
+
         <div id="display">
 
             <h1 id="banger" style="position:relative; left: 40px;"></h1>
@@ -145,6 +156,7 @@ session_start();
             </form>
 
             <div id="bangerang"></div>
+
             <div>
 
                 <?php
@@ -504,46 +516,37 @@ echo "Nombre d'îles : " . $nbiles . "<br>";
 //$output = exec($command);
 ?>
 
-                <div class="martinplace">
-                    <img class="martin" src="image/martin1.png">
-                </div>
-            </div>
-        </div>
-        </div>
-        <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
-        <div id="poubelle" class="poubelle">
-            <img class="poubelle" src="../WEB/image/button/TRASH.png">
-        </div>
 
 
-        <script>
-        // Obtenir la référence de l'élément poubelle
-        var trashBin = document.getElementById('poubelle');
-        // Autoriser le dépôt sur la poubelle
-        trashBin.addEventListener('dragover', function(event) {
-            event.preventDefault(); // nécessaire pour permettre le drop
-        });
 
-        // Gérer le dépôt sur la poubelle
-        trashBin.addEventListener('drop', function(event) {
-            event.preventDefault(); // empêche le navigateur d'ouvrir l'image
-            var id = event.dataTransfer.getData("text"); // obtenir l'id de l'image déplacée
-            var element = document.getElementById(id); // obtenir la référence de l'image
-            element.parentNode.removeChild(element); // supprimer l'image du DOM
+                <script>
+                // Obtenir la référence de l'élément poubelle
+                var trashBin = document.getElementById('poubelle');
+                // Autoriser le dépôt sur la poubelle
+                trashBin.addEventListener('dragover', function(event) {
+                    event.preventDefault(); // nécessaire pour permettre le drop
+                });
 
-
-            // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
-            var islandIndex = huge.Islands.findIndex(function(island) {
-                return island.id === id;
-            });
+                // Gérer le dépôt sur la poubelle
+                trashBin.addEventListener('drop', function(event) {
+                    event.preventDefault(); // empêche le navigateur d'ouvrir l'image
+                    var id = event.dataTransfer.getData("text"); // obtenir l'id de l'image déplacée
+                    var element = document.getElementById(id); // obtenir la référence de l'image
+                    element.parentNode.removeChild(element); // supprimer l'image du DOM
 
 
-            // Si l'île est trouvée, la supprime de huge.Islands
-            if (islandIndex !== -1) {
-                huge.Islands.splice(islandIndex, 1);
-            }
-        });
-        </script>
+                    // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
+                    var islandIndex = huge.Islands.findIndex(function(island) {
+                        return island.id === id;
+                    });
+
+
+                    // Si l'île est trouvée, la supprime de huge.Islands
+                    if (islandIndex !== -1) {
+                        huge.Islands.splice(islandIndex, 1);
+                    }
+                });
+                </script>
 
 
 
