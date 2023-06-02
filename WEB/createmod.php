@@ -74,7 +74,7 @@ session_start();
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
             <a id="savepos" class="savepos">
-                <img class="save" src="image/button/save.png" onclick="myFunction()"/>
+                <img class="save" src="image/button/save.png" onclick="myFunction()" />
             </a>
         </div>
         <div id="popup" style="display: none;">
@@ -97,348 +97,397 @@ session_start();
     </header>
     <main Id="main" class="main">
         <div class="choice">
-        <table border="1">
-            <tbody>
-                <tr>
-                <td class="source-table">
-    <img draggable="true" ondragstart="dragStart(event)" id="image1" class="original" src="../WEB/image/iles/ile1.png">
-</td>
-<td class="source-table">
-    <img draggable="true" ondragstart="dragStart(event)" id="image2" class="original" src="../WEB/image/iles/ile2.png">
-</td>
-<td class="source-table">
-    <img draggable="true" ondragstart="dragStart(event)" id="image3" class="original" src="../WEB/image/iles/ile3.png">
-</td>
-<td class="source-table"> 
-    <img draggable="true" ondragstart="dragStart(event)" id="image4" class="original" src="../WEB/image/iles/ile4.png">
-</td>
-<td class="source-table">
-    <img draggable="true" ondragstart="dragStart(event)" id="image5" class="original" src="../WEB/image/iles/ile5.png">
-</td>
-<td class="source-table">
-    <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original" src="../WEB/image/iles/ile6.png">
-</td>
-        
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <td class="source-table">
+                            <img draggable="true" ondragstart="dragStart(event)" id="image1" class="original"
+                                src="../WEB/image/iles/ile1.png">
+                        </td>
+                        <td class="source-table">
+                            <img draggable="true" ondragstart="dragStart(event)" id="image2" class="original"
+                                src="../WEB/image/iles/ile2.png">
+                        </td>
+                        <td class="source-table">
+                            <img draggable="true" ondragstart="dragStart(event)" id="image3" class="original"
+                                src="../WEB/image/iles/ile3.png">
+                        </td>
+                        <td class="source-table">
+                            <img draggable="true" ondragstart="dragStart(event)" id="image4" class="original"
+                                src="../WEB/image/iles/ile4.png">
+                        </td>
+                        <td class="source-table">
+                            <img draggable="true" ondragstart="dragStart(event)" id="image5" class="original"
+                                src="../WEB/image/iles/ile5.png">
+                        </td>
+                        <td class="source-table">
+                            <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original"
+                                src="../WEB/image/iles/ile6.png">
+                        </td>
 
-                </tr>
-            </tbody>
-        </table>
+
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div id="display">
 
-        <h1 id="banger" style="position:relative; left: 40px;"></h1>
-        <!-- tableau pour stocker des images -->
-        <form action="createmod.php" method="post">
-            <label for="nb_colonnes">Nombre de colonnes</label>
-            <input type="text" name="nb_colonnes" id="nb_colonnes">
-            <label for="nb_lignes">Nombre de lignes</label>
-            <input type="text" name="nb_lignes" id="nb_lignes">
-            <input type="submit" value="Valider">
-            <br><br> <br>  
+            <h1 id="banger" style="position:relative; left: 40px;"></h1>
+            <!-- tableau pour stocker des images -->
+            <form action="createmod.php" method="post">
+                <label for="nb_colonnes">Number of columns</label>
+                <input type="text" name="nb_colonnes" id="nb_colonnes">
+                <label for="nb_lignes">Number of lines</label>
+                <input type="text" name="nb_lignes" id="nb_lignes">
+                <input id="button" type="submit" value="Validate">
+                <br><br> <br>
 
-        </form>
-         <div id="game" class="game"> 
-         <div id="bangerang"></div>
-        <div>
-        
-        <?php
+            </form>
+
+            <div id="bangerang"></div>
+            <div>
+
+                <?php
         if (isset($_POST['nb_lignes']) && isset($_POST['nb_colonnes'])){
             $rows = $_POST['nb_lignes'];
             $columns = $_POST['nb_colonnes'];
             ?>
-            <script>
-var rows = <?php echo json_encode($rows); ?>;
-var columns = <?php echo json_encode($columns); ?>;
-</script>
-<?php
+                <script>
+                var rows = <?php echo json_encode($rows); ?>;
+                var columns = <?php echo json_encode($columns); ?>;
+                </script>
+                <?php
         }
         
 
 ?>
 
 
-        <script>huge = {
-    "Islands": [],
-    "Grid": [],
-    "Bridges": [],
-    "PlacedBridges": {}
-};
-//on affiche les rows et les columns
+                <script>
+                huge = {
+                    "Islands": [],
+                    "Grid": [],
+                    "Bridges": [],
+                    "PlacedBridges": {}
+                };
+                //on affiche les rows et les columns
 
 
-generate_table_no_solution(rows, columns);
-  function generate_table_no_solution(rows, columns) {
+                generate_table_no_solution(rows, columns);
 
-    // Obtenir la référence du body
-    var body = document.getElementsByTagName("body")[0];
+                function generate_table_no_solution(rows, columns) {
 
-    // Créer les éléments <table> et <tbody>
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-                tbl.style.borderRadius = "20px";
-                tbl.style.backgroundColor = "#247cbfe7";
-                tbl.style.width = "70vw";
-                tbl.style.height = "70vh";
-                tbl.style.overflow = "auto"; // allows the table to scroll if necessary
-    // Créer les cellules
-    for (var i = 0; i < rows; i++) {
-        
-        var row = document.createElement("tr");
-        for (var j = 0; j < columns; j++) {
-            var cell = document.createElement("td");
-                //on met des bordures aux cellules
+                    // Obtenir la référence du body
+                    var body = document.getElementsByTagName("body")[0];
 
+                    // Créer les éléments <table> et <tbody>
+                    var tbl = document.createElement("table");
+                    var tblBody = document.createElement("tbody");
 
-            // Vérifier si l'île se trouve à la position actuelle
-            var foundIsland = false;
-            for (var k = 0; k < huge.Islands.length; k++) {
-                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
-                    foundIsland = true;
-                    break;
+                    <?php if(isset($_COOKIE['Colorgame'])){
+                if($_COOKIE['Colorgame']=="red"){ 
+                echo"tbl.style.border = '0.4vw solid #f23e31';
+                tbl.style.backgroundColor = '#bf2424e7';";
                 }
-            }
-            row.appendChild(cell);
-        cell.setAttribute("class", 'case');
-        cell.setAttribute("id", '0');
-    }
+                elseif($_COOKIE['Colorgame']=="grey"){ 
+                echo"tbl.style.border = '0.4vw solid #cecaca';
+                tbl.style.backgroundColor = '#aa9a9a38';";
+                }
+                 elseif($_COOKIE['Colorgame']=="yellow"){ 
+                echo"tbl.style.border = '0.4vw solid #eff84aec';
+                tbl.style.backgroundColor = '#bfb224e7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="orange"){ 
+                echo"tbl.style.border = '0.4vw solid #f2ab31';
+                tbl.style.backgroundColor = '#bf8424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="pink"){ 
+                    echo"tbl.style.border = '0.4vw solid #f231c8';
+                    tbl.style.backgroundColor = '#bf24b2e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="green"){ 
+                echo"tbl.style.border = '0.4vw solid #34f231';
+                tbl.style.backgroundColor = '#24bf2ce7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="purple"){ 
+                echo"tbl.style.border = '0.4vw solid #9b31f2';
+                tbl.style.backgroundColor = '#8424bfe7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="blue"  ){ 
+                echo"tbl.style.border = '0.4vw solid #19608F';
+                tbl.style.backgroundColor = '#247cbfe7';";
+                }}
+                else{
+                    echo"tbl.style.border = '0.4vw solid #19608F';
+                    tbl.style.backgroundColor = '#247cbfe7';";
+                }?>
+                    tbl.style.width = "70vw";
+                    tbl.style.height = "60vh";
+                    tbl.style.borderRadius = "20px";
+                    tbl.style.overflow = "auto"; // allows the table to scroll if necessary
+                    // Créer les cellules
+                    for (var i = 0; i < rows; i++) {
 
-    tblBody.appendChild(row);
-}
-
-// Ajouter <tbody> à <table>
-tbl.appendChild(tblBody);
-// Ajouter <table> au body
-document.getElementById("bangerang").appendChild(tbl);
-}
-
-
-
-
-// Cette fonction sera appelée lorsqu'un élément de glisser-déposer commence
-function dragStart(event) {
-    var img = new Image();
-    img.src = event.target.src;
-    event.dataTransfer.setDragImage(img, 0, 0);
-    event.dataTransfer.setData("text", event.target.id);
-}
-// Cette fonction sera appelée lorsqu'un élément est déplacé sur une cellule du tableau JS
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-// Cette fonction sera appelée lorsqu'une image est déposée sur une autre image
-function dropOnImage(event) {
-  event.stopPropagation();
-// Vérifie si l'élément est la poubelle
-var poubelle = document.getElementById("poubelle");
-    if (event.target === poubelle) {
-        event.dataTransfer.dropEffect = "move"; // Indique que le glisser-déposer est autorisé
-    }
-}
-
-// Ajouter cette fonction à toutes les images dans le tableau JS
-var images = document.getElementsByTagName('img');
-for (var i = 0; i < images.length; i++) {
-    images[i].addEventListener('drop', dropOnImage);
-}
+                        var row = document.createElement("tr");
+                        for (var j = 0; j < columns; j++) {
+                            var cell = document.createElement("td");
+                            //on met des bordures aux cellules
 
 
-// Cette fonction sera appelée lorsqu'un élément est déposé sur une cellule du tableau JS
+                            // Vérifier si l'île se trouve à la position actuelle
+                            var foundIsland = false;
+                            for (var k = 0; k < huge.Islands.length; k++) {
+                                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                                    foundIsland = true;
+                                    break;
+                                }
+                            }
+                            row.appendChild(cell);
+                            cell.setAttribute("class", 'case');
+                            cell.setAttribute("id", '0');
+                        }
 
+                        tblBody.appendChild(row);
+                    }
 
-function drop(event) {
-  event.preventDefault();
-
-
-  // Vérifie si la cellule cible contient déjà une image
-  if (event.target.getElementsByTagName("img").length > 0) {
-    return; // Interrompt le processus de dépôt si une image est déjà présente
-  }
-
-
-  var data = event.dataTransfer.getData("text");
-  var img = document.getElementById(data);
-  var cloneImg = img.cloneNode(true); // clone l'image
-
-
-  var newId;
-  if (img.parentNode.classList.contains("source-table")) {
-    newId = "clone_" + Math.floor(Math.random() * 10000); // attribuer un id unique au clone
-    cloneImg.id = newId;
-  } else {
-    newId = img.id;
-  }
-  cloneImg.style.position = "absolute";
-cloneImg.style.top = "50%";
-cloneImg.style.left = "50%";
-cloneImg.style.width = "90%";
-cloneImg.style.height = "90%";
-cloneImg.style.objectFit = "cover";
-cloneImg.style.transform = "translate(-50%, -50%)";
-
-
-if (img.parentNode.classList.contains("source-table")) {
-    event.target.appendChild(cloneImg); // ajoute le clone à la nouvelle cellule
-} else {
-    event.target.appendChild(img); // déplace l'image si elle ne provient pas du tableau HTML
-    img.style.position = "absolute";
-    img.style.top = "50%";
-    img.style.left = "50%";
-    img.style.width = "90%";
-    img.style.height = "90%";
-    img.style.objectFit = "cover";
-    img.style.transform = "translate(-50%, -50%)";
-}
+                    // Ajouter <tbody> à <table>
+                    tbl.appendChild(tblBody);
+                    // Ajouter <table> au body
+                    document.getElementById("bangerang").appendChild(tbl);
+                }
 
 
 
-  cloneImg.draggable = true;
-  cloneImg.addEventListener("dragstart", dragStart);
-  cloneImg.addEventListener("drop", dropOnImage); // Empêche le dépôt d'une image sur une autre image
+
+                // Cette fonction sera appelée lorsqu'un élément de glisser-déposer commence
+                function dragStart(event) {
+                    var img = new Image();
+                    img.src = event.target.src;
+                    event.dataTransfer.setDragImage(img, 0, 0);
+                    event.dataTransfer.setData("text", event.target.id);
+                }
+                // Cette fonction sera appelée lorsqu'un élément est déplacé sur une cellule du tableau JS
+                function allowDrop(event) {
+                    event.preventDefault();
+                }
+
+                // Cette fonction sera appelée lorsqu'une image est déposée sur une autre image
+                function dropOnImage(event) {
+                    event.stopPropagation();
+                    // Vérifie si l'élément est la poubelle
+                    var poubelle = document.getElementById("poubelle");
+                    if (event.target === poubelle) {
+                        event.dataTransfer.dropEffect = "move"; // Indique que le glisser-déposer est autorisé
+                    }
+                }
+
+                // Ajouter cette fonction à toutes les images dans le tableau JS
+                var images = document.getElementsByTagName('img');
+                for (var i = 0; i < images.length; i++) {
+                    images[i].addEventListener('drop', dropOnImage);
+                }
 
 
-  // Vérifie si l'image provient du tableau HTML
-  if (img.parentNode.classList.contains("source-table")) {
-    event.target.appendChild(cloneImg); // ajoute le clone à la nouvelle cellule
-  } else {
-    event.target.appendChild(img); // déplace l'image si elle ne provient pas du tableau HTML
-    img.addEventListener("drop", dropOnImage); // Empêche le dépôt d'une image sur une autre image
-  }
+                // Cette fonction sera appelée lorsqu'un élément est déposé sur une cellule du tableau JS
 
 
-  // Obtient la position de la cellule cible
-  var rowIndex = event.target.parentNode.rowIndex;
-  var cellIndex = event.target.cellIndex;
+                function drop(event) {
+                    event.preventDefault();
 
 
-  // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
-  var islandIndex = huge.Islands.findIndex(function(island) {
-    return island.id === newId;
-  });
+                    // Vérifie si la cellule cible contient déjà une image
+                    if (event.target.getElementsByTagName("img").length > 0) {
+                        return; // Interrompt le processus de dépôt si une image est déjà présente
+                    }
 
 
-  // Si l'île est trouvée, met à jour sa position
-  if (islandIndex !== -1) {
-    huge.Islands[islandIndex].Placement = [rowIndex, cellIndex];
-  } else {
-    // Crée un nouvel objet île avec les informations de position et de liens
-    var links = getLinksFromImageId(data);
-    var island = {
-      id: newId,
-      Placement: [rowIndex, cellIndex],
-      links: links
-    };
-    huge.Islands.push(island);
-  }
+                    var data = event.dataTransfer.getData("text");
+                    var img = document.getElementById(data);
+                    var cloneImg = img.cloneNode(true); // clone l'image
 
 
-  console.log(huge.Islands);
-  console.log(convertToPixelArt());
-}
-// Fonction utilitaire pour obtenir le nombre de liens à partir de l'ID de l'image
-function getLinksFromImageId(imageId) {
-  switch (imageId) {
-    case "image1":
-      return 1;
-    case "image2":
-      return 2;
-    case "image3":
-      return 3;
-    case "image4":
-      return 4;
-    case "image5":
-      return 5;
-    case "image6":
-      return 6;
-    default:
-      return 0;
-  }
-}
+                    var newId;
+                    if (img.parentNode.classList.contains("source-table")) {
+                        newId = "clone_" + Math.floor(Math.random() * 10000); // attribuer un id unique au clone
+                        cloneImg.id = newId;
+                    } else {
+                        newId = img.id;
+                    }
+                    cloneImg.style.position = "absolute";
+
+                    cloneImg.style.top = "50%";
+                    cloneImg.style.left = "50%";
+                    cloneImg.style.width = "90%";
+                    cloneImg.style.height = "90%";
+                    cloneImg.style.objectFit = "cover";
+                    cloneImg.style.transform = "translate(-50%, -50%)";
 
 
-
-var images = document.getElementsByTagName('img');
-for (var i = 0; i < images.length; i++) {
-    images[i].draggable = true;
-    images[i].addEventListener('dragstart', dragStart);
-}
-
-var cells = document.getElementsByTagName('td');
-for (var i = 0; i < cells.length; i++) {
-    cells[i].addEventListener('drop', drop);
-    cells[i].addEventListener('dragover', allowDrop);
-}
-function convertToPixelArt(rows, cols) {
-  // Créer une matrice vide de dimensions rows x cols
-  var matrix = [];
-  for (var i = 0; i < rows; i++) {
-    matrix[i] = [];
-    for (var j = 0; j < cols; j++) {
-      matrix[i][j] = "*"; // Définir chaque case comme un espace vide "*"
-    }
-  }
-
-
-  // Remplir la matrice avec les numéros d'île en fonction des positions et des liens
-  for (var i = 0; i < huge.Islands.length; i++) {
-    var island = huge.Islands[i];
-    var rowIndex = island.Placement[0];
-    var colIndex = island.Placement[1];
-    var islandNumber = island.links.toString(); // Convertir le nombre de liens en chaîne de caractères
-
-
-    // Si les coordonnées de l'île se trouvent à l'intérieur de la matrice
-    if(rowIndex < rows && colIndex < cols) {
-      matrix[rowIndex][colIndex] = islandNumber;
-    }
-  }
-
-
-  // Convertir la matrice en une chaîne de caractères représentant le pixel art de la carte
-  var pixelArt = "";
-  for (var i = 0; i < rows; i++) {
-    pixelArt += matrix[i].join("");
-  }
-  
-  return pixelArt;
-}
-console.log(convertToPixelArt(rows, columns));
-
-//fonction pour compter le nombre d'iles 
-function countIslands(rows, columns) {
-  var count = 0;
-  for (var i = 0; i < huge.Islands.length; i++) {
-    var island = huge.Islands[i];
-    var rowIndex = island.Placement[0];
-    var colIndex = island.Placement[1];
-    if(rowIndex < rows && colIndex < columns) {
-      count++;
-    }
-  }
-  return count;
-}
-
-// Conversion en pixel art
+                    if (img.parentNode.classList.contains("source-table")) {
+                        event.target.appendChild(cloneImg); // ajoute le clone à la nouvelle cellule
+                    } else {
+                        event.target.appendChild(img); // déplace l'image si elle ne provient pas du tableau HTML
+                        img.style.position = "absolute";
+                        img.style.top = "50%";
+                        img.style.left = "50%";
+                        img.style.width = "90%";
+                        img.style.height = "90%";
+                        img.style.objectFit = "cover";
+                        img.style.transform = "translate(-50%, -50%)";
+                    }
 
 
 
-function myFunction(){
-    var pixelArt = convertToPixelArt(rows, columns);
-    var iles = countIslands(rows, columns);
-var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" + encodeURIComponent(iles);
-
-window.location.href = url;
-}
-
-var poubelle = document.getElementById("poubelle");
-poubelle.addEventListener("drop", dropOnImage);
-poubelle.addEventListener("dragover", allowDrop);
+                    cloneImg.draggable = true;
+                    cloneImg.addEventListener("dragstart", dragStart);
+                    cloneImg.addEventListener("drop",
+                        dropOnImage); // Empêche le dépôt d'une image sur une autre image
 
 
+                    // Vérifie si l'image provient du tableau HTML
+                    if (img.parentNode.classList.contains("source-table")) {
+                        event.target.appendChild(cloneImg); // ajoute le clone à la nouvelle cellule
+                    } else {
+                        event.target.appendChild(img); // déplace l'image si elle ne provient pas du tableau HTML
+                        img.addEventListener("drop",
+                            dropOnImage); // Empêche le dépôt d'une image sur une autre image
+                    }
 
-</script>
 
-<?php
+                    // Obtient la position de la cellule cible
+                    var rowIndex = event.target.parentNode.rowIndex;
+                    var cellIndex = event.target.cellIndex;
+
+
+                    // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
+                    var islandIndex = huge.Islands.findIndex(function(island) {
+                        return island.id === newId;
+                    });
+
+
+                    // Si l'île est trouvée, met à jour sa position
+                    if (islandIndex !== -1) {
+                        huge.Islands[islandIndex].Placement = [rowIndex, cellIndex];
+                    } else {
+                        // Crée un nouvel objet île avec les informations de position et de liens
+                        var links = getLinksFromImageId(data);
+                        var island = {
+                            id: newId,
+                            Placement: [rowIndex, cellIndex],
+                            links: links
+                        };
+                        huge.Islands.push(island);
+                    }
+
+
+                    console.log(huge.Islands);
+                    console.log(convertToPixelArt());
+                }
+                // Fonction utilitaire pour obtenir le nombre de liens à partir de l'ID de l'image
+                function getLinksFromImageId(imageId) {
+                    switch (imageId) {
+                        case "image1":
+                            return 1;
+                        case "image2":
+                            return 2;
+                        case "image3":
+                            return 3;
+                        case "image4":
+                            return 4;
+                        case "image5":
+                            return 5;
+                        case "image6":
+                            return 6;
+                        default:
+                            return 0;
+                    }
+                }
+
+
+
+                var images = document.getElementsByTagName('img');
+                for (var i = 0; i < images.length; i++) {
+                    images[i].draggable = true;
+                    images[i].addEventListener('dragstart', dragStart);
+                }
+
+                var cells = document.getElementsByTagName('td');
+                for (var i = 0; i < cells.length; i++) {
+                    cells[i].addEventListener('drop', drop);
+                    cells[i].addEventListener('dragover', allowDrop);
+                }
+
+                function convertToPixelArt(rows, cols) {
+                    // Créer une matrice vide de dimensions rows x cols
+                    var matrix = [];
+                    for (var i = 0; i < rows; i++) {
+                        matrix[i] = [];
+                        for (var j = 0; j < cols; j++) {
+                            matrix[i][j] = "*"; // Définir chaque case comme un espace vide "*"
+                        }
+                    }
+
+
+                    // Remplir la matrice avec les numéros d'île en fonction des positions et des liens
+                    for (var i = 0; i < huge.Islands.length; i++) {
+                        var island = huge.Islands[i];
+                        var rowIndex = island.Placement[0];
+                        var colIndex = island.Placement[1];
+                        var islandNumber = island.links
+                            .toString(); // Convertir le nombre de liens en chaîne de caractères
+
+
+                        // Si les coordonnées de l'île se trouvent à l'intérieur de la matrice
+                        if (rowIndex < rows && colIndex < cols) {
+                            matrix[rowIndex][colIndex] = islandNumber;
+                        }
+                    }
+
+
+                    // Convertir la matrice en une chaîne de caractères représentant le pixel art de la carte
+                    var pixelArt = "";
+                    for (var i = 0; i < rows; i++) {
+                        pixelArt += matrix[i].join("");
+                    }
+
+                    return pixelArt;
+                }
+                console.log(convertToPixelArt(rows, columns));
+
+                //fonction pour compter le nombre d'iles 
+                function countIslands(rows, columns) {
+                    var count = 0;
+                    for (var i = 0; i < huge.Islands.length; i++) {
+                        var island = huge.Islands[i];
+                        var rowIndex = island.Placement[0];
+                        var colIndex = island.Placement[1];
+                        if (rowIndex < rows && colIndex < columns) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }
+
+                // Conversion en pixel art
+
+
+
+                function myFunction() {
+                    var pixelArt = convertToPixelArt(rows, columns);
+                    var iles = countIslands(rows, columns);
+                    var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
+                            columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" +
+                        encodeURIComponent(iles);
+
+                    window.location.href = url;
+                }
+
+                var poubelle = document.getElementById("poubelle");
+                poubelle.addEventListener("drop", dropOnImage);
+                poubelle.addEventListener("dragover", allowDrop);
+                </script>
+
+                <?php
 // Récupérer les paramètres de l'URL
 if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['pixelArt']) && isset($_GET['nbiles'])){
 $rows = $_GET['rows'];
@@ -455,48 +504,46 @@ echo "Nombre d'îles : " . $nbiles . "<br>";
 //$output = exec($command);
 ?>
 
-            <div class="martinplace">
-                <img class="martin" src="image/martin1.png">
+                <div class="martinplace">
+                    <img class="martin" src="image/martin1.png">
+                </div>
             </div>
-         </div> 
-         </div> 
+        </div>
         </div>
         <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
         <div id="poubelle" class="poubelle">
-    <img class="poubelle" src="../WEB/image/button/TRASH.png">
-</div>
+            <img class="poubelle" src="../WEB/image/button/TRASH.png">
+        </div>
 
 
-<script>
-// Obtenir la référence de l'élément poubelle
-var trashBin = document.getElementById('poubelle');
-// Autoriser le dépôt sur la poubelle
-trashBin.addEventListener('dragover', function(event) {
-    event.preventDefault(); // nécessaire pour permettre le drop
-});
+        <script>
+        // Obtenir la référence de l'élément poubelle
+        var trashBin = document.getElementById('poubelle');
+        // Autoriser le dépôt sur la poubelle
+        trashBin.addEventListener('dragover', function(event) {
+            event.preventDefault(); // nécessaire pour permettre le drop
+        });
 
-// Gérer le dépôt sur la poubelle
-trashBin.addEventListener('drop', function(event) {
-    event.preventDefault(); // empêche le navigateur d'ouvrir l'image
-    var id = event.dataTransfer.getData("text"); // obtenir l'id de l'image déplacée
-    var element = document.getElementById(id); // obtenir la référence de l'image
-    element.parentNode.removeChild(element); // supprimer l'image du DOM
-
-
-    // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
-    var islandIndex = huge.Islands.findIndex(function(island) {
-      return island.id === id;
-    });
+        // Gérer le dépôt sur la poubelle
+        trashBin.addEventListener('drop', function(event) {
+            event.preventDefault(); // empêche le navigateur d'ouvrir l'image
+            var id = event.dataTransfer.getData("text"); // obtenir l'id de l'image déplacée
+            var element = document.getElementById(id); // obtenir la référence de l'image
+            element.parentNode.removeChild(element); // supprimer l'image du DOM
 
 
-    // Si l'île est trouvée, la supprime de huge.Islands
-    if (islandIndex !== -1) {
-      huge.Islands.splice(islandIndex, 1);
-    }
-});
+            // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
+            var islandIndex = huge.Islands.findIndex(function(island) {
+                return island.id === id;
+            });
 
 
-</script>
+            // Si l'île est trouvée, la supprime de huge.Islands
+            if (islandIndex !== -1) {
+                huge.Islands.splice(islandIndex, 1);
+            }
+        });
+        </script>
 
 
 
