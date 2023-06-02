@@ -106,8 +106,20 @@ session_start();
         </div>
     </header>
     <main Id="main" class="main">
+    <?php         
+                //on récupere les valeurs en url pour les envoyer au .exe (easy, medium, hard, custom)
+                if(isset($_GET['mod'])){
+                    $mod = $_GET['mod'];
+                }
+                if(isset($_POST['mod'])){
+                    $mod = $_POST['mod'];
+                }
+                ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
-        <form action="randommod.php?mod=<?php $_GET['mod']?>" method="post">
+        <form action="randommod.php?mod=<?php $mod?>" method="post">
+        <?php   
+        if($mod == 'custom'){?>
+            <input type="hidden" name="mod" value="<?php echo $mod; ?>">
             <label for="nb_iles">Number of islands</label>
             <input type="text" name="nb_iles" id="nb_iles">
             <label for="nb_colonnes">Number of columns</label>
@@ -116,28 +128,61 @@ session_start();
             <input type="text" name="nb_lignes" id="nb_lignes">
             <input Id="button" type="submit" value="Validate">
             <br><br> <br>
+            <?php }?>
         </form>
         <div class="grid">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
             <div id="game" class="game">
-                <?php         
-//on exec le .exe avec les parametres du formulaire
-if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_lignes'])){
- 
-    //on recupere les valeurs du formulaire
-    $nb_iles = $_POST['nb_iles'];
-    $nb_colonnes = $_POST['nb_colonnes'];
-    $nb_lignes = $_POST['nb_lignes'];
-    
+            <?php   
+//on exec le .exe avec les parametres du formulaire 11 13 30
+if($mod == 'easy'){
+    $nb_iles = 6;
+    $nb_colonnes = 6;
+    $nb_lignes = 7;
     $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
-    }
-    ?>
-                <?php
+    
+        $texte_php = $output;
+        $texte_js = json_encode($texte_php);
+        
+}
+if($mod == 'medium'){
+    $nb_iles = 10;
+    $nb_colonnes = 10;
+    $nb_lignes = 10;
+    $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+    $output = exec($command);
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
+}
+if($mod == 'hard'){
+    $nb_iles = 30;
+    $nb_colonnes = 11;
+    $nb_lignes = 13;
+    $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+    $output = exec($command);
+    $texte_php = $output;
+    $texte_js = json_encode($texte_php);
+}
+if($mod == 'custom'){ 
+    if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_lignes'])){
+
+        //on recupere les valeurs du formulaire
+        $nb_iles = $_POST['nb_iles'];
+        $nb_colonnes = $_POST['nb_colonnes'];
+        $nb_lignes = $_POST['nb_lignes'];
+        
+        $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+        $output = exec($command);
+
+        
+                    
+        $texte_php = $output;
+        $texte_js = json_encode($texte_php);
+    }
+}
     ?>
                 <!-- on affiche le texte js avec du JS -->
                 <div id="bangerang"></div>
@@ -203,8 +248,9 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                     tbl.style.borderRadius = "20px";
                     tbl.style.width = "70vw";
                     tbl.style.height = "70vh";
-                    tbl.style.overflow = "auto"; // allows the table to scroll if necessary
-
+                    tbl.style.overflow = "scroll"; // allows the table to scroll if necessary
+                    
+                    
 
 
                     // Set table dimensions to match game div
@@ -418,8 +464,6 @@ if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_
                             var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
                                 .Placement[
                                     1]);
-                            islandCell.classList.remove(
-                                "error"); // Supprimer la classe CSS "error" de la cellule de l'île
                         }
                     }
                     let tmp = {
