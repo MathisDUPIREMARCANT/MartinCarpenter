@@ -84,7 +84,7 @@ foreach($resultat as $row){
                 echo'
                 <div class="classement">
                     <div class="compte">
-                        Classement:
+                        Leader Board:
                     </div>
                     <div class="list">
                         
@@ -121,6 +121,9 @@ foreach($resultat as $row){
                                 echo'
                             </ul>
                         </div>
+                    </div>
+                    <div class="down">
+                    slide down ↓ 
                     </div>
                 </div>
             
