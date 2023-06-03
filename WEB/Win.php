@@ -50,6 +50,25 @@ session_start();
         </div>
     </header>
     <main>
+        <?php
+        //on selectionne au hasard 4 images parmis celles dans ../WEB/image/Carpenter/
+        $images = array();
+        $dir = opendir('../WEB/image/Carpenter/');
+        while ($file = readdir($dir)) {
+            if ($file != '.' && $file != '..') {
+                $images[] = $file;
+            }
+        }
+        closedir($dir);
+        shuffle($images);
+        $images = array_slice($images, 0, 4);
+        ?>
+    <div class="rotating-images">
+    <?php echo"<img class='rotating-image' src='../WEB/image/Carpenter/$images[0]' alt='Image 1'>";
+        echo"<img class='rotating-image' src='../WEB/image/Carpenter/$images[1]' alt='Image 2'>";
+        echo"<img class='rotating-image' src='../WEB/image/Carpenter/$images[2]' alt='Image 3'>";
+        echo"<img class='rotating-image' src='../WEB/image/Carpenter/$images[3]' alt='Image 4'>";?>
+        </div>
         <div class="win">
             You WIN !
         </div>
