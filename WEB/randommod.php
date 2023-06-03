@@ -93,20 +93,20 @@ session_start();
             </button>
 
             <button id="Button" class="Button" type="submit" onclick="togglePopup(); showButton()">
-                <a id="al" class="al">Resume  &emsp;                
+                <a id="al" class="al">Resume &emsp;
                     <img class="img" src="image/button/arrow.png" />
                 </a>
             </button>
 
             <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings   &emsp;              
+                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
             </button>
         </div>
     </header>
     <main Id="main" class="main">
-    <?php         
+        <?php         
                 //on récupere les valeurs en url pour les envoyer au .exe (easy, medium, hard, custom)
                 if(isset($_GET['mod'])){
                     $mod = $_GET['mod'];
@@ -117,7 +117,7 @@ session_start();
                 ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
         <form action="randommod.php?mod=<?php $mod?>" method="post">
-        <?php   
+            <?php   
         if($mod == 'custom'){?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
             <label for="nb_iles">Number of islands</label>
@@ -135,7 +135,7 @@ session_start();
                 <img class="martin" src="image/martin1.png">
             </div>
             <div id="game" class="game">
-            <?php   
+                <?php   
 //on exec le .exe avec les parametres du formulaire 11 13 30
 if($mod == 'easy'){
     $nb_iles = 6;
@@ -249,8 +249,8 @@ if($mod == 'custom'){
                     tbl.style.width = "70vw";
                     tbl.style.height = "70vh";
                     tbl.style.overflow = "scroll"; // allows the table to scroll if necessary
-                    
-                    
+
+
 
 
                     // Set table dimensions to match game div
