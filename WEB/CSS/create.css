@@ -224,7 +224,8 @@ form{
 #display{
   height: 60vh;
   margin-left: 20vh;
-
+  display: flex;
+  flex-direction: column;
 }
 .main{
   justify-content: space-around;

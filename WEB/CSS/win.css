@@ -4,6 +4,73 @@
   *::-webkit-scrollbar {
     display: none;
   }
+  .rotating-images {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    width: 600px;
+    height: 600px;
+}
+
+.rotating-image {
+    position: absolute;
+    border-radius: 10%;
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    left: 50%;
+    top: 47%;
+    transform: translate(-50%, -50%);
+}
+
+.rotating-image:nth-child(1) {
+    animation: spin1 5s linear infinite;
+}
+
+.rotating-image:nth-child(2) {
+    animation: spin2 5s linear infinite;
+}
+
+.rotating-image:nth-child(3) {
+    animation: spin3 5s linear infinite;
+}
+
+.rotating-image:nth-child(4) {
+    animation: spin4 5s linear infinite;
+}
+
+@keyframes spin1 {
+    0%, 100% { transform: translate(-50%, -50%) translate(0, -200px); }
+    25% { transform: translate(-50%, -50%) translate(370px, 0); }
+    50% { transform: translate(-50%, -50%) translate(0, 200px); }
+    75% { transform: translate(-50%, -50%) translate(-370px, 0); }
+}
+
+@keyframes spin2 {
+    0%, 100% { transform: translate(-50%, -50%) translate(370px, 0); }
+    25% { transform: translate(-50%, -50%) translate(0, 200px); }
+    50% { transform: translate(-50%, -50%) translate(-370px, 0); }
+    75% { transform: translate(-50%, -50%) translate(0, -200px); }
+}
+
+@keyframes spin3 {
+    0%, 100% { transform: translate(-50%, -50%) translate(0, 200px); }
+    25% { transform: translate(-50%, -50%) translate(-370px, 0); }
+    50% { transform: translate(-50%, -50%) translate(0, -200px); }
+    75% { transform: translate(-50%, -50%) translate(370px, 0); }
+}
+
+@keyframes spin4 {
+    0%, 100% { transform: translate(-50%, -50%) translate(-370px, 0); }
+    25% { transform: translate(-50%, -50%) translate(0, -200px); }
+    50% { transform: translate(-50%, -50%) translate(370px, 0); }
+    75% { transform: translate(-50%, -50%) translate(0, 200px); }
+}
+
+
+
 .back{
     position: absolute;
     width: 85px;
@@ -64,7 +131,8 @@
     animation-duration:2s;
     animation-iteration-count: infinite;
     animation-direction:reverse;
-    
+    position: relative;
+    top: 15%;
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;

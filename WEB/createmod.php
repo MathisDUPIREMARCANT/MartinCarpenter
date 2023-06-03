@@ -36,6 +36,22 @@ session_start();
 </head>
 
 <body>
+    
+
+<?php
+        if (isset($_POST['nb_lignes']) && isset($_POST['nb_colonnes'])){
+            $rows = $_POST['nb_lignes'];
+            $columns = $_POST['nb_colonnes'];
+            ?>
+                <script>
+                var rows = <?php echo json_encode($rows); ?>;
+                var columns = <?php echo json_encode($columns); ?>;
+                </script>
+                <?php
+        }
+        
+
+?>
     <script>
     function togglePopup() {
         var popup = document.getElementById("popup");
@@ -103,54 +119,11 @@ session_start();
             </button>
         </div>
     </header>
+    
     <main Id="main" class="main">
-        <div class="sticky">
-            <div class="choice">
-                <table border="1">
-                    <tbody>
-                        <tr>
-                            <td class="source-table">
-                                <img draggable="true" ondragstart="dragStart(event)" id="image1" class="original"
-                                    src="../WEB/image/iles/ile1.png">
-                            </td>
-                            <td class="source-table">
-                                <img draggable="true" ondragstart="dragStart(event)" id="image2" class="original"
-                                    src="../WEB/image/iles/ile2.png">
-                            </td>
-                            <td class="source-table">
-                                <img draggable="true" ondragstart="dragStart(event)" id="image3" class="original"
-                                    src="../WEB/image/iles/ile3.png">
-                            </td>
-                            <td class="source-table">
-                                <img draggable="true" ondragstart="dragStart(event)" id="image4" class="original"
-                                    src="../WEB/image/iles/ile4.png">
-                            </td>
-                            <td class="source-table">
-                                <img draggable="true" ondragstart="dragStart(event)" id="image5" class="original"
-                                    src="../WEB/image/iles/ile5.png">
-                            </td>
-                            <td class="source-table">
-                                <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original"
-                                    src="../WEB/image/iles/ile6.png">
-                            </td>
+            
 
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="martinplace">
-                <img class="martin" src="image/martin1.png">
-            </div>
-            <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
-            <div id="poubelle" class="poubelle">
-                <img class="poubelle" src="../WEB/image/button/TRASH.png">
-            </div>
-        </div>
-
-
-        <div id="display">
+    <div id="display">
 
             <h1 id="banger" style="position:relative; left: 40px;"></h1>
             <!-- tableau pour stocker des images -->
@@ -161,30 +134,9 @@ session_start();
                 <input type="text" name="nb_lignes" id="nb_lignes">
                 <input id="button" type="submit" value="Validate">
                 <br><br> <br>
-
             </form>
-
             <div id="bangerang"></div>
-
-            <div>
-
-                <?php
-        if (isset($_POST['nb_lignes']) && isset($_POST['nb_colonnes'])){
-            $rows = $_POST['nb_lignes'];
-            $columns = $_POST['nb_colonnes'];
-            ?>
-                <script>
-                var rows = <?php echo json_encode($rows); ?>;
-                var columns = <?php echo json_encode($columns); ?>;
-                </script>
-                <?php
-        }
-        
-
-?>
-
-
-                <script>
+            <script>
                 huge = {
                     "Islands": [],
                     "Grid": [],
@@ -507,6 +459,59 @@ session_start();
                 poubelle.addEventListener("drop", dropOnImage);
                 poubelle.addEventListener("dragover", allowDrop);
                 </script>
+        </div>
+        <div class="sticky">
+            <div class="choice">
+                <table border="1">
+                    <tbody>
+                        <tr>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image1" class="original"
+                                    src="../WEB/image/iles/ile1.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image2" class="original"
+                                    src="../WEB/image/iles/ile2.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image3" class="original"
+                                    src="../WEB/image/iles/ile3.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image4" class="original"
+                                    src="../WEB/image/iles/ile4.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image5" class="original"
+                                    src="../WEB/image/iles/ile5.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original"
+                                    src="../WEB/image/iles/ile6.png">
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="martinplace">
+                <img class="martin" src="image/martin1.png">
+            </div>
+            <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
+            <div id="poubelle" class="poubelle">
+                <img class="poubelle" src="../WEB/image/button/TRASH.png">
+            </div>
+
+
+
+
+
+
+            <div>
+
+
 
                 <?php
 // Récupérer les paramètres de l'URL
