@@ -303,19 +303,19 @@ if($mod == 'custom'){
                                 //on verifie le status du cookie "mode" 
                                 if (getCookie("mode") == 1) {
                                     if (huge.Islands[k].links == 1) {
-                                        islandImage.src = "image/images_temporaires/3167v-chiffre-1.png";
+                                        islandImage.src = "image/images_temporaires/1.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 2) {
-                                        islandImage.src = "image/images_temporaires/chiffre-2-en-aluminium-decoupe-coloris-et-dimensions-au-choix.png";
+                                        islandImage.src = "image/images_temporaires/2.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 3) {
-                                        islandImage.src = "image/images_temporaires/chiffre-3-en-alu-couleur-et-dimensions-au-choix.png";
+                                        islandImage.src = "image/images_temporaires/3.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 4) {
-                                        islandImage.src = "image/images_temporaires/chiffre-4-en-aluminium-5-coloris-et-2-dimensions-possibles.png";
+                                        islandImage.src = "image/images_temporaires/4.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 5) {
-                                        islandImage.src = "image/images_temporaires/chiffre-5-en-aluminium-5-coloris-au-choix-100-ou-150-mm-de-haut.png";
+                                        islandImage.src = "image/images_temporaires/5.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 6) {
                                         islandImage.src = "image/images_temporaires/6.png";
@@ -723,7 +723,7 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "100%"; // Largeur du pont en pixels
+                                    bridgeImage.style.width = "50%"; // Largeur du pont en pixels
                                 bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
                                     bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
                                 } else { // Sinon, c'est un pont simple
