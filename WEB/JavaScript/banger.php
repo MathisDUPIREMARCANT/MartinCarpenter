@@ -88,7 +88,7 @@ function generate_table_no_solution(rows, columns) {
 
 
             if (foundIsland) {
-                var islandImage = document.createElement("img"); //A REMPLACER EN FONCTION DU NOMBRE DE LINKS
+                var islandImage = document.createElement("img"); 
                 islandImage.setAttribute("id", "island-" + i + "-" + j);
                 if (huge.Islands[k].links == 1) {
                     islandImage.src = "../image/ile1.png";

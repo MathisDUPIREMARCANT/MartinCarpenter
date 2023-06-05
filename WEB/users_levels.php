@@ -1,7 +1,9 @@
 <?php
 session_start();
-?>
+$texte_php = $_GET["level"];
+$texte_js = json_encode($texte_php);
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,9 +77,6 @@ session_start();
             <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
-            <a id="savepos" class="savepos">
-                <img class="save" src="image/button/savestar.png" onclick="myFunction()"/>
-            </a>
         </div>
         <div id="popup" style="display: none;">
             <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
@@ -99,7 +98,7 @@ session_start();
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'];?>">Settings
+                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings
                     &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
@@ -107,98 +106,11 @@ session_start();
         </div>
     </header>
     <main Id="main" class="main">
-        <?php         
-                //on récupere les valeurs en url pour les envoyer au .exe (easy, medium, hard, custom)
-                if(isset($_GET['mod'])){
-                    $mod = $_GET['mod'];
-                }
-                if(isset($_POST['mod'])){
-                    $mod = $_POST['mod'];
-                }
-                ?>
-        <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
-        <form action=" randommod.php?mod=<?php $mod?>" method="post">
-            <?php 
-        if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
-        if($mod == 'custom'){?>
-            <input type="hidden" name="mod" value="<?php echo $mod; ?>">
-            <label for="nb_iles">Number of islands</label>
-            <input type="text" name="nb_iles" id="nb_iles">
-            <label for="nb_colonnes">Number of columns</label>
-            <input type="text" name="nb_colonnes" id="nb_colonnes">
-            <label for="nb_lignes">Number of lines</label>
-            <input type="text" name="nb_lignes" id="nb_lignes">
-            <input Id="button" type="submit" value="Validate">
-            <br><br> <br>
-            <?php }?>
-        </form>
-        <div class="grid">
+    <div class="grid">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
             <div id="game" class="game">
-                <?php   
-//on exec le .exe avec les parametres du formulaire 11 13 30
-if($mod == 'easy'){
-    $nb_iles = 6;
-    $nb_colonnes = 6;
-    $nb_lignes = 7;
-    $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-    $output = exec($command);
-    while($output == -1){
-        $output = exec($command);
-    }
-        $texte_php = $output;
-        $texte_js = json_encode($texte_php);
-        
-}
-if($mod == 'medium'){
-    $nb_iles = 10;
-    $nb_colonnes = 10;
-    $nb_lignes = 10;
-    $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-    $output = exec($command);
-    while($output == -1){
-        $output = exec($command);
-    }
-    $texte_php = $output;
-    $texte_js = json_encode($texte_php);
-}
-if($mod == 'hard'){
-    $nb_iles = 25;
-    $nb_colonnes = 11;
-    $nb_lignes = 13;
-    $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-    $output = exec($command);
-    echo $output;
-    while($output == -1){
-        echo $output;
-        $output = exec($command);
-    }
-    echo $output;
-    $texte_php = $output;
-    $texte_js = json_encode($texte_php);
-}
-if($mod == 'custom'){ 
-    if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_lignes'])){
-
-        //on recupere les valeurs du formulaire
-        $nb_iles = $_POST['nb_iles'];
-        $nb_colonnes = $_POST['nb_colonnes'];
-        $nb_lignes = $_POST['nb_lignes'];
-        
-        $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-        $output = exec($command);
-        while($output == -1){
-            $output = exec($command);
-        }
-        
-                    
-        $texte_php = $output;
-        $texte_js = json_encode($texte_php);
-    }
-}
-    ?>
                 <!-- on affiche le texte js avec du JS -->
                 <div id="bangerang"></div>
                 <script type="text/javascript">
@@ -578,8 +490,6 @@ if($mod == 'custom'){
 
                     // Réinitialiser huge.userPlacedBridges
                     huge.userPlacedBridges = [];
-                    console.log('BIG PIPZ', huge.PlacedBridges); // Pour le débogage
-                    check_win();
                 }
 
                 function removeBridge(island1, island2) {
@@ -773,42 +683,9 @@ if($mod == 'custom'){
                     }
                     check_win();
                 }
-//on transforme huge en chaine de caractere
-                function myFunction() {
-                var url = "randommod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&JSON=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
-                    encodeURIComponent(huge.Islands.length);
-                window.location.href = url;
-            }
 
-
-            <?php   
-}
-            if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
-$rows = $_GET['rows'];
-$columns = $_GET['columns'];
-$pixelArt = $_GET['JSON'];
-$nbiles = $_GET['nbiles'];
-$difficulty = ($rows*$columns*$nbiles)/20;
-
-//on stock les valeurs dans la base de données
-//on recupere le pseudo de l'utilisateur
-$username = $_SESSION['username'];
-//on se connecte a la base de données
-include("traitement/DB_connect.php");
-$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
-//on prepare la requete
-$stmt = $conn->prepare($sql);
-//on execute la requete
-$stmt->execute();
-//on fait une alerte pour dire que le niveau a bien été sauvegardé
-echo "<script>alert('Votre niveau a bien été enregistré !');</script>";
-//on réaffiche la page
-echo "<script>window.location.href = 'randommod.php?mod=easy';</script>";
-}
-
-?>
-                </script>
+            
+            </script>
             </div>
         </div>
     </main>

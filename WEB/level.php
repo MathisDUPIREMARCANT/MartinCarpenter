@@ -44,7 +44,7 @@ session_start();
                 <?php
                 try{
                 require("traitement/DB_connect.php");
-                $reqPrep1="SELECT user,difficulty,rows,colls,islands FROM users_level WHERE user='$_SESSION[username]'";
+                $reqPrep1="SELECT user,difficulty,rows,colls,islands,path FROM users_level WHERE user='$_SESSION[username]'";
                 $req1 =$conn->prepare($reqPrep1);
                 $req1->execute();
                 $resultat = $req1->fetchAll();
@@ -55,9 +55,10 @@ session_start();
                 die("Erreur : " . $e->getMessage());
                 } 
                 foreach($resultat as $row){
+                    $level=$row['path'];
                 ?>
 
-                <a class="lev" href="">
+                    <a class="lev" href="users_levels.php?level=<?php echo urlencode($level); ?>">
                     Made by <?php echo $row["user"] ?><br>
                     Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
                     Difficulty: <?php echo " ".$row["difficulty"] ?>
@@ -69,7 +70,7 @@ session_start();
                 <?php
                 try{
                 require("traitement/DB_connect.php");
-                $reqPrep1="SELECT user,difficulty,rows,colls,islands FROM users_level ";
+                $reqPrep1="SELECT user,difficulty,rows,colls,islands,path FROM users_level ";
                 $req1 =$conn->prepare($reqPrep1);
                 $req1->execute();
                 $resultat = $req1->fetchAll();
@@ -80,9 +81,10 @@ session_start();
                 die("Erreur : " . $e->getMessage());
                 } 
                 foreach($resultat as $row){
+                    $level=$row['path'];
                 ?>
 
-                <a class="lev" href="">
+                <a class="lev" href="users_levels.php?level=<?php echo urlencode($level); ?>">
                     Made by <?php echo $row["user"] ?><br>
                     Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
                     Difficulty:<?php echo " ".$row["difficulty"] ?>
