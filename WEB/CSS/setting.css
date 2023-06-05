@@ -10,7 +10,7 @@
   width: 85px;
   height: 80px;
   background: url(../image/button/arrow.png);
-  background-size: 80px;
+
   border-style: none;
 }
 
@@ -23,7 +23,7 @@
   margin-bottom: 3%;
 }
 .ch2{
-  margin-top: 5vh;
+  margin-top: 1vh;
 }
 .buttonhead {
   display: flex;
@@ -97,7 +97,7 @@
       font-weight: 200;
       font-size: 2vw;
       color: #ffffff;
-      margin-top: 7px;
+      margin-top: 5px;
       text-decoration: none;
 }
 .button:hover{

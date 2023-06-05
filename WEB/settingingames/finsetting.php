@@ -4,21 +4,22 @@
         Blue(default color)
     </option>
 
-    <option value="red" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="rouge"){ echo"selected";}?>>
+    <option value="red" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="red"){ echo"selected";}?>>
         Red</option>
     <option value="orange"
         <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="orange"){ echo"selected";}?>>Orange</option>
-    <option value="yellow" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="jaune"){ echo"selected";}?>>
+    <option value="yellow"
+        <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="yellow"){ echo"selected";}?>>
         Yellow
     </option>
-    <option value="green" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="vert"){ echo"selected";}?>>
+    <option value="green" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="green"){ echo"selected";}?>>
         Green</option>
 
     <option value="purple"
-        <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="violet"){ echo"selected";}?>>Purple</option>
-    <option value="pink" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="rose"){ echo"selected";}?>>
+        <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="purple"){ echo"selected";}?>>Purple</option>
+    <option value="pink" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="pink"){ echo"selected";}?>>
         Pink</option>
-    <option value="grey" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="gris"){ echo"selected";}?>>
+    <option value="grey" <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['Colorgame']=="grey"){ echo"selected";}?>>
         Grey</option>
 </select>
 <?php
@@ -34,27 +35,27 @@ if(isset($_COOKIE['Colorgame'])){
         </option>
 
         <option value="red"
-            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="rouge"){ echo"selected";}?>>
+            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="red"){ echo"selected";}?>>
             Red</option>
         <option value="orange"
             <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="orange"){ echo"selected";}?>>Orange
         </option>
         <option value="yellow"
-            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="jaune"){ echo"selected";}?>>
+            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="yellow"){ echo"selected";}?>>
             Yellow
         </option>
         <option value="green"
-            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="vert"){ echo"selected";}?>>
+            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="green"){ echo"selected";}?>>
             Green</option>
 
         <option value="purple"
-            <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['ColorButton']=="violet"){ echo"selected";}?>>Purple
+            <?php if(isset($_COOKIE['Colorgame']) && $_COOKIE['ColorButton']=="purple"){ echo"selected";}?>>Purple
         </option>
         <option value="pink"
-            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="rose"){ echo"selected";}?>>
+            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="pink"){ echo"selected";}?>>
             Pink</option>
         <option value="grey"
-            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="gris"){ echo"selected";}?>>
+            <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="grey"){ echo"selected";}?>>
             Grey</option>
     </select>
     <!-- on propose un bouton pour activer le mode chiffre -->

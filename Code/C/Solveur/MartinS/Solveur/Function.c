@@ -171,10 +171,19 @@ void Print_board(char* Board, Coord Taille) {
     printf("\n");
 }
 
-void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge) {
+void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge, Bridge* Bridges, int Nb_bridge) {
+
+    Bridges[Nb_bridge].length = Length;
+    Bridges[Nb_bridge].direction = Direction;
+    Bridges[Nb_bridge].size = Type_bridge;
+
+    Bridges[Nb_bridge].pos = (Coord*)malloc(sizeof(Coord) * Length);
+
     for (int i = 0; i < Length; i++) {
         Next_Coord(pos, Direction);
         Place_bridge_on_map(Board, posMax, *pos, Type_bridge);
+        Bridges[Nb_bridge].pos[i].x = pos->x;
+        Bridges[Nb_bridge].pos[i].y = pos->y;
     }
 }
 
@@ -259,14 +268,15 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
-void fonction_mathis(Island* islands, Coord posMax, char* board, int* Nb_island) {
+void Stock_island(Island* islands, Coord posMax, char* board) {
+   int incr = 0;
    for (int i = 0; i < posMax.x; i++) {
         for (int j = 0; j < posMax.y; j++) {
-            if (*(board + (posMax.x * j) + i) != '*' || *(board + (posMax.x * j) + i) != '~' || *(board + (posMax.x * j) + i) != '#') {
-                islands[*Nb_island].pos.x = i;
-                islands[*Nb_island].pos.y = j;
-                islands[*Nb_island].number = *(board + (posMax.x * j) + i);
-                (*Nb_island)++;
+            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
+                islands[incr].pos.x = i;
+                islands[incr].pos.y = j;
+                islands[incr].number = atoi(board + (posMax.x * j) + i);
+                incr++;
             }
         }
     }
@@ -276,8 +286,38 @@ void Copy_bridges(Bridge* Bridge_copy, Bridge* Bridges, int Nb_bridge) {
     for (int i = 0; i < Nb_bridge; i++) {
         Bridge_copy[i].direction = Bridges[i].direction;
         Bridge_copy[i].length = Bridges[i].length;
-        Bridge_copy[i].pos->x = Bridges[i].pos->x;
-        Bridge_copy[i].pos->y = Bridges[i].pos->y;
         Bridge_copy[i].size = Bridges[i].size;
+        Bridge_copy[i].pos = (Coord*)malloc(sizeof(Coord) * Bridges[i].length);
+        if (Bridge_copy[i].pos == NULL) {
+			printf("Erreur d'allocation");
+			exit(1);
+		}
+        for (int y = 0; y < Bridges[i].length; y++) {
+            Bridge_copy[i].pos[y].x = Bridges[i].pos[y].x;
+            Bridge_copy[i].pos[y].y = Bridges[i].pos[y].y;
+        }
+    }
+}
+
+
+Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length) {
+
+    switch (Direction) {
+
+    case(0):
+        return atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
+        break;
+
+    case(1):
+        return atoi((Board + (posMax.x * (pos.y) + pos.x + Length + 1)));
+        break;
+
+    case(2):
+        return atoi((Board + (posMax.x * (pos.y + (Length + 1)) + pos.x)));
+        break;
+
+    case(3):
+        return atoi((Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
+        break;
     }
 }
