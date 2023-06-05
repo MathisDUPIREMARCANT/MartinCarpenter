@@ -268,7 +268,6 @@ void Stock_island(Island* islands, Coord posMax, char* board) {
                 islands[incr].pos.y = j;
                 islands[incr].number = atoi(board + (posMax.x * j) + i);
                 incr++;
-                
             }
         }
     }

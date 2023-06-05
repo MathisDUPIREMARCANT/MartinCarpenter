@@ -45,7 +45,6 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction,
 		if (Nb_islands == 0) {
 			*(Result) = Board;
 			(*Nb_solution)++;
-			printf("Prout");
 			printf("\n");
 			Print_board(Board, posMax);
 			printf("\n");
