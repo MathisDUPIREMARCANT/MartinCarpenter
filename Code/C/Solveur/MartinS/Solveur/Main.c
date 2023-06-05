@@ -23,6 +23,10 @@ void main() {
 	int* Pt_solution = &Nb_solution;
 
 	int* Nb_bridge = (int*)malloc(sizeof(int));
+	if (Nb_bridge == NULL) {
+		printf("Bug");
+		return;
+	}
 	*Nb_bridge = 0;
 
 	int Nb_island = 0;
@@ -33,11 +37,14 @@ void main() {
 	Island* Islands = (Island*)malloc(Nb_island * sizeof(Island*));
 
 
-
+	Stock_island(Islands, posMax, Board);
 	Solver(Result, Board, posMax, pos, NULL, Pt_solution, Nb_bridge, Bridges);
+	
 	Print_board(Board, posMax);
+	
+	
 	if (Result != NULL && Nb_solution) {
-		//Print_board(*Result, posMax);
-		From_C_to_Json(Bridges, Islands, Nb_bridge, Nb_island, posMax);
+		Print_board(*Result, posMax);
+		From_C_to_Json(Bridges, Islands, Nb_bridge, Nb_island, posMax, *Pt_solution);
 	}
 }
