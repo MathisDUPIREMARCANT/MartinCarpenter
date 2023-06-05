@@ -214,12 +214,13 @@ if($mod == 'custom'){
                 var gameDiv = document.getElementById('game');
                 var gameDivWidth = gameDiv.clientWidth;
                 var gameDivHeight = gameDiv.clientHeight;
-//fonction pour recuperer les cookies 
+                //fonction pour recuperer les cookies 
                 function getCookie(name) {
                     var value = "; " + document.cookie;
                     var parts = value.split("; " + name + "=");
                     if (parts.length == 2) return parts.pop().split(";").shift();
                 }
+
                 function generate_table_no_solution(rows, columns) {
                     // Obtenir la référence du body
                     var body = document.getElementsByTagName("body")[0];
@@ -321,8 +322,7 @@ if($mod == 'custom'){
                                         islandImage.src = "image/images_temporaires/6.png";
                                         cell.appendChild(islandImage);
                                     }
-                                } 
-                                else {
+                                } else {
                                     if (huge.Islands[k].links == 1) {
                                         islandImage.src = "../WEB/image/iles/ile1.png";
                                         cell.appendChild(islandImage);
@@ -723,8 +723,8 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "50%"; // Largeur du pont en pixels
-                                bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
+                                    bridgeImage.style.width = "100%"; // Largeur d1u pont en pixels
+                                    bridgeImage.style.height = "75%"; // Hauteur du pont en pixels
                                     bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
                                 } else { // Sinon, c'est un pont simple
                                     bridgeImage.src = "../WEB/image/iles/bridge_h.png";
