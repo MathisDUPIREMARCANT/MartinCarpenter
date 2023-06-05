@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction, int* Nb_solution, int* Nb_bridge, Bridge* Bridges) {
+void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Direction, int* Nb_solution, Bridge* Bridges, int Nb_bridge) {
 
 	int Direction_available[4];
 	int* result = malloc(sizeof(int) * 4 * 81);
@@ -27,7 +27,9 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction,
 
 					Length = Length_next_island(Board, posMax, pos, i);
 
-					Create_bridge(Board, posMax, &Copy_pos, Length, i, Direction[i]-1);
+					Create_bridge(Board, posMax, &Copy_pos, Length, i, Direction[i]-1, Bridges, Nb_bridge);
+
+					Nb_bridge++;
 
 					Next_Coord(&Copy_pos, i);
 
@@ -43,7 +45,7 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction,
 		int Nb_islands = Island_on_map(Board, pos, posMax);
 
 		if (Nb_islands == 0) {
-			*(Result) = Board;
+			*(Result) = Bridges;
 			(*Nb_solution)++;
 			printf("\n");
 			Print_board(Board, posMax);
@@ -58,8 +60,6 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction,
 			Direction_available[i] = Peek_island_number(Board, posMax, pos, i, Length_next_island(Board, posMax, pos, i));
 		}
 
-
-		int* result = malloc(sizeof(int) * 4 * 81);
 		int Nb_combinaison = Enumeration(Board, pos, posMax, result, &Direction_available) ;
 
 		if (Nb_combinaison == 0 && atoi(Board + (pos.y * posMax.x) + pos.x)) { return; }
@@ -67,39 +67,21 @@ void Solver(char** Result, char* Board, Coord posMax, Coord pos, int* Direction,
 
 		for (int y = 0; y < Nb_combinaison; y++) {
 			char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
-			Bridge* Bridge_copy = (Bridge*)malloc(*Nb_bridge * sizeof(Bridge*));
+			Bridge* Bridge_copy = (Bridge*)malloc(Nb_bridge * sizeof(Bridge*));
 
 			if (Board_copy != NULL && Bridge_copy != NULL) {
 				Copy_board(Board_copy, Board, posMax.x * posMax.y);
-				Copy_bridges(Bridge_copy, Bridges, *Nb_bridge);
+				if (Nb_bridge > 0) {
+					Copy_bridges(Bridge_copy, Bridges, Nb_bridge);
+				}
+			}
+			else {
+				printf("Erreur d'allocation");
+				return;
 			}
 
-			Solver(Result, Board_copy, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge, Bridge_copy);
+			Solver(Result, Board_copy, posMax, pos, result + (4 * y), Nb_solution, Bridge_copy, Nb_bridge);
 		}
 		return;
 	}
 }
-
-Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length) {
-
-	switch (Direction) {
-
-	case(0):
-		return atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
-		break;
-
-	case(1):
-		return atoi((Board + (posMax.x * (pos.y) + pos.x + Length + 1)));
-		break;
-
-	case(2):
-		return atoi((Board + (posMax.x * (pos.y + (Length + 1)) + pos.x)));
-		break;
-
-	case(3):
-		return atoi((Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
-		break;
-	}
-}
-
-
