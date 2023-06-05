@@ -29,7 +29,7 @@ void main(int argc, char *argv[]) {
 	int test = Map_gen(Board, posMax, pos, nombre_iles);
 	printf("%d", test);
 
-	Print_board(Board, posMax);
+	//Print_board(Board, posMax);
 	free(Board);
 
 }
