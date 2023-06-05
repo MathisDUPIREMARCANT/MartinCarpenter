@@ -33,7 +33,7 @@ void main(int argc, char *argv[]) {
 		free(Board);
 		Board = Init_board_Game(posMax);
 		test = Map_gen(Board, posMax, pos, nombre_iles);
-		//printf("\n\nTest : %d\n", test);
+		printf("%d", test);
 	}
 
 	Print_board(Board, posMax);

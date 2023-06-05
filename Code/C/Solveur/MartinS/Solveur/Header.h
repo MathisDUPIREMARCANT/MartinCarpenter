@@ -36,6 +36,7 @@ void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge);
 void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight);
 void Print_board(char* Board, Coord Taille);
 void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Direction, int* Nb_solution, Bridge* Bridges, int Nb_bridge);
+void Stock_island(Island* islands, Coord posMax, char* board);
 
 Coord Find_Island(char* Board, Coord posMax);
 

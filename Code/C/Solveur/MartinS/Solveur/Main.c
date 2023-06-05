@@ -40,6 +40,6 @@ void main() {
 	
 	if (Result != NULL && Nb_solution) {
 		Print_board(*Result, posMax);
-		From_C_to_Json(Bridges, Islands, *Nb_bridge, Nb_island, posMax, *Pt_solution);
+		From_C_to_Json(Bridges, Islands, Nb_bridge, Nb_island, posMax, *Pt_solution);
 	}
 }
