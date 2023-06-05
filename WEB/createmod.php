@@ -537,9 +537,7 @@ session_start();
                 </table>
             </div>
 
-            <div class="martinplace">
-                <img class="martin" src="image/martin1.png">
-            </div>
+
             <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
             <div id="poubelle" class="poubelle">
                 <img class="poubelle" src="../WEB/image/button/TRASH.png">
