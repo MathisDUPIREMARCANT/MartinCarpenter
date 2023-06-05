@@ -127,14 +127,26 @@ session_start();
 
             <h1 id="banger" style="position:relative; left: 40px;"></h1>
             <!-- tableau pour stocker des images -->
+            <?php if(!isset($rows)){?>
             <form action="createmod.php" method="post">
                 <label for="nb_colonnes">Number of columns</label>
                 <input type="text" name="nb_colonnes" id="nb_colonnes">
                 <label for="nb_lignes">Number of lines</label>
                 <input type="text" name="nb_lignes" id="nb_lignes">
-                <input id="button" type="submit" value="Validate">
+                <input id="button" type="submit" value="Create">
                 <br><br> <br>
             </form>
+            <?php }else{?>
+                            <form action="createmod.php" method="post">
+                            <label for="nb_colonnes">Number of columns</label>
+                            <input type="text" name="nb_colonnes" id="nb_colonnes">
+                            <label for="nb_lignes">Number of lines</label>
+                            <input type="text" name="nb_lignes" id="nb_lignes">
+                            <input id="button" type="submit" value="New Board">
+                            <br><br> <br>
+                        </form>
+            <?php  }?>
+
             <div id="bangerang"></div>
             <script>
             huge = {

@@ -144,7 +144,9 @@ if($mod == 'easy'){
     $nb_lignes = 7;
     $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
-    
+    while($output == -1){
+        $output = exec($command);
+    }
         $texte_php = $output;
         $texte_js = json_encode($texte_php);
         
@@ -155,15 +157,24 @@ if($mod == 'medium'){
     $nb_lignes = 10;
     $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
+    while($output == -1){
+        $output = exec($command);
+    }
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
 if($mod == 'hard'){
-    $nb_iles = 30;
+    $nb_iles = 25;
     $nb_colonnes = 11;
     $nb_lignes = 13;
     $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
+    echo $output;
+    while($output == -1){
+        echo $output;
+        $output = exec($command);
+    }
+    echo $output;
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
@@ -175,9 +186,11 @@ if($mod == 'custom'){
         $nb_colonnes = $_POST['nb_colonnes'];
         $nb_lignes = $_POST['nb_lignes'];
         
-        $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+        $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
         $output = exec($command);
-
+        while($output == -1){
+            $output = exec($command);
+        }
         
                     
         $texte_php = $output;
@@ -709,9 +722,9 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "100%"; // Largeur du pont en pixels
-                                    bridgeImage.style.height = "80%"; // Hauteur du pont en pixels
-                                    bridgeImage.src = "../WEB/image/iles/bridge_h.png";
+                                    bridgeImage.style.width = "50%"; // Largeur du pont en pixels
+                                bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
+                                    bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
                                 } else { // Sinon, c'est un pont simple
                                     bridgeImage.src = "../WEB/image/iles/bridge_h.png";
                                 }
@@ -729,7 +742,7 @@ if($mod == 'custom'){
                                     }
                                     bridgeImage.style.width = "50%"; // Largeur du pont en pixels
                                     bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
-                                    bridgeImage.src = "../WEB/image/iles/bridge_V.png";
+                                    bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
                                 } else { // Sinon, c'est un pont simple
                                     bridgeImage.src = "../WEB/image/iles/bridge_V.png";
                                 }
