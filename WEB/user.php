@@ -19,7 +19,7 @@ catch(Exception $e){
 
 if(isset($_SESSION['username'])){
 foreach($resultat as $row){
-    echo'
+?>
     <!DOCTYPE html>
     <html lang="en">
     
@@ -67,29 +67,31 @@ foreach($resultat as $row){
                 <div class="Compte">
     
                     <div class="name">
-                        '.$row["username"].'
+                        <?php echo $row["username"] ?>
                     </div>
                     <div class="line">
-                        Personal Best: '.$row["score"].'
+                       Personal Best: <?php $row["score"] ?>
                         <br>
-                        Email : '.$row["email"].'
+                        Email : <?php $row["email"] ?>
                     </div>
                     <div class="logout">
                         <a class="textlogout" href=" logout.php">Logout
                         </a>
                     </div>
                 </div>
-                ';
+                
+            <?php
             };
-                echo'
+            ?>
+                
                 <div class="classement">
                     <div class="compte">
                         Leader Board:
                     </div>
                     <div class="list">
-                        
+                    <?php   
 
-                           ';
+                           
                            $stmt = $conn->query($sql);
 
                         // Récupération des résultats dans un tableau
@@ -116,9 +118,9 @@ foreach($resultat as $row){
                             echo "Aucun résultat trouvé.";
                         }
                            
-                           
-                                echo "</table>";
-                                echo'
+                        ?>
+                                 </table>
+                                
                             </ul>
                         </div>
                     </div>
@@ -129,7 +131,10 @@ foreach($resultat as $row){
             
         </main>
     </body>
-    </html>';}
+    </html>
+    <?php
+    }
+    
                     
 else{
     header("Location: sign_in_up.php");
