@@ -5,29 +5,25 @@
 // -*- coding: utf-8 -*-
 
 
-#define X 5
+#define X 11
 #define Y 7
 void main() {
 
 	Coord posMax = { X, Y }; //{ *(argv[1]), *(argv[2])} 
 	Coord pos;
 	
-	char** Result = (char**)malloc(sizeof(char*));
+	Bridge** Result = (char**)malloc(sizeof(Bridge*));
 
-	//char Board[X * Y] = { "1*****4*4*1****************************2*1***************2***3****************" };
-	char Board[X * Y] = { "*1*2*****************3*5*******1*2*" };
+	char Board[X * Y] = { "1*****4*4*1****************************2*1***************2***3****************" };
+	//char Board[X * Y] = { "*1*2*****************3*5*******1*2*" };
 	pos.x = 0;
 	pos.y = 0;
 
 	int Nb_solution = 0;
 	int* Pt_solution = &Nb_solution;
 
-	int* Nb_bridge = (int*)malloc(sizeof(int));
-	if (Nb_bridge == NULL) {
-		printf("Bug");
-		return;
-	}
-	*Nb_bridge = 0;
+	int Nb_bridge;
+	Nb_bridge = 0;
 
 	int Nb_island = 0;
 	int* Pt_island = &Nb_island;
@@ -37,9 +33,8 @@ void main() {
 	Island* Islands = (Island*)malloc(Nb_island * sizeof(Island*));
 
 
-	Stock_island(Islands, posMax, Board);
-	Solver(Result, Board, posMax, pos, NULL, Pt_solution, Nb_bridge, Bridges);
-	
+
+	Solver(Result, Board, posMax, pos, NULL, Pt_solution, Bridges, Nb_bridge);
 	Print_board(Board, posMax);
 	
 	

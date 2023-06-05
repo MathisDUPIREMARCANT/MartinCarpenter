@@ -80,26 +80,27 @@ session_start();
             </a>
         </div>
         <div id="popup" style="display: none;">
-            <button id="Button" class="Button" type="submit" onclick="togglePopup(); showButton()">
+            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
                 <a id="test" class="al" href="game.php">Retry &emsp; &#160; &#160;
                     <img class="img" src="image/button/retry.png" />
                 </a>
             </button>
 
-            <button id="Button" class="Button" type="submit">
+            <button id="Buttonp" class="Buttonp" type="submit">
                 <a id="al" class="al" href="../index.php">Back Home
                     <img class="img" src="image/button/maison.png" />
                 </a>
             </button>
 
-            <button id="Button" class="Button" type="submit" onclick="togglePopup(); showButton()">
+            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
                 <a id="al" class="al">Resume &emsp;
                     <img class="img" src="image/button/arrow.png" />
                 </a>
             </button>
 
-            <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings &emsp;
+            <button id="Buttonp" class="Buttonp" type="submit">
+                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'];?>">Settings
+                    &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
             </button>
@@ -116,7 +117,7 @@ session_start();
                 }
                 ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
-        <form action="randommod.php?mod=<?php $mod?>" method="post">
+        <form action=" randommod.php?mod=<?php $mod?>" method="post">
             <?php   
         if($mod == 'custom'){?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
@@ -269,7 +270,8 @@ if($mod == 'custom'){
                             // Vérifier si l'île se trouve à la position actuelle
                             var foundIsland = false;
                             for (var k = 0; k < huge.Islands.length; k++) {
-                                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] ===
+                                    j) {
                                     foundIsland = true;
                                     break;
                                 }
@@ -348,10 +350,12 @@ if($mod == 'custom'){
                         island); // Ajout d'un message de débogage
                     if (currentBridge.start === null) {
                         currentBridge.start = island;
-                        console.log('Pont commencé, île de départ : ', island); // Ajout d'un message de débogage
+                        console.log('Pont commencé, île de départ : ',
+                            island); // Ajout d'un message de débogage
                     } else if (currentBridge.end === null && canPlaceBridge(currentBridge.start, island)) {
                         currentBridge.end = island;
-                        console.log('Pont fini, île d\'arrivée : ', island); // Ajout d'un message de débogage
+                        console.log('Pont fini, île d\'arrivée : ',
+                            island); // Ajout d'un message de débogage
                         placeBridge(currentBridge.start, currentBridge.end);
                         currentBridge.start = null;
                         currentBridge.end = null;
@@ -360,7 +364,8 @@ if($mod == 'custom'){
 
                 function getIslandAt(coordinates) {
                     for (var i = 0; i < huge.Islands.length; i++) {
-                        if (huge.Islands[i].Placement[0] === coordinates[0] && huge.Islands[i].Placement[1] ===
+                        if (huge.Islands[i].Placement[0] === coordinates[0] && huge.Islands[i].Placement[
+                                1] ===
                             coordinates[
                                 1]) {
                             return huge.Islands[i];
@@ -371,7 +376,8 @@ if($mod == 'custom'){
 
                 function canPlaceBridge(island1, island2) {
                     // Vérifier si les îles sont sur la même ligne ou la même colonne
-                    if (island1.Placement[0] !== island2.Placement[0] && island1.Placement[1] !== island2.Placement[
+                    if (island1.Placement[0] !== island2.Placement[0] && island1.Placement[1] !== island2
+                        .Placement[
                             1]) {
                         return false;
                     }
@@ -385,7 +391,8 @@ if($mod == 'custom'){
                     for (var i = 0; i < huge.Islands.length; i++) {
                         var island = huge.Islands[i];
                         if (island !== island1 && island !== island2) {
-                            if (island.Placement[0] >= minRow && island.Placement[0] <= maxRow && island.Placement[1] >=
+                            if (island.Placement[0] >= minRow && island.Placement[0] <= maxRow && island
+                                .Placement[1] >=
                                 minCol && island.Placement[1] <= maxCol) {
                                 return false;
                             }
@@ -396,8 +403,10 @@ if($mod == 'custom'){
                     // Vérifier si un des ponts placés serait en conflit avec le nouveau pont
                     for (let r = minRow; r <= maxRow; r++) {
                         for (let c = minCol; c <= maxCol; c++) {
-                            if ((r === island1.Placement[0] && r === island2.Placement[0]) || // Horizontal bridge
-                                (c === island1.Placement[1] && c === island2.Placement[1])) { // Vertical bridge
+                            if ((r === island1.Placement[0] && r === island2.Placement[0]) ||
+                                // Horizontal bridge
+                                (c === island1.Placement[1] && c === island2.Placement[1])
+                            ) { // Vertical bridge
                                 var cellId = "cell-" + r + "-" + c;
                                 if (huge.PlacedBridges[cellId] && huge.PlacedBridges[cellId].orientation !==
                                     bridgeOrientation) {
@@ -409,7 +418,8 @@ if($mod == 'custom'){
                             }
                         }
                     }
-                    console.log('Vérification de la possibilité de placer le pont, île1 : ', island1, ', île2 : ',
+                    console.log('Vérification de la possibilité de placer le pont, île1 : ', island1,
+                        ', île2 : ',
                         island2); // Ajout d'un message de débogage
                     // Si toutes les vérifications sont passées, le pont peut être placé
                     return true;
@@ -433,18 +443,22 @@ if($mod == 'custom'){
 
                     //on verifie la valeur du count
                     if (huge.Bridges[Object.keys(huge.Bridges)[j]].width == 0) {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement.length; k++) {
+                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
+                            .length; k++) {
 
                             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(
-                                huge
-                                .Bridges)[j]].Placement[k]);
+                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
+                                Object.keys(
+                                    huge
+                                    .Bridges)[j]].Placement[k]);
                         }
                     } else {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement.length; k++) {
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(
-                                huge
-                                .Bridges)[j]].Placement[k]);
+                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
+                            .length; k++) {
+                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
+                                Object.keys(
+                                    huge
+                                    .Bridges)[j]].Placement[k]);
                         }
 
                     }
@@ -456,12 +470,15 @@ if($mod == 'custom'){
                         var bridges = getBridgesAroundIsland(island);
 
                         if (bridges.length > island.links) {
-                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
+                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" +
+                                island
                                 .Placement[
                                     1]);
-                            islandCell.classList.add("error"); // Ajouter la classe CSS "error" à la cellule de l'île
+                            islandCell.classList.add(
+                                "error"); // Ajouter la classe CSS "error" à la cellule de l'île
                         } else {
-                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
+                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" +
+                                island
                                 .Placement[
                                     1]);
                         }
@@ -474,14 +491,16 @@ if($mod == 'custom'){
                         //on verifie la valeur du count
                         if (huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count == 1) {
                             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[
-                                Object
-                                .keys(huge.PlacedBridges)[j]].Placement[0]);
+                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge
+                                .PlacedBridges[
+                                    Object
+                                    .keys(huge.PlacedBridges)[j]].Placement[0]);
                         } else if (huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count == 2) {
                             console.log("pipi")
-                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[
-                                Object
-                                .keys(huge.PlacedBridges)[j]].Placement[0]);
+                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge
+                                .PlacedBridges[
+                                    Object
+                                    .keys(huge.PlacedBridges)[j]].Placement[0]);
                         }
 
                     }
@@ -500,25 +519,25 @@ if($mod == 'custom'){
                 document.getElementById("test").addEventListener("click", retryClicked);
 
                 function retryClicked(event) {
-    event.preventDefault(); // Empêche le comportement par défaut du lien
+                    event.preventDefault(); // Empêche le comportement par défaut du lien
 
-    // Parcourir toutes les cellules dans huge.PlacedBridges
-    for (var cellId in huge.PlacedBridges) {
-        // Supprimer le pont du DOM
-        var cellElement = document.getElementById(cellId);
-        while (cellElement.firstChild) {
-            cellElement.removeChild(cellElement.firstChild);
-        }
+                    // Parcourir toutes les cellules dans huge.PlacedBridges
+                    for (var cellId in huge.PlacedBridges) {
+                        // Supprimer le pont du DOM
+                        var cellElement = document.getElementById(cellId);
+                        while (cellElement.firstChild) {
+                            cellElement.removeChild(cellElement.firstChild);
+                        }
 
-        // Supprimer le pont des données
-        delete huge.PlacedBridges[cellId];
-    }
+                        // Supprimer le pont des données
+                        delete huge.PlacedBridges[cellId];
+                    }
 
-    // Réinitialiser huge.userPlacedBridges
-    huge.userPlacedBridges = [];
-    console.log('BIG PIPZ', huge.PlacedBridges); // Pour le débogage
-    check_win();
-}
+                    // Réinitialiser huge.userPlacedBridges
+                    huge.userPlacedBridges = [];
+                    console.log('BIG PIPZ', huge.PlacedBridges); // Pour le débogage
+                    check_win();
+                }
 
                 function removeBridge(island1, island2) {
                     // Trouvez les indices des îles dans le tableau huge.Islands
@@ -595,17 +614,20 @@ if($mod == 'custom'){
 
 
                     // Longueur du pont
-                    let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1.Placement[
-                            0]) -
+                    let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1
+                            .Placement[
+                                0]) -
                         (bridgeOrientation === 1 ? island2.Placement[1] : island2.Placement[0])) + 1;
 
 
                     // Placer le pont
                     for (let i = 0; i < bridgeLength; i++) {
-                        var row = bridgeOrientation === 1 ? island1.Placement[0] : Math.min(island1.Placement[0],
+                        var row = bridgeOrientation === 1 ? island1.Placement[0] : Math.min(island1
+                            .Placement[0],
                             island2
                             .Placement[0]) + i;
-                        var col = bridgeOrientation === 2 ? island1.Placement[1] : Math.min(island1.Placement[1],
+                        var col = bridgeOrientation === 2 ? island1.Placement[1] : Math.min(island1
+                            .Placement[1],
                             island2
                             .Placement[1]) + i;
 
@@ -613,7 +635,8 @@ if($mod == 'custom'){
                         // Vérifier si la cellule n'est pas une île
                         var isIsland = false;
                         for (var j = 0; j < huge.Islands.length; j++) {
-                            if (huge.Islands[j].Placement[0] === row && huge.Islands[j].Placement[1] === col) {
+                            if (huge.Islands[j].Placement[0] === row && huge.Islands[j].Placement[1] ===
+                                col) {
                                 isIsland = true;
                                 break;
                             }

@@ -61,23 +61,14 @@
 *::-webkit-scrollbar {
     display: none;
   }
-.martin{
- width: 100%;
- height: 100%;
-}
-.martinplace{
-    height: 150px;
-    display: flex;
-    width: 100px;
 
-}
 .body {
     width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
   }
-  .Button {
+  .Buttonp {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,17 +117,21 @@
 .choice table {
   width: 100%;
   height: 100%;
-  border-collapse: collapse;
-}
 
+  border: none;
+}
+.choice tbody {
+display: flex ;
+justify-content: center;
+
+  border: none;
+}
 .choice tr {
   display: flex;
   flex-direction: column; /* Affiche les lignes du tableau en colonne */
 }
 
-td, tr {
-  border: 1px solid #19608F;
-}
+
 table {
   border-collapse: collapse;
 }
@@ -243,16 +238,14 @@ form{
   justify-content: center;
   position:fixed;
  margin-right: 85%;
-
   margin-top: 25vh;
 }
 tbody{
-  height: 30vh;
+  height: 63vh;
+  border-radius: 20px;
 }
-.img{
-  width: 5vw;
-  height: 100%;
-  margin-left: 15vw;
+.poubelle{
+  margin-top: 2vh;
 }
 .img{
   width: 5vw;

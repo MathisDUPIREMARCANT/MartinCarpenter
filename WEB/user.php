@@ -20,75 +20,75 @@ catch(Exception $e){
 if(isset($_SESSION['username'])){
 foreach($resultat as $row){
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="utf-8">
-    
-        <title>Martin Carpenter</title>
-    
-        <meta name="description" content="Martin carpenter information user">
-        <!--page description-->
-        <meta name="keywords" content="Martin Carpenter,id,mp,name">
-        <!--Page keywords-->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!--Setting up a web page visibility zone for the user-->
-    
-        <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
-        <!--Page authors-->
-        <link rel="icon" type="image/x-con" href="image/logomartin.ico">
-        
-        <!--Browser icon-->
-        <link rel="stylesheet" href="CSS/user.css">
-    </head>
-    
-    <body>
-        <header>
-            <div class="buttonhead">
-                <button class="back" type=submit>
-                    <a href="../index.php">
-                        <img class="backimg" src="image/button/arrow.png">
-                    </a>
-                </button>
-                <a class="al" - href="settingingames/settinguser.php">
-                    <img class="settingimg" src="image/button/boutonsetting.png" />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Martin Carpenter</title>
+
+    <meta name="description" content="Martin carpenter information user">
+    <!--page description-->
+    <meta name="keywords" content="Martin Carpenter,id,mp,name">
+    <!--Page keywords-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Setting up a web page visibility zone for the user-->
+
+    <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
+    <!--Page authors-->
+    <link rel="icon" type="image/x-con" href="image/logomartin.ico">
+
+    <!--Browser icon-->
+    <link rel="stylesheet" href="CSS/user.css">
+</head>
+
+<body>
+    <header>
+        <div class="buttonhead">
+            <button class="back" type=submit>
+                <a href="../index.php">
+                    <img class="backimg" src="image/button/arrow.png">
                 </a>
-    
+            </button>
+            <a class="al" - href="settingingames/settinguser.php">
+                <img class="settingimg" src="image/button/boutonsetting.png" />
+            </a>
+
+        </div>
+    </header>
+    <main>
+        <div class="cont">
+            <div class="user">
+                <img class="imgmartin" src="image/button/martin.png" alt="">
             </div>
-        </header>
-        <main>
-            <div class="cont">
-                <div class="user">
-                    <img class="imgmartin" src="image/button/martin.png" alt="">
+        </div>
+        <div class="cont2">
+            <div class="Compte">
+
+                <div class="name">
+                    <?php echo $row["username"] ?>
+                </div>
+                <div class="line">
+                    Personal Best: <?php echo  $row["score"] ?>
+                    <br>
+                    Email : <?php echo $row["email"] ?>
+                </div>
+                <div class="logout">
+                    <a class="textlogout" href=" logout.php">Logout
+                    </a>
                 </div>
             </div>
-            <div class="cont2">
-                <div class="Compte">
-    
-                    <div class="name">
-                        <?php echo $row["username"] ?>
-                    </div>
-                    <div class="line">
-                       Personal Best: <?php $row["score"] ?>
-                        <br>
-                        Email : <?php $row["email"] ?>
-                    </div>
-                    <div class="logout">
-                        <a class="textlogout" href=" logout.php">Logout
-                        </a>
-                    </div>
-                </div>
-                
+
             <?php
             };
             ?>
-                
-                <div class="classement">
-                    <div class="compte">
-                        Leader Board:
-                    </div>
-                    <div class="list">
+
+            <div class="classement">
+                <div class="compte">
+                    Leader Board:
+                </div>
+                <div class="list">
                     <?php   
 
                            
@@ -119,20 +119,21 @@ foreach($resultat as $row){
                         }
                            
                         ?>
-                                 </table>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="down">
-                    slide down ↓ 
-                    </div>
+                    </table>
+
+                    </ul>
                 </div>
-            
-        </main>
-    </body>
-    </html>
-    <?php
+            </div>
+            <div class="down">
+                slide down ↓
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
+<?php
     }
     
                     
