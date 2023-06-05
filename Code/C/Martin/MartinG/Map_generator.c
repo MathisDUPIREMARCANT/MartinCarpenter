@@ -114,7 +114,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             Island_current++;
             Bridge_current++;
-            printf("\n");
+            
             //Print_board(Board, posMax);
 
         }
