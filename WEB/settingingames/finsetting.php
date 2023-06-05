@@ -58,6 +58,31 @@ if(isset($_COOKIE['Colorgame'])){
             <?php if(isset($_COOKIE['ColorButton']) && $_COOKIE['ColorButton']=="grey"){ echo"selected";}?>>
             Grey</option>
     </select>
+    <!-- on propose un bouton pour activer le mode chiffre -->
+    <?php 
+    // Vérifier si une option a été sélectionnée
+if (isset($_POST['mode'])) {
+    // Récupérer la valeur sélectionnée
+    $mode = $_POST['mode'];
+
+    // Créer un cookie avec la valeur sélectionnée
+    setcookie('mode', $mode, time() + (86400 * 30), '/'); // Cookie valide pendant 30 jours
+}
+?>
+
+<div class="ch3">
+    <label>Number mode :</label><br>
+    <label class="slider">
+        <input type="radio" name="mode" value="1">
+        <span class="slider"></span>
+    </label>
+    <label for="1">On</label>
+    <label class="slider">
+        <input type="radio" name="mode" value="0">
+        <span class="slider"></span>
+    </label>
+    <label for="0">Off</label>
+</div>
 
     <?php
 if(isset($_COOKIE['ColorButton'])){

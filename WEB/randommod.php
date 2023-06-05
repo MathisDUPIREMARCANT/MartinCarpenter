@@ -200,7 +200,12 @@ if($mod == 'custom'){
                 var gameDiv = document.getElementById('game');
                 var gameDivWidth = gameDiv.clientWidth;
                 var gameDivHeight = gameDiv.clientHeight;
-
+//fonction pour recuperer les cookies 
+                function getCookie(name) {
+                    var value = "; " + document.cookie;
+                    var parts = value.split("; " + name + "=");
+                    if (parts.length == 2) return parts.pop().split(";").shift();
+                }
                 function generate_table_no_solution(rows, columns) {
                     // Obtenir la référence du body
                     var body = document.getElementsByTagName("body")[0];
@@ -281,24 +286,48 @@ if($mod == 'custom'){
                             if (foundIsland) {
                                 var islandImage = document.createElement("img");
                                 islandImage.setAttribute("id", "island-" + i + "-" + j);
-                                if (huge.Islands[k].links == 1) {
-                                    islandImage.src = "../WEB/image/iles/ile1.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 2) {
-                                    islandImage.src = "../WEB/image/iles/ile2.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 3) {
-                                    islandImage.src = "../WEB/image/iles/ile3.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 4) {
-                                    islandImage.src = "../WEB/image/iles/ile4.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 5) {
-                                    islandImage.src = "../WEB/image/iles/ile5.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 6) {
-                                    islandImage.src = "../WEB/image/iles/ile6.png";
-                                    cell.appendChild(islandImage);
+                                //on verifie le status du cookie "mode" 
+                                if (getCookie("mode") == 1) {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "image/images_temporaires/3167v-chiffre-1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "image/images_temporaires/chiffre-2-en-aluminium-decoupe-coloris-et-dimensions-au-choix.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "image/images_temporaires/chiffre-3-en-alu-couleur-et-dimensions-au-choix.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "image/images_temporaires/chiffre-4-en-aluminium-5-coloris-et-2-dimensions-possibles.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "image/images_temporaires/chiffre-5-en-aluminium-5-coloris-au-choix-100-ou-150-mm-de-haut.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "image/images_temporaires/6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                } 
+                                else {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "../WEB/image/iles/ile1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "../WEB/image/iles/ile2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "../WEB/image/iles/ile3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "../WEB/image/iles/ile4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "../WEB/image/iles/ile5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "../WEB/image/iles/ile6.png";
+                                        cell.appendChild(islandImage);
+                                    }
                                 }
                                 cell.appendChild(islandImage);
                                 islandImage.setAttribute("data-row", i.toString());
