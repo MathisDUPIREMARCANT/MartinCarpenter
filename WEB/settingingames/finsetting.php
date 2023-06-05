@@ -72,16 +72,17 @@ if (isset($_POST['mode'])) {
 
 <div class="ch3">
     <label>Number mode :</label><br>
+    <br>
     <label class="slider">
         <input type="radio" name="mode" value="1">
         <span class="slider"></span>
     </label>
-    <label for="1">On</label>
+    <label class="ch4" for="1">On</label>
     <label class="slider">
         <input type="radio" name="mode" value="0">
         <span class="slider"></span>
     </label>
-    <label for="0">Off</label>
+    <label class="ch4" for="0">Off</label>
 </div>
 
     <?php

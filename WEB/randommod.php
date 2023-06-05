@@ -289,7 +289,7 @@ if($mod == 'custom'){
                                 //on verifie le status du cookie "mode" 
                                 if (getCookie("mode") == 1) {
                                     if (huge.Islands[k].links == 1) {
-                                        islandImage.src = "image/images_temporaires/3167v-chiffre-1.png";
+                                        islandImage.src = "image/images_temporaires/1.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 2) {
                                         islandImage.src = "image/images_temporaires/chiffre-2-en-aluminium-decoupe-coloris-et-dimensions-au-choix.png";
