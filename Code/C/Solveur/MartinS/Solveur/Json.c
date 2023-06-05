@@ -43,57 +43,60 @@ void From_C_to_Json_bridge_null(Bridge bridge) {
 }
 
 void From_C_to_Json(Bridge* Bridges, Island* Islands, int Nb_bridge, int Nb_island, Coord posMax, int Nb_possibility) {
-	if (Nb_possibility==1) {
-		printf("{");
-		printf("	\"Islands\" : [");
-		for (int i = 0; i < Nb_island; i++) {
-			From_C_to_Json_island(Islands[i]);
-			if (i < Nb_island - 1) {
-				printf(",");
+	for (int j = 1; j <= Nb_possibility; j++) {
+		if (j == 1) {
+			printf("{");
+			printf("	\"Islands\" : [");
+			for (int i = 0; i < Nb_island; i++) {
+				From_C_to_Json_island(Islands[i]);
+				if (i < Nb_island - 1) {
+					printf(",");
+				}
 			}
-		}
-		printf("    ],");
-		printf("    \"Grid\": [		{			\"size\" : [%d, %d]		} ", posMax.x, posMax.y);
-		printf("    ],");
-		printf("    \"Bridges\" : [");
-		for (int i = 0; i < Nb_bridge; i++) {
-			From_C_to_Json_bridge(Bridges[i]);
+			printf("    ],");
+			printf("    \"Grid\": [		{			\"size\" : [%d, %d]		} ", posMax.x, posMax.y);
+			printf("    ],");
+			printf("    \"Bridges\" : [");
+			for (int i = 0; i < Nb_bridge; i++) {
+				From_C_to_Json_bridge(Bridges[i]);
 
-			free(Bridges[i].pos); //free positions
+				free(Bridges[i].pos); //free positions
 
-			if (i < Nb_bridge - 1) {
-				printf(",");
+				if (i < Nb_bridge - 1) {
+					printf(",");
+				}
 			}
+			printf("    ],");
+			printf("    \"PlacedBridges\":{}");
+			printf("}");
 		}
-		printf("    ],");
-		printf("    \"PlacedBridges\":{}");
-		printf("}");
-	}
-	else {
-		printf("{");
-		printf("	\"Islands\" : [");
-		for (int i = 0; i < Nb_island; i++) {
-			From_C_to_Json_island_null(Islands[i]);
-			if (i < Nb_island - 1) {
-				printf(",");
+		if (j>1) {
+			printf("{");
+			printf("	\"Islands\" : [");
+			for (int i = 0; i < Nb_island; i++) {
+				From_C_to_Json_island_null(Islands[i]);
+				if (i < Nb_island - 1) {
+					printf(",");
+				}
 			}
-		}
-		printf("    ],");
-		printf("    \"Grid\": [		{			\"size\" : [, ]		} ");
-		printf("    ],");
-		printf("    \"Bridges\" : [");
-		for (int i = 0; i < Nb_bridge; i++) {
-			From_C_to_Json_bridge_null(Bridges[i]);
+			printf("    ],");
+			printf("    \"Grid\": [		{			\"size\" : [, ]		} ");
+			printf("    ],");
+			printf("    \"Bridges\" : [");
+			for (int i = 0; i < Nb_bridge; i++) {
+				From_C_to_Json_bridge_null(Bridges[i]);
 
-			free(Bridges[i].pos); //free positions
+				free(Bridges[i].pos); //free positions
 
-			if (i < Nb_bridge - 1) {
-				printf(",");
+				if (i < Nb_bridge - 1) {
+					printf(",");
+				}
 			}
+			printf("    ],");
+			printf("    \"PlacedBridges\":{}");
+			printf("}");
 		}
-		printf("    ],");
-		printf("    \"PlacedBridges\":{}");
-		printf("}");
+		printf("\n");
 	}
 
 
