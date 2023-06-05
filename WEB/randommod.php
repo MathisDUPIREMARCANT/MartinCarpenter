@@ -80,8 +80,8 @@ session_start();
             </a>
         </div>
         <div id="popup" style="display: none;">
-            <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="game.php">Retry &emsp; &#160; &#160;
+            <button id="Button" class="Button" type="submit" onclick="togglePopup(); showButton()">
+                <a id="test" class="al" href="game.php">Retry &emsp; &#160; &#160;
                     <img class="img" src="image/button/retry.png" />
                 </a>
             </button>
@@ -496,6 +496,29 @@ if($mod == 'custom'){
                     }
 
                 }
+
+                document.getElementById("test").addEventListener("click", retryClicked);
+
+                function retryClicked(event) {
+    event.preventDefault(); // Empêche le comportement par défaut du lien
+
+    // Parcourir toutes les cellules dans huge.PlacedBridges
+    for (var cellId in huge.PlacedBridges) {
+        // Supprimer le pont du DOM
+        var cellElement = document.getElementById(cellId);
+        while (cellElement.firstChild) {
+            cellElement.removeChild(cellElement.firstChild);
+        }
+
+        // Supprimer le pont des données
+        delete huge.PlacedBridges[cellId];
+    }
+
+    // Réinitialiser huge.userPlacedBridges
+    huge.userPlacedBridges = [];
+    console.log('BIG PIPZ', huge.PlacedBridges); // Pour le débogage
+    check_win();
+}
 
                 function removeBridge(island1, island2) {
                     // Trouvez les indices des îles dans le tableau huge.Islands
