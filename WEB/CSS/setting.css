@@ -18,7 +18,7 @@
   
 }
 .ch2{
-  margin-top: 5vh;
+  margin-top: 1vh;
 }
 .buttonhead {
   display: flex;
@@ -91,7 +91,7 @@
       font-weight: 200;
       font-size: 2vw;
       color: #ffffff;
-      margin-top: 7px;
+      margin-top: 5px;
       text-decoration: none;
 }
 .button:hover{

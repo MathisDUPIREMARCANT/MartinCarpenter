@@ -36,8 +36,10 @@ void main() {
 
 	Solver(Result, Board, posMax, pos, NULL, Pt_solution, Bridges, Nb_bridge);
 	Print_board(Board, posMax);
+	
+	
 	if (Result != NULL && Nb_solution) {
-		//Print_board(*Result, posMax);
-		From_C_to_Json(*Result, Islands, Nb_bridge, Nb_island, posMax, Nb_solution);
+		Print_board(*Result, posMax);
+		From_C_to_Json(Bridges, Islands, *Nb_bridge, Nb_island, posMax, *Pt_solution);
 	}
 }

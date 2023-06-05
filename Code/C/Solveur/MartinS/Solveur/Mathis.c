@@ -47,7 +47,6 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 		if (Nb_islands == 0) {
 			*(Result) = Bridges;
 			(*Nb_solution)++;
-			printf("Prout");
 			printf("\n");
 			Print_board(Board, posMax);
 			printf("\n");

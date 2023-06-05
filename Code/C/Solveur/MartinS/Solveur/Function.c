@@ -268,14 +268,15 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
-void fonction_mathis(Island* islands, Coord posMax, char* board, int* Nb_island) {
+void Stock_island(Island* islands, Coord posMax, char* board) {
+   int incr = 0;
    for (int i = 0; i < posMax.x; i++) {
         for (int j = 0; j < posMax.y; j++) {
-            if (*(board + (posMax.x * j) + i) != '*' || *(board + (posMax.x * j) + i) != '~' || *(board + (posMax.x * j) + i) != '#') {
-                islands[*Nb_island].pos.x = i;
-                islands[*Nb_island].pos.y = j;
-                islands[*Nb_island].number = *(board + (posMax.x * j) + i);
-                (*Nb_island)++;
+            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
+                islands[incr].pos.x = i;
+                islands[incr].pos.y = j;
+                islands[incr].number = atoi(board + (posMax.x * j) + i);
+                incr++;
             }
         }
     }

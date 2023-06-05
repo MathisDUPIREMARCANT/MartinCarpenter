@@ -73,10 +73,6 @@ session_start();
             You WIN !
         </div>
         <script>
-            //on redirige vers la page de jeu au bout de 3 secondes
-            setTimeout(function() {
-                window.location.href = "../index.php";
-            }, 3000);
         </script>
     </main>
 </body>

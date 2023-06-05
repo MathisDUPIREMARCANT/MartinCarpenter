@@ -80,25 +80,25 @@ session_start();
             </a>
         </div>
         <div id="popup" style="display: none;">
-            <button id="Button" class="Button" type="submit">
-                <a id="al" class="al" href="game.php">Retry &emsp; &#160; &#160;
+            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
+                <a id="test" class="al" href="game.php">Retry &emsp; &#160; &#160;
                     <img class="img" src="image/button/retry.png" />
                 </a>
             </button>
 
-            <button id="Button" class="Button" type="submit">
+            <button id="Buttonp" class="Buttonp" type="submit">
                 <a id="al" class="al" href="../index.php">Back Home
                     <img class="img" src="image/button/maison.png" />
                 </a>
             </button>
 
-            <button id="Button" class="Button" type="submit" onclick="togglePopup(); showButton()">
+            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
                 <a id="al" class="al">Resume &emsp;
                     <img class="img" src="image/button/arrow.png" />
                 </a>
             </button>
 
-            <button id="Button" class="Button" type="submit">
+            <button id="Buttonp" class="Buttonp" type="submit">
                 <a id="al" class="al" href="settingingames/settingrandommod.php">Settings &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
@@ -495,6 +495,29 @@ if($mod == 'custom'){
                         document.location.href = "Win.php";
                     }
 
+                }
+
+                document.getElementById("test").addEventListener("click", retryClicked);
+
+                function retryClicked(event) {
+                    event.preventDefault(); // Empêche le comportement par défaut du lien
+
+                    // Parcourir toutes les cellules dans huge.PlacedBridges
+                    for (var cellId in huge.PlacedBridges) {
+                        // Supprimer le pont du DOM
+                        var cellElement = document.getElementById(cellId);
+                        while (cellElement.firstChild) {
+                            cellElement.removeChild(cellElement.firstChild);
+                        }
+
+                        // Supprimer le pont des données
+                        delete huge.PlacedBridges[cellId];
+                    }
+
+                    // Réinitialiser huge.userPlacedBridges
+                    huge.userPlacedBridges = [];
+                    console.log('BIG PIPZ', huge.PlacedBridges); // Pour le débogage
+                    check_win();
                 }
 
                 function removeBridge(island1, island2) {
