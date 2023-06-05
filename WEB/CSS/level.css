@@ -70,3 +70,28 @@ main{
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
 }
+.lev{
+    width:25vw;
+    height: 15vh;
+    border: 0.1vw solid #B7CB5A;
+    background-color: #e6ff7861;
+    margin: auto;
+    font-weight: 400;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-bottom: 2vw;
+    text-decoration: none;
+    font-family: "Inter";
+    font-style: normal;
+justify-content: center;
+align-items: center;
+    font-size: 1.5vw;
+  display: flex;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25);
+}
