@@ -501,6 +501,10 @@ session_start();
             function myFunction() {
                 var pixelArt = convertToPixelArt(rows, columns);
                 var iles = countIslands(rows, columns);
+                //on ajoute dans huge dans le tableau d'objet Grid un tableau size qui contient les lignes et les colonnes pour avoir la forme     "Grid": [{ "size": [7, 7] }]
+                huge.Grid.push({
+                    "size": [rows, columns]
+                });
                 var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
                         columns) + "&pixelArt=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
                     encodeURIComponent(iles);
