@@ -13,7 +13,7 @@ header('location:settingcreatemod.php');
                 <img class="backimg" src="../image/button/arrow.png">
             </a>
         </button>
-        <a class="user" href="../user.php">
+        <a class="user" href="../users/creategame.php">
             <img class="userimg" src="../image/button/martin.png">
         </a>
         </button>

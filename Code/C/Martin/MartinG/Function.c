@@ -141,9 +141,10 @@ int* Table_copy(int* table, int length) {
 void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island* Islands, int Island_current, int Bridge_current, int Direction, int length) {
     int Type_bridgebis = Random(0, 1);
 
-    Islands[Island_current-1].number += Type_bridgebis + 1;
-
-    Place_island_on_map(Board, posMax, pos, Islands[Island_current-1].number);
+    int Island = 0;
+    Island = atoi(Board + (posMax.x * pos.y) + pos.x) + Type_bridgebis +1;
+    Islands[Island_current-1].number = Island;
+    Place_island_on_map(Board, posMax, pos, Island);
 
 
     Bridges[Bridge_current].length = length;
@@ -161,7 +162,8 @@ void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island*
 
     Next_Coord(&pos, Direction);
     if (*(Board + (posMax.x * pos.y) + pos.x) != '*') {
-        Type_bridgebis +=  atoi((Board + (posMax.x * pos.y) + pos.x));
+        Type_bridgebis +=  atoi(Board + (posMax.x * pos.y) + pos.x);
+        
     }
     Place_island_on_map(Board, posMax, pos, Type_bridgebis + 1);
 

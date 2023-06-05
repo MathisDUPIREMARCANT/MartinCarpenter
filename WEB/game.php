@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['username'])){
     
-    echo'
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,21 +45,21 @@ if(isset($_SESSION['username'])){
     </header>
     <main class="main">
     <div class="game">
-        <button class="Buttonstory" onclick="redirectTo(\'storymod.php\')"><a class="textstory">Story
-                Mod</a></button>
-        <button class="Buttonstory" onclick="redirectTo(\'randommod.php?mod=custom\')"><a class="textstory">Custom
-            Mod</a></button>
+        <button class="Buttonstory" onclick="redirectTo('storymod.php')"><a class="textstory">Story
+                Mode</a></button>
+        <button class="Buttonstory" onclick="redirectTo('randommod.php?mod=custom')"><a class="textstory">Custom
+            Mode</a></button>
             </div>
         <div class="games">
-            <button class="Buttoneasy" onclick="redirectTo(\'randommod.php?mod=easy\')"><a class="texteasy">Easy Mod</a></button>
-            <button class="Buttonmedium" onclick="redirectTo(\'randommod.php?mod=medium\')"><a class="textmedium">Medium
-                    Mod</a></button>
-            <button class="Buttonhard" onclick="redirectTo(\'randommod.php?mod=hard\')"><a class="texthard">Hard Mod</a></button>
+            <button class="Buttoneasy" onclick="redirectTo('randommod.php?mod=easy')"><a class="texteasy">Easy Mode</a></button>
+            <button class="Buttonmedium" onclick="redirectTo('randommod.php?mod=medium')"><a class="textmedium">Medium
+                    Mode</a></button>
+            <button class="Buttonhard" onclick="redirectTo('randommod.php?mod=hard')"><a class="texthard">Hard Mode</a></button>
         </div>
         <div class="creationgames">
-            <button class="Buttoncreate" onclick="redirectTo(\'createmod.php\')"><a class="textcreate">Create
+            <button class="Buttoncreate" onclick="redirectTo('createmod.php')"><a class="textcreate">Create
                     level</a></button>
-            <button class="ButtonLevel" onclick="redirectTo(\'level.php\')"><a class="textlevel">My Level</a></button>
+            <button class="ButtonLevel" onclick="redirectTo('level.php')"><a class="textlevel">My Level</a></button>
         </div>
 
 
@@ -72,7 +72,8 @@ if(isset($_SESSION['username'])){
     </script>
 </body>
 
-</html>';
+</html>
+<?php
 }
 else{ 
     header("Location: sign_in_up.php");

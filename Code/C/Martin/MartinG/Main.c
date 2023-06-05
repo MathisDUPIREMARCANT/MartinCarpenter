@@ -27,16 +27,9 @@ void main(int argc, char *argv[]) {
 
 
 	int test = Map_gen(Board, posMax, pos, nombre_iles);
-	//printf("\n\nTest : %d\n", test);
+	printf("%d", test);
 
-	while (test == -1) { 
-		free(Board);
-		Board = Init_board_Game(posMax);
-		test = Map_gen(Board, posMax, pos, nombre_iles);
-		//printf("\n\nTest : %d\n", test);
-	}
-
-	Print_board(Board, posMax);
+	//Print_board(Board, posMax);
 	free(Board);
 
 }

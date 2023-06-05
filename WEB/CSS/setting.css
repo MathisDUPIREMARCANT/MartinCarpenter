@@ -4,18 +4,28 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
 .back{
   position: absolute;
   width: 85px;
   height: 80px;
   background: url(../image/button/arrow.png);
-  background-size: 80px;
+
   border-style: none;
 }
 
 .backimg{
   width: 50px; 
   
+}
+.ch3{
+  margin-top: 4%;
+  margin-bottom: 3%;
+}
+.ch4{
+  color:#538E8A;
+  margin-top: 4vh;
+  margin-bottom: 3vh;
 }
 .ch2{
   margin-top: 1vh;
@@ -58,11 +68,12 @@
     
 }
 .Choix{
+  padding-bottom: 1%;
   border:0.3vw solid #538E8A;
   background-color: #9acdcef6;
   border-radius: 30px;
   margin: auto;
-  height: 45vh;
+  height: 100%;
   width: 40vw;
   padding-left: 4vw;
   padding-top: 1.5vw;

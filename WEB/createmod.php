@@ -127,14 +127,26 @@ session_start();
 
             <h1 id="banger" style="position:relative; left: 40px;"></h1>
             <!-- tableau pour stocker des images -->
+            <?php if(!isset($rows)){?>
             <form action="createmod.php" method="post">
                 <label for="nb_colonnes">Number of columns</label>
                 <input type="text" name="nb_colonnes" id="nb_colonnes">
                 <label for="nb_lignes">Number of lines</label>
                 <input type="text" name="nb_lignes" id="nb_lignes">
-                <input id="button" type="submit" value="Validate">
+                <input id="button" type="submit" value="Create">
                 <br><br> <br>
             </form>
+            <?php }else{?>
+                            <form action="createmod.php" method="post">
+                            <label for="nb_colonnes">Number of columns</label>
+                            <input type="text" name="nb_colonnes" id="nb_colonnes">
+                            <label for="nb_lignes">Number of lines</label>
+                            <input type="text" name="nb_lignes" id="nb_lignes">
+                            <input id="button" type="submit" value="New Board">
+                            <br><br> <br>
+                        </form>
+            <?php  }?>
+
             <div id="bangerang"></div>
             <script>
             huge = {
@@ -537,9 +549,7 @@ session_start();
                 </table>
             </div>
 
-            <div class="martinplace">
-                <img class="martin" src="image/martin1.png">
-            </div>
+
             <!-- on ajoute une poubelle pour pouvoir drag and drop pour degager les images -->
             <div id="poubelle" class="poubelle">
                 <img class="poubelle" src="../WEB/image/button/TRASH.png">
@@ -561,11 +571,22 @@ $rows = $_GET['rows'];
 $columns = $_GET['columns'];
 $pixelArt = $_GET['pixelArt'];
 $nbiles = $_GET['nbiles'];
+$difficulty = (($rows*$columns)/$nbiles)*5;
 
 echo "Nombre de lignes : " . $rows . "<br>";
 echo "Nombre de colonnes : " . $columns . "<br>";
 echo "Pixel art : " . $pixelArt . "<br>";
 echo "Nombre d'îles : " . $nbiles . "<br>";
+//on stock les valeurs dans la base de données
+//on recupere le pseudo de l'utilisateur
+$username = $_SESSION['username'];
+//on se connecte a la base de données
+include("traitement/DB_connect.php");
+$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
+//on prepare la requete
+$stmt = $conn->prepare($sql);
+//on execute la requete
+$stmt->execute();
 }
 //$command = 'MartinS.exe'. ' '. $rows . ' ' . $columns . ' ' . $nbiles . ' ' . $pixelArt;
 //$output = exec($command);

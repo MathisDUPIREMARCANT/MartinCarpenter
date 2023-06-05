@@ -23,6 +23,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
         int Type_bridge = 0;
         int Type_island;
         int Direction_available[4];
+        int Stop_generation = 0;
 
         *(Board + (posMax.x * pos.y) + pos.x) = '1';
         Islands[Island_current].number = 1;
@@ -37,7 +38,11 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             for (int i = 0; i < 4; i++) {
                 spa[i] = Space_next_bridge(Board, pos, posMax, i);
+                if(spa[i] == 0) {
+                    Stop_generation++;
+                }
             }
+            
 
 
             for (int i = 0; i < 4; i++) {
@@ -109,8 +114,8 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
 
             Island_current++;
             Bridge_current++;
-            printf("\n");
-            Print_board(Board, posMax);
+            
+            //Print_board(Board, posMax);
 
         }
         //Print_board(Board, posMax);

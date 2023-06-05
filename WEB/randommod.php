@@ -99,7 +99,8 @@ session_start();
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings &emsp;
+                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'];?>">Settings
+                    &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
             </button>
@@ -116,7 +117,7 @@ session_start();
                 }
                 ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
-        <form action="randommod.php?mod=<?php $mod?>" method="post">
+        <form action=" randommod.php?mod=<?php $mod?>" method="post">
             <?php   
         if($mod == 'custom'){?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
@@ -143,7 +144,9 @@ if($mod == 'easy'){
     $nb_lignes = 7;
     $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
-    
+    while($output == -1){
+        $output = exec($command);
+    }
         $texte_php = $output;
         $texte_js = json_encode($texte_php);
         
@@ -154,15 +157,24 @@ if($mod == 'medium'){
     $nb_lignes = 10;
     $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
+    while($output == -1){
+        $output = exec($command);
+    }
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
 if($mod == 'hard'){
-    $nb_iles = 30;
+    $nb_iles = 25;
     $nb_colonnes = 11;
     $nb_lignes = 13;
     $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
+    echo $output;
+    while($output == -1){
+        echo $output;
+        $output = exec($command);
+    }
+    echo $output;
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
@@ -174,9 +186,11 @@ if($mod == 'custom'){
         $nb_colonnes = $_POST['nb_colonnes'];
         $nb_lignes = $_POST['nb_lignes'];
         
-        $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+        $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
         $output = exec($command);
-
+        while($output == -1){
+            $output = exec($command);
+        }
         
                     
         $texte_php = $output;
@@ -199,7 +213,12 @@ if($mod == 'custom'){
                 var gameDiv = document.getElementById('game');
                 var gameDivWidth = gameDiv.clientWidth;
                 var gameDivHeight = gameDiv.clientHeight;
-
+//fonction pour recuperer les cookies 
+                function getCookie(name) {
+                    var value = "; " + document.cookie;
+                    var parts = value.split("; " + name + "=");
+                    if (parts.length == 2) return parts.pop().split(";").shift();
+                }
                 function generate_table_no_solution(rows, columns) {
                     // Obtenir la référence du body
                     var body = document.getElementsByTagName("body")[0];
@@ -269,7 +288,8 @@ if($mod == 'custom'){
                             // Vérifier si l'île se trouve à la position actuelle
                             var foundIsland = false;
                             for (var k = 0; k < huge.Islands.length; k++) {
-                                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] ===
+                                    j) {
                                     foundIsland = true;
                                     break;
                                 }
@@ -279,24 +299,48 @@ if($mod == 'custom'){
                             if (foundIsland) {
                                 var islandImage = document.createElement("img");
                                 islandImage.setAttribute("id", "island-" + i + "-" + j);
-                                if (huge.Islands[k].links == 1) {
-                                    islandImage.src = "../WEB/image/iles/ile1.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 2) {
-                                    islandImage.src = "../WEB/image/iles/ile2.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 3) {
-                                    islandImage.src = "../WEB/image/iles/ile3.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 4) {
-                                    islandImage.src = "../WEB/image/iles/ile4.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 5) {
-                                    islandImage.src = "../WEB/image/iles/ile5.png";
-                                    cell.appendChild(islandImage);
-                                } else if (huge.Islands[k].links == 6) {
-                                    islandImage.src = "../WEB/image/iles/ile6.png";
-                                    cell.appendChild(islandImage);
+                                //on verifie le status du cookie "mode" 
+                                if (getCookie("mode") == 1) {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "image/images_temporaires/1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "image/images_temporaires/2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "image/images_temporaires/3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "image/images_temporaires/4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "image/images_temporaires/5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "image/images_temporaires/6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                } 
+                                else {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "../WEB/image/iles/ile1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "../WEB/image/iles/ile2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "../WEB/image/iles/ile3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "../WEB/image/iles/ile4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "../WEB/image/iles/ile5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "../WEB/image/iles/ile6.png";
+                                        cell.appendChild(islandImage);
+                                    }
                                 }
                                 cell.appendChild(islandImage);
                                 islandImage.setAttribute("data-row", i.toString());
@@ -348,10 +392,12 @@ if($mod == 'custom'){
                         island); // Ajout d'un message de débogage
                     if (currentBridge.start === null) {
                         currentBridge.start = island;
-                        console.log('Pont commencé, île de départ : ', island); // Ajout d'un message de débogage
+                        console.log('Pont commencé, île de départ : ',
+                            island); // Ajout d'un message de débogage
                     } else if (currentBridge.end === null && canPlaceBridge(currentBridge.start, island)) {
                         currentBridge.end = island;
-                        console.log('Pont fini, île d\'arrivée : ', island); // Ajout d'un message de débogage
+                        console.log('Pont fini, île d\'arrivée : ',
+                            island); // Ajout d'un message de débogage
                         placeBridge(currentBridge.start, currentBridge.end);
                         currentBridge.start = null;
                         currentBridge.end = null;
@@ -360,7 +406,8 @@ if($mod == 'custom'){
 
                 function getIslandAt(coordinates) {
                     for (var i = 0; i < huge.Islands.length; i++) {
-                        if (huge.Islands[i].Placement[0] === coordinates[0] && huge.Islands[i].Placement[1] ===
+                        if (huge.Islands[i].Placement[0] === coordinates[0] && huge.Islands[i].Placement[
+                                1] ===
                             coordinates[
                                 1]) {
                             return huge.Islands[i];
@@ -371,7 +418,8 @@ if($mod == 'custom'){
 
                 function canPlaceBridge(island1, island2) {
                     // Vérifier si les îles sont sur la même ligne ou la même colonne
-                    if (island1.Placement[0] !== island2.Placement[0] && island1.Placement[1] !== island2.Placement[
+                    if (island1.Placement[0] !== island2.Placement[0] && island1.Placement[1] !== island2
+                        .Placement[
                             1]) {
                         return false;
                     }
@@ -385,7 +433,8 @@ if($mod == 'custom'){
                     for (var i = 0; i < huge.Islands.length; i++) {
                         var island = huge.Islands[i];
                         if (island !== island1 && island !== island2) {
-                            if (island.Placement[0] >= minRow && island.Placement[0] <= maxRow && island.Placement[1] >=
+                            if (island.Placement[0] >= minRow && island.Placement[0] <= maxRow && island
+                                .Placement[1] >=
                                 minCol && island.Placement[1] <= maxCol) {
                                 return false;
                             }
@@ -396,8 +445,10 @@ if($mod == 'custom'){
                     // Vérifier si un des ponts placés serait en conflit avec le nouveau pont
                     for (let r = minRow; r <= maxRow; r++) {
                         for (let c = minCol; c <= maxCol; c++) {
-                            if ((r === island1.Placement[0] && r === island2.Placement[0]) || // Horizontal bridge
-                                (c === island1.Placement[1] && c === island2.Placement[1])) { // Vertical bridge
+                            if ((r === island1.Placement[0] && r === island2.Placement[0]) ||
+                                // Horizontal bridge
+                                (c === island1.Placement[1] && c === island2.Placement[1])
+                            ) { // Vertical bridge
                                 var cellId = "cell-" + r + "-" + c;
                                 if (huge.PlacedBridges[cellId] && huge.PlacedBridges[cellId].orientation !==
                                     bridgeOrientation) {
@@ -409,7 +460,8 @@ if($mod == 'custom'){
                             }
                         }
                     }
-                    console.log('Vérification de la possibilité de placer le pont, île1 : ', island1, ', île2 : ',
+                    console.log('Vérification de la possibilité de placer le pont, île1 : ', island1,
+                        ', île2 : ',
                         island2); // Ajout d'un message de débogage
                     // Si toutes les vérifications sont passées, le pont peut être placé
                     return true;
@@ -433,18 +485,22 @@ if($mod == 'custom'){
 
                     //on verifie la valeur du count
                     if (huge.Bridges[Object.keys(huge.Bridges)[j]].width == 0) {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement.length; k++) {
+                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
+                            .length; k++) {
 
                             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(
-                                huge
-                                .Bridges)[j]].Placement[k]);
+                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
+                                Object.keys(
+                                    huge
+                                    .Bridges)[j]].Placement[k]);
                         }
                     } else {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement.length; k++) {
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[Object.keys(
-                                huge
-                                .Bridges)[j]].Placement[k]);
+                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
+                            .length; k++) {
+                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
+                                Object.keys(
+                                    huge
+                                    .Bridges)[j]].Placement[k]);
                         }
 
                     }
@@ -456,12 +512,15 @@ if($mod == 'custom'){
                         var bridges = getBridgesAroundIsland(island);
 
                         if (bridges.length > island.links) {
-                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
+                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" +
+                                island
                                 .Placement[
                                     1]);
-                            islandCell.classList.add("error"); // Ajouter la classe CSS "error" à la cellule de l'île
+                            islandCell.classList.add(
+                                "error"); // Ajouter la classe CSS "error" à la cellule de l'île
                         } else {
-                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" + island
+                            var islandCell = document.getElementById("cell-" + island.Placement[0] + "-" +
+                                island
                                 .Placement[
                                     1]);
                         }
@@ -474,14 +533,16 @@ if($mod == 'custom'){
                         //on verifie la valeur du count
                         if (huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count == 1) {
                             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[
-                                Object
-                                .keys(huge.PlacedBridges)[j]].Placement[0]);
+                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge
+                                .PlacedBridges[
+                                    Object
+                                    .keys(huge.PlacedBridges)[j]].Placement[0]);
                         } else if (huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count == 2) {
                             console.log("pipi")
-                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge.PlacedBridges[
-                                Object
-                                .keys(huge.PlacedBridges)[j]].Placement[0]);
+                            tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge
+                                .PlacedBridges[
+                                    Object
+                                    .keys(huge.PlacedBridges)[j]].Placement[0]);
                         }
 
                     }
@@ -595,17 +656,20 @@ if($mod == 'custom'){
 
 
                     // Longueur du pont
-                    let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1.Placement[
-                            0]) -
+                    let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1
+                            .Placement[
+                                0]) -
                         (bridgeOrientation === 1 ? island2.Placement[1] : island2.Placement[0])) + 1;
 
 
                     // Placer le pont
                     for (let i = 0; i < bridgeLength; i++) {
-                        var row = bridgeOrientation === 1 ? island1.Placement[0] : Math.min(island1.Placement[0],
+                        var row = bridgeOrientation === 1 ? island1.Placement[0] : Math.min(island1
+                            .Placement[0],
                             island2
                             .Placement[0]) + i;
-                        var col = bridgeOrientation === 2 ? island1.Placement[1] : Math.min(island1.Placement[1],
+                        var col = bridgeOrientation === 2 ? island1.Placement[1] : Math.min(island1
+                            .Placement[1],
                             island2
                             .Placement[1]) + i;
 
@@ -613,7 +677,8 @@ if($mod == 'custom'){
                         // Vérifier si la cellule n'est pas une île
                         var isIsland = false;
                         for (var j = 0; j < huge.Islands.length; j++) {
-                            if (huge.Islands[j].Placement[0] === row && huge.Islands[j].Placement[1] === col) {
+                            if (huge.Islands[j].Placement[0] === row && huge.Islands[j].Placement[1] ===
+                                col) {
                                 isIsland = true;
                                 break;
                             }
@@ -657,9 +722,9 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "100%"; // Largeur du pont en pixels
-                                    bridgeImage.style.height = "80%"; // Hauteur du pont en pixels
-                                    bridgeImage.src = "../WEB/image/iles/bridge_h.png";
+                                    bridgeImage.style.width = "50%"; // Largeur du pont en pixels
+                                bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
+                                    bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
                                 } else { // Sinon, c'est un pont simple
                                     bridgeImage.src = "../WEB/image/iles/bridge_h.png";
                                 }
@@ -677,7 +742,7 @@ if($mod == 'custom'){
                                     }
                                     bridgeImage.style.width = "50%"; // Largeur du pont en pixels
                                     bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
-                                    bridgeImage.src = "../WEB/image/iles/bridge_V.png";
+                                    bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
                                 } else { // Sinon, c'est un pont simple
                                     bridgeImage.src = "../WEB/image/iles/bridge_V.png";
                                 }
