@@ -1,0 +1,124 @@
+.back{
+    position: absolute;
+    width: 85px;
+    height: 80px;
+    left: 17px;
+    top: 7px;
+    background: url(../image/button/arrow.png);
+   
+    border-style: none;
+}
+.backimg{
+    width: 50px; 
+    
+}
+*{
+    scrollbar-width:none;
+}
+*::-webkit-scrollbar {
+    display: none;
+  }
+  main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container{
+    width: 90vw;
+    height: 80vh;
+    background-color:rgba(37, 141, 210, 0.63);
+    border: 0.2vw solid #fdeb96;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+  .overflow{
+    overflow-y: scroll;
+    scrollbar-width:none;
+    width: 90vw;
+    height: 69vh;
+  }
+.body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+ 
+  #background-video {
+    /*vidéo d'arrière plan*/
+    height: 100vh;
+    width: 100vw;
+    -o-object-fit: cover;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  .buttonhead {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    margin-top: 2vh;
+    height: 70px;
+  }
+  table{
+    border-collapse: collapse;
+    padding: 4vw;
+    border-spacing: 3vw;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5vw;
+    line-height: 10vh;
+    text-align: center;
+    color: #ffffff;
+    -webkit-text-stroke: 0.01vw;
+    -webkit-text-stroke-color:#fdeb96;
+    text-decoration:none;
+    
+}
+  td,th{
+    border: 0.2vw solid #fdeb96;
+    border-spacing: 0;
+    min-width: 10vw;
+    height: 10vh;
+    max-height: 10vh;
+    text-align: center;
+ 
+  }
+  a{
+    text-decoration: none;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5vw;
+    line-height: 10vh;
+    text-align: center;
+    color: #ffffff;
+    -webkit-text-stroke: 0.01vw;
+    -webkit-text-stroke-color:#fdeb96;
+    text-decoration:none;
+  
+  }
+.sticky{
+    width: 90vw;
+
+}
+  .user{
+    overflow-y: scroll;
+    scrollbar-width:none;
+    width: 90vw;
+
+  }
+  .col{
+    width: 33.3vw;
+  }
+  a:hover{
+    font-size: 2vw;
+  }

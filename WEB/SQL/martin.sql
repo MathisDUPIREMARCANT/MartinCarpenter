@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 02, 2023 at 08:56 AM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- Hôte : localhost:3306
+-- Généré le : lun. 05 juin 2023 à 09:21
+-- Version du serveur :  5.7.24
+-- Version de PHP : 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `martin`
+-- Base de données : `martin`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `levels`
+-- Structure de la table `levels`
 --
 
 CREATE TABLE `levels` (
@@ -37,7 +37,7 @@ CREATE TABLE `levels` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -49,46 +49,64 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`username`, `email`, `password`, `score`, `progression`) VALUES
+('a', 'a@junia.com', '$2y$10$tnDaFVzHb7bMbHv9/BAotejbnJqQCQ8EIC81rzqU/.8aVsRU5hr7i', 1000, 0),
 ('dada', 'dada@student.junia.com', 'dada', 400, 5),
-('df', 'h@junia.com', '$2y$10$h1QePfm3M0kmA1YDDoG8q.cmcf3Ddm50CVXLjdOfI8soO1/TElJyK', 0, 0),
-('fr', 'j@junia.com', '$2y$10$.OQnTZQjDqh/coDjocoRQeqnKTLd1i5BKs8cknu1I58r18bEuDwiK', 0, 0),
-('frrf', 't@junia.com', '$2y$10$Dff2BPf0Wrnl.HCh1zj4G.Tais.wGKf42vCNjOXwm/.6wFEIU/QrO', 0, 0),
 ('juju', 'juliette.saint-maxent@student.junia.com', '$2y$10$pgvnBaLxcTP3ZgwFoftJSe9yzgUo3QtwtGQIQTHZYj3tCaJsOTQOm', 0, 0),
-('s', 'u@junia.com', '$2y$10$pGDAy4E8dHi.1Vv8QHZequLeqWyp6V/OpByX8/jW1wCS0jEnk2D9a', 0, 0),
 ('salut', 's@student.junia.com', 'salut', 50, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_level`
+-- Structure de la table `users_level`
 --
 
 CREATE TABLE `users_level` (
   `number` int(11) NOT NULL,
-  `path` varchar(64) NOT NULL,
-  `description` text NOT NULL,
+  `path` text NOT NULL,
+  `islands` int(8) NOT NULL,
+  `rows` int(8) NOT NULL,
+  `colls` int(8) NOT NULL,
+  `difficulty` int(8) NOT NULL,
   `user` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Déchargement des données de la table `users_level`
+--
+
+INSERT INTO `users_level` (`number`, `path`, `islands`, `rows`, `colls`, `difficulty`, `user`) VALUES
+(5, '***********2***1**********3*****4***************4*******4****6**************************************', 7, 10, 10, 71, 'a'),
+(6, '******11**********2343*********4**********', 7, 7, 6, 30, 'a');
+
+--
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `users_level`
+-- Index pour la table `users_level`
 --
 ALTER TABLE `users_level`
-  ADD UNIQUE KEY `user` (`user`);
+  ADD PRIMARY KEY (`number`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `users_level`
+--
+ALTER TABLE `users_level`
+  MODIFY `number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
