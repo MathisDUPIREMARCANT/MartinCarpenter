@@ -76,7 +76,7 @@ session_start();
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
             <a id="savepos" class="savepos">
-                <img class="save" src="image/button/savestar.png" />
+                <img class="save" src="image/button/savestar.png" onclick="myFunction()"/>
             </a>
         </div>
         <div id="popup" style="display: none;">
@@ -118,7 +118,8 @@ session_start();
                 ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
         <form action=" randommod.php?mod=<?php $mod?>" method="post">
-            <?php   
+            <?php 
+        if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
         if($mod == 'custom'){?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
             <label for="nb_iles">Number of islands</label>
@@ -722,7 +723,7 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "50%"; // Largeur du pont en pixels
+                                    bridgeImage.style.width = "100%"; // Largeur du pont en pixels
                                 bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
                                     bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
                                 } else { // Sinon, c'est un pont simple
@@ -740,7 +741,7 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "50%"; // Largeur du pont en pixels
+                                    bridgeImage.style.width = "80%"; // Largeur du pont en pixels
                                     bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
                                     bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
                                 } else { // Sinon, c'est un pont simple
@@ -772,6 +773,41 @@ if($mod == 'custom'){
                     }
                     check_win();
                 }
+//on transforme huge en chaine de caractere
+                function myFunction() {
+                var url = "randommod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
+                        columns) + "&JSON=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
+                    encodeURIComponent(huge.Islands.length);
+                window.location.href = url;
+            }
+
+
+            <?php   
+}
+            if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
+$rows = $_GET['rows'];
+$columns = $_GET['columns'];
+$pixelArt = $_GET['JSON'];
+$nbiles = $_GET['nbiles'];
+$difficulty = (($rows*$columns)/$nbiles)*5;
+
+echo "Nombre de lignes : " . $rows . "<br>";
+echo "Nombre de colonnes : " . $columns . "<br>";
+echo "Pixel art : " . $pixelArt . "<br>";
+echo "Nombre d'îles : " . $nbiles . "<br>";
+//on stock les valeurs dans la base de données
+//on recupere le pseudo de l'utilisateur
+$username = $_SESSION['username'];
+//on se connecte a la base de données
+include("traitement/DB_connect.php");
+$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
+//on prepare la requete
+$stmt = $conn->prepare($sql);
+//on execute la requete
+$stmt->execute();
+}
+
+?>
                 </script>
             </div>
         </div>

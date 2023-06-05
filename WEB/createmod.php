@@ -502,9 +502,8 @@ session_start();
                 var pixelArt = convertToPixelArt(rows, columns);
                 var iles = countIslands(rows, columns);
                 var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" +
+                        columns) + "&pixelArt=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
                     encodeURIComponent(iles);
-
                 window.location.href = url;
             }
 
@@ -554,16 +553,7 @@ session_start();
             <div id="poubelle" class="poubelle">
                 <img class="poubelle" src="../WEB/image/button/TRASH.png">
             </div>
-
-
-
-
-
-
             <div>
-
-
-
                 <?php
 // Récupérer les paramètres de l'URL
 if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['pixelArt']) && isset($_GET['nbiles'])){
