@@ -4,6 +4,7 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
 .back{
   position: absolute;
   width: 85px;
@@ -16,6 +17,10 @@
 .backimg{
   width: 50px; 
   
+}
+.ch3{
+  margin-top: 4%;
+  margin-bottom: 3%;
 }
 .ch2{
   margin-top: 5vh;
@@ -58,11 +63,12 @@
     
 }
 .Choix{
+  padding-bottom: 1%;
   border:0.3vw solid #538E8A;
   background-color: #9acdcef6;
   border-radius: 30px;
   margin: auto;
-  height: 45vh;
+  height: 100%;
   width: 40vw;
   padding-left: 4vw;
   padding-top: 1.5vw;

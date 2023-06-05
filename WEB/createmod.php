@@ -520,11 +520,22 @@ $rows = $_GET['rows'];
 $columns = $_GET['columns'];
 $pixelArt = $_GET['pixelArt'];
 $nbiles = $_GET['nbiles'];
+$difficulty = (($rows*$columns)/$nbiles)*5;
 
 echo "Nombre de lignes : " . $rows . "<br>";
 echo "Nombre de colonnes : " . $columns . "<br>";
 echo "Pixel art : " . $pixelArt . "<br>";
 echo "Nombre d'îles : " . $nbiles . "<br>";
+//on stock les valeurs dans la base de données
+//on recupere le pseudo de l'utilisateur
+$username = $_SESSION['username'];
+//on se connecte a la base de données
+include("traitement/DB_connect.php");
+$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
+//on prepare la requete
+$stmt = $conn->prepare($sql);
+//on execute la requete
+$stmt->execute();
 }
 //$command = 'MartinS.exe'. ' '. $rows . ' ' . $columns . ' ' . $nbiles . ' ' . $pixelArt;
 //$output = exec($command);
