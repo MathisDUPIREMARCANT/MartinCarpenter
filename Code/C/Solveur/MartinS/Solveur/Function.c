@@ -173,6 +173,8 @@ void Print_board(char* Board, Coord Taille) {
 
 void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge, Bridge* Bridges, int Nb_bridge) {
 
+    Nb_bridge--;
+
     Bridges[Nb_bridge].length = Length;
     Bridges[Nb_bridge].direction = Direction;
     Bridges[Nb_bridge].size = Type_bridge;
@@ -268,19 +270,6 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
-void Stock_island(Island* islands, Coord posMax, char* board) {
-   int incr = 0;
-   for (int i = 0; i < posMax.x; i++) {
-        for (int j = 0; j < posMax.y; j++) {
-            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
-                islands[incr].pos.x = i;
-                islands[incr].pos.y = j;
-                islands[incr].number = atoi(board + (posMax.x * j) + i);
-                incr++;
-            }
-        }
-    }
-}
 
 void Copy_bridges(Bridge* Bridge_copy, Bridge* Bridges, int Nb_bridge) {
     for (int i = 0; i < Nb_bridge; i++) {
@@ -319,5 +308,20 @@ Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Leng
     case(3):
         return atoi((Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
         break;
+    }
+}
+
+void Stock_island(Island* islands, Coord posMax, char* board) {
+    int incr = 0;
+    for (int i = 0; i < posMax.x; i++) {
+        for (int j = 0; j < posMax.y; j++) {
+            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
+                islands[incr].pos.x = i;
+                islands[incr].pos.y = j;
+                islands[incr].number = atoi(board + (posMax.x * j) + i);
+                incr++;
+
+            }
+        }
     }
 }
