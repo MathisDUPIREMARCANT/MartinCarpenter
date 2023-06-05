@@ -58,7 +58,7 @@ session_start() ;
 
             <div class="buttons2">
                 <?php
-            if(isset($_SESSION['username'])){
+            if(isset($_SESSION['username']) && ($_SESSION['username'])!="admin" ){
                 ?><button id="Button2" class="Button2" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
                 </button>
@@ -69,13 +69,30 @@ session_start() ;
             </div>
             <?php
                 }
-                else{
-                ?>
+                elseif((isset($_SESSION['username'])) && ($_SESSION['username'])=="admin" ){
+                    ?>
             <div class="buttons">
                 <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
                 </button>
-                        
+
+                <button id="Button" class="Button" type="submit">
+                    <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
+                </button>
+                <button id="Button" class="Button" type="submit">
+                    <a id="writebutton" class='writebutton' href="WEB/admin.php">Admin</a>
+                    <a></a>
+                </button>
+            </div>
+            <?php
+            }
+            else{
+            ?>
+            <div class="buttons">
+                <button id="Button" class="Button" type="submit">
+                    <a id="writebutton" class='writebutton' href="WEB/game.php">Play</a>
+                </button>
+
                 <button id="Button" class="Button" type="submit">
                     <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
                 </button>
@@ -95,7 +112,7 @@ session_start() ;
         <footer>
 
             <audio class="audio" controls>
-            <source src="WEB/image/music.mp3" type="video/mp4">
+                <source src="WEB/image/music.mp3" type="video/mp4">
             </audio>
 
             </button>

@@ -35,7 +35,7 @@
             if($email == "admin.admin@student.junia.com" && password_verify($password, $donnees['password'])){
                 $_SESSION['username'] = "admin";
                 $_SESSION['email'] = $email;
-                header("Location: ../admin.php");
+                header("Location: ../../index.php");
                 return;
             }
             $requete = $conn->prepare('SELECT COUNT(*) AS `nb_email` FROM `users` WHERE `email` = ?');
