@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <malloc.h>
+#define _CRT_SECURE_DEPRECATE_MEMORY
+#include <memory.h>
 
 #define Nb_max 100
 
@@ -109,11 +112,11 @@ int Weigth_Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direc
 
 
 int Island_on_map(char* Board, Coord pos, Coord posMax) {
-    
+
     int Island_current = 0;
 
-    for (int y = 0; y < posMax.y ; y++) {
-        for (int x = 0; x < posMax.x ; x++) {
+    for (int y = 0; y < posMax.y; y++) {
+        for (int x = 0; x < posMax.x; x++) {
             if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
                 Island_current++;
             }
@@ -171,14 +174,11 @@ void Print_board(char* Board, Coord Taille) {
     printf("\n");
 }
 
-void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge, Bridge* Bridges, int Nb_bridge) {
-
-    Nb_bridge--;
+void Create_bridge(Bridge* Bridges, char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Nb_bridge, int Type_bridge) {
 
     Bridges[Nb_bridge].length = Length;
     Bridges[Nb_bridge].direction = Direction;
     Bridges[Nb_bridge].size = Type_bridge;
-
     Bridges[Nb_bridge].pos = (Coord*)malloc(sizeof(Coord) * Length);
 
     for (int i = 0; i < Length; i++) {
@@ -232,7 +232,7 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
 
 int Enumeration(char* board, Coord pos, Coord posMax, int* result, int* direction) {
     int weight_island = atoi((board + (posMax.x * pos.y) + pos.x));
-    int Nb_possibility = 0 ;
+    int Nb_possibility = 0;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
@@ -254,11 +254,11 @@ int Enumeration(char* board, Coord pos, Coord posMax, int* result, int* directio
                          //   free(result);
                           //  result = buffer; 
                         //}
-                        
+
                     }
-                    
+
                 }
-            } 
+            }
         }
     }
     return Nb_possibility;
@@ -270,46 +270,23 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
-
 void Copy_bridges(Bridge* Bridge_copy, Bridge* Bridges, int Nb_bridge) {
     for (int i = 0; i < Nb_bridge; i++) {
         Bridge_copy[i].direction = Bridges[i].direction;
         Bridge_copy[i].length = Bridges[i].length;
         Bridge_copy[i].size = Bridges[i].size;
+
         Bridge_copy[i].pos = (Coord*)malloc(sizeof(Coord) * Bridges[i].length);
-        if (Bridge_copy[i].pos == NULL) {
-			printf("Erreur d'allocation");
-			exit(1);
-		}
+
         for (int y = 0; y < Bridges[i].length; y++) {
             Bridge_copy[i].pos[y].x = Bridges[i].pos[y].x;
             Bridge_copy[i].pos[y].y = Bridges[i].pos[y].y;
         }
+
     }
+
 }
 
-
-Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length) {
-
-    switch (Direction) {
-
-    case(0):
-        return atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
-        break;
-
-    case(1):
-        return atoi((Board + (posMax.x * (pos.y) + pos.x + Length + 1)));
-        break;
-
-    case(2):
-        return atoi((Board + (posMax.x * (pos.y + (Length + 1)) + pos.x)));
-        break;
-
-    case(3):
-        return atoi((Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
-        break;
-    }
-}
 
 void Stock_island(Island* islands, Coord posMax, char* board) {
     int incr = 0;

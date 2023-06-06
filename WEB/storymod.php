@@ -23,43 +23,26 @@ session_start();
     <link rel="icon" type="image/x-con" href="image/logomartin.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/choiceoflevel.css">
-    <script>
-    function RedirectPage($buttonID){
-            $path = GetPathFromDB($buttonID);
-            $url = "users_levels.php?level=".$path;
-            header("Location: rules.php");
-            exit();
-    }
-    </script>
     <?php
-    function GetPathFromDB($buttonID){
-            $sql="SELECT path FROM levels WHERE number = 'buttonID'";
-            require("traitement/DB_connect.php");  
-            $sql = $conn->prepare($sql);
-            $sql->execute();
-            $path = $sql->fetchAll();
-            $reussi = "oui";
-            return $path;
-            
-    }
+
     ?>
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       
-        GetPathFromDB(1);
-    }
-        if(isset($_COOKIE['ColorButton'])==TRUE){
-            $style=$_COOKIE['ColorButton']; //on récupère le theme choisi enregistré dans le cookie
-            echo"
-            <link rel='stylesheet' href='CSS/Changecolorbutton/$style.css' />";
-            }
-       
-        
-        
-        ?>
+
 </head>
 
 <body>
+
+<script>
+    //on convertit la variable path en php en variable javascript
+    //var path = "<?php //echo $path; ?>";
+    // function RedirectPage($buttonID){
+    //         path = GetPathFromDB($buttonID);
+    //         $url = "users_levels.php?level=".$path;
+    //         header("Location: rules.php");
+    //         exit();
+    // }
+
+
+    </script>
     <video id="background-video" muted="" autoplay="autoplay" playsinline loop>
         <source src="image/background.mp4" type="video/mp4">
     </video>
@@ -77,7 +60,7 @@ session_start();
         </div>
     </header>
     <main class="main">
-    <button id="niveau" class="niveau">
+    <button id="niveau" class="niveau" >
             <a>
                 1
             </a>
@@ -177,6 +160,22 @@ session_start();
                 20
             </a>
         </button>
+        <SCript>
+                // Sélectionnez tous les boutons avec la classe "niveau"
+const boutons = document.querySelectorAll('.niveau');
+
+// Parcourez chaque bouton et ajoutez un gestionnaire d'événements de clic
+boutons.forEach(bouton => {
+  bouton.addEventListener('click', () => {
+    // Récupérez le numéro affiché dans l'élément <a>
+    const numero = bouton.querySelector('a').textContent.trim();
+    //on redirige vers la page de jeu avec le niveau choisi
+    window.location.href = "users_levels.php?story_level=" + numero;
+  });
+});
+//on convertit la variable numero JS en variable php
+
+        </SCript>
     </main>
 </body>
 

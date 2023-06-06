@@ -1,6 +1,6 @@
 <?php include("debutsetting.php"); ?>
 <?php 
-if(isset($_POST['theme'])){
+if(isset($_POST['theme'])||isset($_POST['mode'])){
 setcookie("Colorgame",$_POST['Choixtheme'],time()+(365*24*3600),'/', '',false,true);
 setcookie("ColorButton",$_POST['ChoiceButton'],time()+(365*24*3600),'/', '',false,true);
 header('location:settinglevelchoice.php');	
