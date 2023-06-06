@@ -66,8 +66,9 @@ if(isset($_SESSION['username'])){
     </main>
 
     <script>
+    var id = Date.now(); //ID POUR LA VICTOIRE
     function redirectTo(url) {
-        window.location.href = url;
+        window.location.href = url + "&id=" + id;
     }
     </script>
 </body>

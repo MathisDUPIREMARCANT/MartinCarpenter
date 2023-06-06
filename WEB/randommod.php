@@ -33,6 +33,7 @@ session_start();
         echo"
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
+        $username = $_SESSION['username'];
     ?>
 </head>
 
@@ -204,7 +205,8 @@ if($mod == 'custom'){
                 <script type="text/javascript">
                 var texte_js = <?php echo $texte_js; ?>;
                 var huge = JSON.parse(texte_js);
-                <?php ?>
+                //on convertit la variable php mod en variable js
+                var mod = "<?php echo $mod; ?>";
                 // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
                 //{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },
                 //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
@@ -554,7 +556,11 @@ if($mod == 'custom'){
                     tmp2["2"].sort();
 
                     if (JSON.stringify(tmp) === JSON.stringify(tmp2)) {
-                        document.location.href = "Win.php";
+                //on creer un identifiant unique pour la partie
+                //on transforme la varibale id php en variable js
+
+
+                        document.location.href = "Win.php?mod=" + mod;
                     }
 
                 }
@@ -782,6 +788,9 @@ if($mod == 'custom'){
             }
 
 
+            
+
+
             <?php   
 }
             if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
@@ -793,7 +802,7 @@ $difficulty = ($rows*$columns*$nbiles)/20;
 
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur
-$username = $_SESSION['username'];
+
 //on se connecte a la base de données
 include("traitement/DB_connect.php");
 $sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
@@ -808,6 +817,15 @@ echo "<script>window.location.href = 'randommod.php?mod=easy';</script>";
 }
 
 ?>
+                    // <?php 
+                    // //on convertit la variable JS "id" en variable globale PHP 
+                     $id = $_GET["id"];
+
+                    // // Utilisez la variable $id comme vous le souhaitez
+                     echo "L'ID est : " . $id;
+
+                    $_SESSION['id'] = $id;
+                    $_SESSION['id2'] = $id;?> 
                 </script>
             </div>
         </div>
