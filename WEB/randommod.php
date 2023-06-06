@@ -33,6 +33,7 @@ session_start();
         echo"
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
+        $username = $_SESSION['username'];
     ?>
 </head>
 
@@ -141,9 +142,9 @@ session_start();
 //on exec le .exe avec les parametres du formulaire 11 13 30
 if($mod == 'easy'){
     $nb_iles = 6;
-    $nb_colonnes = 6;
+    $nb_colonnes = 7;
     $nb_lignes = 7;
-    $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+    $command = 'MartinG_easy.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
     while($output == -1){
         $output = exec($command);
@@ -168,14 +169,11 @@ if($mod == 'hard'){
     $nb_iles = 25;
     $nb_colonnes = 11;
     $nb_lignes = 13;
-    $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+    $command = 'MartinG_test5.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
-    echo $output;
     while($output == -1){
-        echo $output;
         $output = exec($command);
     }
-    echo $output;
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
@@ -204,11 +202,11 @@ if($mod == 'custom'){
                 <script type="text/javascript">
                 var texte_js = <?php echo $texte_js; ?>;
                 var huge = JSON.parse(texte_js);
-                <?php ?>
-                // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
-                //{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },
-                //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
-                var rows = huge.Grid[0].size[0];
+                //on convertit la variable php mod en variable js
+                var mod = "<?php echo $mod; ?>";
+//                 huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [3, 7]            },              {"links" : 4,                   "Placement" : [3, 4]            },              {"links" : 2,                   "Placement" : [1, 4]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 2,                   "Placement" : [1, 2]            },              {"links" : 6,                   "Placement" : [3, 0]            },              {"links" : 2,                   "Placement" : [6, 0]            },              {"links" : 4,                   "Placement" : [0, 0]            },              {"links" : 3,                   "Placement" : [0, 3]            },              {"links" : 1,                   "Placement" : [2, 3]            }    ],    "Grid": [
+// {                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 2,           "direction" : 1,                 "Placement" : [[3, 6],[3, 5]]  },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[2, 4]] },              {               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[3, 3]]         },              {               "width" : 1,            "length" : 1,           "direction" : 0,         "Placement" : [[2, 2]]         },              {               "width" : 1,            "length" : 1,          "direction" : 1,          "Placement" : [[3, 1]]         },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[4, 0],[5, 0]]  },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[2, 0],[1, 0]]  },             {                "width" : 1,            "length" : 2,           "direction" : 1,                 "Placement" : [[0, 1],[0, 2]]  },              {               "width" : 0,            "length" : 1,           "direction" : 0,                "Placement" : [[1, 3]]  }    ],    "PlacedBridges":{}}
+var rows = huge.Grid[0].size[0];
                 var columns = huge.Grid[0].size[1];
 
                 var gameDiv = document.getElementById('game');
@@ -320,6 +318,14 @@ if($mod == 'custom'){
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 6) {
                                         islandImage.src = "image/images_temporaires/6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                 else if (huge.Islands[k].links == 7) {
+                                        islandImage.src = "image/images_temporaires/7.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                 else if (huge.Islands[k].links == 8) {
+                                        islandImage.src = "image/images_temporaires/8.png";
                                         cell.appendChild(islandImage);
                                     }
                                 } else {
@@ -481,7 +487,7 @@ if($mod == 'custom'){
                     "1": [],
                     "2": []
                 };
-                console.log('huge.Bridges', huge.Bridges);
+                console.log('huge.Bridges', huge);
                 for (var j = 0; j < Object.keys(huge.Bridges).length; j++) {
 
                     //on verifie la valeur du count
@@ -554,7 +560,11 @@ if($mod == 'custom'){
                     tmp2["2"].sort();
 
                     if (JSON.stringify(tmp) === JSON.stringify(tmp2)) {
-                        document.location.href = "Win.php";
+                //on creer un identifiant unique pour la partie
+                //on transforme la varibale id php en variable js
+
+
+                        document.location.href = "Win.php?mod=" + mod;
                     }
 
                 }
@@ -782,6 +792,9 @@ if($mod == 'custom'){
             }
 
 
+            
+
+
             <?php   
 }
             if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
@@ -789,15 +802,11 @@ $rows = $_GET['rows'];
 $columns = $_GET['columns'];
 $pixelArt = $_GET['JSON'];
 $nbiles = $_GET['nbiles'];
-$difficulty = (($rows*$columns)/$nbiles)*5;
+$difficulty = ($rows*$columns*$nbiles)/20;
 
-echo "Nombre de lignes : " . $rows . "<br>";
-echo "Nombre de colonnes : " . $columns . "<br>";
-echo "Pixel art : " . $pixelArt . "<br>";
-echo "Nombre d'îles : " . $nbiles . "<br>";
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur
-$username = $_SESSION['username'];
+
 //on se connecte a la base de données
 include("traitement/DB_connect.php");
 $sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
@@ -805,9 +814,22 @@ $sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) V
 $stmt = $conn->prepare($sql);
 //on execute la requete
 $stmt->execute();
+//on fait une alerte pour dire que le niveau a bien été sauvegardé
+echo "<script>alert('Votre niveau a bien été enregistré !');</script>";
+//on réaffiche la page
+echo "<script>window.location.href = 'randommod.php?mod=easy';</script>";
 }
 
 ?>
+                    // <?php 
+                    // //on convertit la variable JS "id" en variable globale PHP 
+                     $id = $_GET["id"];
+
+                    // // Utilisez la variable $id comme vous le souhaitez
+                     echo "L'ID est : " . $id;
+
+                    $_SESSION['id'] = $id;
+                    $_SESSION['id2'] = $id;?> 
                 </script>
             </div>
         </div>
