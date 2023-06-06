@@ -39,6 +39,9 @@ session_start();
 
 
     <?php
+    // if($_GET['create']==1){
+    //     echo "<script>alert('You have to create a level before playing')</script>";
+    // }
         if (isset($_POST['nb_lignes']) && isset($_POST['nb_colonnes'])){
             $rows = $_POST['nb_lignes'];
             $columns = $_POST['nb_colonnes'];
@@ -127,14 +130,26 @@ session_start();
 
             <h1 id="banger" style="position:relative; left: 40px;"></h1>
             <!-- tableau pour stocker des images -->
+            <?php if(!isset($rows)){?>
             <form action="createmod.php" method="post">
                 <label for="nb_colonnes">Number of columns</label>
                 <input type="text" name="nb_colonnes" id="nb_colonnes">
                 <label for="nb_lignes">Number of lines</label>
                 <input type="text" name="nb_lignes" id="nb_lignes">
-                <input id="button" type="submit" value="Validate">
+                <input id="button" type="submit" value="Create">
                 <br><br> <br>
             </form>
+            <?php }else{?>
+                            <form action="createmod.php" method="post">
+                            <label for="nb_colonnes">Number of columns</label>
+                            <input type="text" name="nb_colonnes" id="nb_colonnes">
+                            <label for="nb_lignes">Number of lines</label>
+                            <input type="text" name="nb_lignes" id="nb_lignes">
+                            <input id="button" type="submit" value="New Board">
+                            <br><br> <br>
+                        </form>
+            <?php  }?>
+
             <div id="bangerang"></div>
             <script>
             huge = {
@@ -489,10 +504,13 @@ session_start();
             function myFunction() {
                 var pixelArt = convertToPixelArt(rows, columns);
                 var iles = countIslands(rows, columns);
+                //on ajoute dans huge dans le tableau d'objet Grid un tableau size qui contient les lignes et les colonnes pour avoir la forme     "Grid": [{ "size": [7, 7] }]
+                huge.Grid.push({
+                    "size": [rows, columns]
+                });
                 var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" +
+                        columns) + "&pixelArt=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
                     encodeURIComponent(iles);
-
                 window.location.href = url;
             }
 
@@ -542,39 +560,28 @@ session_start();
             <div id="poubelle" class="poubelle">
                 <img class="poubelle" src="../WEB/image/button/TRASH.png">
             </div>
-
-
-
-
-
-
             <div>
-
-
-
                 <?php
 // Récupérer les paramètres de l'URL
 if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['pixelArt']) && isset($_GET['nbiles'])){
+
 $rows = $_GET['rows'];
 $columns = $_GET['columns'];
 $pixelArt = $_GET['pixelArt'];
 $nbiles = $_GET['nbiles'];
-$difficulty = (($rows*$columns)/$nbiles)*5;
-
-echo "Nombre de lignes : " . $rows . "<br>";
-echo "Nombre de colonnes : " . $columns . "<br>";
-echo "Pixel art : " . $pixelArt . "<br>";
-echo "Nombre d'îles : " . $nbiles . "<br>";
+$difficulty = ($rows*$columns*$nbiles)/20;
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur
 $username = $_SESSION['username'];
 //on se connecte a la base de données
 include("traitement/DB_connect.php");
-$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
+$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty, soluce) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty', 'A MODIFIER AVEC SOLVEUR')";
 //on prepare la requete
 $stmt = $conn->prepare($sql);
 //on execute la requete
 $stmt->execute();
+//on fait un message d'alerte pour dire que le niveau a été enregistré
+echo "<script>alert('Votre niveau a bien été enregistré !');</script>";
 }
 //$command = 'MartinS.exe'. ' '. $rows . ' ' . $columns . ' ' . $nbiles . ' ' . $pixelArt;
 //$output = exec($command);
@@ -593,23 +600,26 @@ $stmt->execute();
 
                 // Gérer le dépôt sur la poubelle
                 trashBin.addEventListener('drop', function(event) {
-                    event.preventDefault(); // empêche le navigateur d'ouvrir l'image
-                    var id = event.dataTransfer.getData("text"); // obtenir l'id de l'image déplacée
-                    var element = document.getElementById(id); // obtenir la référence de l'image
-                    element.parentNode.removeChild(element); // supprimer l'image du DOM
+    event.preventDefault(); // empêche le navigateur d'ouvrir l'image
+    var id = event.dataTransfer.getData("text"); // obtenir l'id de l'image déplacée
 
 
-                    // Recherche l'index de l'île correspondante dans huge.Islands en fonction de l'ID de l'image
-                    var islandIndex = huge.Islands.findIndex(function(island) {
-                        return island.id === id;
-                    });
+    // vérifie si l'image ne provient pas du tableau HTML
+    if (!document.getElementById(id).parentNode.classList.contains("source-table")) {
+        var element = document.getElementById(id); // obtenir la référence de l'image
+        element.parentNode.removeChild(element); // supprimer l'image du DOM
 
 
-                    // Si l'île est trouvée, la supprime de huge.Islands
-                    if (islandIndex !== -1) {
-                        huge.Islands.splice(islandIndex, 1);
-                    }
-                });
+        // Supprime l'île du tableau huge.Islands
+        for (var i = 0; i < huge.Islands.length; i++) {
+            if (huge.Islands[i].id === id) {
+                huge.Islands.splice(i, 1);
+                break;
+            }
+        }
+    }
+});
+
                 </script>
 
 

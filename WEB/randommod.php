@@ -33,6 +33,7 @@ session_start();
         echo"
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
+        $username = $_SESSION['username'];
     ?>
 </head>
 
@@ -76,7 +77,7 @@ session_start();
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
             <a id="savepos" class="savepos">
-                <img class="save" src="image/button/savestar.png" />
+                <img class="save" src="image/button/savestar.png" onclick="myFunction()"/>
             </a>
         </div>
         <div id="popup" style="display: none;">
@@ -118,7 +119,8 @@ session_start();
                 ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
         <form action=" randommod.php?mod=<?php $mod?>" method="post">
-            <?php   
+            <?php 
+        if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
         if($mod == 'custom'){?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
             <label for="nb_iles">Number of islands</label>
@@ -144,7 +146,9 @@ if($mod == 'easy'){
     $nb_lignes = 7;
     $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
-    
+    while($output == -1){
+        $output = exec($command);
+    }
         $texte_php = $output;
         $texte_js = json_encode($texte_php);
         
@@ -155,15 +159,24 @@ if($mod == 'medium'){
     $nb_lignes = 10;
     $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
+    while($output == -1){
+        $output = exec($command);
+    }
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
 if($mod == 'hard'){
-    $nb_iles = 30;
+    $nb_iles = 25;
     $nb_colonnes = 11;
     $nb_lignes = 13;
     $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
+    echo $output;
+    while($output == -1){
+        echo $output;
+        $output = exec($command);
+    }
+    echo $output;
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
@@ -175,9 +188,11 @@ if($mod == 'custom'){
         $nb_colonnes = $_POST['nb_colonnes'];
         $nb_lignes = $_POST['nb_lignes'];
         
-        $command = 'MartinG.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+        $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
         $output = exec($command);
-
+        while($output == -1){
+            $output = exec($command);
+        }
         
                     
         $texte_php = $output;
@@ -190,7 +205,8 @@ if($mod == 'custom'){
                 <script type="text/javascript">
                 var texte_js = <?php echo $texte_js; ?>;
                 var huge = JSON.parse(texte_js);
-                <?php ?>
+                //on convertit la variable php mod en variable js
+                var mod = "<?php echo $mod; ?>";
                 // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
                 //{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },
                 //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
@@ -200,12 +216,13 @@ if($mod == 'custom'){
                 var gameDiv = document.getElementById('game');
                 var gameDivWidth = gameDiv.clientWidth;
                 var gameDivHeight = gameDiv.clientHeight;
-//fonction pour recuperer les cookies 
+                //fonction pour recuperer les cookies 
                 function getCookie(name) {
                     var value = "; " + document.cookie;
                     var parts = value.split("; " + name + "=");
                     if (parts.length == 2) return parts.pop().split(";").shift();
                 }
+
                 function generate_table_no_solution(rows, columns) {
                     // Obtenir la référence du body
                     var body = document.getElementsByTagName("body")[0];
@@ -289,26 +306,25 @@ if($mod == 'custom'){
                                 //on verifie le status du cookie "mode" 
                                 if (getCookie("mode") == 1) {
                                     if (huge.Islands[k].links == 1) {
-                                        islandImage.src = "image/images_temporaires/3167v-chiffre-1.png";
+                                        islandImage.src = "image/images_temporaires/1.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 2) {
-                                        islandImage.src = "image/images_temporaires/chiffre-2-en-aluminium-decoupe-coloris-et-dimensions-au-choix.png";
+                                        islandImage.src = "image/images_temporaires/2.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 3) {
-                                        islandImage.src = "image/images_temporaires/chiffre-3-en-alu-couleur-et-dimensions-au-choix.png";
+                                        islandImage.src = "image/images_temporaires/3.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 4) {
-                                        islandImage.src = "image/images_temporaires/chiffre-4-en-aluminium-5-coloris-et-2-dimensions-possibles.png";
+                                        islandImage.src = "image/images_temporaires/4.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 5) {
-                                        islandImage.src = "image/images_temporaires/chiffre-5-en-aluminium-5-coloris-au-choix-100-ou-150-mm-de-haut.png";
+                                        islandImage.src = "image/images_temporaires/5.png";
                                         cell.appendChild(islandImage);
                                     } else if (huge.Islands[k].links == 6) {
                                         islandImage.src = "image/images_temporaires/6.png";
                                         cell.appendChild(islandImage);
                                     }
-                                } 
-                                else {
+                                } else {
                                     if (huge.Islands[k].links == 1) {
                                         islandImage.src = "../WEB/image/iles/ile1.png";
                                         cell.appendChild(islandImage);
@@ -540,7 +556,11 @@ if($mod == 'custom'){
                     tmp2["2"].sort();
 
                     if (JSON.stringify(tmp) === JSON.stringify(tmp2)) {
-                        document.location.href = "Win.php";
+                //on creer un identifiant unique pour la partie
+                //on transforme la varibale id php en variable js
+
+
+                        document.location.href = "Win.php?mod=" + mod;
                     }
 
                 }
@@ -709,9 +729,9 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "100%"; // Largeur du pont en pixels
-                                    bridgeImage.style.height = "80%"; // Hauteur du pont en pixels
-                                    bridgeImage.src = "../WEB/image/iles/bridge_h.png";
+                                    bridgeImage.style.width = "100%"; // Largeur d1u pont en pixels
+                                    bridgeImage.style.height = "75%"; // Hauteur du pont en pixels
+                                    bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
                                 } else { // Sinon, c'est un pont simple
                                     bridgeImage.src = "../WEB/image/iles/bridge_h.png";
                                 }
@@ -727,9 +747,9 @@ if($mod == 'custom'){
                                     if (cellElement.firstChild) {
                                         cellElement.removeChild(cellElement.firstChild);
                                     }
-                                    bridgeImage.style.width = "50%"; // Largeur du pont en pixels
+                                    bridgeImage.style.width = "80%"; // Largeur du pont en pixels
                                     bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
-                                    bridgeImage.src = "../WEB/image/iles/bridge_V.png";
+                                    bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
                                 } else { // Sinon, c'est un pont simple
                                     bridgeImage.src = "../WEB/image/iles/bridge_V.png";
                                 }
@@ -759,6 +779,53 @@ if($mod == 'custom'){
                     }
                     check_win();
                 }
+//on transforme huge en chaine de caractere
+                function myFunction() {
+                var url = "randommod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
+                        columns) + "&JSON=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
+                    encodeURIComponent(huge.Islands.length);
+                window.location.href = url;
+            }
+
+
+            
+
+
+            <?php   
+}
+            if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
+$rows = $_GET['rows'];
+$columns = $_GET['columns'];
+$pixelArt = $_GET['JSON'];
+$nbiles = $_GET['nbiles'];
+$difficulty = ($rows*$columns*$nbiles)/20;
+
+//on stock les valeurs dans la base de données
+//on recupere le pseudo de l'utilisateur
+
+//on se connecte a la base de données
+include("traitement/DB_connect.php");
+$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
+//on prepare la requete
+$stmt = $conn->prepare($sql);
+//on execute la requete
+$stmt->execute();
+//on fait une alerte pour dire que le niveau a bien été sauvegardé
+echo "<script>alert('Votre niveau a bien été enregistré !');</script>";
+//on réaffiche la page
+echo "<script>window.location.href = 'randommod.php?mod=easy';</script>";
+}
+
+?>
+                    // <?php 
+                    // //on convertit la variable JS "id" en variable globale PHP 
+                     $id = $_GET["id"];
+
+                    // // Utilisez la variable $id comme vous le souhaitez
+                     echo "L'ID est : " . $id;
+
+                    $_SESSION['id'] = $id;
+                    $_SESSION['id2'] = $id;?> 
                 </script>
             </div>
         </div>

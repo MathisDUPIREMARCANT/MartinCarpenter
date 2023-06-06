@@ -27,8 +27,8 @@ session_start();
 
     <header>
         <div class="buttonhead">
-            <button class="back" type="submit" onclick="showPopup()">
-                <a class="al" - href="../index.php"><img class="backimg" src="image/button/vide.png"></a>
+            <button class="back" type="submit">
+                <a class=" al" - href="../index.php"><img class="backimg" src="image/button/vide.png"></a>
             </button>
         </div>
     </header>
@@ -41,10 +41,56 @@ session_start();
                 Workshop
             </div>
             <div class="levels">
+                <?php
+                try{
+                require("traitement/DB_connect.php");
+                $reqPrep1="SELECT user,difficulty,rows,colls,islands,path FROM users_level WHERE user='$_SESSION[username]'";
+                $req1 =$conn->prepare($reqPrep1);
+                $req1->execute();
+                $resultat = $req1->fetchAll();
+                
+                }
+                catch(Exception $e){
 
+                die("Erreur : " . $e->getMessage());
+                } 
+                foreach($resultat as $row){
+                    $level=$row['path'];
+                ?>
+
+                    <a class="lev" href="users_levels.php?level=<?php echo urlencode($level); ?>">
+                    Made by <?php echo $row["user"] ?><br>
+                    Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
+                    Difficulty: <?php echo " ".$row["difficulty"] ?>
+
+                </a>
+                <?php } ?>
             </div>
             <div class="levels">
+                <?php
+                try{
+                require("traitement/DB_connect.php");
+                $reqPrep1="SELECT user,difficulty,rows,colls,islands,path FROM users_level ";
+                $req1 =$conn->prepare($reqPrep1);
+                $req1->execute();
+                $resultat = $req1->fetchAll();
+                
+                }
+                catch(Exception $e){
 
+                die("Erreur : " . $e->getMessage());
+                } 
+                foreach($resultat as $row){
+                    $level=$row['path'];
+                ?>
+
+                <a class="lev" href="users_levels.php?level=<?php echo urlencode($level); ?>">
+                    Made by <?php echo $row["user"] ?><br>
+                    Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
+                    Difficulty:<?php echo " ".$row["difficulty"] ?>
+
+                </a>
+                <?php } ?>
             </div>
         </div>
     </main>

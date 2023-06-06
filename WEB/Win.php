@@ -51,6 +51,7 @@ session_start();
     </header>
     <main>
         <?php
+        include("traitement/DB_connect.php");
         //on selectionne au hasard 4 images parmis celles dans ../WEB/image/Carpenter/
         $images = array();
         $dir = opendir('../WEB/image/Carpenter/');
@@ -72,6 +73,28 @@ session_start();
         <div class="win">
             You WIN !
         </div>
+        <?php 
+
+                //on verifie que l'id en session est bien celui dans l'url
+                if($_SESSION['id'] == $_SESSION['id2']){
+                   $username = $_SESSION['username'];
+                    if($_GET ['mod'] == 'easy'){
+                        $score = 15;
+                    }
+                    elseif($_GET ['mod'] == 'medium'){
+                        $score = 35;
+                    }
+                    elseif($_GET ['mod'] == 'hard'){
+                        $score = 100;
+                    }
+                //on vient ajouter le score de l'utilisateur dans la base de données en fonction du mode de jeu. on ajoute le score avec une addition 
+                $sql = "UPDATE users SET score = score + '$score' WHERE username = '$username'";
+                //on prepare la requete
+                $stmt = $conn->prepare($sql);
+                //on execute la requete
+                $stmt->execute();
+                }
+                ?>
         <script>
         </script>
     </main>
