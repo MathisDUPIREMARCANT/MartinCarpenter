@@ -34,6 +34,7 @@ session_start();
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
         $username = $_SESSION['username'];
+        $id = $_GET['id'];
     ?>
 </head>
 
@@ -100,7 +101,7 @@ session_start();
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'];?>">Settings
+                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'].'&id='.$id;?>">Settings
                     &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
@@ -809,7 +810,7 @@ $difficulty = ($rows*$columns*$nbiles)/20;
 
 //on se connecte a la base de données
 include("traitement/DB_connect.php");
-$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty')";
+$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty, soluce) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty', 'A MODIFIER AVEC SOLVEUR')";
 //on prepare la requete
 $stmt = $conn->prepare($sql);
 //on execute la requete
