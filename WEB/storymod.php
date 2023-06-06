@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 session_start();
 ?>
 <!DOCTYPE html>
@@ -21,12 +23,39 @@ session_start();
     <link rel="icon" type="image/x-con" href="image/logomartin.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/choiceoflevel.css">
+    <script>
+    function RedirectPage($buttonID){
+            $path = GetPathFromDB($buttonID);
+            $url = "users_levels.php?level=".$path;
+            header("Location: rules.php");
+            exit();
+    }
+    </script>
     <?php
+    function GetPathFromDB($buttonID){
+            $sql="SELECT path FROM levels WHERE number = 'buttonID'";
+            require("traitement/DB_connect.php");  
+            $sql = $conn->prepare($sql);
+            $sql->execute();
+            $path = $sql->fetchAll();
+            $reussi = "oui";
+            return $path;
+            
+    }
+    ?>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+       
+        GetPathFromDB(1);
+    }
         if(isset($_COOKIE['ColorButton'])==TRUE){
             $style=$_COOKIE['ColorButton']; //on récupère le theme choisi enregistré dans le cookie
             echo"
             <link rel='stylesheet' href='CSS/Changecolorbutton/$style.css' />";
             }
+       
+        
+        
         ?>
 </head>
 
@@ -48,7 +77,7 @@ session_start();
         </div>
     </header>
     <main class="main">
-        <button id="niveau" class="niveau" type=submit>
+    <button id="niveau" class="niveau">
             <a>
                 1
             </a>

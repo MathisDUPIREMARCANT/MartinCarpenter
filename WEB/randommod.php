@@ -34,12 +34,13 @@ session_start();
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
         $username = $_SESSION['username'];
+        if($_GET['mod'] != 'custom'){
         $id = $_GET['id'];
+        }
     ?>
 </head>
 
 <body>
-
     <script>
     function togglePopup() {
         var popup = document.getElementById("popup");
@@ -119,7 +120,7 @@ session_start();
                 }
                 ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
-        <form action=" randommod.php?mod=<?php $mod?>" method="post">
+        <form action=" randommod.php?mod=custom" method="post">
             <?php 
         if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
         if($mod == 'custom'){?>
@@ -186,7 +187,7 @@ if($mod == 'custom'){
         $nb_colonnes = $_POST['nb_colonnes'];
         $nb_lignes = $_POST['nb_lignes'];
         
-        $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+        $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
         $output = exec($command);
         while($output == -1){
             $output = exec($command);
@@ -197,13 +198,24 @@ if($mod == 'custom'){
         $texte_js = json_encode($texte_php);
     }
 }
-    ?>
+    ?> <?php 
+    if($mod != 'custom'){
+    // //on convertit la variable JS "id" en variable globale PHP 
+     $id = $_GET["id"];
+
+
+    $_SESSION['id'] = $id;
+    $_SESSION['id2'] = $id;
+    }?> 
+
+
                 <!-- on affiche le texte js avec du JS -->
                 <div id="bangerang"></div>
                 <script type="text/javascript">
                 var texte_js = <?php echo $texte_js; ?>;
                 var huge = JSON.parse(texte_js);
                 //on convertit la variable php mod en variable js
+                var id = <?php echo json_encode($id); ?>;
                 var mod = "<?php echo $mod; ?>";
 //                 huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [3, 7]            },              {"links" : 4,                   "Placement" : [3, 4]            },              {"links" : 2,                   "Placement" : [1, 4]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 2,                   "Placement" : [1, 2]            },              {"links" : 6,                   "Placement" : [3, 0]            },              {"links" : 2,                   "Placement" : [6, 0]            },              {"links" : 4,                   "Placement" : [0, 0]            },              {"links" : 3,                   "Placement" : [0, 3]            },              {"links" : 1,                   "Placement" : [2, 3]            }    ],    "Grid": [
 // {                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 2,           "direction" : 1,                 "Placement" : [[3, 6],[3, 5]]  },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[2, 4]] },              {               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[3, 3]]         },              {               "width" : 1,            "length" : 1,           "direction" : 0,         "Placement" : [[2, 2]]         },              {               "width" : 1,            "length" : 1,          "direction" : 1,          "Placement" : [[3, 1]]         },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[4, 0],[5, 0]]  },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[2, 0],[1, 0]]  },             {                "width" : 1,            "length" : 2,           "direction" : 1,                 "Placement" : [[0, 1],[0, 2]]  },              {               "width" : 0,            "length" : 1,           "direction" : 0,                "Placement" : [[1, 3]]  }    ],    "PlacedBridges":{}}
@@ -589,7 +601,6 @@ var rows = huge.Grid[0].size[0];
 
                     // Réinitialiser huge.userPlacedBridges
                     huge.userPlacedBridges = [];
-                    console.log('BIG PIPZ', huge.PlacedBridges); // Pour le débogage
                     check_win();
                 }
 
@@ -786,9 +797,24 @@ var rows = huge.Grid[0].size[0];
                 }
 //on transforme huge en chaine de caractere
                 function myFunction() {
+                    //on supprime les ponts de la grille
+                     // Parcourir toutes les cellules dans huge.PlacedBridges
+                     for (var cellId in huge.PlacedBridges) {
+                        // Supprimer le pont du DOM
+                        var cellElement = document.getElementById(cellId);
+                        while (cellElement.firstChild) {
+                            cellElement.removeChild(cellElement.firstChild);
+                        }
+
+                        // Supprimer le pont des données
+                        delete huge.PlacedBridges[cellId];
+                    }
+
+                    // Réinitialiser huge.userPlacedBridges
+                    huge.userPlacedBridges = [];
                 var url = "randommod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
                         columns) + "&JSON=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
-                    encodeURIComponent(huge.Islands.length);
+                    encodeURIComponent(huge.Islands.length) +  "&mod=" + encodeURIComponent(mod) + "&id=" + encodeURIComponent(id);
                 window.location.href = url;
             }
 
@@ -804,7 +830,7 @@ $columns = $_GET['columns'];
 $pixelArt = $_GET['JSON'];
 $nbiles = $_GET['nbiles'];
 $difficulty = ($rows*$columns*$nbiles)/20;
-
+$mod = $_GET['mod'];
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur
 
@@ -818,19 +844,11 @@ $stmt->execute();
 //on fait une alerte pour dire que le niveau a bien été sauvegardé
 echo "<script>alert('Votre niveau a bien été enregistré !');</script>";
 //on réaffiche la page
-echo "<script>window.location.href = 'randommod.php?mod=easy';</script>";
+echo "<script>window.location.href = 'randommod.php?mod=$mod&id=$id';</script>";
 }
 
 ?>
-                    // <?php 
-                    // //on convertit la variable JS "id" en variable globale PHP 
-                     $id = $_GET["id"];
 
-                    // // Utilisez la variable $id comme vous le souhaitez
-                     echo "L'ID est : " . $id;
-
-                    $_SESSION['id'] = $id;
-                    $_SESSION['id2'] = $id;?> 
                 </script>
             </div>
         </div>

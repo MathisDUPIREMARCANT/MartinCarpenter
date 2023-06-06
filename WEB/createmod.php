@@ -548,6 +548,14 @@ session_start();
                                 <img draggable="true" ondragstart="dragStart(event)" id="image6" class="original"
                                     src="../WEB/image/iles/ile6.png">
                             </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image7" class="original"
+                                    src="../WEB/image/iles/ile7.png">
+                            </td>
+                            <td class="source-table">
+                                <img draggable="true" ondragstart="dragStart(event)" id="image8" class="original"
+                                    src="../WEB/image/iles/ile8.png">
+                            </td>
 
 
                         </tr>

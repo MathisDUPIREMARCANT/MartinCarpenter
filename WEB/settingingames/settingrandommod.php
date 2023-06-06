@@ -1,15 +1,15 @@
 <?php include("debutsetting.php"); ?>
 <?php 
-if(isset($_POST['theme'])){
+if(isset($_POST['theme'])||isset($_POST['mode'])){
 setcookie("Colorgame",$_POST['Choixtheme'],time()+(365*24*3600),'/', '',false,true);
 setcookie("ColorButton",$_POST['ChoiceButton'],time()+(365*24*3600),'/', '',false,true);
-header('location:settingrandommod.php');	
+header("location: ../randommod.php?mod=".$_GET['mod']."&id=".$_GET['id']);	
 }
 ?>
 <header>
     <div class="buttonhead">
         <button class=" back" type=submit>
-            <a href="../randommod.php?mod=<?php echo $_GET['mod'];?>">
+            <a href="../randommod.php?mod=<?php echo $_GET['mod'].'&id='.$_GET['id'];?>">
                 <img class="backimg" src="../image/button/arrow.png">
             </a>
         </button>
@@ -47,6 +47,7 @@ header('location:settingrandommod.php');
 
             </div>
         </div>
+        
         <div class=" Choix">
-            <form method="post" class="form" id="formLetter" action="settingrandommod.php">
+            <form method="post" class="form" id="formLetter" action="settingrandommod.php?mod=<?php echo $_GET['mod'].'&id='.$_GET['id'];?>">
                 <?php include("finsetting.php"); ?>
