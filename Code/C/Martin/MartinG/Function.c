@@ -55,7 +55,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
 
     case(0):
         Next_Coord(&pos, 0);
-        while (pos.y > 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*') {
+        while (pos.y >= 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 0);
         } 
@@ -71,7 +71,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
 
     case(2):
         Next_Coord(&pos, 2);
-        while (pos.y < posMax.y-1 && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
             space++;
             Next_Coord(&pos, 2);
         }
@@ -79,7 +79,7 @@ int Space_next_bridge(char* Board, Coord pos, Coord posMax, int Direction){
         
     case(3):
         Next_Coord(&pos, 3);
-        while (pos.x > 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*' ) {
+        while (pos.x >= 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*' ) {
             space++;
             Next_Coord(&pos, 3);
         }

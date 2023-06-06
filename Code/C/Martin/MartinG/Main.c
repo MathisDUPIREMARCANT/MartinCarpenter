@@ -16,17 +16,18 @@ void main(int argc, char *argv[]) {
 	int nombre_x = atoi(argv[2]);
 	int nombre_y = atoi(argv[3]);*/
 
-	int nombre_iles = 10;
-	int nombre_x = 7;
-	int nombre_y = 9;
+	int nombre_iles = 20;
+	int nombre_x = 11;
+	int nombre_y = 13;
 
 	Coord posMax = { nombre_x, nombre_y};
-	Coord pos = { Random(0, posMax.x), Random(0, posMax.y) };
+	Coord pos = { Random(0, posMax.x-1), Random(0, posMax.y-1) };
 
 	char* Board = Init_board_Game(posMax);
 
-
+	
 	int test = Map_gen(Board, posMax, pos, nombre_iles);
+	Print_board(Board, posMax);
 	printf("%d", test);
 
 	//Print_board(Board, posMax);
