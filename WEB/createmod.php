@@ -509,7 +509,7 @@ session_start();
                     "size": [rows, columns]
                 });
                 var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&pixelArt=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
+                        columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" +
                     encodeURIComponent(iles);
                 window.location.href = url;
             }
