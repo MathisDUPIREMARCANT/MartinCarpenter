@@ -59,7 +59,6 @@ void From_C_to_Json(Bridge* Bridges, Island* Islands, int Nb_bridge, int Nb_isla
 		for (int i = 0; i < Nb_bridge; i++) {
 			From_C_to_Json_bridge(Bridges[i]);
 
-			free(Bridges[i].pos); //free positions
 
 			if (i < Nb_bridge - 1) {
 				printf(",");

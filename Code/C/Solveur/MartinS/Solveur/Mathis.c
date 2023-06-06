@@ -67,16 +67,17 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 
 			//Result = realloc(Result, sizeof(Bridge*) * (*Nb_solution + 1));
 			*(Result + *Nb_solution) = malloc(sizeof(Bridge) * Nb_bridge);
-			memcpy(*(Result + *Nb_solution), *Bridges, _msize(*Bridges));
+			memcpy(*(Result + *Nb_solution), *Bridges, sizeof(Bridge) * Nb_bridge);
 
 			for (int i = 0; i < Nb_bridge; i++) {
-
-				(Result + *Nb_solution)[i]->pos = (Coord*)malloc(sizeof(Coord) * (Result + *Nb_solution)[i]->length);
-
-				for (int y = 0; y < (*Bridges)[i].length; y++) {
-					memcpy((Result + *Nb_solution)[i]->pos, Bridges[i]->pos, sizeof(Coord) * (Result + *Nb_solution)[i]->length);
-				}
+				(*(Result + *Nb_solution))[i].pos = malloc(sizeof(Coord) * (*(Result + *Nb_solution))[i].length);
+				memcpy((*(Result + *Nb_solution))[i].pos, (*Bridges)[i].pos, sizeof(Coord) * (*(Result + *Nb_solution))[i].length);
 			}
+			//for (int i = 0; i < Nb_bridge; i++) {
+			//	int L = (*(Result + *Nb_solution + i))->length;
+			//	(*(Result + *Nb_solution + i))->pos = malloc(sizeof(Coord) * L);
+			//	memcpy((*(Result + *Nb_solution + i))->pos, (*Bridges)[i].pos, sizeof(Coord) * L);
+			//}
 
 			//Copy_bridges(*(Result + *Nb_solution), Bridges, Nb_bridge);
 
