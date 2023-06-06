@@ -25,6 +25,7 @@
 <?php
 if(isset($_COOKIE['Colorgame'])){
     echo"<div class='color'> The color of the game grid has been changed to $_COOKIE[Colorgame]! </div>";
+
 }
     ?><br>
 <div class="ch2">
@@ -68,6 +69,7 @@ if (isset($_POST['mode'])) {
     // Créer un cookie avec la valeur sélectionnée
     setcookie('mode', $mode, time() + (86400 * 30), '/'); // Cookie valide pendant 30 jours
 }
+
 ?>
 
 <div class="ch3">
@@ -89,6 +91,7 @@ if (isset($_POST['mode'])) {
 if(isset($_COOKIE['ColorButton'])){
     echo"<div class='color'> The color of the button has been changed to $_COOKIE[ColorButton]! </div>";
 }
+
     ?>
     <input type="submit" class="button" name="theme" Value="Appliquer" />
     </form>
