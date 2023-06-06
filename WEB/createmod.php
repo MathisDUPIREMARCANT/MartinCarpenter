@@ -134,7 +134,7 @@ session_start();
             <form action="createmod.php" method="post">
                 <label for="nb_colonnes">Number of columns</label>
                 <input type="text" name="nb_colonnes" id="nb_colonnes">
-                <label for="nb_lignes">Number of lines</label>
+                <label for="nb_lignes">Number of rows</label>
                 <input type="text" name="nb_lignes" id="nb_lignes">
                 <input id="button" type="submit" value="Create">
                 <br><br> <br>

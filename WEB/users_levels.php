@@ -1,8 +1,28 @@
 <?php
 session_start();
+
+
+function GetPath($number){
+    require("traitement/DB_connect.php");
+    $sql = "SELECT path FROM levels WHERE number='$number'";
+    $result = $conn->query($sql);
+    $path = $result->fetch(PDO::FETCH_ASSOC);
+    return $path;
+}
+if(isset($_GET['level'])){
 $texte_php = $_GET["level"];
 $texte_js = json_encode($texte_php);
+}
+if(isset($_GET['story_level'])){
+    $story_level = $_GET['story_level'];
 
+    $texte_js = GetPath($story_level);
+        //on convertit le tableau path en chaine de caractère avec un foreach
+        foreach($texte_js as $key => $value){
+            $texte_js = $value;
+        }
+    json_encode($texte_js);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +135,12 @@ $texte_js = json_encode($texte_php);
                 <div id="bangerang"></div>
                 <script type="text/javascript">
                 var texte_js = <?php echo $texte_js; ?>;
+                <?php if(!isset($_GET['story_level'])){ ?>
                 var huge = JSON.parse(texte_js);
+                <?php }
+                else{ ?>
+                    var huge = texte_js;
+                    <?php }?>
                 <?php ?>
                 // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
                 //{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },

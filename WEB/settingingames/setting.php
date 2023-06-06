@@ -26,7 +26,7 @@ header('location:setting.php');
         <div class="footitem" id="footsec">
             <!--Début du premier item les réseaux sociaux-->
             <label for="ch" class="iconsocial">
-                <h2 class="H2">Suivez-nous :</h2>
+                <h2 class="H2">Follow Us :</h2>
             </label>
             <div class="container">
                 <!--Container de l'animation -->

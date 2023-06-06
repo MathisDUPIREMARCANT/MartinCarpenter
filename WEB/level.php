@@ -35,7 +35,7 @@ session_start();
     <main>
         <div class="level">
             <div class="Title">
-                Personnal level
+                Personnal Levels
             </div>
             <div class="Title2">
                 Workshop
