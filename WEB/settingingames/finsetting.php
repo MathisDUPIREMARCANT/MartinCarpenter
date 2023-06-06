@@ -71,7 +71,7 @@ if (isset($_POST['mode'])) {
 ?>
 
 <div class="ch3">
-    <label>Number mode :</label><br>
+    <label>Simplified mode :</label><br>
     <br>
     <label class="slider">
         <input type="radio" name="mode" value="1">
@@ -90,13 +90,13 @@ if(isset($_COOKIE['ColorButton'])){
     echo"<div class='color'> The color of the button has been changed to $_COOKIE[ColorButton]! </div>";
 }
     ?>
-    <input type="submit" class="button" name="theme" Value="Appliquer" />
+    <input type="submit" class="button" name="theme" Value="Apply" />
     </form>
 </div>
 </div>
 </div>
 <div class="Credit">
-    Credit: CHTI'MI - SAINT-MAXENT Juliette - CLAUS Damia - DUPIRE-MARCANT Mathis - TASSIN Clément - LEMOINE James -
+    Credits : CHTI'MI - SAINT-MAXENT Juliette - CLAUS Damia - DUPIRE-MARCANT Mathis - TASSIN Clément - LEMOINE James -
     VANDEVOIR Victor
 </div>
 </main>

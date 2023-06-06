@@ -97,7 +97,7 @@ session_start() ;
                     <a id="writebutton" class="writebutton" href="WEB/rules.php">Rules</a>
                 </button>
                 <button id="Button" class="Button" type="submit">
-                    <a id="writebutton" class='writebutton' href="WEB/sign_in_up.php">Connexion</a>
+                    <a id="writebutton" class='writebutton' href="WEB/sign_in_up.php">Log In</a>
                     <a></a>
                 </button>
             </div>
