@@ -73,13 +73,7 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 				(*(Result + *Nb_solution))[i].pos = malloc(sizeof(Coord) * (*(Result + *Nb_solution))[i].length);
 				memcpy((*(Result + *Nb_solution))[i].pos, (*Bridges)[i].pos, sizeof(Coord) * (*(Result + *Nb_solution))[i].length);
 			}
-			//for (int i = 0; i < Nb_bridge; i++) {
-			//	int L = (*(Result + *Nb_solution + i))->length;
-			//	(*(Result + *Nb_solution + i))->pos = malloc(sizeof(Coord) * L);
-			//	memcpy((*(Result + *Nb_solution + i))->pos, (*Bridges)[i].pos, sizeof(Coord) * L);
-			//}
 
-			//Copy_bridges(*(Result + *Nb_solution), Bridges, Nb_bridge);
 
 			(*Nb_solution)++;
 			printf("Trouve");
