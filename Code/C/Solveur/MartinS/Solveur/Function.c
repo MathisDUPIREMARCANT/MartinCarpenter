@@ -2,26 +2,36 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <malloc.h>
-#define _CRT_SECURE_DEPRECATE_MEMORY
-#include <memory.h>
 
 #define Nb_max 100
 
-void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge) {
+void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge, int Direction) {
     /*Place a bridge on the board in (x,y)*/
 
-    if (type_bridge == 0) {
-        *(Board + posMax.x * pos.y + pos.x) = '~';
-    }
+    if (Direction % 2) {
+        if (type_bridge == 0) {
+            *(Board + posMax.x * pos.y + pos.x) = '~';
+        }
 
-    if (type_bridge == 1) {
-        *(Board + posMax.x * pos.y + pos.x) = '#';
+        if (type_bridge == 1) {
+            *(Board + posMax.x * pos.y + pos.x) = '-';
+        }
+
+    }
+    else {
+        if (type_bridge == 0) {
+            *(Board + posMax.x * pos.y + pos.x) = '_';
+        }
+
+        if (type_bridge == 1) {
+            *(Board + posMax.x * pos.y + pos.x) = '.';
+        }
     }
 };
 
 void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight) {
     /*Place a bridge on the board in (x,y)*/
+
     *(Board + posMax.x * pos.y + pos.x) = weight + '0';
 };
 
@@ -54,7 +64,7 @@ void Next_Coord(Coord* pos, int direction) {
 }
 
 int Is_not_Island(char* Board, Coord pos, Coord posMax) {
-    if (*(Board + (posMax.x * (pos.y)) + pos.x) != '*' && *(Board + (posMax.x * (pos.y)) + pos.x) != '~' && *(Board + (posMax.x * (pos.y)) + pos.x) != '#') {
+    if (*(Board + (posMax.x * (pos.y)) + pos.x) != '*' && *(Board + (posMax.x * (pos.y)) + pos.x) != '~' && *(Board + (posMax.x * (pos.y)) + pos.x) != '-') {
         return 1;
     }
     return 0;
@@ -117,7 +127,7 @@ int Island_on_map(char* Board, Coord pos, Coord posMax) {
 
     for (int y = 0; y < posMax.y; y++) {
         for (int x = 0; x < posMax.x; x++) {
-            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '-' || *(Board + (posMax.x * y) + x) == '_' || *(Board + (posMax.x * y) + x) == '.' || *(Board + (posMax.x * y) + x) == '0')) {
                 Island_current++;
             }
         }
@@ -152,7 +162,7 @@ Coord Find_Island(char* Board, Coord posMax) {
     Coord pos = { 0, 0 };
     for (int y = 0; y < posMax.y; y++) {
         for (int x = 0; x < posMax.x; x++) {
-            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '-' || *(Board + (posMax.x * y) + x) == '_' || *(Board + (posMax.x * y) + x) == '.' || *(Board + (posMax.x * y) + x) == '0')) {
                 pos.x = x;
                 pos.y = y;
                 x = posMax.x;
@@ -163,29 +173,28 @@ Coord Find_Island(char* Board, Coord posMax) {
     return pos;
 }
 
-void Print_board(char* Board, Coord Taille) {
+void Print_board(char* Save, char* Board, Coord Taille) {
     int i = 0;
     for (i; i < (Taille.x * Taille.y); i++) {
         if (i % Taille.x == 0) {
-            //printf("\n");
+            printf("\n");
         }
-        printf("%c", Board[i]);
+
+        if (Board[i] == '0') {
+            printf("%c", Save[i]);
+        }
+        else {
+            printf("%c", Board[i]);
+        }
+
     }
     //printf("\n");
 }
 
-void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Nb_bridge, int Type_bridge) {
-
-    //Bridges[Nb_bridge].length = Length;
-    //Bridges[Nb_bridge].direction = Direction;
-    //Bridges[Nb_bridge].size = Type_bridge;
-    //Bridges[Nb_bridge].pos = (Coord*)malloc(sizeof(Coord) * Length);
-
+void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge) {
     for (int i = 0; i < Length; i++) {
         Next_Coord(pos, Direction);
-        Place_bridge_on_map(Board, posMax, *pos, Type_bridge);
-        //Bridges[Nb_bridge].pos[i].x = pos->x;
-        //Bridges[Nb_bridge].pos[i].y = pos->y;
+        Place_bridge_on_map(Board, posMax, *pos, Type_bridge, Direction);
     }
 }
 
@@ -270,35 +279,115 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
-void Copy_bridges(Bridge* Bridge_copy, Bridge* Bridges, int Nb_bridge) {
-    for (int i = 0; i < Nb_bridge; i++) {
-        Bridge_copy[i].direction = Bridges[i].direction;
-        Bridge_copy[i].length = Bridges[i].length;
-        Bridge_copy[i].size = Bridges[i].size;
+#include "Header.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-        Bridge_copy[i].pos = (Coord*)malloc(sizeof(Coord) * Bridges[i].length);
+void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction) {
 
-        for (int y = 0; y < Bridges[i].length; y++) {
-            Bridge_copy[i].pos[y].x = Bridges[i].pos[y].x;
-            Bridge_copy[i].pos[y].y = Bridges[i].pos[y].y;
+    int Direction_available[4];
+    int* result = malloc(sizeof(int) * 4 * 81);
+
+
+
+    if (result != NULL) {
+
+        if (Direction != NULL) {
+
+            Coord Copy_pos;
+            int Type_island = 0;
+
+            for (int i = 0; i < 4; i++) {
+                Copy_pos.x = pos.x;
+                Copy_pos.y = pos.y;
+
+                if (Direction[i]) {
+                    int Length;
+                    Type_island += Direction[i];
+
+                    Length = Length_next_island(Board, posMax, pos, i);
+
+                    Create_bridge(Board, posMax, &Copy_pos, Length, i, Direction[i] - 1);
+
+                    Next_Coord(&Copy_pos, i);
+
+                    if ((atoi(Board + (Copy_pos.y * posMax.x) + Copy_pos.x) - Direction[i]) < 0) { return; }
+
+                    Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
+
+
+
+                    // if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
+                }
+            }
+
+            Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
         }
 
-    }
+        int Nb_islands = Island_on_map(Board, pos, posMax);
 
-}
+        if (Nb_islands == 0) {
+            Print_board(Save, Board, posMax);
+            printf(" ");
+            return;
+        }
+
+        pos = Find_Island(Board, posMax);
 
 
-void Stock_island(Island* islands, Coord posMax, char* board) {
-    int incr = 0;
-    for (int i = 0; i < posMax.x; i++) {
-        for (int j = 0; j < posMax.y; j++) {
-            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
-                islands[incr].pos.x = i;
-                islands[incr].pos.y = j;
-                islands[incr].number = atoi(board + (posMax.x * j) + i);
-                incr++;
+        for (int i = 0; i < 4; i++) {
+            int Space = Length_next_island(Board, posMax, pos, i);
 
+            if (Space) {
+                Direction_available[i] = Peek_island_number(Board, posMax, pos, i, Space);
+            }
+            else {
+                Direction_available[i] = 0;
             }
         }
+
+        int Nb_combinaison = Enumeration(Board, pos, posMax, result, &Direction_available);
+
+        if (Nb_combinaison == 0 && atoi(Board + (pos.y * posMax.x) + pos.x)) { return; }
+
+
+        for (int y = 0; y < Nb_combinaison; y++) {
+            char* Board_copy = (char*)malloc((strlen(Board) + 1) * sizeof(char));
+
+            if (Board_copy != NULL) {
+                Copy_board(Board_copy, Board, (posMax.x * posMax.y) + 1);
+            }
+            //Print_board(Board, Board, posMax);
+            //printf("\n");
+            Solver(Save, Board_copy, posMax, pos, result + (4 * y));
+        }
+        free(result);
+        return;
     }
 }
+
+Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length) {
+
+    switch (Direction) {
+
+    case(0):
+        return atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
+        break;
+
+    case(1):
+        return atoi((Board + (posMax.x * (pos.y) + pos.x + Length + 1)));
+        break;
+
+    case(2):
+        return atoi((Board + (posMax.x * (pos.y + (Length + 1)) + pos.x)));
+        break;
+
+    case(3):
+        return atoi((Board + (posMax.x * (pos.y) + pos.x - (Length + 1))));
+        break;
+    }
+}
+
+
+
