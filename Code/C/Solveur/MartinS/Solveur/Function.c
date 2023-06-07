@@ -279,11 +279,6 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
-#include "Header.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction) {
 
     int Direction_available[4];
