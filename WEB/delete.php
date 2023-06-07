@@ -8,7 +8,7 @@ session_start() ;
 			$reqPrep1="DELETE FROM users WHERE `username`='$user'";
 			$req1 =$conn->prepare($reqPrep1);
             $req1->execute();
-            header(Location:"admin.php")
+            header("Location:admin.php");
 		}                 
 		catch(Exception $e){
 			die("Erreur : " . $e->getMessage());
