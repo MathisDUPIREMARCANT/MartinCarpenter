@@ -64,7 +64,7 @@ catch(Exception $e){
                     <th>User</th>
                     <th class="col">Email</th>
                     <th>Score</th>
-                    <th>Progression</th>
+                    <th>Progress</th>
                     <th>Delete</th>
                 </tr>
             </table>
