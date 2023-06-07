@@ -78,7 +78,7 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 			(*Nb_solution)++;
 			printf("Trouve");
 			//printf("\n");
-			Print_board(Board, posMax);
+			//Print_board(Board, posMax);
 			//printf("\n");
 			return;
 		}
@@ -94,7 +94,7 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 
 		if (Nb_combinaison == 0 && atoi(Board + (pos.y * posMax.x) + pos.x)) { return; }
 
-
+		//Print_board(Board, posMax);
 		for (int y = 0; y < Nb_combinaison; y++) {
 			if (Nb_combinaison == 1) {
 				Solver(Result, Board, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge_max, Nb_bridge, Bridges);
@@ -119,7 +119,7 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 					//Copy_board(Board_copy, Board, posMax.x * posMax.y);
 					Copy_bridges(Bridge_copy, *Bridges, Nb_bridge);
 				}
-				Print_board(Board, posMax);
+				//Print_board(Board, posMax);
 				Solver(Result, Board_copy, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge_max, Nb_bridge, Bridge_copy);
 
 

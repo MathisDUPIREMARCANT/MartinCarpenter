@@ -9,8 +9,8 @@
 // -*- coding: utf-8 -*-
 
 
-#define X 7
-#define Y 9
+#define X 5
+#define Y 7
 void main() {
 
 	Coord posMax = { X, Y }; //{ *(argv[1]), *(argv[2])} 
@@ -22,8 +22,8 @@ void main() {
 	//char Board[X * Y] = { "*1*2*****************3*5*******1*2*" };
 
 	char Board[X * Y + 1];
-	//strncpy_s(Board, _countof(Board), "*************2*5********2********14*2***************2*8****5*1*4**********************3*2***********************1*3***2***********************1******4**22**************", _TRUNCATE);
-	strncpy_s(Board, _countof(Board), "*4**3*****************2**1*************************************", _TRUNCATE);
+	//strncpy_s(Board, _countof(Board), "*************2*5********2********14*2***************2*8****5*1*4**********************3*2***********************1*3***2***********************1******4***22**************", _TRUNCATE);
+	strncpy_s(Board, _countof(Board), "*2*1*********1*********************", _TRUNCATE);
 
 	pos.x = 0;
 	pos.y = 0;
@@ -50,10 +50,13 @@ void main() {
 	Solver(Result, Board, posMax, pos, NULL, Pt_solution, Pt_max, Nb_bridge, Pt_bridges);
 
 	printf("[");
-	for (int i = 0; i < Nb_solution; i++) {
-		From_C_to_Json(*(Result + i), Islands, Nb_bridge_max, Nb_island, posMax, Nb_solution);
-		if (i != Nb_solution - 1) {
-			printf(",");
+
+	if (Nb_solution) {
+		for (int i = 0; i < Nb_solution; i++) {
+			From_C_to_Json(*(Result + i), Islands, Nb_bridge_max, Nb_island, posMax, Nb_solution);
+			if (i != Nb_solution - 1) {
+				printf(",");
+			}
 		}
 	}
 	printf("]");
