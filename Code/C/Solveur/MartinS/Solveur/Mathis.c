@@ -6,7 +6,7 @@
 #define _CRT_SECURE_DEPRECATE_MEMORY
 #include <memory.h>
 
-void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Direction, int* Nb_solution, int* Nb_bridge_max, int Nb_bridge, Bridge** Bridges) {
+void Solver(char* Board, Coord posMax, Coord pos, int* Direction, int* Nb_solution, int* Nb_bridge_max, int Nb_bridge) {
 
 	int Direction_available[4];
 	int* result = malloc(sizeof(int) * 4 * 81);
@@ -32,23 +32,23 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 
 
 
-					Create_bridge(*Bridges, Board, posMax, &Copy_pos, Length, i, Nb_bridge, Direction[i] - 1);
+					Create_bridge(Board, posMax, &Copy_pos, Length, i, Nb_bridge, Direction[i] - 1);
 
-					int nb = _msize(*Bridges) / sizeof(Bridge);
+					//int nb = _msize(*Bridges) / sizeof(Bridge);
 
-					if (nb > *Nb_bridge_max) {
-						*Nb_bridge_max = nb;
-					}
+					//if (nb > *Nb_bridge_max) {
+					//	*Nb_bridge_max = nb;
+					//}
 
-					Nb_bridge++;
-					Bridge* buffer = (Bridge*)malloc(_msize(*Bridges) + sizeof(Bridge));
-					if (buffer != NULL) {
-						memcpy(buffer, *Bridges, _msize(*Bridges) + sizeof(Bridge));
-						//Copy_bridges(buffer, Bridges, Nb_bridge);
-						free(*Bridges);
-						*Bridges = buffer;
-						buffer = NULL;
-					}
+					//Nb_bridge++;
+					//Bridge* buffer = (Bridge*)malloc(_msize(*Bridges) + sizeof(Bridge));
+					//if (buffer != NULL) {
+					//	memcpy(buffer, *Bridges, _msize(*Bridges) + sizeof(Bridge));
+					//	//Copy_bridges(buffer, Bridges, Nb_bridge);
+					//	free(*Bridges);
+					//	*Bridges = buffer;
+					//	buffer = NULL;
+					//}
 
 					Next_Coord(&Copy_pos, i);
 
@@ -66,20 +66,20 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 		if (Nb_islands == 0) {
 
 			//Result = realloc(Result, sizeof(Bridge*) * (*Nb_solution + 1));
-			*(Result + *Nb_solution) = malloc(sizeof(Bridge) * Nb_bridge);
+			/**(Result + *Nb_solution) = malloc(sizeof(Bridge) * Nb_bridge);
 			memcpy(*(Result + *Nb_solution), *Bridges, sizeof(Bridge) * Nb_bridge);
 
 			for (int i = 0; i < Nb_bridge; i++) {
 				(*(Result + *Nb_solution))[i].pos = malloc(sizeof(Coord) * (*(Result + *Nb_solution))[i].length);
 				memcpy((*(Result + *Nb_solution))[i].pos, (*Bridges)[i].pos, sizeof(Coord) * (*(Result + *Nb_solution))[i].length);
-			}
+			}*/
 
 
 			(*Nb_solution)++;
-			printf("Trouve");
+			//("Trouve");
 			//printf("\n");
 			Print_board(Board, posMax);
-			//printf("\n");
+			printf(" "); //salut beboiu
 			return;
 		}
 
@@ -97,44 +97,45 @@ void Solver(Bridge** Result, char* Board, Coord posMax, Coord pos, int* Directio
 
 		for (int y = 0; y < Nb_combinaison; y++) {
 			if (Nb_combinaison == 1) {
-				Solver(Result, Board, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge_max, Nb_bridge, Bridges);
-				if (Bridges != NULL && Nb_bridge == 0) {
-					for (int e = 0; e < *Nb_bridge_max; e++) {
-						if ((*Bridges)[e].pos != NULL) {
-							(*Bridges)[e].pos;
-							free((*Bridges)[e].pos);
+				Solver(Board, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge_max, Nb_bridge);
+				if (Nb_bridge == 0) {
+					//	for (int e = 0; e < *Nb_bridge_max; e++) {
+					//		if ((*Bridges)[e].pos != NULL) {
+					//			(*Bridges)[e].pos;
+					//			free((*Bridges)[e].pos);
+					//		}
+
+					//	}
+					//	//free(Bridges[0].pos);
+					//	free(*Bridges);
+					//}
+				}
+				else {
+					char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
+					/*Bridge* Bridge_copy = (Bridge*)malloc((Nb_bridge) * sizeof(Bridge));*/
+
+					if (Board_copy != NULL) {
+						strncpy_s(Board_copy, strlen(Board), Board, _TRUNCATE);
+						//Copy_board(Board_copy, Board, posMax.x * posMax.y);
+						//Copy_bridges(Bridge_copy, *Bridges, Nb_bridge);
+					}
+					Print_board(Board, posMax);
+					Solver(Board_copy, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge_max, Nb_bridge);
+
+
+					free(Board_copy);
+
+					/*if (Nb_bridge) {
+						for (int e = 0; e < Nb_bridge; e++) {
+							free(Bridge_copy[e].pos);
 						}
-
-					}
-					//free(Bridges[0].pos);
-					free(*Bridges);
+						free(Bridge_copy);
+					}*/
 				}
 			}
-			else {
-				char* Board_copy = (char*)malloc(strlen(Board) * sizeof(char));
-				Bridge* Bridge_copy = (Bridge*)malloc((Nb_bridge) * sizeof(Bridge));
-
-				if (Board_copy != NULL && Bridge_copy != NULL) {
-					strncpy_s(Board_copy, strlen(Board), Board, _TRUNCATE);
-					//Copy_board(Board_copy, Board, posMax.x * posMax.y);
-					Copy_bridges(Bridge_copy, *Bridges, Nb_bridge);
-				}
-				Print_board(Board, posMax);
-				Solver(Result, Board_copy, posMax, pos, result + (4 * y), Nb_solution, Nb_bridge_max, Nb_bridge, Bridge_copy);
-
-
-				free(Board_copy);
-
-				if (Nb_bridge) {
-					for (int e = 0; e < Nb_bridge; e++) {
-						free(Bridge_copy[e].pos);
-					}
-					free(Bridge_copy);
-				}
-			}
+			free(result);
+			return;
 		}
-		free(result);
-		return;
 	}
 }
 
@@ -143,7 +144,7 @@ Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Leng
 	switch (Direction) {
 
 	case(0):
-		atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
+		return atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x)));
 		break;
 
 	case(1):

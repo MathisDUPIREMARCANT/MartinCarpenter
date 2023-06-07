@@ -167,25 +167,25 @@ void Print_board(char* Board, Coord Taille) {
     int i = 0;
     for (i; i < (Taille.x * Taille.y); i++) {
         if (i % Taille.x == 0) {
-            printf("\n");
+            //printf("\n");
         }
         printf("%c", Board[i]);
     }
-    printf("\n");
+    //printf("\n");
 }
 
-void Create_bridge(Bridge* Bridges, char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Nb_bridge, int Type_bridge) {
+void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Nb_bridge, int Type_bridge) {
 
-    Bridges[Nb_bridge].length = Length;
-    Bridges[Nb_bridge].direction = Direction;
-    Bridges[Nb_bridge].size = Type_bridge;
-    Bridges[Nb_bridge].pos = (Coord*)malloc(sizeof(Coord) * Length);
+    //Bridges[Nb_bridge].length = Length;
+    //Bridges[Nb_bridge].direction = Direction;
+    //Bridges[Nb_bridge].size = Type_bridge;
+    //Bridges[Nb_bridge].pos = (Coord*)malloc(sizeof(Coord) * Length);
 
     for (int i = 0; i < Length; i++) {
         Next_Coord(pos, Direction);
         Place_bridge_on_map(Board, posMax, *pos, Type_bridge);
-        Bridges[Nb_bridge].pos[i].x = pos->x;
-        Bridges[Nb_bridge].pos[i].y = pos->y;
+        //Bridges[Nb_bridge].pos[i].x = pos->x;
+        //Bridges[Nb_bridge].pos[i].y = pos->y;
     }
 }
 

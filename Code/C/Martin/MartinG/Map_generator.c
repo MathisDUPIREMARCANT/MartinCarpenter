@@ -74,7 +74,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                 }
             }
             
-            for (int i = 0; i < 4; i++) {
+            /*for (int i = 0; i < 4; i++) {
                 if (i != D_pont && Direction_available[i] == 1 && Island_current != 1 && Island_current != Nb_island - 1 ) {
                     int Length_ramification = Random(1, spa[i] - 1);
                     while (Length_ramification > posMax.x / 3) {
@@ -84,7 +84,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                     Ramification(Board, pos, posMax, Bridges, Islands, Island_current, Bridge_current, i, Length_ramification);
                     Island_current++;
                     Bridge_current++;
-                    //i = 4;
+                    i = 4;
 
                 }
                 if (i != D_pont && Direction_available[i] == 1 && Island_current != 1 && Island_current != Nb_island - 1 ) {
@@ -98,7 +98,7 @@ int Map_gen(char* Board, Coord posMax, Coord pos, int Nb_island) {
                     Bridge_current++;
 
                 }
-            }
+            }*/
             int length;
             length = Random(1, spa[D_pont] - 1);
             while (length > posMax.x / 3) {

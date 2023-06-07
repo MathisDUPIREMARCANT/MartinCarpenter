@@ -38,7 +38,7 @@ void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge){
     }
    
     if(type_bridge == 1){
-        *(Board + posMax.x * pos.y + pos.x) = '#';
+        *(Board + posMax.x * pos.y + pos.x) = '-';
     }
 };
 

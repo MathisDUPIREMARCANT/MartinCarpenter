@@ -33,229 +33,100 @@ session_start();
         echo"
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
-        $username = $_SESSION['username'];
-        if($_GET['mod'] != 'custom'){
-        $id = $_GET['id'];
-        }
     ?>
 </head>
 
 <body>
-    <script>
-function jsonToPixelArt(obj) {
-    // Initialise une grille vide
-    let grid = Array(obj.Grid[0].size[1]).fill().map(() => Array(obj.Grid[0].size[0]).fill("*"));
-
-
-    // Remplit les iles
-    obj.Islands.forEach(island => {
-        grid[island.Placement[1]][island.Placement[0]] = island.links.toString();
-    });
-
-
-    // Remplit les ponts
-    obj.Bridges.forEach(bridge => {
-        let symbol = bridge.width === 1 ? "~" : "-";
-
-
-        bridge.Placement.forEach(coord => {
-            grid[coord[1]][coord[0]] = symbol;
-        });
-    });
-
-
-    // Convertit la grille en chaine de caracteres
-    return grid.map(row => row.join("")).join("");
-}
-    function togglePopup() {
-        var popup = document.getElementById("popup");
-        if (popup.style.display === "none") {
-            popup.style.display = "block";
-        } else {
-            popup.style.display = "none";
-        }
-    }
-
-    function hideButton() {
-        var boutonPause = document.getElementById("boutonPause");
-        boutonPause.style.display = "none";
-        var main = document.getElementById("main");
-        main.style.display = "none";
-        var savepos = document.getElementById("savepos");
-        savepos.style.display = "none";
-    }
-
-    function showButton() {
-        var boutonPause = document.getElementById("boutonPause");
-        boutonPause.style.display = "block";
-        var main = document.getElementById("main");
-        main.style.display = "flex";
-        var savepos = document.getElementById("savepos");
-        savepos.style.display = "block";
-    }
-    </script>
-    <video id="background-video" autoplay="autoplay" playsinline loop>
-        <source src="image/background.mp4" type="video/mp4">
-    </video>
-
-    <header>
-        <div class="buttonhead">
-            <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
-                <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
-            </button>
-            <a id="savepos" class="savepos">
-                <img class="save" src="image/button/savestar.png" onclick="myFunction()"/>
-            </a>
-        </div>
-        <div id="popup" style="display: none;">
-            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
-                <a id="test" class="al" href="game.php">Retry &emsp; &#160; &#160;
-                    <img class="img" src="image/button/retry.png" />
-                </a>
-            </button>
-
-            <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="../index.php">Back Home
-                    <img class="img" src="image/button/maison.png" />
-                </a>
-            </button>
-
-            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
-                <a id="al" class="al">Resume &emsp;
-                    <img class="img" src="image/button/arrow.png" />
-                </a>
-            </button>
-
-            <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'].'&id='.$id;?>">Settings
-                    &emsp;
-                    <img class="img" src="image/button/boutonsetting.png" />
-                </a>
-            </button>
-        </div>
-    </header>
-    <main Id="main" class="main">
-        <?php         
-                //on récupere les valeurs en url pour les envoyer au .exe (easy, medium, hard, custom)
-                if(isset($_GET['mod'])){
-                    $mod = $_GET['mod'];
-                }
-                if(isset($_POST['mod'])){
-                    $mod = $_POST['mod'];
-                }
-                ?>
-        <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
-        <form action=" randommod.php?mod=custom" method="post">
-            <?php 
-        if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
-        if($mod == 'custom'){?>
-            <input type="hidden" name="mod" value="<?php echo $mod; ?>">
-            <label for="nb_iles">Number of islands</label>
-            <input type="text" name="nb_iles" id="nb_iles">
-            <label for="nb_colonnes">Number of columns</label>
-            <input type="text" name="nb_colonnes" id="nb_colonnes">
-            <label for="nb_lignes">Number of lines</label>
-            <input type="text" name="nb_lignes" id="nb_lignes">
-            <input Id="button" type="submit" value="Validate">
-            <br><br> <br>
-            <?php }?>
-        </form>
-        <div class="grid">
-            <div class="martinplace">
-                <img class="martin" src="image/martin1.png">
-            </div>
-            <div id="game" class="game">
-                <?php   
-//on exec le .exe avec les parametres du formulaire 11 13 30
-if($mod == 'easy'){
-    $nb_iles = 6;
-    $nb_colonnes = 7;
-    $nb_lignes = 7;
-    $command = 'MartinG_easy.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-    $output = exec($command);
-    while($output == -1){
-        $output = exec($command);
-    }
-    ?>
-<script>
-   var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
-   //on redirige vers une page qui va verifier si le niveau est faisable ou non
-    window.location.href = "verif_level.php?mod=easy&JSON=" + bangerdefou;
-</script>
+<main Id="main" class="main">
+<div id="game" class="game">
 <?php
-        $texte_php = $output;
-        $texte_js = json_encode($texte_php);
-        
-}
-if($mod == 'medium'){
-    $nb_iles = 10;
-    $nb_colonnes = 10;
-    $nb_lignes = 10;
-    $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-    $output = exec($command);
-    while($output == -1){
-        $output = exec($command);
-    }
-    ?>
-    <script>
-       var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
-    </script>
-    <?php
-    $texte_php = $output;
-    $texte_js = json_encode($texte_php);
-}
-if($mod == 'hard'){
-    $nb_iles = 25;
-    $nb_colonnes = 11;
-    $nb_lignes = 13;
-    $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-    $output = exec($command);
-    while($output == -1){
-        $output = exec($command);
-    }
-    $texte_php = $output;
-    $texte_js = json_encode($texte_php);
-}
-if($mod == 'custom'){ 
-    if(isset($_POST['nb_iles']) && isset($_POST['nb_colonnes']) && isset($_POST['nb_lignes'])){
+//on récupère les données du formulaire
+$pixelArt = $_GET['JSON'];
+echo 'caca'. $pixelArt;
+$command = 'MartinS.exe'. ' '. 16 . ' ' . 16 . ' ' . $pixelArt;
+$output = exec($command);
+$pixelArt = $output; 
+echo 'aaaaa'. $pixelArt;
 
-        //on recupere les valeurs du formulaire
-        $nb_iles = $_POST['nb_iles'];
-        $nb_colonnes = $_POST['nb_colonnes'];
-        $nb_lignes = $_POST['nb_lignes'];
-        
-        $command = 'MartinG_medium.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
-        $output = exec($command);
-        while($output == -1){
-            $output = exec($command);
+
+?>
+<script>
+    //on convertit pixelart php en pixel art js
+
+    let gridSize = [16,16];
+   function pixelArtToJson(gridSize) {
+    let pixelArt = <?php echo json_encode($pixelArt); ?>;
+    console.log('aaa', pixelArt);
+    //on stocke les differentes solutions dans un tableau (les differentes solutions sont séparées par des " ")
+    pixelArt = pixelArt.split(" ");
+    // Initialise l'objet json vide
+    let obj = {
+        "Islands": [],
+        "Grid": [{"size": gridSize}],
+        "Bridges": [],
+        "PlacedBridges": []
+    };
+
+
+    let width = gridSize[0];
+    let height = gridSize[1];
+
+
+    for (let i = 0; i < pixelArt.length; i++) {
+        let y = Math.floor(i / width);
+        let x = i % width;
+        let symbol = pixelArt[i];
+
+
+        // Detect islands
+        if (!isNaN(parseInt(symbol))) {
+            obj.Islands.push({
+                "links": parseInt(symbol),
+                "Placement": [y, x]
+            });
         }
-        
-                    
-        $texte_php = $output;
-        $texte_js = json_encode($texte_php);
+        // Detect bridges
+        else if (symbol === "~" || symbol === "-" || symbol === "." || symbol === "_") {
+            let bridge = {
+                "width": symbol === "~" ? 1 : 2,
+                "length": 0,
+                "direction": null,
+                "Placement": [[y, x]]
+            };
+
+
+            // Check direction of the bridge (horizontal or vertical) (~ = vertical witdh = 0, _ = horizontal width = 0, - = vertical width = 1, . = horizontal width = 1)
+            if (symbol === "~" || symbol === ".") {
+                bridge.direction = 1;
+            } else if (symbol === "-" || symbol === "_") {
+                bridge.direction = 0;
+            }
+            //check width of the bridge
+            if (symbol === "~" || symbol === "_") {
+                bridge.width = 1;
+            } else if (symbol === "-" || symbol === ".") {
+                bridge.width = 2;
+            }
+            obj.Bridges.push(bridge);
+        }
     }
+
+
+    return obj;
 }
-    ?> <?php 
-    if($mod != 'custom'){
-    // //on convertit la variable JS "id" en variable globale PHP 
-     $id = $_GET["id"];
 
 
-    $_SESSION['id'] = $id;
-    $_SESSION['id2'] = $id;
-    }?> 
+
+console.log('caca', pixelArtToJson(gridSize));
+
+let huge = pixelArtToJson(gridSize)
 
 
-                <!-- on affiche le texte js avec du JS -->
-                <div id="bangerang"></div>
+
+
+</script>
+<div id="bangerang"></div>
                 <script type="text/javascript">
-                var texte_js = <?php echo $texte_js; ?>;
-                var huge = JSON.parse(texte_js);
-                //on convertit la variable php mod en variable js
-                var id = <?php echo json_encode($id); ?>;
-                var mod = "<?php echo $mod; ?>";
-//                 huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [3, 7]            },              {"links" : 4,                   "Placement" : [3, 4]            },              {"links" : 2,                   "Placement" : [1, 4]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 2,                   "Placement" : [1, 2]            },              {"links" : 6,                   "Placement" : [3, 0]            },              {"links" : 2,                   "Placement" : [6, 0]            },              {"links" : 4,                   "Placement" : [0, 0]            },              {"links" : 3,                   "Placement" : [0, 3]            },              {"links" : 1,                   "Placement" : [2, 3]            }    ],    "Grid": [
-// {                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 2,           "direction" : 1,                 "Placement" : [[3, 6],[3, 5]]  },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[2, 4]] },              {               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[3, 3]]         },              {               "width" : 1,            "length" : 1,           "direction" : 0,         "Placement" : [[2, 2]]         },              {               "width" : 1,            "length" : 1,          "direction" : 1,          "Placement" : [[3, 1]]         },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[4, 0],[5, 0]]  },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[2, 0],[1, 0]]  },             {                "width" : 1,            "length" : 2,           "direction" : 1,                 "Placement" : [[0, 1],[0, 2]]  },              {               "width" : 0,            "length" : 1,           "direction" : 0,                "Placement" : [[1, 3]]  }    ],    "PlacedBridges":{}}
 var rows = huge.Grid[0].size[0];
                 var columns = huge.Grid[0].size[1];
 
@@ -269,162 +140,113 @@ var rows = huge.Grid[0].size[0];
                     if (parts.length == 2) return parts.pop().split(";").shift();
                 }
 
-                function generate_table_no_solution(rows, columns) {
-                    // Obtenir la référence du body
-                    var body = document.getElementsByTagName("body")[0];
-                    // Créer les éléments <table> et <tbody>
-                    var tbl = document.createElement("table");
-                    var tblBody = document.createElement("tbody");
+                function generate_table(rows, columns) {
+    // Obtenir la référence du body
+    var body = document.getElementsByTagName("body")[0];
 
-                    <?php if(isset($_COOKIE['Colorgame'])){
-                if($_COOKIE['Colorgame']=="red"){ 
-                echo"tbl.style.border = '0.4vw solid #f23e31';
-                tbl.style.backgroundColor = '#bf2424e7';";
+
+    // Créer les éléments <table> et <tbody>
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+
+
+    // Créer les cellules
+    for (var i = 0; i < rows; i++) {
+        var row = document.createElement("tr");
+
+
+        for (var j = 0; j < columns; j++) {
+            var cell = document.createElement("td");
+
+
+            // Vérifier si l'île se trouve à la position actuelle
+            var foundIsland = false;
+            for (var k = 0; k < huge.Islands.length; k++) {
+                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                    foundIsland = true;
+                    break;
                 }
-                elseif($_COOKIE['Colorgame']=="grey"){ 
-                echo"tbl.style.border = '0.4vw solid #cecaca';
-                tbl.style.backgroundColor = '#aa9a9a38';";
-                }
-                 elseif($_COOKIE['Colorgame']=="yellow"){ 
-                echo"tbl.style.border = '0.4vw solid #eff84aec';
-                tbl.style.backgroundColor = '#bfb224e7';";
-                }
-                 elseif($_COOKIE['Colorgame']=="orange"){ 
-                echo"tbl.style.border = '0.4vw solid #f2ab31';
-                tbl.style.backgroundColor = '#bf8424e7';";
-                }
-                elseif($_COOKIE['Colorgame']=="pink"){ 
-                    echo"tbl.style.border = '0.4vw solid #f231c8';
-                    tbl.style.backgroundColor = '#bf24b2e7';";
-                }
-                elseif($_COOKIE['Colorgame']=="green"){ 
-                echo"tbl.style.border = '0.4vw solid #34f231';
-                tbl.style.backgroundColor = '#24bf2ce7';";
-                }
-                 elseif($_COOKIE['Colorgame']=="purple"){ 
-                echo"tbl.style.border = '0.4vw solid #9b31f2';
-                tbl.style.backgroundColor = '#8424bfe7';";
-                }
-                 elseif($_COOKIE['Colorgame']=="blue"  ){ 
-                echo"tbl.style.border = '0.4vw solid #19608F';
-                tbl.style.backgroundColor = '#247cbfe7';";
-                }}
-                else{
-                    echo"tbl.style.border = '0.4vw solid #19608F';
-                    tbl.style.backgroundColor = '#247cbfe7';";
-                }?>
-
-                    tbl.style.borderRadius = "20px";
-                    tbl.style.width = "70vw";
-                    tbl.style.height = "70vh";
-                    tbl.style.overflow = "scroll"; // allows the table to scroll if necessary
+            }
 
 
+            if (foundIsland) {
+    //on creer une image pour chaque ile en fonction du nombre de link (1 a 6)
+    var islandImage = document.createElement("img");
 
 
-                    // Set table dimensions to match game div
-                    tbl.style.width = gameDivWidth + 'px';
-                    tbl.style.height = gameDivHeight + 'px';
-
-                    // Créer les cellules
-                    for (var i = 0; i < rows; i++) {
-                        var row = document.createElement("tr");
-                        for (var j = 0; j < columns; j++) {
-                            var cell = document.createElement('td');
-                            cell.setAttribute('id', `cell-${i}-${j}`);
-                            cell.style.width = (gameDivWidth / columns) + 'px';
-                            cell.style.height = (gameDivHeight / rows) + 'px';
-
-                            // Vérifier si l'île se trouve à la position actuelle
-                            var foundIsland = false;
-                            for (var k = 0; k < huge.Islands.length; k++) {
-                                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] ===
-                                    j) {
-                                    foundIsland = true;
-                                    break;
-                                }
-                            }
-
-
-                            if (foundIsland) {
-                                var islandImage = document.createElement("img");
-                                islandImage.setAttribute("id", "island-" + i + "-" + j);
-                                //on verifie le status du cookie "mode" 
-                                if (getCookie("mode") == 1) {
-                                    if (huge.Islands[k].links == 1) {
-                                        islandImage.src = "image/images_temporaires/1.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 2) {
-                                        islandImage.src = "image/images_temporaires/2.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 3) {
-                                        islandImage.src = "image/images_temporaires/3.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 4) {
-                                        islandImage.src = "image/images_temporaires/4.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 5) {
-                                        islandImage.src = "image/images_temporaires/5.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 6) {
-                                        islandImage.src = "image/images_temporaires/6.png";
-                                        cell.appendChild(islandImage);
-                                    }
-                                 else if (huge.Islands[k].links == 7) {
-                                        islandImage.src = "image/images_temporaires/7.png";
-                                        cell.appendChild(islandImage);
-                                    }
-                                 else if (huge.Islands[k].links == 8) {
-                                        islandImage.src = "image/images_temporaires/8.png";
-                                        cell.appendChild(islandImage);
-                                    }
-                                } else {
-                                    if (huge.Islands[k].links == 1) {
-                                        islandImage.src = "../WEB/image/iles/ile1.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 2) {
-                                        islandImage.src = "../WEB/image/iles/ile2.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 3) {
-                                        islandImage.src = "../WEB/image/iles/ile3.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 4) {
-                                        islandImage.src = "../WEB/image/iles/ile4.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 5) {
-                                        islandImage.src = "../WEB/image/iles/ile5.png";
-                                        cell.appendChild(islandImage);
-                                    } else if (huge.Islands[k].links == 6) {
-                                        islandImage.src = "../WEB/image/iles/ile6.png";
-                                        cell.appendChild(islandImage);
-                                    }
-                                }
-                                cell.appendChild(islandImage);
-                                islandImage.setAttribute("data-row", i.toString());
-                                islandImage.setAttribute("data-col", j.toString());
-                                islandImage.addEventListener("click", handleIslandClick);
-                                cell.appendChild(islandImage);
-                            }
-                            row.appendChild(cell);
-                            cell.setAttribute("class", 'case');
-                            cell.setAttribute("id", "cell-" + i + "-" + j);
+    if (huge.Islands[k].links == 1) {
+        islandImage.src = "image/images_temporaires/1.png";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 2) {
+        islandImage.src = "image/images_temporaires/2.png";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 3) {
+        islandImage.src = "image/images_temporaires/3.png";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 4) {
+        islandImage.src = "image/images_temporaires/4.png";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 5) {
+        islandImage.src = "image/images_temporaires/5.png";
+        cell.appendChild(islandImage);
+    } else if (huge.Islands[k].links == 6) {
+        islandImage.src = "image/images_temporaires/6.png";
+        cell.appendChild(islandImage);
+    }
+} else {
+                // Vérifier si un pont se trouve à la position actuelle
+                var bridgeFound = false;
+                for (var l = 0; l < huge.Bridges.length; l++) {
+                    var bridge = huge.Bridges[l];
+                    for (var m = 0; m < bridge.Placement.length; m++) {
+                        var bridgePlacement = bridge.Placement[m];
+                        if (bridgePlacement[0] === i && bridgePlacement[1] === j) {
+                            bridgeFound = true;
+                            break;
                         }
-
-
-                        tblBody.appendChild(row);
                     }
+                    if (bridgeFound) {
+                        var bridgeImage = document.createElement("img");
+                        if (bridge.direction === 1) { // Pont vertical
+                            if (bridge.width === 2) {
+                                console.log("caca");
+                                bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
+                            } else {
 
-
-                    // Ajouter <tbody> à <table>
-                    tbl.appendChild(tblBody);
-                    // Ajouter <table> au body
-                    document.getElementById("bangerang").appendChild(tbl);
+                                bridgeImage.src = "../WEB/image/iles/bridge_h.png";
+                            }
+                        } else { // Pont horizontal
+                            if (bridge.width === 2) {
+                                bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
+                            } else {
+                                bridgeImage.src = "../WEB/image/iles/bridge_V.png";
+                            }
+                        }
+                        cell.appendChild(bridgeImage);
+                        break;
+                    }
                 }
-                generate_table_no_solution(rows, columns);
+            }
 
 
+            row.appendChild(cell);
+            cell.setAttribute("class", 'case');
+            cell.setAttribute("id", '0');
+        }
 
 
+        tblBody.appendChild(row);
+    }
+
+
+    // Ajouter <tbody> à <table>
+    tbl.appendChild(tblBody);
+    // Ajouter <table> au body
+    document.getElementById("bangerang").appendChild(tbl);
+}
+  // Appeler cette fonction après avoir généré le tableau
+  //on recupere la taille du tableau
+  generate_table(rows, columns);
                 var currentBridge = {
                     start: null,
                     end: null
@@ -537,11 +359,11 @@ var rows = huge.Grid[0].size[0];
                     "1": [],
                     "2": []
                 };
-                console.log('huge.Bridges', huge);
+                console.log('huge', huge);
                 for (var j = 0; j < Object.keys(huge.Bridges).length; j++) {
 
                     //on verifie la valeur du count
-                    if (huge.Bridges[Object.keys(huge.Bridges)[j]].width == 0) {
+                    if (huge.Bridges[Object.keys(huge.Bridges)[j]].width == 1) {
                         for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
                             .length; k++) {
 
@@ -551,7 +373,7 @@ var rows = huge.Grid[0].size[0];
                                     huge
                                     .Bridges)[j]].Placement[k]);
                         }
-                    } else {
+                     } else {
                         for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
                             .length; k++) {
                             tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
@@ -561,7 +383,7 @@ var rows = huge.Grid[0].size[0];
                         }
 
                     }
-                }
+                }console.log('tempé', tmp2)
 
                 function check_win() {
                     for (var i = 0; i < huge.Islands.length; i++) {
@@ -609,9 +431,10 @@ var rows = huge.Grid[0].size[0];
                     tmp2["1"].sort();
                     tmp2["2"].sort();
 
-                    if (JSON.stringify(tmp) === JSON.stringify(tmp2)) {
-                //on creer un identifiant unique pour la partie
-                //on transforme la varibale id php en variable js
+                    tmp = JSON.stringify(tmp)
+                    tmp2 = JSON.stringify(tmp2)
+                    console.log('temp', tmp, tmp2)
+                    if (tmp === tmp2) {
 
 
                         document.location.href = "Win.php?mod=" + mod;
@@ -832,98 +655,6 @@ var rows = huge.Grid[0].size[0];
                     }
                     check_win();
                 }
-
-                function convertToPixelArt(rows, cols) {
-                // Créer une matrice vide de dimensions rows x cols
-                var matrix = [];
-                for (var i = 0; i < rows; i++) {
-                    matrix[i] = [];
-                    for (var j = 0; j < cols; j++) {
-                        matrix[i][j] = "*"; // Définir chaque case comme un espace vide "*"
-                    }
-                }
-
-
-                // Remplir la matrice avec les numéros d'île en fonction des positions et des liens
-                for (var i = 0; i < huge.Islands.length; i++) {
-                    var island = huge.Islands[i];
-                    var rowIndex = island.Placement[0];
-                    var colIndex = island.Placement[1];
-                    var islandNumber = island.links
-                        .toString(); // Convertir le nombre de liens en chaîne de caractères
-
-
-                    // Si les coordonnées de l'île se trouvent à l'intérieur de la matrice
-                    if (rowIndex < rows && colIndex < cols) {
-                        matrix[rowIndex][colIndex] = islandNumber;
-                    }
-                }
-
-
-                // Convertir la matrice en une chaîne de caractères représentant le pixel art de la carte
-                var pixelArt = "";
-                for (var i = 0; i < rows; i++) {
-                    pixelArt += matrix[i].join("");
-                }
-
-                return pixelArt;
-            }
-                function myFunction() {
-                    //on supprime les ponts de la grille
-                     // Parcourir toutes les cellules dans huge.PlacedBridges
-                     for (var cellId in huge.PlacedBridges) {
-                        // Supprimer le pont du DOM
-                        var cellElement = document.getElementById(cellId);
-                        while (cellElement.firstChild) {
-                            cellElement.removeChild(cellElement.firstChild);
-                        }
-
-                        // Supprimer le pont des données
-                        delete huge.PlacedBridges[cellId];
-                    }
-
-                    // Réinitialiser huge.userPlacedBridges
-                    huge.userPlacedBridges = [];
-                var url = "randommod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&JSON=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
-                    encodeURIComponent(huge.Islands.length) +  "&mod=" + encodeURIComponent(mod) + "&id=" + encodeURIComponent(id);
-                window.location.href = url;
-            }
-
-
-
-
-            <?php   
-}
-            if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
-$rows = $_GET['rows'];
-$columns = $_GET['columns'];
-$pixelArt = $_GET['JSON'];
-$nbiles = $_GET['nbiles'];
-$difficulty = ($rows*$columns*$nbiles)/20;
-$mod = $_GET['mod'];
-//on stock les valeurs dans la base de données
-//on recupere le pseudo de l'utilisateur
-
-//on se connecte a la base de données
-include("traitement/DB_connect.php");
-$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty, soluce) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty', 'A MODIFIER AVEC SOLVEUR')";
-//on prepare la requete
-$stmt = $conn->prepare($sql);
-//on execute la requete
-$stmt->execute();
-//on fait une alerte pour dire que le niveau a bien été sauvegardé
-echo "<script>alert('Votre niveau a bien été enregistré !');</script>";
-//on réaffiche la page
-echo "<script>window.location.href = 'randommod.php?mod=$mod&id=$id';</script>";
-}
-
-?>
-
-                </script>
+            </script>
             </div>
-        </div>
-    </main>
-</body>
-
-</html>
+            </div>

@@ -118,7 +118,7 @@ if(isset($_GET['story_level'])){
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php">Settings
+                <a id="al" class="al" href="settingingames/settinguserslevels.php?level=<?php echo urlencode($_GET['level'])?>">Settings
                     &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>

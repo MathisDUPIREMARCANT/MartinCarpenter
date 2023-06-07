@@ -42,31 +42,6 @@ session_start();
 
 <body>
     <script>
-function jsonToPixelArt(obj) {
-    // Initialise une grille vide
-    let grid = Array(obj.Grid[0].size[1]).fill().map(() => Array(obj.Grid[0].size[0]).fill("*"));
-
-
-    // Remplit les iles
-    obj.Islands.forEach(island => {
-        grid[island.Placement[1]][island.Placement[0]] = island.links.toString();
-    });
-
-
-    // Remplit les ponts
-    obj.Bridges.forEach(bridge => {
-        let symbol = bridge.width === 1 ? "~" : "-";
-
-
-        bridge.Placement.forEach(coord => {
-            grid[coord[1]][coord[0]] = symbol;
-        });
-    });
-
-
-    // Convertit la grille en chaine de caracteres
-    return grid.map(row => row.join("")).join("");
-}
     function togglePopup() {
         var popup = document.getElementById("popup");
         if (popup.style.display === "none") {
@@ -176,13 +151,7 @@ if($mod == 'easy'){
     while($output == -1){
         $output = exec($command);
     }
-    ?>
-<script>
-   var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
-   //on redirige vers une page qui va verifier si le niveau est faisable ou non
-    window.location.href = "verif_level.php?mod=easy&JSON=" + bangerdefou;
-</script>
-<?php
+    $command = 'MartinS.exe'. ' '. $pixelArt . ' ' . $nb_colonnes . ' ' . $nb_lignes. ' ' . $nb_iles;
         $texte_php = $output;
         $texte_js = json_encode($texte_php);
         
@@ -196,11 +165,6 @@ if($mod == 'medium'){
     while($output == -1){
         $output = exec($command);
     }
-    ?>
-    <script>
-       var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
-    </script>
-    <?php
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
@@ -208,7 +172,7 @@ if($mod == 'hard'){
     $nb_iles = 25;
     $nb_colonnes = 11;
     $nb_lignes = 13;
-    $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
+    $command = 'MartinG_test5.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
     while($output == -1){
         $output = exec($command);
@@ -684,7 +648,7 @@ var rows = huge.Grid[0].size[0];
                     for (var key in huge.PlacedBridges) {
                         huge.userPlacedBridges.push(huge.PlacedBridges[key].Placement);
                     }
-                    console.log( huge.PlacedBridges); // For debugging
+                    console.log('BIG CACZ', huge.PlacedBridges); // For debugging
                     check_win();
                 }
 
@@ -815,7 +779,7 @@ var rows = huge.Grid[0].size[0];
                             bridgeImage.addEventListener('click', () => removeBridge(island1, island2));
                             cellElement.appendChild(bridgeImage);
                             // ...
-                            console.log(huge.PlacedBridges); // For debugging
+                            console.log('lololol', huge.PlacedBridges); // For debugging
                             console.log(huge.Bridges)
                             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
                             huge.userPlacedBridges = [];
@@ -832,42 +796,7 @@ var rows = huge.Grid[0].size[0];
                     }
                     check_win();
                 }
-
-                function convertToPixelArt(rows, cols) {
-                // Créer une matrice vide de dimensions rows x cols
-                var matrix = [];
-                for (var i = 0; i < rows; i++) {
-                    matrix[i] = [];
-                    for (var j = 0; j < cols; j++) {
-                        matrix[i][j] = "*"; // Définir chaque case comme un espace vide "*"
-                    }
-                }
-
-
-                // Remplir la matrice avec les numéros d'île en fonction des positions et des liens
-                for (var i = 0; i < huge.Islands.length; i++) {
-                    var island = huge.Islands[i];
-                    var rowIndex = island.Placement[0];
-                    var colIndex = island.Placement[1];
-                    var islandNumber = island.links
-                        .toString(); // Convertir le nombre de liens en chaîne de caractères
-
-
-                    // Si les coordonnées de l'île se trouvent à l'intérieur de la matrice
-                    if (rowIndex < rows && colIndex < cols) {
-                        matrix[rowIndex][colIndex] = islandNumber;
-                    }
-                }
-
-
-                // Convertir la matrice en une chaîne de caractères représentant le pixel art de la carte
-                var pixelArt = "";
-                for (var i = 0; i < rows; i++) {
-                    pixelArt += matrix[i].join("");
-                }
-
-                return pixelArt;
-            }
+//on transforme huge en chaine de caractere
                 function myFunction() {
                     //on supprime les ponts de la grille
                      // Parcourir toutes les cellules dans huge.PlacedBridges
@@ -891,6 +820,7 @@ var rows = huge.Grid[0].size[0];
             }
 
 
+            
 
 
             <?php   
