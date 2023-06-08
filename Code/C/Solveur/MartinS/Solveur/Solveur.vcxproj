@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Function.c" />
-    <ClCompile Include="Json.c" />
     <ClCompile Include="Main.c" />
   </ItemGroup>
   <ItemGroup>
