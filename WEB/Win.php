@@ -73,7 +73,7 @@ session_start();
             You WIN !
         </div>
         <?php 
-
+if($_GET ['mod'] != 'custom'){
                 //on verifie que l'id en session est bien celui dans l'url
                 if($_SESSION['id'] == $_SESSION['id2']){
                    $username = $_SESSION['username'];
@@ -93,6 +93,7 @@ session_start();
                 //on execute la requete
                 $stmt->execute();
                 }
+            }
                 ?>
         <script>
         </script>
