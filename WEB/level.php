@@ -58,7 +58,7 @@ session_start();
                     $level=$row['path'];
                 ?>
 
-                    <a class="lev" href="verif_level.php?JSON=<?php echo urlencode($level); ?>">
+                    <a class="lev" href="users_levels.php?JSON=<?php echo urlencode($level); ?>&rows=<?php echo $row["rows"] ?>&columns=<?php echo $row["colls"]?>&mod=1&id=1&siuu=1">
                     Made by <?php echo $row["user"] ?><br>
                     Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
                     Difficulty: <?php echo " ".$row["difficulty"] ?>

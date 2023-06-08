@@ -508,10 +508,15 @@ session_start();
                 huge.Grid.push({
                     "size": [rows, columns]
                 });
-                var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" +
-                    encodeURIComponent(iles);
-                window.location.href = url;
+                //on redirige vers la page se verifiacation 
+                window.location.href = "verif_level_user.php?rows=" + encodeURIComponent(rows) +
+                    "&columns=" + encodeURIComponent(columns) + "&pixelArt=" + encodeURIComponent(
+                        pixelArt) + "&nbiles=" + encodeURIComponent(iles) + "&mod=2&siuu=2&id=2&JSON=2" ;
+
+                // var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
+                //         columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" +
+                //     encodeURIComponent(iles);
+                // window.location.href = url;
             }
 
             var poubelle = document.getElementById("poubelle");
@@ -571,26 +576,8 @@ session_start();
             <div>
                 <?php
 // Récupérer les paramètres de l'URL
-if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['pixelArt']) && isset($_GET['nbiles'])){
 
-$rows = $_GET['rows'];
-$columns = $_GET['columns'];
-$pixelArt = $_GET['pixelArt'];
-$nbiles = $_GET['nbiles'];
-$difficulty = ($rows*$columns*$nbiles)/20;
-//on stock les valeurs dans la base de données
-//on recupere le pseudo de l'utilisateur
-$username = $_SESSION['username'];
-//on se connecte a la base de données
-include("traitement/DB_connect.php");
-$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty, soluce) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty', 'A MODIFIER AVEC SOLVEUR')";
-//on prepare la requete
-$stmt = $conn->prepare($sql);
-//on execute la requete
-$stmt->execute();
-//on fait un message d'alerte pour dire que le niveau a été enregistré
-echo "<script>alert('Votre niveau a bien été enregistré !');</script>";
-}
+
 //$command = 'MartinS.exe'. ' '. $rows . ' ' . $columns . ' ' . $nbiles . ' ' . $pixelArt;
 //$output = exec($command);
 ?>

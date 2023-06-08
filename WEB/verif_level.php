@@ -39,88 +39,137 @@ session_start();
 <body>
 <main Id="main" class="main">
 <div id="game" class="game">
+<video id="background-video" autoplay="autoplay" playsinline loop>
+        <source src="image/background.mp4" type="video/mp4">
+    </video>
 <?php
 //on récupère les données du formulaire
 $pixelArt = $_GET['JSON'];
-echo 'caca'. $pixelArt;
-$command = 'MartinS.exe'. ' '. 16 . ' ' . 16 . ' ' . $pixelArt;
+
+$command = 'MartinS.exe'. ' '. $_GET['rows'] . ' ' . $_GET['columns'] . ' ' . $pixelArt;
 $output = exec($command);
 $pixelArt = $output; 
-echo 'aaaaa'. $pixelArt;
 
 
 ?>
 <script>
-    //on convertit pixelart php en pixel art js
+    //on convertit rows et columns de variable php en variables js
+    let rows = <?php echo json_encode($_GET['rows']); ?>;
+    let columns = <?php echo json_encode($_GET['columns']); ?>;
 
-    let gridSize = [16,16];
-   function pixelArtToJson(gridSize) {
+    let gridSize = [rows,columns];
+   
     let pixelArt = <?php echo json_encode($pixelArt); ?>;
     console.log('aaa', pixelArt);
     //on stocke les differentes solutions dans un tableau (les differentes solutions sont séparées par des " ")
-    pixelArt = pixelArt.split(" ");
-    // Initialise l'objet json vide
-    let obj = {
-        "Islands": [],
-        "Grid": [{"size": gridSize}],
-        "Bridges": [],
-        "PlacedBridges": []
-    };
+    solution = pixelArt.split(" ");
+    //on recupere les solutions dans le tableau (uniquement les solutions qui ont un index impaire comme pixelArt[1], pixelArt[3]...) et on les supprime de pixelart
+    var Nb_bridge = []; //tableau qui contient le nombre de ponts pour chaque
+    var pixel = []; //tableau qui contient les pixels
+    for (let i = 0; i < solution.length/2; i++) {
+        //on push la solution dans le tableau pixel
+        console.log('azeaze', solution[2*i+1], solution[2*i]);
+        Nb_bridge.push(solution[2*i+1]);
+        pixel.push(solution[2*i]);
 
+    }
+    console.log('bbb', Nb_bridge);
+    pixelArt =  solution;
+    console.log('ccc', pixel);
+    //window.location.href = "pixelart_json.php?JSON=" + pixel + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge;
+    <?php 
+    if (isset($_GET['mod']) || isset($_GET['id']) || isset($_GET['siuu'])){
+    $mod = $_GET['mod'];
+    $id = $_GET['id'];
+    $siuu = $_GET['siuu'];
+    }
+    ?>
 
-    let width = gridSize[0];
-    let height = gridSize[1];
+if("<?php echo($_GET['mod']);?>" != 1){
+    window.location.href = "randommod.php?mod=" + <?php echo json_encode($mod); ?> + "&id=" + <?php echo json_encode($id); ?> + "&JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($siuu); ?>
+}else if ("<?php echo($_GET['mod']);?>" == 1){
+    window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge
+}
+else {
+    window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge
+}
+    //on récupere le nombre de ponts et d'iles dans le pixelart
+    let nbIslands = 0;
+    //on compte le nombre d'iles dans le pixelart
+    //for (let j = 0; j < pixelArt.length; j++) {
 
-
-    for (let i = 0; i < pixelArt.length; i++) {
-        let y = Math.floor(i / width);
-        let x = i % width;
-        let symbol = pixelArt[i];
-
-
-        // Detect islands
-        if (!isNaN(parseInt(symbol))) {
-            obj.Islands.push({
-                "links": parseInt(symbol),
-                "Placement": [y, x]
-            });
-        }
-        // Detect bridges
-        else if (symbol === "~" || symbol === "-" || symbol === "." || symbol === "_") {
-            let bridge = {
-                "width": symbol === "~" ? 1 : 2,
+//}
+    console.log('ddd', nbIslands);
+    
+    let bridge = {
+                "width": 0,
                 "length": 0,
                 "direction": null,
-                "Placement": [[y, x]]
+                "Placement": [[0, 0]]
             };
+//     function pixelArtToJson(gridSize) {
+//     // Initialise l'objet json vide
+//     let obj = {
+//         "Islands": [],
+//         "Grid": [{"size": gridSize}],
+//         "Bridges": [],
+//         "PlacedBridges": []
+//     };
 
 
-            // Check direction of the bridge (horizontal or vertical) (~ = vertical witdh = 0, _ = horizontal width = 0, - = vertical width = 1, . = horizontal width = 1)
-            if (symbol === "~" || symbol === ".") {
-                bridge.direction = 1;
-            } else if (symbol === "-" || symbol === "_") {
-                bridge.direction = 0;
-            }
-            //check width of the bridge
-            if (symbol === "~" || symbol === "_") {
-                bridge.width = 1;
-            } else if (symbol === "-" || symbol === ".") {
-                bridge.width = 2;
-            }
-            obj.Bridges.push(bridge);
-        }
-    }
+//     let width = gridSize[0];
+//     let height = gridSize[1];
 
 
-    return obj;
-}
+//     for (let i = 0; i < pixelArt.length; i++) {
+//         let y = Math.floor(i / width);
+//         let x = i % width;
+//         let symbol = pixelArt[i];
+
+
+//         // Detect islands
+//         if (!isNaN(parseInt(symbol))) {
+//             obj.Islands.push({
+//                 "links": parseInt(symbol),
+//                 "Placement": [y, x]
+//             });
+//         }
+//         // Detect bridges
+//         else if (symbol === "~" || symbol === "-" || symbol === "." || symbol === "_") {
 
 
 
-console.log('caca', pixelArtToJson(gridSize));
+//             // Check direction of the bridge (horizontal or vertical) (~ = vertical witdh = 0, _ = horizontal width = 0, - = vertical width = 1, . = horizontal width = 1)
+//             if (symbol === "~" || symbol === ".") {
+//                 bridge.direction = 1;
+//             } else if (symbol === "-" || symbol === "_") {
+//                 bridge.direction = 0;
+//             }
+//             //check width of the bridge
+//             if (symbol === "~" || symbol === "_") {
+//                 bridge.width = 1;
+//             } else if (symbol === "-" || symbol === ".") {
+//                 bridge.width = 2;
+//             }
 
-let huge = pixelArtToJson(gridSize)
 
+
+            
+//         }
+        
+//     }
+
+//     obj.Bridges.push(bridge);
+//     return obj;
+// }
+
+
+
+//console.log('caca', pixelArtToJson(gridSize));
+
+//on met le pixel art dans une variable huge 
+//var huge = pixelArtToJson(gridSize);
+//console.log('caca', huge);
 
 
 
@@ -208,7 +257,7 @@ var rows = huge.Grid[0].size[0];
                     if (bridgeFound) {
                         var bridgeImage = document.createElement("img");
                         if (bridge.direction === 1) { // Pont vertical
-                            if (bridge.width === 2) {
+                            if (bridge.width === 1) {
                                 console.log("caca");
                                 bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
                             } else {
@@ -216,7 +265,7 @@ var rows = huge.Grid[0].size[0];
                                 bridgeImage.src = "../WEB/image/iles/bridge_h.png";
                             }
                         } else { // Pont horizontal
-                            if (bridge.width === 2) {
+                            if (bridge.width === 1) {
                                 bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
                             } else {
                                 bridgeImage.src = "../WEB/image/iles/bridge_V.png";

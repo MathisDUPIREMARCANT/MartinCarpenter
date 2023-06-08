@@ -9,9 +9,18 @@ function GetPath($number){
     $path = $result->fetch(PDO::FETCH_ASSOC);
     return $path;
 }
-if(isset($_GET['level'])){
-$texte_php = $_GET["level"];
+if(isset($_GET['JSON'])){
+$texte_php = $_GET["JSON"];
 $texte_js = json_encode($texte_php);
+//on importe la solution du niveau dans la base de donnée
+require("traitement/DB_connect.php");
+$sql = "SELECT soluce FROM users_level WHERE path='$texte_php'";
+$result = $conn->query($sql);
+$soluce = $result->fetch(PDO::FETCH_ASSOC);
+foreach($soluce as $key => $value){
+    $soluce = $value;
+}
+$texte_js = json_encode($soluce);
 }
 if(isset($_GET['story_level'])){
     $story_level = $_GET['story_level'];
@@ -145,6 +154,8 @@ if(isset($_GET['story_level'])){
                 // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
                 //{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },
                 //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
+                huge2 = huge;
+                huge = huge[0]
                 var rows = huge.Grid[0].size[0];
                 var columns = huge.Grid[0].size[1];
 
@@ -404,7 +415,7 @@ if(isset($_GET['story_level'])){
                     // Si toutes les vérifications sont passées, le pont peut être placé
                     return true;
                 }
-
+                
 
 
 
@@ -414,37 +425,32 @@ if(isset($_GET['story_level'])){
                     "Bridges": [],
                 };
 
-                tmp2 = {
-                    "1": [],
-                    "2": []
-                };
-                console.log('huge.Bridges', huge.Bridges);
-                for (var j = 0; j < Object.keys(huge.Bridges).length; j++) {
+       // On initie tmp2 comme un tableau vide.
+       let tmp2 = [];
 
-                    //on verifie la valeur du count
-                    if (huge.Bridges[Object.keys(huge.Bridges)[j]].width == 0) {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
-                            .length; k++) {
 
-                            //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
-                                Object.keys(
-                                    huge
-                                    .Bridges)[j]].Placement[k]);
-                        }
-                    } else {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
-                            .length; k++) {
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
-                                Object.keys(
-                                    huge
-                                    .Bridges)[j]].Placement[k]);
-                        }
+for (var yes = 0; yes < huge2.length; yes++) {
+    let solution = {
+        "1": [],
+        "2": []
+    };
 
-                    }
-                }
 
+    for (var j = 0; j < Object.keys(huge2[yes].Bridges).length; j++) {
+        var width = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].width;
+        var placement = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].Placement;
+        for (var k = 0; k < placement.length; k++) {
+            var real = ((width + 1) % 2) + 1;
+            console.log("caca", "" + real);
+            solution["" + real].push(placement[k]);
+        }
+    }
+
+
+    tmp2.push(solution);
+}
                 function check_win() {
+
                     for (var i = 0; i < huge.Islands.length; i++) {
                         var island = huge.Islands[i];
                         var bridges = getBridgesAroundIsland(island);
@@ -486,15 +492,28 @@ if(isset($_GET['story_level'])){
                     }
                     //trie les deux dictionnaires
                     tmp["1"].sort();
-                    tmp["2"].sort();
-                    tmp2["1"].sort();
-                    tmp2["2"].sort();
+    tmp["2"].sort();
+    console.log('tmp12', tmp2);
+    tmp2.forEach(solution => {
+        solution["1"].sort();
+        solution["2"].sort();
+    });
 
-                    if (JSON.stringify(tmp) === JSON.stringify(tmp2)) {
-                        document.location.href = "Win.php";
-                    }
 
-                }
+    console.log('tmp2', tmp2);
+    console.log('tmp', tmp);
+    amogus = tmp2[0];
+    console.log("siuu", JSON.stringify(tmp), 'siuu', JSON.stringify(amogus))
+
+    // Vérifie si tmp correspond à l'une des solutions dans tmp2
+    for (var siu = 0; siu < tmp2.length; siu++) {
+        if (JSON.stringify(tmp) === JSON.stringify(tmp2[siu])) {
+            document.location.href = "Win.php";
+            break;
+        }
+    }
+}
+
 
                 document.getElementById("test").addEventListener("click", retryClicked);
 

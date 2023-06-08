@@ -42,6 +42,7 @@ session_start();
 
 <body>
     <script>
+
 function jsonToPixelArt(obj) {
     // Initialise une grille vide
     let grid = Array(obj.Grid[0].size[1]).fill().map(() => Array(obj.Grid[0].size[0]).fill("*"));
@@ -51,22 +52,19 @@ function jsonToPixelArt(obj) {
     obj.Islands.forEach(island => {
         grid[island.Placement[1]][island.Placement[0]] = island.links.toString();
     });
-
-
-    // Remplit les ponts
-    obj.Bridges.forEach(bridge => {
-        let symbol = bridge.width === 1 ? "~" : "-";
-
-
-        bridge.Placement.forEach(coord => {
-            grid[coord[1]][coord[0]] = symbol;
-        });
-    });
-
-
     // Convertit la grille en chaine de caracteres
     return grid.map(row => row.join("")).join("");
 }
+
+
+
+
+
+
+
+
+
+
     function togglePopup() {
         var popup = document.getElementById("popup");
         if (popup.style.display === "none") {
@@ -93,6 +91,7 @@ function jsonToPixelArt(obj) {
         var savepos = document.getElementById("savepos");
         savepos.style.display = "block";
     }
+
     </script>
     <video id="background-video" autoplay="autoplay" playsinline loop>
         <source src="image/background.mp4" type="video/mp4">
@@ -139,16 +138,21 @@ function jsonToPixelArt(obj) {
                 //on récupere les valeurs en url pour les envoyer au .exe (easy, medium, hard, custom)
                 if(isset($_GET['mod'])){
                     $mod = $_GET['mod'];
+
                 }
                 if(isset($_POST['mod'])){
                     $mod = $_POST['mod'];
+                    
                 }
                 ?>
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
         <form action=" randommod.php?mod=custom" method="post">
             <?php 
+
         if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
-        if($mod == 'custom'){?>
+
+        if($mod == 'custom'){
+?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
             <label for="nb_iles">Number of islands</label>
             <input type="text" name="nb_iles" id="nb_iles">
@@ -158,14 +162,15 @@ function jsonToPixelArt(obj) {
             <input type="text" name="nb_lignes" id="nb_lignes">
             <input Id="button" type="submit" value="Validate">
             <br><br> <br>
-            <?php }?>
+            <?php }}?>
         </form>
         <div class="grid">
             <div class="martinplace">
                 <img class="martin" src="image/martin1.png">
             </div>
             <div id="game" class="game">
-                <?php   
+            <script>
+                <?php             
 //on exec le .exe avec les parametres du formulaire 11 13 30
 if($mod == 'easy'){
     $nb_iles = 6;
@@ -173,14 +178,25 @@ if($mod == 'easy'){
     $nb_lignes = 7;
     $command = 'MartinG_easy.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
+
     while($output == -1){
         $output = exec($command);
     }
+    if (!isset($_GET['JSON'])) {
     ?>
-<script>
+
    var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
+   let siuu = <?php echo $output; ?>;
+   console.log('siuuuuu', siuu);
    //on redirige vers une page qui va verifier si le niveau est faisable ou non
-    window.location.href = "verif_level.php?mod=easy&JSON=" + bangerdefou;
+   var verified = 0;
+   if(verified == 0){
+   verified = 0;
+   window.location.href = "verif_level.php?mod=easy&JSON=" + bangerdefou + "&iles=" + <?php echo $nb_iles; ?> + "&columns=" + <?php echo $nb_colonnes; ?> + "&rows=" + <?php echo $nb_lignes;?> + "&id=" + <?php echo $id;?> + "&siuu=" + JSON.stringify(siuu) + "&verified=" + verified;
+   }
+    <?php
+    } ?>
+
 </script>
 <?php
         $texte_php = $output;
@@ -229,8 +245,6 @@ if($mod == 'custom'){
         while($output == -1){
             $output = exec($command);
         }
-        
-                    
         $texte_php = $output;
         $texte_js = json_encode($texte_php);
     }
@@ -243,7 +257,7 @@ if($mod == 'custom'){
 
     $_SESSION['id'] = $id;
     $_SESSION['id2'] = $id;
-    }?> 
+    }else { $id = 1; } ?> 
 
 
                 <!-- on affiche le texte js avec du JS -->
@@ -251,6 +265,14 @@ if($mod == 'custom'){
                 <script type="text/javascript">
                 var texte_js = <?php echo $texte_js; ?>;
                 var huge = JSON.parse(texte_js);
+                //on met huge comme etant le get json
+
+                <?php if(isset($_GET['JSON'])){ ?>
+                    console.log('siuuuuu2', <?php echo ($_GET['siuu']); ?>);
+                huge = <?php echo $_GET['siuu']; ?>;
+
+                <?php } ?>
+                console.log(huge)
                 //on convertit la variable php mod en variable js
                 var id = <?php echo json_encode($id); ?>;
                 var mod = "<?php echo $mod; ?>";
@@ -398,7 +420,16 @@ var rows = huge.Grid[0].size[0];
                                         islandImage.src = "../WEB/image/iles/ile6.png";
                                         cell.appendChild(islandImage);
                                     }
+                                     else if (huge.Islands[k].links == 7) {
+                                        islandImage.src = "../WEB/image/iles/ile7.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                     else if (huge.Islands[k].links == 8) {
+                                        islandImage.src = "../WEB/image/iles/ile8.png";
+                                        cell.appendChild(islandImage);
+                                    }
                                 }
+                            
                                 cell.appendChild(islandImage);
                                 islandImage.setAttribute("data-row", i.toString());
                                 islandImage.setAttribute("data-col", j.toString());
@@ -885,7 +916,7 @@ var rows = huge.Grid[0].size[0];
                     // Réinitialiser huge.userPlacedBridges
                     huge.userPlacedBridges = [];
                 var url = "randommod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&JSON=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
+                        columns) + "&JSON=" + encodeURIComponent(bangerdefou) + "&nbiles=" +
                     encodeURIComponent(huge.Islands.length) +  "&mod=" + encodeURIComponent(mod) + "&id=" + encodeURIComponent(id);
                 window.location.href = url;
             }
@@ -894,7 +925,7 @@ var rows = huge.Grid[0].size[0];
 
 
             <?php   
-}
+
             if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
 $rows = $_GET['rows'];
 $columns = $_GET['columns'];

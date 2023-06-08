@@ -47,7 +47,7 @@ if(isset($_SESSION['username'])){
     <div class="game">
         <button class="Buttonstory" onclick="redirectTo('storymod.php')"><a class="textstory">Story
                 Mode</a></button>
-        <button class="Buttonstory" onclick="redirectTo('randommod.php?mod=custom')"><a class="textstory">Custom
+        <button class="Buttonstory" onclick="redirectTo('custommod.php?mod=custom')"><a class="textstory">Custom
             Mode</a></button>
             </div>
         <div class="games">
