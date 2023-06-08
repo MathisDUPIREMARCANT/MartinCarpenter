@@ -54,7 +54,7 @@ void Stock_island(Island* islands, Coord posMax, char* board) {
                 // If the character at the current position is not '*', '~', or '#'
                 islands[incr].pos.x = i; // Store the x-coordinate of the island in the islands array at the corresponding index
                 islands[incr].pos.y = j; // Store the y-coordinate of the island in the islands array at the corresponding index
-                islands[incr].number = atoi(board + (posMax.x * j) + i); // Store the island number (converted from the character) in the islands array at the corresponding index
+                islands[incr].number = *(board + (posMax.x * j) + i) - '0'; // Store the island number (converted from the character) in the islands array at the corresponding index
                 incr++; // Increment the increment variable
             }
         }
