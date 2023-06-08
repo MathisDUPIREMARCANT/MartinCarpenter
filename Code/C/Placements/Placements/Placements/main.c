@@ -15,18 +15,18 @@
 
 void main(int argc, char* argv[]) {
 
-	//Coord posMax = { (atoi(argv[1])), (atoi(argv[2])) };
-	Coord posMax = { 7, 7 };
+	Coord posMax = { (atoi(argv[1])), (atoi(argv[2])) };
+	//Coord posMax = { 7, 7 };
 	Coord pos;
-	//int Nb_bridge = atoi(argv[3]);
-	int Nb_bridge = 0;
+	int Nb_bridge = atoi(argv[3]);
+	//int Nb_bridge = 3;
 	int Nb_island;
 
-	//char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));;
-	//strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), (argv[4]), _TRUNCATE);
+	char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));;
+	strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), (argv[4]), _TRUNCATE);
 
-	char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));
-	strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), "*********2**1*****************3*2***********3*3**", _TRUNCATE);
+	//char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));
+	//strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), "********3~2****.*_****2*1************************", _TRUNCATE);
 
 	pos.x = 0;
 	pos.y = 0;

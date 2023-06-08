@@ -8,7 +8,7 @@ int Island_on_map(char* Board, Coord pos, Coord posMax) {
 
     for (int y = 0; y < posMax.y; y++) {
         for (int x = 0; x < posMax.x; x++) {
-            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '-' || *(Board + (posMax.x * y) + x) == '0' || *(Board + (posMax.x * y) + x) == '_' || *(Board + (posMax.x * y) + x) == '.')) {
                 Island_current++;
             }
         }
@@ -49,7 +49,7 @@ void Stock_island(Island* islands, Coord posMax, char* board) {
     int incr = 0;
     for (int i = 0; i < posMax.x; i++) {
         for (int j = 0; j < posMax.y; j++) {
-            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
+            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '-' && *(board + (posMax.x * j) + i) != '_' && *(board + (posMax.x * j) + i) != '.') {
                 islands[incr].pos.x = i;
                 islands[incr].pos.y = j;
                 islands[incr].number = atoi(board + (posMax.x * j) + i);
