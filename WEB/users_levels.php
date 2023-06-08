@@ -509,7 +509,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
     // Vérifie si tmp correspond à l'une des solutions dans tmp2
     for (var siu = 0; siu < tmp2.length; siu++) {
         if (JSON.stringify(tmp) === JSON.stringify(tmp2[siu])) {
-            document.location.href = "Win.php";
+            document.location.href = "Win.php?mod=10&score=50";
             break;
         }
     }

@@ -79,6 +79,6 @@ $stmt->execute();
 //on dit que le niveau a bien été enregistré
 alert("Your level has been saved");
 //on redirige vers la page d'accueil
-//window.location.href = "../index.php";
+window.location.href = "../index.php";
 
 </script>
