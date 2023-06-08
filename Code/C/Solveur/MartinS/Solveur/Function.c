@@ -67,10 +67,17 @@ void Next_Coord(Coord* pos, int direction) {
 }
 
 int Is_not_Island(char* Board, Coord pos, Coord posMax) {
-    if (*(Board + (posMax.x * (pos.y)) + pos.x) != '*' && *(Board + (posMax.x * (pos.y)) + pos.x) != '~' && *(Board + (posMax.x * (pos.y)) + pos.x) != '-') {
+    if (*(Board + (posMax.x * (pos.y)) + pos.x) != '*' && *(Board + (posMax.x * (pos.y)) + pos.x) != '~' && *(Board + (posMax.x * (pos.y)) + pos.x) != '-' && *(Board + (posMax.x * (pos.y)) + pos.x) != '_' && *(Board + (posMax.x * (pos.y)) + pos.x) != '.') {
         return 1;
     }
     return 0;
+}
+
+int Is_not_Bridge(char* Board, Coord pos, Coord posMax) {
+    if (*(Board + (posMax.x * (pos.y)) + pos.x) == '~' || *(Board + (posMax.x * (pos.y)) + pos.x) == '-' || *(Board + (posMax.x * (pos.y)) + pos.x) == '_' || *(Board + (posMax.x * (pos.y)) + pos.x) == '.') {
+        return 0;
+    }
+    return 1;
 }
 
 int Weigth_Island_in_a_direction(char* Board, Coord pos, Coord posMax, int Direction) {
@@ -195,38 +202,50 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
     switch (Direction) {
     case(0): // If Direction is 0 (up)
         Next_Coord(&pos, 0); // Move to the next coordinate in the specified direction (up)
-        while (pos.y > 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*') {
+        while (pos.y > 0 && *(Board + (posMax.x * (pos.y)) + pos.x) == '*' && Is_not_Bridge(Board, pos, posMax)) {
             // While the y-coordinate is greater than 0 and the current position is an island ('*')
             space++; // Increment the length of the bridge segment
             Next_Coord(&pos, 0); // Move to the next coordinate in the specified direction (up)
+        }
+        if (pos.y == 0 || !Is_not_Bridge(Board, pos, posMax)) {
+            space = 0;
         }
         break;
 
     case(1): // If Direction is 1 (right)
         Next_Coord(&pos, 1); // Move to the next coordinate in the specified direction (right)
-        while (pos.x < posMax.x && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+        while (pos.x < posMax.x && *(Board + (posMax.x * pos.y) + pos.x) == '*' && Is_not_Bridge(Board, pos, posMax)) {
             // While the x-coordinate is less than the maximum x-coordinate and the current position is an island ('*')
             space++; // Increment the length of the bridge segment
             Next_Coord(&pos, 1); // Move to the next coordinate in the specified direction (right)
         }
+        if(pos.x == posMax.x || !Is_not_Bridge(Board, pos, posMax)) {
+			space = 0;
+		}
         break;
 
     case(2): // If Direction is 2 (down)
         Next_Coord(&pos, 2); // Move to the next coordinate in the specified direction (down)
-        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+        while (pos.y < posMax.y && *(Board + (posMax.x * pos.y) + pos.x) == '*' && Is_not_Bridge(Board, pos, posMax)) {
             // While the y-coordinate is less than the maximum y-coordinate and the current position is an island ('*')
             space++; // Increment the length of the bridge segment
             Next_Coord(&pos, 2); // Move to the next coordinate in the specified direction (down)
+        }
+        if (pos.y == posMax.y || !Is_not_Bridge(Board, pos, posMax)) {
+            space = 0;
         }
         break;
 
     case(3): // If Direction is 3 (left)
         Next_Coord(&pos, 3); // Move to the next coordinate in the specified direction (left)
-        while (pos.x > 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*') {
+        while (pos.x > 0 && *(Board + (posMax.x * pos.y) + pos.x) == '*' && Is_not_Bridge(Board, pos, posMax)) {
             // While the x-coordinate is greater than 0 and the current position is an island ('*')
             space++; // Increment the length of the bridge segment
             Next_Coord(&pos, 3); // Move to the next coordinate in the specified direction (left)
         }
+        if(pos.x == 0 || !Is_not_Bridge(Board, pos, posMax)) {
+			space = 0;
+		}
         break;
     }
 
@@ -236,7 +255,7 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction) {
 
 
 int Enumeration(char* board, Coord pos, Coord posMax, int* result, int* direction) {
-    int weight_island = atoi((board + (posMax.x * pos.y) + pos.x)); // Convert the character at the current position to an integer weight
+    int weight_island = *((board + (posMax.x * pos.y) + pos.x)) - '0'; // Convert the character at the current position to an integer weight
     int Nb_possibility = 0; // Initialize the number of possibilities
 
     for (int i = 0; i < 3; i++) { // Iterate over the possible values for direction[0]
@@ -264,7 +283,13 @@ int Enumeration(char* board, Coord pos, Coord posMax, int* result, int* directio
 
 void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction, int Nb_bridge) {
     int Direction_available[Nb_per_combinaison]; // Array to store the available directions for each island
-    int* result = malloc(sizeof(int) * Nb_per_combinaison * Nb_combinaison_max); // Initialize the result array pointer
+    int* result = NULL; // Initialize the result array pointer
+
+    int* buffer = malloc(sizeof(int) * Nb_per_combinaison * Nb_combinaison_max); // Initialize the buffer array pointer
+    if (buffer != NULL) {
+        result = buffer; // Set the result array pointer to the buffer array pointer
+    }
+    //int result[Nb_per_combinaison * Nb_combinaison_max];
 
     if (result != NULL) {
         if (Direction != NULL) {
@@ -287,17 +312,17 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction, in
 
                     Next_Coord(&Copy_pos, i);
 
-                    if ((atoi(Board + (Copy_pos.y * posMax.x) + Copy_pos.x) - Direction[i]) < 0) {
+                    if ((*(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') - Direction[i] < 0) {
                         return; // If the island weight minus the direction value is negative, exit the function
                     }
 
-                    Place_island_on_map(Board, posMax, Copy_pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Direction[i]);
+                    Place_island_on_map(Board, posMax, Copy_pos, (*(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') - Direction[i]);
 
                     // if Peek_island_number(Board, posMax, Copy_pos, i, 0) - Direction[i] < 0 alors on casse la recursivite
                 }
             }
 
-            Place_island_on_map(Board, posMax, pos, atoi(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - Type_island);
+            Place_island_on_map(Board, posMax, pos, (*(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') - Type_island);
         }
 
         int Nb_islands = Island_on_map(Board, pos, posMax);
@@ -324,7 +349,7 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction, in
 
         int Nb_combinaison = Enumeration(Board, pos, posMax, result, &Direction_available); // Enumerate the possible bridge combinations
 
-        if (Nb_combinaison == 0 && atoi(Board + (pos.y * posMax.x) + pos.x)) {
+        if (Nb_combinaison == 0 && *(Board + (pos.y * posMax.x) + pos.x) - '0') {
             return; // If there are no combinations and the current island weight is non-zero, exit the function
         }
 
@@ -356,37 +381,32 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction, in
 int Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length) {
     switch (Direction) {
     case(0): // If Direction is 0 (up)
-        return atoi((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x))); // Return the integer value of the character at the position above the specified length
+        if(pos.x < 0 || pos.x >= posMax.x || pos.y - (Length + 1) < 0 || pos.y - (Length + 1) >= posMax.y) {
+			return 0;
+		}
+        return *((Board + (posMax.x * (pos.y - (Length + 1)) + pos.x))) - '0'; // Return the integer value of the character at the position above the specified length
         break;
 
     case(1): // If Direction is 1 (right)
-        return atoi((Board + (posMax.x * (pos.y) + pos.x + Length + 1))); // Return the integer value of the character at the position to the right of the specified length
+        if (pos.x + Length + 1 >= posMax.x || pos.x + Length + 1 < 0 || pos.y < 0 || pos.y >= posMax.y) {
+            return 0;
+        }
+        return *((Board + (posMax.x * (pos.y) + pos.x + Length + 1))) - '0'; // Return the integer value of the character at the position to the right of the specified length
         break;
 
     case(2): // If Direction is 2 (down)
-        return atoi((Board + (posMax.x * (pos.y + (Length + 1)) + pos.x))); // Return the integer value of the character at the position below the specified length
+        if (pos.x < 0 || pos.x >= posMax.x || pos.y + (Length + 1) < 0 || pos.y + (Length + 1) >= posMax.y) {
+            return 0;
+        }
+        return *((Board + (posMax.x * (pos.y + (Length + 1)) + pos.x))) - '0'; // Return the integer value of the character at the position below the specified length
         break;
 
     case(3): // If Direction is 3 (left)
-        return atoi((Board + (posMax.x * (pos.y) + pos.x - (Length + 1)))); // Return the integer value of the character at the position to the left of the specified length
-        break;
-    }
-}
-
-
-void Stock_island(Island* islands, Coord posMax, char* board) {
-    int incr = 0; // Initialize the increment variable
-
-    for (int i = 0; i < posMax.x; i++) { // Iterate over the x-axis positions
-        for (int j = 0; j < posMax.y; j++) { // Iterate over the y-axis positions
-            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
-                // If the character at the current position is not '*', '~', or '#'
-                islands[incr].pos.x = i; // Store the x-coordinate of the island in the islands array at the corresponding index
-                islands[incr].pos.y = j; // Store the y-coordinate of the island in the islands array at the corresponding index
-                islands[incr].number = atoi(board + (posMax.x * j) + i); // Store the island number (converted from the character) in the islands array at the corresponding index
-                incr++; // Increment the increment variable
-            }
+        if (pos.x - (Length + 1) >= posMax.x || pos.x - (Length + 1) < 0 || pos.y < 0 || pos.y >= posMax.y) {
+            return 0;
         }
+        return *((Board + (posMax.x * (pos.y) + pos.x - (Length + 1)))) - '0'; // Return the integer value of the character at the position to the left of the specified length
+        break;
     }
 }
 
