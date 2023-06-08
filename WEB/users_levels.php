@@ -156,6 +156,7 @@ if(isset($_GET['story_level'])){
                 //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
                 huge2 = huge;
                 huge = huge[0]
+                console.log('siu', huge)
                 var rows = huge.Grid[0].size[0];
                 var columns = huge.Grid[0].size[1];
 

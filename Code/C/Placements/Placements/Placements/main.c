@@ -38,22 +38,10 @@ int main(int argc, char* argv[]) {
     Bridge* Bridges = (Bridge*)malloc(sizeof(Bridge) * Nb_bridge);
     Island* Islands = (Island*)malloc(sizeof(Island) * Nb_island);
 
-    if (Bridges == NULL || Islands == NULL) {
-        printf("Error: Memory allocation failed\n");
-        free(Board);
-        free(Bridges);
-        free(Islands);
-        return 1;
-    }
-
     Stock_island(Islands, posMax, Board);
     Stock_bridge(Bridges, posMax, Board, Nb_bridge);
 
     From_C_to_Json(Bridges, Islands, Nb_bridge, Nb_island, posMax, 1);
-
-    free(Board);
-    free(Bridges);
-    free(Islands);
 
     return 0;
 }

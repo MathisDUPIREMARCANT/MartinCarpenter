@@ -49,9 +49,11 @@ $brdg = explode(",", $brdg);
 
 $pxl = $_GET["pxl"];
 $pxl = explode(",", $pxl);
+$rows = $_GET['row'];
+$columns = $_GET['column'];
 $resultat = "[";
 for ($i = 0; $i < count($brdg); $i++) {
-    $command = 'Placements.exe'. ' '. 7 . ' ' . 7 . ' ' . $brdg[$i] . ' ' . $pxl[$i];
+    $command = 'Placements.exe'. ' '. $rows . ' ' . $columns . ' ' . $brdg[$i] . ' ' . $pxl[$i];
     $output = exec($command);
     $resultat = $resultat.$output;
     if($i != count($brdg)-1){
@@ -59,8 +61,7 @@ for ($i = 0; $i < count($brdg); $i++) {
     }
 }  
 $resultat = $resultat."]";
- $rows = $_GET['row'];
-$columns = $_GET['column'];
+
 $pixelArt = $_GET['JSON'];
 $nbiles = $_GET['nbiles'];
 $difficulty = ($rows*$columns*$nbiles)/20;
@@ -78,6 +79,6 @@ $stmt->execute();
 //on dit que le niveau a bien été enregistré
 alert("Your level has been saved");
 //on redirige vers la page d'accueil
-window.location.href = "index.php";
+//window.location.href = "../index.php";
 
 </script>

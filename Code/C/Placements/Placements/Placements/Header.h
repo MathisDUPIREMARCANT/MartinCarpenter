@@ -25,7 +25,6 @@ void From_C_to_Json(Bridge* Bridges, Island* Islands, int Nb_bridge, int Nb_isla
 void From_C_to_Json_bridge(Bridge bridge);
 void From_C_to_Json_island(Island island);
 void Next_Coord(Coord* pos, int direction);
-void Print_board(char* Board, Coord Taille);
 void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max);
 void Stock_island(Island* islands, Coord posMax, char* board);
 

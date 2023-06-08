@@ -4,7 +4,7 @@
 
 void From_C_to_Json_island(Island island) {
     // Print the JSON representation of the island
-    printf("{\"links\" : %d,\"Placement\" : [%d, %d]}", island.number, island.pos.x, island.pos.y);
+    printf("{\"links\" : %d,\"Placement\" : [%d, %d]}", island.number, island.pos.y, island.pos.x);
 }
 
 
@@ -18,10 +18,10 @@ void From_C_to_Json_bridge(Bridge bridge) {
 
     for (int i = 0; i < bridge.length; i++) {
         if (i < bridge.length - 1) {
-            printf("[%d, %d],", bridge.pos[i].x, bridge.pos[i].y);
+            printf("[%d, %d],", bridge.pos[i].y, bridge.pos[i].x);
         }
         else {
-            printf("[%d, %d]", bridge.pos[i].x, bridge.pos[i].y);
+            printf("[%d, %d]", bridge.pos[i].y, bridge.pos[i].x);
         }
     }
 

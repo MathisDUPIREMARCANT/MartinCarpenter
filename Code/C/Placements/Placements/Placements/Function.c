@@ -50,7 +50,7 @@ void Stock_island(Island* islands, Coord posMax, char* board) {
 
     for (int i = 0; i < posMax.x; i++) { // Iterate over the x-axis positions
         for (int j = 0; j < posMax.y; j++) { // Iterate over the y-axis positions
-            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
+            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '_' && *(board + (posMax.x * j) + i) != '.' && *(board + (posMax.x * j) + i) != '-') {
                 // If the character at the current position is not '*', '~', or '#'
                 islands[incr].pos.x = i; // Store the x-coordinate of the island in the islands array at the corresponding index
                 islands[incr].pos.y = j; // Store the y-coordinate of the island in the islands array at the corresponding index
