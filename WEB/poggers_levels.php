@@ -1,7 +1,39 @@
 <?php
 session_start();
-?>
 
+
+function GetPath($number){
+    require("traitement/DB_connect.php");
+    $sql = "SELECT path FROM levels WHERE number='$number'";
+    $result = $conn->query($sql);
+    $path = $result->fetch(PDO::FETCH_ASSOC);
+    return $path;
+}
+if($_GET['mod'] != "easy"){
+$texte_php = $_GET["JSON"];
+$texte_js = json_encode($texte_php);
+//on importe la solution du niveau dans la base de donnée
+require("traitement/DB_connect.php");
+$sql = "SELECT soluce FROM users_level WHERE path='$texte_php'";
+$result = $conn->query($sql);
+$soluce = $result->fetch(PDO::FETCH_ASSOC);
+foreach($soluce as $key => $value){
+    $soluce = $value;
+}
+$texte_js = json_encode($soluce);
+}
+
+if(isset($_GET['story_level'])){
+    $story_level = $_GET['story_level'];
+
+    $texte_js = GetPath($story_level);
+        //on convertit le tableau path en chaine de caractère avec un foreach
+        foreach($texte_js as $key => $value){
+            $texte_js = $value;
+        }
+    json_encode($texte_js);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,162 +69,96 @@ session_start();
 </head>
 
 <body>
-<main Id="main" class="main">
-<div id="game" class="game">
-<video id="background-video" autoplay="autoplay" playsinline loop>
+
+    <script>
+    function togglePopup() {
+        var popup = document.getElementById("popup");
+        if (popup.style.display === "none") {
+            popup.style.display = "block";
+        } else {
+            popup.style.display = "none";
+        }
+    }
+
+    function hideButton() {
+        var boutonPause = document.getElementById("boutonPause");
+        boutonPause.style.display = "none";
+        var main = document.getElementById("main");
+        main.style.display = "none";
+        var savepos = document.getElementById("savepos");
+        savepos.style.display = "none";
+    }
+
+    function showButton() {
+        var boutonPause = document.getElementById("boutonPause");
+        boutonPause.style.display = "block";
+        var main = document.getElementById("main");
+        main.style.display = "flex";
+        var savepos = document.getElementById("savepos");
+        savepos.style.display = "block";
+    }
+    </script>
+    <video id="background-video" autoplay="autoplay" playsinline loop>
         <source src="image/background.mp4" type="video/mp4">
     </video>
-<?php
-//on récupère les données du formulaire
-$pixelArt = $_GET['JSON'];
 
-$command = 'MartinS.exe'. ' '. $_GET['rows'] . ' ' . $_GET['columns'] . ' ' . $pixelArt;
-$output = exec($command);
-$pixelArt = $output; 
+    <header>
+        <div class="buttonhead">
+            <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
+                <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
+            </button>
+        </div>
+        <div id="popup" style="display: none;">
+            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
+                <a id="test" class="al" href="game.php">Retry &emsp; &#160; &#160;
+                    <img class="img" src="image/button/retry.png" />
+                </a>
+            </button>
 
+            <button id="Buttonp" class="Buttonp" type="submit">
+                <a id="al" class="al" href="../index.php">Back Home
+                    <img class="img" src="image/button/maison.png" />
+                </a>
+            </button>
 
-?>
-<script>
-    //on convertit rows et columns de variable php en variables js
-    let rows = <?php echo json_encode($_GET['rows']); ?>;
-    let columns = <?php echo json_encode($_GET['columns']); ?>;
+            <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
+                <a id="al" class="al">Resume &emsp;
+                    <img class="img" src="image/button/arrow.png" />
+                </a>
+            </button>
 
-    let gridSize = [rows,columns];
-   
-    let pixelArt = <?php echo json_encode($pixelArt); ?>;
-    console.log('aaa', pixelArt);
-    //on stocke les differentes solutions dans un tableau (les differentes solutions sont séparées par des " ")
-    solution = pixelArt.split(" ");
-    //on recupere les solutions dans le tableau (uniquement les solutions qui ont un index impaire comme pixelArt[1], pixelArt[3]...) et on les supprime de pixelart
-    var Nb_bridge = []; //tableau qui contient le nombre de ponts pour chaque
-    var pixel = []; //tableau qui contient les pixels
-    for (let i = 0; i < solution.length/2; i++) {
-        //on push la solution dans le tableau pixel
-        console.log('azeaze', solution[2*i+1], solution[2*i]);
-        Nb_bridge.push(solution[2*i+1]);
-        pixel.push(solution[2*i]);
-
-    }
-    console.log('bbb', Nb_bridge);
-    pixelArt =  solution;
-    console.log('ccc', pixel);
-    //window.location.href = "pixelart_json.php?JSON=" + pixel + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge;
-    <?php 
-    if (isset($_GET['mod']) || isset($_GET['id']) || isset($_GET['siuu'])){
-    $mod = $_GET['mod'];
-    $id = $_GET['id'];
-    $siuu = $_GET['siuu'];
-    if ($mod == "easy"){
-        ?>
-        nombreiles = 6;
-        let mod = "easy";
-        <?php
-    }else if ($mod == "medium"){
-        ?>
-        nombreiles = 10;
-        let mod = "medium";
-        <?php
-    }else if ($mod == "hard"){
-        ?>
-        nombreiles = 25;
-        let mod = "hard";
-        <?php
-    }
-    
-    }
-
-    ?>
-
-if ("<?php echo($_GET['mod']);?>" == 1){
-    window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge
-}
-else {
-    window.location.href = "pixelart_json_no_save.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=" + <?php echo json_encode($_GET['mod']); ?> + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge + "&nbiles=" + nombreiles
-}
-    //on récupere le nombre de ponts et d'iles dans le pixelart
-    let nbIslands = 0;
-    //on compte le nombre d'iles dans le pixelart
-    //for (let j = 0; j < pixelArt.length; j++) {
-
-//}
-    console.log('ddd', nbIslands);
-    
-    let bridge = {
-                "width": 0,
-                "length": 0,
-                "direction": null,
-                "Placement": [[0, 0]]
-            };
-//     function pixelArtToJson(gridSize) {
-//     // Initialise l'objet json vide
-//     let obj = {
-//         "Islands": [],
-//         "Grid": [{"size": gridSize}],
-//         "Bridges": [],
-//         "PlacedBridges": []
-//     };
-
-
-//     let width = gridSize[0];
-//     let height = gridSize[1];
-
-
-//     for (let i = 0; i < pixelArt.length; i++) {
-//         let y = Math.floor(i / width);
-//         let x = i % width;
-//         let symbol = pixelArt[i];
-
-
-//         // Detect islands
-//         if (!isNaN(parseInt(symbol))) {
-//             obj.Islands.push({
-//                 "links": parseInt(symbol),
-//                 "Placement": [y, x]
-//             });
-//         }
-//         // Detect bridges
-//         else if (symbol === "~" || symbol === "-" || symbol === "." || symbol === "_") {
-
-
-
-//             // Check direction of the bridge (horizontal or vertical) (~ = vertical witdh = 0, _ = horizontal width = 0, - = vertical width = 1, . = horizontal width = 1)
-//             if (symbol === "~" || symbol === ".") {
-//                 bridge.direction = 1;
-//             } else if (symbol === "-" || symbol === "_") {
-//                 bridge.direction = 0;
-//             }
-//             //check width of the bridge
-//             if (symbol === "~" || symbol === "_") {
-//                 bridge.width = 1;
-//             } else if (symbol === "-" || symbol === ".") {
-//                 bridge.width = 2;
-//             }
-
-
-
-            
-//         }
-        
-//     }
-
-//     obj.Bridges.push(bridge);
-//     return obj;
-// }
-
-
-
-//console.log('caca', pixelArtToJson(gridSize));
-
-//on met le pixel art dans une variable huge 
-//var huge = pixelArtToJson(gridSize);
-//console.log('caca', huge);
-
-
-
-</script>
-<div id="bangerang"></div>
+            <button id="Buttonp" class="Buttonp" type="submit">
+                <a id="al" class="al" href="settingingames/settinguserslevels.php?level=<?php echo urlencode($_GET['level'])?>">Settings
+                    &emsp;
+                    <img class="img" src="image/button/boutonsetting.png" />
+                </a>
+            </button>
+        </div>
+    </header>
+    <main Id="main" class="main">
+    <div class="grid">
+            <div class="martinplace">
+                <img class="martin" src="image/martin1.png">
+            </div>
+            <div id="game" class="game">
+                <!-- on affiche le texte js avec du JS -->
+                <div id="bangerang"></div>
                 <script type="text/javascript">
-var rows = huge.Grid[0].size[0];
+                var texte_js = <?php echo $_GET['JSON'] ?>;
+                <?php if(!isset($_GET['story_level'])){ ?>
+                var huge = texte_js;
+                <?php }
+                else{ ?>
+                    var huge = texte_js;
+                    <?php }?>
+                <?php ?>
+                // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
+                //{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },
+                //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
+                huge2 = huge;
+                huge = huge[0]
+                console.log('siu', huge)
+                var rows = huge.Grid[0].size[0];
                 var columns = huge.Grid[0].size[1];
 
                 var gameDiv = document.getElementById('game');
@@ -205,113 +171,154 @@ var rows = huge.Grid[0].size[0];
                     if (parts.length == 2) return parts.pop().split(";").shift();
                 }
 
-                function generate_table(rows, columns) {
-    // Obtenir la référence du body
-    var body = document.getElementsByTagName("body")[0];
+                function generate_table_no_solution(rows, columns) {
+                    // Obtenir la référence du body
+                    var body = document.getElementsByTagName("body")[0];
+                    // Créer les éléments <table> et <tbody>
+                    var tbl = document.createElement("table");
+                    var tblBody = document.createElement("tbody");
 
-
-    // Créer les éléments <table> et <tbody>
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-
-
-    // Créer les cellules
-    for (var i = 0; i < rows; i++) {
-        var row = document.createElement("tr");
-
-
-        for (var j = 0; j < columns; j++) {
-            var cell = document.createElement("td");
-
-
-            // Vérifier si l'île se trouve à la position actuelle
-            var foundIsland = false;
-            for (var k = 0; k < huge.Islands.length; k++) {
-                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
-                    foundIsland = true;
-                    break;
+                    <?php if(isset($_COOKIE['Colorgame'])){
+                if($_COOKIE['Colorgame']=="red"){ 
+                echo"tbl.style.border = '0.4vw solid #f23e31';
+                tbl.style.backgroundColor = '#bf2424e7';";
                 }
-            }
-
-
-            if (foundIsland) {
-    //on creer une image pour chaque ile en fonction du nombre de link (1 a 6)
-    var islandImage = document.createElement("img");
-
-
-    if (huge.Islands[k].links == 1) {
-        islandImage.src = "image/images_temporaires/1.png";
-        cell.appendChild(islandImage);
-    } else if (huge.Islands[k].links == 2) {
-        islandImage.src = "image/images_temporaires/2.png";
-        cell.appendChild(islandImage);
-    } else if (huge.Islands[k].links == 3) {
-        islandImage.src = "image/images_temporaires/3.png";
-        cell.appendChild(islandImage);
-    } else if (huge.Islands[k].links == 4) {
-        islandImage.src = "image/images_temporaires/4.png";
-        cell.appendChild(islandImage);
-    } else if (huge.Islands[k].links == 5) {
-        islandImage.src = "image/images_temporaires/5.png";
-        cell.appendChild(islandImage);
-    } else if (huge.Islands[k].links == 6) {
-        islandImage.src = "image/images_temporaires/6.png";
-        cell.appendChild(islandImage);
-    }
-} else {
-                // Vérifier si un pont se trouve à la position actuelle
-                var bridgeFound = false;
-                for (var l = 0; l < huge.Bridges.length; l++) {
-                    var bridge = huge.Bridges[l];
-                    for (var m = 0; m < bridge.Placement.length; m++) {
-                        var bridgePlacement = bridge.Placement[m];
-                        if (bridgePlacement[0] === i && bridgePlacement[1] === j) {
-                            bridgeFound = true;
-                            break;
-                        }
-                    }
-                    if (bridgeFound) {
-                        var bridgeImage = document.createElement("img");
-                        if (bridge.direction === 1) { // Pont vertical
-                            if (bridge.width === 1) {
-                                console.log("caca");
-                                bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
-                            } else {
-
-                                bridgeImage.src = "../WEB/image/iles/bridge_h.png";
-                            }
-                        } else { // Pont horizontal
-                            if (bridge.width === 1) {
-                                bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
-                            } else {
-                                bridgeImage.src = "../WEB/image/iles/bridge_V.png";
-                            }
-                        }
-                        cell.appendChild(bridgeImage);
-                        break;
-                    }
+                elseif($_COOKIE['Colorgame']=="grey"){ 
+                echo"tbl.style.border = '0.4vw solid #cecaca';
+                tbl.style.backgroundColor = '#aa9a9a38';";
                 }
-            }
+                 elseif($_COOKIE['Colorgame']=="yellow"){ 
+                echo"tbl.style.border = '0.4vw solid #eff84aec';
+                tbl.style.backgroundColor = '#bfb224e7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="orange"){ 
+                echo"tbl.style.border = '0.4vw solid #f2ab31';
+                tbl.style.backgroundColor = '#bf8424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="pink"){ 
+                    echo"tbl.style.border = '0.4vw solid #f231c8';
+                    tbl.style.backgroundColor = '#bf24b2e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="green"){ 
+                echo"tbl.style.border = '0.4vw solid #34f231';
+                tbl.style.backgroundColor = '#24bf2ce7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="purple"){ 
+                echo"tbl.style.border = '0.4vw solid #9b31f2';
+                tbl.style.backgroundColor = '#8424bfe7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="blue"  ){ 
+                echo"tbl.style.border = '0.4vw solid #19608F';
+                tbl.style.backgroundColor = '#247cbfe7';";
+                }}
+                else{
+                    echo"tbl.style.border = '0.4vw solid #19608F';
+                    tbl.style.backgroundColor = '#247cbfe7';";
+                }?>
+
+                    tbl.style.borderRadius = "20px";
+                    tbl.style.width = "70vw";
+                    tbl.style.height = "70vh";
+                    tbl.style.overflow = "scroll"; // allows the table to scroll if necessary
 
 
-            row.appendChild(cell);
-            cell.setAttribute("class", 'case');
-            cell.setAttribute("id", '0');
-        }
 
 
-        tblBody.appendChild(row);
-    }
+                    // Set table dimensions to match game div
+                    tbl.style.width = gameDivWidth + 'px';
+                    tbl.style.height = gameDivHeight + 'px';
+
+                    // Créer les cellules
+                    for (var i = 0; i < rows; i++) {
+                        var row = document.createElement("tr");
+                        for (var j = 0; j < columns; j++) {
+                            var cell = document.createElement('td');
+                            cell.setAttribute('id', `cell-${i}-${j}`);
+                            cell.style.width = (gameDivWidth / columns) + 'px';
+                            cell.style.height = (gameDivHeight / rows) + 'px';
+
+                            // Vérifier si l'île se trouve à la position actuelle
+                            var foundIsland = false;
+                            for (var k = 0; k < huge.Islands.length; k++) {
+                                if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] ===
+                                    j) {
+                                    foundIsland = true;
+                                    break;
+                                }
+                            }
 
 
-    // Ajouter <tbody> à <table>
-    tbl.appendChild(tblBody);
-    // Ajouter <table> au body
-    document.getElementById("bangerang").appendChild(tbl);
-}
-  // Appeler cette fonction après avoir généré le tableau
-  //on recupere la taille du tableau
-  generate_table(rows, columns);
+                            if (foundIsland) {
+                                var islandImage = document.createElement("img");
+                                islandImage.setAttribute("id", "island-" + i + "-" + j);
+                                //on verifie le status du cookie "mode" 
+                                if (getCookie("mode") == 1) {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "image/images_temporaires/1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "image/images_temporaires/2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "image/images_temporaires/3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "image/images_temporaires/4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "image/images_temporaires/5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "image/images_temporaires/6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                } else {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "../WEB/image/iles/ile1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "../WEB/image/iles/ile2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "../WEB/image/iles/ile3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "../WEB/image/iles/ile4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "../WEB/image/iles/ile5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "../WEB/image/iles/ile6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                }
+                                cell.appendChild(islandImage);
+                                islandImage.setAttribute("data-row", i.toString());
+                                islandImage.setAttribute("data-col", j.toString());
+                                islandImage.addEventListener("click", handleIslandClick);
+                                cell.appendChild(islandImage);
+                            }
+                            row.appendChild(cell);
+                            cell.setAttribute("class", 'case');
+                            cell.setAttribute("id", "cell-" + i + "-" + j);
+                        }
+
+
+                        tblBody.appendChild(row);
+                    }
+
+
+                    // Ajouter <tbody> à <table>
+                    tbl.appendChild(tblBody);
+                    // Ajouter <table> au body
+                    document.getElementById("bangerang").appendChild(tbl);
+                }
+                generate_table_no_solution(rows, columns);
+
+
+
+
                 var currentBridge = {
                     start: null,
                     end: null
@@ -410,7 +417,7 @@ var rows = huge.Grid[0].size[0];
                     // Si toutes les vérifications sont passées, le pont peut être placé
                     return true;
                 }
-
+                
 
 
 
@@ -420,37 +427,32 @@ var rows = huge.Grid[0].size[0];
                     "Bridges": [],
                 };
 
-                tmp2 = {
-                    "1": [],
-                    "2": []
-                };
-                console.log('huge', huge);
-                for (var j = 0; j < Object.keys(huge.Bridges).length; j++) {
+       // On initie tmp2 comme un tableau vide.
+       let tmp2 = [];
 
-                    //on verifie la valeur du count
-                    if (huge.Bridges[Object.keys(huge.Bridges)[j]].width == 1) {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
-                            .length; k++) {
 
-                            //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
-                                Object.keys(
-                                    huge
-                                    .Bridges)[j]].Placement[k]);
-                        }
-                     } else {
-                        for (var k = 0; k < huge.Bridges[Object.keys(huge.Bridges)[j]].Placement
-                            .length; k++) {
-                            tmp2[huge.Bridges[Object.keys(huge.Bridges)[j]].width + 1].push(huge.Bridges[
-                                Object.keys(
-                                    huge
-                                    .Bridges)[j]].Placement[k]);
-                        }
+for (var yes = 0; yes < huge2.length; yes++) {
+    let solution = {
+        "1": [],
+        "2": []
+    };
 
-                    }
-                }console.log('tempé', tmp2)
 
+    for (var j = 0; j < Object.keys(huge2[yes].Bridges).length; j++) {
+        var width = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].width;
+        var placement = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].Placement;
+        for (var k = 0; k < placement.length; k++) {
+            var real = ((width + 1) % 2) + 1;
+            console.log("caca", "" + real);
+            solution["" + real].push(placement[k]);
+        }
+    }
+
+
+    tmp2.push(solution);
+}
                 function check_win() {
+
                     for (var i = 0; i < huge.Islands.length; i++) {
                         var island = huge.Islands[i];
                         var bridges = getBridgesAroundIsland(island);
@@ -492,20 +494,28 @@ var rows = huge.Grid[0].size[0];
                     }
                     //trie les deux dictionnaires
                     tmp["1"].sort();
-                    tmp["2"].sort();
-                    tmp2["1"].sort();
-                    tmp2["2"].sort();
-
-                    tmp = JSON.stringify(tmp)
-                    tmp2 = JSON.stringify(tmp2)
-                    console.log('temp', tmp, tmp2)
-                    if (tmp === tmp2) {
+    tmp["2"].sort();
+    console.log('tmp12', tmp2);
+    tmp2.forEach(solution => {
+        solution["1"].sort();
+        solution["2"].sort();
+    });
 
 
-                        document.location.href = "Win.php?mod=" + mod;
-                    }
+    console.log('tmp2', tmp2);
+    console.log('tmp', tmp);
+    amogus = tmp2[0];
+    console.log("siuu", JSON.stringify(tmp), 'siuu', JSON.stringify(amogus))
 
-                }
+    // Vérifie si tmp correspond à l'une des solutions dans tmp2
+    for (var siu = 0; siu < tmp2.length; siu++) {
+        if (JSON.stringify(tmp) === JSON.stringify(tmp2[siu])) {
+            document.location.href = "Win.php?mod=10&score=50";
+            break;
+        }
+    }
+}
+
 
                 document.getElementById("test").addEventListener("click", retryClicked);
 
@@ -526,7 +536,6 @@ var rows = huge.Grid[0].size[0];
 
                     // Réinitialiser huge.userPlacedBridges
                     huge.userPlacedBridges = [];
-                    check_win();
                 }
 
                 function removeBridge(island1, island2) {
@@ -572,7 +581,7 @@ var rows = huge.Grid[0].size[0];
                     for (var key in huge.PlacedBridges) {
                         huge.userPlacedBridges.push(huge.PlacedBridges[key].Placement);
                     }
-                    console.log( huge.PlacedBridges); // For debugging
+                    console.log('BIG CACZ', huge.PlacedBridges); // For debugging
                     check_win();
                 }
 
@@ -703,7 +712,7 @@ var rows = huge.Grid[0].size[0];
                             bridgeImage.addEventListener('click', () => removeBridge(island1, island2));
                             cellElement.appendChild(bridgeImage);
                             // ...
-                            console.log(huge.PlacedBridges); // For debugging
+                            console.log('lololol', huge.PlacedBridges); // For debugging
                             console.log(huge.Bridges)
                             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
                             huge.userPlacedBridges = [];
@@ -720,6 +729,12 @@ var rows = huge.Grid[0].size[0];
                     }
                     check_win();
                 }
+
+            
             </script>
             </div>
-            </div>
+        </div>
+    </main>
+</body>
+
+</html>

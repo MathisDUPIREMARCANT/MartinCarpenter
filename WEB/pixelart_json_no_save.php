@@ -65,24 +65,9 @@ for ($i = 0; $i < count($brdg); $i++) {
 }  
 $resultat = $resultat."]";
 if($resultat != "[Invalid arguments. Usage: program_name <width> <height> <bridge_count> <board>]"){
-$pixelArt = $_GET['JSON'];
-$nbiles = $_GET['nbiles'];
-$difficulty = ($rows*$columns*$nbiles)/20;
-//on stock les valeurs dans la base de données
-//on recupere le pseudo de l'utilisateur
-$username = $_SESSION['username'];
-$sql = "INSERT INTO users_level (path, user, rows, colls, islands, difficulty, soluce) VALUES ('$pixelArt', '$username', '$rows', '$columns', '$nbiles', '$difficulty', '$resultat')";
-//on prepare la requete
-$stmt = $conn->prepare($sql);
-//on execute la requete
-$stmt->execute();
-
-
-?>
-//on dit que le niveau a bien été enregistré
-alert("Your level has been saved");
-//on redirige vers la page d'accueil
-window.location.href = "../index.php";
+    ?>
+    //on redirige vers la page pour afficher le niveau
+    window.location.href = "poggers_levels.php?verif=1" + "&JSON=" + JSON.stringify(<?php echo $resultat; ?>) + "&rows=" + <?php echo $rows; ?> + "&columns=" + <?php echo $columns;?> + "&mod=" + "<?php echo $_GET['mod'];?>" + "&id=" + <?php echo $_SESSION['id'];?>;
 <?php
 }else{
     ?>
