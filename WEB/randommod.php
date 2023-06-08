@@ -172,6 +172,7 @@ function jsonToPixelArt(obj) {
             <script>
                 <?php             
 //on exec le .exe avec les parametres du formulaire 11 13 30
+if("0" == $_GET['verif']){
 if($mod == 'easy'){
     $nb_iles = 6;
     $nb_colonnes = 7;
@@ -247,6 +248,7 @@ if($mod == 'custom'){
         $texte_js = json_encode($texte_php);
     }
 }
+}
     ?> <?php 
     if($mod != 'custom'){
     // //on convertit la variable JS "id" en variable globale PHP 
@@ -261,7 +263,7 @@ if($mod == 'custom'){
                 <!-- on affiche le texte js avec du JS -->
                 <div id="bangerang"></div>
                 <script type="text/javascript">
-                var texte_js = <?php echo $texte_js; ?>;
+                var texte_js = <?php echo $_GET['JSON']; ?>;
                 var huge = JSON.parse(texte_js);
                 //on met huge comme etant le get json
 
