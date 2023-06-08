@@ -26,9 +26,6 @@ int Length_next_island(char* Board, Coord posMax, Coord pos, int Direction);
 int Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Length);
 
 void Create_bridge(char* Board, Coord posMax, Coord* pos, int Length, int Direction, int Type_bridge);
-void From_C_to_Json(Bridge* Bridges, Island* Islands, int Nb_bridge, int Nb_island, Coord posMax);
-void From_C_to_Json_bridge(Bridge bridge);
-void From_C_to_Json_island(Island island);
 void Next_Coord(Coord* pos, int direction);
 void Place_bridge_on_map(char* Board, Coord posMax, Coord pos, int type_bridge, int Direction);
 void Place_island_on_map(char* Board, Coord posMax, Coord pos, int weight);
