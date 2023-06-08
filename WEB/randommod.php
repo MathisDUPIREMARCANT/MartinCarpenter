@@ -189,11 +189,9 @@ if($mod == 'easy'){
    let siuu = <?php echo $output; ?>;
    console.log('siuuuuu', siuu);
    //on redirige vers une page qui va verifier si le niveau est faisable ou non
-   var verified = 0;
-   if(verified == 0){
-   verified = 0;
-   window.location.href = "verif_level.php?mod=easy&JSON=" + bangerdefou + "&iles=" + <?php echo $nb_iles; ?> + "&columns=" + <?php echo $nb_colonnes; ?> + "&rows=" + <?php echo $nb_lignes;?> + "&id=" + <?php echo $id;?> + "&siuu=" + JSON.stringify(siuu) + "&verified=" + verified;
-   }
+
+   window.location.href = "verif_level.php?mod=easy&JSON=" + bangerdefou + "&iles=" + <?php echo $nb_iles; ?> + "&columns=" + <?php echo $nb_colonnes; ?> + "&rows=" + <?php echo $nb_lignes;?> + "&id=" + <?php echo $id;?> + "&siuu=" + JSON.stringify(siuu);
+   
     <?php
     } ?>
 

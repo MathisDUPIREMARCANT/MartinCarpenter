@@ -85,13 +85,11 @@ $pixelArt = $output;
     }
     ?>
 
-if("<?php echo($_GET['mod']);?>" != 1){
-    window.location.href = "randommod.php?mod=" + <?php echo json_encode($mod); ?> + "&id=" + <?php echo json_encode($id); ?> + "&JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($siuu); ?>
-}else if ("<?php echo($_GET['mod']);?>" == 1){
+if ("<?php echo($_GET['mod']);?>" == 1){
     window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge
 }
 else {
-    window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge
+    window.location.href = "pixelart_json_no_save.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=" + <?php echo json_encode($_GET['mod']); ?> + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge
 }
     //on récupere le nombre de ponts et d'iles dans le pixelart
     let nbIslands = 0;
