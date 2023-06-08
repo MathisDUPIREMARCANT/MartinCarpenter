@@ -177,7 +177,7 @@ void Print_board(char* Save, char* Board, Coord Taille) {
     int i = 0;
     for (i; i < (Taille.x * Taille.y); i++) {
         if (i % Taille.x == 0) {
-            printf("\n");
+            //printf("\n");
         }
 
         if (Board[i] == '0') {
@@ -279,7 +279,7 @@ void Copy_board(char* destination, char* source, int count) {
     }
 }
 
-void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction) {
+void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction, int Nb_bridge) {
 
     int Direction_available[4];
     int* result = malloc(sizeof(int) * 4 * 81);
@@ -305,6 +305,8 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction) {
 
                     Create_bridge(Board, posMax, &Copy_pos, Length, i, Direction[i] - 1);
 
+                    Nb_bridge++;
+
                     Next_Coord(&Copy_pos, i);
 
                     if ((atoi(Board + (Copy_pos.y * posMax.x) + Copy_pos.x) - Direction[i]) < 0) { return; }
@@ -325,6 +327,7 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction) {
         if (Nb_islands == 0) {
             Print_board(Save, Board, posMax);
             printf(" ");
+            printf("%d ", Nb_bridge);
             return;
         }
 
@@ -353,9 +356,7 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction) {
             if (Board_copy != NULL) {
                 Copy_board(Board_copy, Board, (posMax.x * posMax.y) + 1);
             }
-            //Print_board(Board, Board, posMax);
-            //printf("\n");
-            Solver(Save, Board_copy, posMax, pos, result + (4 * y));
+            Solver(Save, Board_copy, posMax, pos, result + (4 * y), Nb_bridge);
         }
         free(result);
         return;
@@ -384,5 +385,18 @@ Peek_island_number(char* Board, Coord posMax, Coord pos, int Direction, int Leng
     }
 }
 
+void Stock_island(Island* islands, Coord posMax, char* board) {
+    int incr = 0;
+    for (int i = 0; i < posMax.x; i++) {
+        for (int j = 0; j < posMax.y; j++) {
+            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
+                islands[incr].pos.x = i;
+                islands[incr].pos.y = j;
+                islands[incr].number = atoi(board + (posMax.x * j) + i);
+                incr++;
 
+            }
+        }
+    }
+}
 
