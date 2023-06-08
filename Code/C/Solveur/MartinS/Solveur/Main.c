@@ -11,22 +11,23 @@
 
 void main(int argc, char* argv[]) {
 
-	//Coord posMax = { atoi(argv[1]), atoi(argv[2]) }; //{ *(argv[1]), *(argv[2])} 
-	Coord posMax = { X, Y };
+	Coord posMax = { atoi(argv[1]), atoi(argv[2]) }; //{ *(argv[1]), *(argv[2])} 
+	//Coord posMax = { X, Y };
 	Coord pos;
 
 	char* Save = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));
 	char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));
-	//strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), (argv[3]), _TRUNCATE);
-	//strncpy_s(Save, ((posMax.x * posMax.y) + 1) * sizeof(char), (argv[3]), _TRUNCATE);
 
-	strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), "**********************3**3****************************************************************************************************************************************3***6**6***3************************************3***4**4***3**********************************", _TRUNCATE);
-	strncpy_s(Save, ((posMax.x * posMax.y) + 1) * sizeof(char), Board, _TRUNCATE);
+	strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), (argv[3]), _TRUNCATE);
+	strncpy_s(Save, ((posMax.x * posMax.y) + 1) * sizeof(char), (argv[3]), _TRUNCATE);
+
+	//strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), "**********************3**3****************************************************************************************************************************************3***6**6***3************************************3***4**4***3**********************************", _TRUNCATE);
+	//strncpy_s(Save, ((posMax.x * posMax.y) + 1) * sizeof(char), Board, _TRUNCATE);
 
 	pos.x = 0;
 	pos.y = 0;
 
-	Solver(Save, Board, posMax, pos, NULL);
+	Solver(Save, Board, posMax, pos, NULL, 0);
 	/*Print_board(Save, Board, posMax);*/
 	//if (Result != NULL) {
 	//	for (int i = 0; i < 2; i++) {

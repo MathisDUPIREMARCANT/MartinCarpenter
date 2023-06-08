@@ -16,10 +16,9 @@ session_start();
     <!--Page keywords-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Setting up a web page visibility zone for the user-->
-
+    <link rel="icon" type="image/x-con" href="image/logomartin.ico">
     <meta name="autors" content="Claus,Dupire-Marcant,Lemoine,Saint-Maxent,Tassin,Vandevoir">
     <!--Page authors-->
-    <link rel="icon" type="image/x-con" href="image/logo.ico">
     <!--Browser icon-->
     <link rel="stylesheet" href="CSS/win.css">
     <?php
