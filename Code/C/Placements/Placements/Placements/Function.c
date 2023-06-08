@@ -132,13 +132,13 @@ void Test(Bridge* Bridges, int Nb) {
     }
 }
 
-void Stock_bridge(Bridge* Bridges, Coord posMax, char* board) {
+void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max) {
     int Nb_bridge = 0;
     Coord pos = { 0, 0 };
-    while (pos.x != posMax.x && pos.y != posMax.y) {
+    while (Nb_bridge != Nb_bridge_max) {
 
         pos = Find_Bridge(board, posMax);
-        Coord poslast = Find_Bridge_last(board, posMax);
+        //Coord poslast = Find_Bridge_last(board, posMax);
         int direction = 0;
         int width = 0;
 
