@@ -3,18 +3,18 @@
 #include <stdlib.h>
 
 int Island_on_map(char* Board, Coord pos, Coord posMax) {
-
     int Island_current = 0;
 
-    for (int y = 0; y < posMax.y; y++) {
-        for (int x = 0; x < posMax.x; x++) {
-            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '#' || *(Board + (posMax.x * y) + x) == '0')) {
-                Island_current++;
+    for (int y = 0; y < posMax.y; y++) { // Iterate over the rows of the board
+        for (int x = 0; x < posMax.x; x++) { // Iterate over the columns of the board
+            if (!(*(Board + (posMax.x * y) + x) == '*' || *(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '-' || *(Board + (posMax.x * y) + x) == '_' || *(Board + (posMax.x * y) + x) == '.' || *(Board + (posMax.x * y) + x) == '0')) {
+                // If the current position is not '*', '~', '-', '_', '.', or '0' (indicating an island)
+                Island_current++; // Increment the count of islands
             }
         }
     }
 
-    return Island_current;
+    return Island_current; // Return the total number of islands found on the board
 };
 
 void Next_Coord(Coord* pos, int direction) {
@@ -46,102 +46,91 @@ void Next_Coord(Coord* pos, int direction) {
 }
 
 void Stock_island(Island* islands, Coord posMax, char* board) {
-    int incr = 0;
-    for (int i = 0; i < posMax.x; i++) {
-        for (int j = 0; j < posMax.y; j++) {
-            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
-                islands[incr].pos.x = i;
-                islands[incr].pos.y = j;
-                islands[incr].number = atoi(board + (posMax.x * j) + i);
-                incr++;
+    int incr = 0; // Initialize the increment variable
 
+    for (int i = 0; i < posMax.x; i++) { // Iterate over the x-axis positions
+        for (int j = 0; j < posMax.y; j++) { // Iterate over the y-axis positions
+            if (*(board + (posMax.x * j) + i) != '*' && *(board + (posMax.x * j) + i) != '~' && *(board + (posMax.x * j) + i) != '#') {
+                // If the character at the current position is not '*', '~', or '#'
+                islands[incr].pos.x = i; // Store the x-coordinate of the island in the islands array at the corresponding index
+                islands[incr].pos.y = j; // Store the y-coordinate of the island in the islands array at the corresponding index
+                islands[incr].number = atoi(board + (posMax.x * j) + i); // Store the island number (converted from the character) in the islands array at the corresponding index
+                incr++; // Increment the increment variable
             }
         }
     }
 }
+
 
 Coord Find_Bridge(char* Board, Coord posMax) {
-    Coord pos = { 0, 0 };
+    Coord pos = { 0, 0 }; // Initialize the coordinates of the bridge position
+
+    // Iterate over the rows
     for (int y = 0; y < posMax.y; y++) {
+        // Iterate over the columns
         for (int x = 0; x < posMax.x; x++) {
-            if ((*(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '-' || *(Board + (posMax.x * y) + x) == '_' || *(Board + (posMax.x * y) + x) == '.')) {
-                pos.x = x;
-                pos.y = y;
-                x = posMax.x;
-                y = posMax.y;
+            char currentChar = *(Board + (posMax.x * y) + x); // Get the current character in the Board string
+
+            // Check if the current character is a bridge character
+            if (currentChar == '~' || currentChar == '-' || currentChar == '_' || currentChar == '.') {
+                pos.x = x; // Update the x-coordinate of the bridge position
+                pos.y = y; // Update the y-coordinate of the bridge position
+                return pos; // Return the bridge position and exit the function
             }
         }
     }
-    if (pos.x == 0 && pos.y == 0) {
-        return posMax;
-    }
-    return pos;
+
+    // If no bridge character is found, return posMax as the default position
+    return posMax;
 }
 
-Coord Find_Bridge_last(char* Board, Coord posMax) {
-    Coord pos = { posMax.x-1, posMax.y-1 };
-    for (int y = posMax.y-1; y >= 0 ; y--) {
-        for (int x = posMax.x - 1; x >= 0; x--) {
-            if ((*(Board + (posMax.x * y) + x) == '~' || *(Board + (posMax.x * y) + x) == '-' || *(Board + (posMax.x * y) + x) == '_' || *(Board + (posMax.x * y) + x) == '.')) {
-                pos.x = x;
-                pos.y = y;
-                x = -1;
-                y = -1;
-            }
-        }
-    }
-    return pos;
-}
 
 int Is_not_in_bridges(Coord pos, Bridge* Bridges, int Nb_bridge) {
-    if(Nb_bridge == 0) return 1;
+    if (Nb_bridge == 0) return 1; // If there are no bridges, the position is not in bridges
+
     for (int i = 0; i < Nb_bridge; i++) {
-        for(int y= 0; y < Bridges[i].length; y++){
+        for (int y = 0; y < Bridges[i].length; y++) {
+            // Check if the current position matches any position in the bridges
             if (Bridges[i].pos[y].x == pos.x && Bridges[i].pos[y].y == pos.y) {
-                return 0;
+                return 0; // Position is found in bridges, return 0 (false)
             }
-		}
-	}
-    return 1;
+        }
+    }
+
+    return 1; // Position is not found in bridges, return 1 (true)
 }
 
-void Print_board(char* Board, Coord Taille) {
-    int i = 0;
-    for (i; i < (Taille.x * Taille.y); i++) {
-        if (i % Taille.x == 0) {
-            printf("\n");
-        }
-        printf("%c", Board[i]);
-    }
-    printf("\n");
-}
 
 void Test(Bridge* Bridges, int Nb) {
     for (int i = 0; i < Nb; i++) {
-        Bridges[i].direction = 0;
-        Bridges[i].length = 10;
-        Bridges[i].size = 0;
-        Bridges[i].pos = NULL;
-        Coord* buffer = (Coord*)malloc(sizeof(Coord) * Bridges[i].length);
+        Bridges[i].direction = 0; // Set the direction of the current bridge to 0
+        Bridges[i].length = 10; // Set the length of the current bridge to 10
+        Bridges[i].size = 0; // Set the size of the current bridge to 0
+        Bridges[i].pos = NULL; // Set the position array of the current bridge to NULL
+
+        Coord* buffer = (Coord*)malloc(sizeof(Coord) * Bridges[i].length); // Allocate memory for the position array
+
         if (buffer != NULL) {
-            Bridges[i].pos = buffer;
+            Bridges[i].pos = buffer; // Assign the allocated memory to the position array
         }
-		else {
-			printf("Erreur d'allocation");
-		}
+        else {
+            printf("Erreur d'allocation"); // Print an error message if memory allocation fails
+        }
     }
 }
 
+
 void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max) {
-    int Nb_bridge = 0;
-    Coord pos = { 0, 0 };
-    while (Nb_bridge != Nb_bridge_max) {
+    int Nb_bridge = 0; // Initialize the number of bridges
+    Coord pos = { 0, 0 }; // Initialize the position variable
 
-        pos = Find_Bridge(board, posMax);
-        //Coord poslast = Find_Bridge_last(board, posMax);
-        int direction = 0;
-        int width = 0;
+    while (Nb_bridge != Nb_bridge_max) { // Loop until the desired number of bridges is reached
 
+        int direction = 0; // Initialize the direction variable
+        int width = 0; // Initialize the width variable
+        pos = Find_Bridge(board, posMax); // Find the next bridge position in the board
+
+        // Determine the direction and width based on the character at the bridge position
         if (*(board + (posMax.x * pos.y) + pos.x) == '~') {
             direction = 1;
             width = 1;
@@ -159,151 +148,164 @@ void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max)
             width = 0;
         }
 
-        Coord Copy_pos;
+        Coord Copy_pos; // Create a copy of the bridge position
         Copy_pos.x = pos.x;
         Copy_pos.y = pos.y;
 
-        if (Is_not_in_bridges(pos, Bridges, Nb_bridge)) {
+        if (Is_not_in_bridges(pos, Bridges, Nb_bridge)) { // Check if the bridge position is not already in the bridges array
 
-
-            if (direction == 0) { //horizontal
-                if (width == 0) {
+            if (direction == 0) { // If the direction is horizontal
+                if (width == 0) { // If the width is 0
                     Bridges[Nb_bridge].direction = direction;
                     Bridges[Nb_bridge].size = width;
 
-                    int length = 1;
+                    int length = 1; // Initialize the length of the bridge
 
-                    Next_Coord(&pos, 2);
+                    Next_Coord(&pos, 2); // Move to the next position in the board
+
+                    // Determine the length of the bridge by counting the consecutive '.' characters
                     while (*(board + (posMax.x * pos.y) + pos.x) == '.') {
                         length++;
                         Next_Coord(&pos, 2);
                     }
 
-                    Bridges[Nb_bridge].length = length;
+                    Bridges[Nb_bridge].length = length; // Set the length of the bridge
 
-                    Bridges[Nb_bridge].pos = NULL;
-                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length);
+                    Bridges[Nb_bridge].pos = NULL; // Set the position array of the bridge to NULL
+                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length); // Allocate memory for the position array
 
                     if (buffer != NULL) {
-						Bridges[Nb_bridge].pos = buffer;
+                        Bridges[Nb_bridge].pos = buffer; // Assign the allocated memory to the position array
                     }
 
-
-                    pos.x = Copy_pos.x;
+                    pos.x = Copy_pos.x; // Restore the original position
                     pos.y = Copy_pos.y;
 
-                    for(int i = 0; i < Bridges[Nb_bridge].length; i++){
-						Bridges[Nb_bridge].pos[i].x = pos.x;
-						Bridges[Nb_bridge].pos[i].y = pos.y;
-
-                        *(board + posMax.x * pos.y + pos.x) = '*';
-
-						Next_Coord(&pos, 2);
-					}
-                    
+                    // Populate the position array with the bridge positions and mark them as '*' in the board
+                    for (int i = 0; i < Bridges[Nb_bridge].length; i++) {
+                        if (Bridges[Nb_bridge].pos != NULL) {
+                            Bridges[Nb_bridge].pos[i].x = pos.x;
+                            Bridges[Nb_bridge].pos[i].y = pos.y;
+                            *(board + posMax.x * pos.y + pos.x) = '*';
+                            Next_Coord(&pos, 2);
+                        }
+                    }
                 }
-                else {
+                else { // If the width is 1
                     Bridges[Nb_bridge].direction = direction;
                     Bridges[Nb_bridge].size = width;
-                    int length = 1;
 
-                    Next_Coord(&pos, 2);
+                    int length = 1; // Initialize the length of the bridge
+
+                    Next_Coord(&pos, 2); // Move to the next position in the board
+
+                    // Determine the length of the bridge by counting the consecutive '_' characters
                     while (*(board + (posMax.x * pos.y) + pos.x) == '_') {
                         length++;
                         Next_Coord(&pos, 2);
                     }
-                    Bridges[Nb_bridge].length = length;
 
-                    Bridges[Nb_bridge].pos = NULL;
-                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length);
+                    Bridges[Nb_bridge].length = length; // Set the length of the bridge
+
+                    Bridges[Nb_bridge].pos = NULL; // Set the position array of the bridge to NULL
+                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length); // Allocate memory for the position array
 
                     if (buffer != NULL) {
-                        Bridges[Nb_bridge].pos = buffer;
+                        Bridges[Nb_bridge].pos = buffer; // Assign the allocated memory to the position array
                     }
 
-                    pos.x = Copy_pos.x;
+                    pos.x = Copy_pos.x; // Restore the original position
                     pos.y = Copy_pos.y;
 
+                    // Populate the position array with the bridge positions and mark them as '*' in the board
                     for (int i = 0; i < Bridges[Nb_bridge].length; i++) {
-                        Bridges[Nb_bridge].pos[i].x = pos.x;
-                        Bridges[Nb_bridge].pos[i].y = pos.y;
-                        *(board + posMax.x * pos.y + pos.x) = '*';
-                        Next_Coord(&pos, 2);
+                        if (Bridges[Nb_bridge].pos != NULL) {
+                            Bridges[Nb_bridge].pos[i].x = pos.x;
+                            Bridges[Nb_bridge].pos[i].y = pos.y;
+                            *(board + posMax.x * pos.y + pos.x) = '*';
+                            Next_Coord(&pos, 2);
+                        }
                     }
                 }
-
-
-
-
-
             }
-            else { //vertical
-                if (width == 0) {
+            else { // If the direction is vertical
+                if (width == 0) { // If the width is 0
                     Bridges[Nb_bridge].direction = direction;
                     Bridges[Nb_bridge].size = width;
-                    int length = 1;
-                    
 
-                    Next_Coord(&pos, 1);
+                    int length = 1; // Initialize the length of the bridge
+
+                    Next_Coord(&pos, 1); // Move to the next position in the board
+
+                    // Determine the length of the bridge by counting the consecutive '-' characters
                     while (*(board + (posMax.x * pos.y) + pos.x) == '-') {
                         length++;
                         Next_Coord(&pos, 1);
                     }
 
-                    Bridges[Nb_bridge].length = length;
+                    Bridges[Nb_bridge].length = length; // Set the length of the bridge
 
-                    Bridges[Nb_bridge].pos = NULL;
-                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length);
+                    Bridges[Nb_bridge].pos = NULL; // Set the position array of the bridge to NULL
+                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length); // Allocate memory for the position array
 
                     if (buffer != NULL) {
-                        Bridges[Nb_bridge].pos = buffer;
+                        Bridges[Nb_bridge].pos = buffer; // Assign the allocated memory to the position array
                     }
 
-                    pos.x = Copy_pos.x;
+                    pos.x = Copy_pos.x; // Restore the original position
                     pos.y = Copy_pos.y;
 
+                    // Populate the position array with the bridge positions and mark them as '*' in the board
                     for (int i = 0; i < Bridges[Nb_bridge].length; i++) {
-                        Bridges[Nb_bridge].pos[i].x = pos.x;
-                        Bridges[Nb_bridge].pos[i].y = pos.y;
-                        *(board + posMax.x * pos.y + pos.x) = '*';
-                        Next_Coord(&pos, 1);
+                        if (Bridges[Nb_bridge].pos != NULL) {
+                            Bridges[Nb_bridge].pos[i].x = pos.x;
+                            Bridges[Nb_bridge].pos[i].y = pos.y;
+                            *(board + posMax.x * pos.y + pos.x) = '*';
+                            Next_Coord(&pos, 1);
+                        }
                     }
                 }
-                else {
+                else { // If the width is 1
                     Bridges[Nb_bridge].direction = direction;
                     Bridges[Nb_bridge].size = width;
-                    int length = 1;
-                    
 
-                    Next_Coord(&pos, 1);
+                    int length = 1; // Initialize the length of the bridge
+
+                    Next_Coord(&pos, 1); // Move to the next position in the board
+
+                    // Determine the length of the bridge by counting the consecutive '~' characters
                     while (*(board + (posMax.x * pos.y) + pos.x) == '~') {
                         length++;
                         Next_Coord(&pos, 1);
                     }
-                    Bridges[Nb_bridge].length = length;
 
-                    Bridges[Nb_bridge].pos = NULL;
-                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length);
+                    Bridges[Nb_bridge].length = length; // Set the length of the bridge
+
+                    Bridges[Nb_bridge].pos = NULL; // Set the position array of the bridge to NULL
+                    Coord* buffer = (Coord*)malloc(sizeof(Coord) * length); // Allocate memory for the position array
 
                     if (buffer != NULL) {
-                        Bridges[Nb_bridge].pos = buffer;
+                        Bridges[Nb_bridge].pos = buffer; // Assign the allocated memory to the position array
                     }
 
-                    pos.x = Copy_pos.x;
+                    pos.x = Copy_pos.x; // Restore the original position
                     pos.y = Copy_pos.y;
 
+                    // Populate the position array with the bridge positions and mark them as '*' in the board
                     for (int i = 0; i < Bridges[Nb_bridge].length; i++) {
-                        Bridges[Nb_bridge].pos[i].x = pos.x;
-                        Bridges[Nb_bridge].pos[i].y = pos.y;
-                        *(board + posMax.x * pos.y + pos.x) = '*';
-                        Next_Coord(&pos, 1);
+                        if (Bridges[Nb_bridge].pos != NULL) {
+                            Bridges[Nb_bridge].pos[i].x = pos.x;
+                            Bridges[Nb_bridge].pos[i].y = pos.y;
+                            *(board + posMax.x * pos.y + pos.x) = '*';
+                            Next_Coord(&pos, 1);
+                        }
                     }
                 }
             }
 
-            Nb_bridge += 1;
+            Nb_bridge += 1; // Increment the number of bridges
 
         }
     }
-
 }
+
