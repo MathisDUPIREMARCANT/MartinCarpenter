@@ -30,5 +30,8 @@ int main(int argc, char* argv[]) {
 
     Solver(Save, Board, posMax, pos, NULL, 0);
 
+    free(Save);
+    free(Board);
+
     return 0;
 }
