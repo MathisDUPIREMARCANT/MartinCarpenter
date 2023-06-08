@@ -142,7 +142,7 @@ void Ramification(char* Board, Coord pos, Coord posMax, Bridge* Bridges, Island*
     int Type_bridgebis = Random(0, 1);
 
     int Island = 0;
-    Island = atoi(Board + (posMax.x * pos.y) + pos.x) + Type_bridgebis + 1;
+    Island = (*(Board + (posMax.x * pos.y) + pos.x) - '0') + Type_bridgebis + 1;
     
     Islands[Island_current - 1].number = Island;
     Place_island_on_map(Board, posMax, pos, Island);
