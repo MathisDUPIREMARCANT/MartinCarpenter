@@ -7,6 +7,7 @@ header('location:setting.php');
 }
 ?>
 <header>
+    <link rel="icon" type="image/x-con" href="../image/logomartin.ico">
     <div class="buttonhead">
         <button class="back" type=submit>
             <a href="../../index.php">
