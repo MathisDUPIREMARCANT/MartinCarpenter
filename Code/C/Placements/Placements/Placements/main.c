@@ -3,42 +3,57 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
-#define _CRT_SECURE_DEPRECATE_MEMORY
 #include <memory.h>
+
+#define _CRT_SECURE_DEPRECATE_MEMORY
 
 // -*- coding: utf-8 -*-
 
 
-//#define X 7
-//#define Y 9
+int main(int argc, char* argv[]) {
+    if (argc < 5) {
+        printf("Invalid arguments. Usage: program_name <width> <height> <bridge_count> <board>\n");
+        return 1;
+    }
 
+    int Nb_island;
+    int Nb_bridge = atoi(argv[3]);
+    Coord pos;
+    Coord posMax = { atoi(argv[1]), atoi(argv[2]) };
+    char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));
 
-void main(int argc, char* argv[]) {
+    if (Board != NULL) {
+        strncpy_s(Board, (posMax.x * posMax.y) + 1, argv[4], (posMax.x * posMax.y) + 1);
+    }
+    else {
+        printf("Error: Memory allocation failed\n");
+        return 1;
+    }
 
-	Coord posMax = { (atoi(argv[1])), (atoi(argv[2])) };
-	//Coord posMax = { 7, 7 };
-	Coord pos;
-	int Nb_bridge = atoi(argv[3]);
-	//int Nb_bridge = 3;
-	int Nb_island;
+    pos.x = 0;
+    pos.y = 0;
 
-	char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));;
-	strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), (argv[4]), _TRUNCATE);
+    Nb_island = Island_on_map(Board, pos, posMax);
 
-	//char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));
-	//strncpy_s(Board, ((posMax.x * posMax.y) + 1) * sizeof(char), "********3~2****.*_****2*1************************", _TRUNCATE);
+    Bridge* Bridges = (Bridge*)malloc(sizeof(Bridge) * Nb_bridge);
+    Island* Islands = (Island*)malloc(sizeof(Island) * Nb_island);
 
-	pos.x = 0;
-	pos.y = 0;
+    if (Bridges == NULL || Islands == NULL) {
+        printf("Error: Memory allocation failed\n");
+        free(Board);
+        free(Bridges);
+        free(Islands);
+        return 1;
+    }
 
-	Nb_island = Island_on_map(Board, pos, posMax);
+    Stock_island(Islands, posMax, Board);
+    Stock_bridge(Bridges, posMax, Board, Nb_bridge);
 
-	Bridge* Bridges = (Bridge*)malloc(sizeof(Bridge) * Nb_bridge);
-	Island* Islands = (Island*)malloc(sizeof(Island) * Nb_island);
+    From_C_to_Json(Bridges, Islands, Nb_bridge, Nb_island, posMax, 1);
 
-	Stock_island(Islands, posMax, Board);
-	Stock_bridge(Bridges, posMax, Board, Nb_bridge);
+    free(Board);
+    free(Bridges);
+    free(Islands);
 
-	From_C_to_Json(Bridges, Islands, Nb_bridge, Nb_island, posMax, 1);
-
+    return 0;
 }

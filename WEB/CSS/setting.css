@@ -35,7 +35,7 @@
   width: 100vw;
   justify-content: space-between;
  
-  height: 105px;
+  height: 75px;
   }
   .user{
     height: 80px;
@@ -149,7 +149,7 @@
   padding: 1vw;
   width: 90vw;
   height: 15vh;
-  margin-top: 4vh;
+  margin-top: 0vh;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   -ms-border-radius: 30px;
