@@ -409,8 +409,6 @@ session_start();
                 }
 
 
-                console.log(huge.Islands);
-                console.log(convertToPixelArt());
             }
             // Fonction utilitaire pour obtenir le nombre de liens à partir de l'ID de l'image
             function getLinksFromImageId(imageId) {
@@ -481,7 +479,7 @@ session_start();
 
                 return pixelArt;
             }
-            console.log(convertToPixelArt(rows, columns));
+
 
             //fonction pour compter le nombre d'iles 
             function countIslands(rows, columns) {

@@ -148,7 +148,7 @@ if(isset($_GET['story_level'])){
                 //{               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[4, 2]] },              {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 3]]         },              {               "width" : 0,            "length" : 2,           "direction" : 1,         "Placement" : [[6, 4],[7, 4]]  },              {               "width" : 0,            "length" : 1,          "direction" : 0,          "Placement" : [[8, 5]]         }    ],    "PlacedBridges":{}}
                 huge2 = huge;
                 huge = huge[0]
-                console.log('siu', huge)
+               
                 var rows = huge.Grid[0].size[0];
                 var columns = huge.Grid[0].size[1];
 
@@ -330,16 +330,13 @@ if(isset($_GET['story_level'])){
                         }
                     }
 
-                    console.log('Clic sur une île, coordonnées : ', [row, col], ', île : ',
-                        island); // Ajout d'un message de débogage
+
                     if (currentBridge.start === null) {
                         currentBridge.start = island;
-                        console.log('Pont commencé, île de départ : ',
-                            island); // Ajout d'un message de débogage
+                      
                     } else if (currentBridge.end === null && canPlaceBridge(currentBridge.start, island)) {
                         currentBridge.end = island;
-                        console.log('Pont fini, île d\'arrivée : ',
-                            island); // Ajout d'un message de débogage
+                      
                         placeBridge(currentBridge.start, currentBridge.end);
                         currentBridge.start = null;
                         currentBridge.end = null;
@@ -402,9 +399,7 @@ if(isset($_GET['story_level'])){
                             }
                         }
                     }
-                    console.log('Vérification de la possibilité de placer le pont, île1 : ', island1,
-                        ', île2 : ',
-                        island2); // Ajout d'un message de débogage
+                   
                     // Si toutes les vérifications sont passées, le pont peut être placé
                     return true;
                 }
@@ -434,7 +429,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
         var placement = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].Placement;
         for (var k = 0; k < placement.length; k++) {
             var real = ((width + 1) % 2) + 1;
-            console.log("caca", "" + real);
+           
             solution["" + real].push(placement[k]);
         }
     }
@@ -475,7 +470,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
                                     Object
                                     .keys(huge.PlacedBridges)[j]].Placement[0]);
                         } else if (huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count == 2) {
-                            console.log("pipi")
+                           
                             tmp[huge.PlacedBridges[Object.keys(huge.PlacedBridges)[j]].count].push(huge
                                 .PlacedBridges[
                                     Object
@@ -486,17 +481,16 @@ for (var yes = 0; yes < huge2.length; yes++) {
                     //trie les deux dictionnaires
                     tmp["1"].sort();
     tmp["2"].sort();
-    console.log('tmp12', tmp2);
+    
     tmp2.forEach(solution => {
         solution["1"].sort();
         solution["2"].sort();
     });
 
 
-    console.log('tmp2', tmp2);
-    console.log('tmp', tmp);
+
     amogus = tmp2[0];
-    console.log("siuu", JSON.stringify(tmp), 'siuu', JSON.stringify(amogus))
+   
 
     // Vérifie si tmp correspond à l'une des solutions dans tmp2
     for (var siu = 0; siu < tmp2.length; siu++) {
@@ -572,7 +566,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
                     for (var key in huge.PlacedBridges) {
                         huge.userPlacedBridges.push(huge.PlacedBridges[key].Placement);
                     }
-                    console.log('BIG CACZ', huge.PlacedBridges); // For debugging
+                  
                     check_win();
                 }
 
@@ -600,8 +594,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
                 function placeBridge(island1, island2) {
                     var bridgeOrientation = island1.Placement[0] === island2.Placement[0] ? 1 :
                         2; // 1 pour horizontal, 2 pour vertical
-                    console.log('Placement du pont, île1 : ', island1, ', île2 : ', island2);
-
+                   
 
                     // Longueur du pont
                     let bridgeLength = Math.abs((bridgeOrientation === 1 ? island1.Placement[1] : island1
@@ -637,8 +630,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
                         if (!isIsland) {
                             var cellId = "cell-" + row + "-" + col;
                             var cellElement = document.getElementById(cellId);
-                            console.log('cellId: ', cellId); // For debugging
-                            console.log('Cell element: ', cellElement); // For debugging
+                           
                             var bridgeData = huge.PlacedBridges[cellId] || {
                                 count: 0,
                                 orientation: bridgeOrientation,
@@ -647,7 +639,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
                             bridgeData.count += 1;
                             bridgeData.Placement.push([row, col]);
                             huge.PlacedBridges[cellId] = bridgeData;
-                            console.log('absolute', huge.userPlacedBridges)
+                            
                             // Trouvez les indices des îles dans le tableau huge.Islands
                             var island1Index = huge.Islands.indexOf(island1);
                             var island2Index = huge.Islands.indexOf(island2);
@@ -703,8 +695,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
                             bridgeImage.addEventListener('click', () => removeBridge(island1, island2));
                             cellElement.appendChild(bridgeImage);
                             // ...
-                            console.log('lololol', huge.PlacedBridges); // For debugging
-                            console.log(huge.Bridges)
+                       
                             //on stocke la position des ponts de placedBridges dans userPlacedBridges sous forme d'un tableau de tableau : [[row, col], [row, col], ...]
                             huge.userPlacedBridges = [];
                             for (var key in huge.PlacedBridges) {
