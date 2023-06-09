@@ -179,7 +179,7 @@ void Print_board(char* Save, char* Board, Coord Taille) {
 
     for (i; i < (Taille.x * Taille.y); i++) {
 		if (i % Taille.x == 0 && i != 0) {
-			printf("\n");
+			//printf("\n");
 		}
         
         if (Board[i] == '0') { // If the current position on the board is '0'
