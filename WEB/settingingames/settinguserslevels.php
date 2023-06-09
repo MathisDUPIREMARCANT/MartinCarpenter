@@ -24,7 +24,7 @@ header("location: ../users_levels.php?mod=".$_GET['level']);
         <div class="footitem" id="footsec">
             <!--Début du premier item les réseaux sociaux-->
             <label for="ch" class="iconsocial">
-                <h2 class="H2">Suivez-nous :</h2>
+                <h2 class="H2">Follow Us :</h2>
             </label>
             <div class="container">
                 <!--Container de l'animation -->
@@ -47,7 +47,8 @@ header("location: ../users_levels.php?mod=".$_GET['level']);
 
             </div>
         </div>
-        
+
         <div class=" Choix">
-            <form method="post" class="form" id="formLetter" action="settinguserslevels.php?mod=<?php echo $_GET['level']?>">
+            <form method="post" class="form" id="formLetter"
+                action="settinguserslevels.php?mod=<?php echo $_GET['level']?>">
                 <?php include("finsetting.php"); ?>
