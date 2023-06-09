@@ -271,6 +271,13 @@ if(isset($_GET['story_level'])){
                                         islandImage.src = "image/images_temporaires/6.png";
                                         cell.appendChild(islandImage);
                                     }
+                                 else if (huge.Islands[k].links == 7) {
+                                        islandImage.src = "image/images_temporaires/7.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 8) {
+                                        islandImage.src = "image/images_temporaires/8.png";
+                                        cell.appendChild(islandImage);
+                                    }
                                 } else {
                                     if (huge.Islands[k].links == 1) {
                                         islandImage.src = "../WEB/image/iles/ile1.png";
@@ -291,6 +298,15 @@ if(isset($_GET['story_level'])){
                                         islandImage.src = "../WEB/image/iles/ile6.png";
                                         cell.appendChild(islandImage);
                                     }
+                                    else if (huge.Islands[k].links == 7) {
+                                        islandImage.src = "../WEB/image/iles/ile7.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                    else if (huge.Islands[k].links == 8) {
+                                        islandImage.src = "../WEB/image/iles/ile8.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                    
                                 }
                                 cell.appendChild(islandImage);
                                 islandImage.setAttribute("data-row", i.toString());
@@ -436,7 +452,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
         var width = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].width;
         var placement = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].Placement;
         for (var k = 0; k < placement.length; k++) {
-            var real = ((width + 1) % 2) + 1;
+             real = (width + 1);
            
             solution["" + real].push(placement[k]);
         }

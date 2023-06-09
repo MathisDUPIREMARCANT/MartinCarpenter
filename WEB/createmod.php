@@ -425,6 +425,10 @@ session_start();
                         return 5;
                     case "image6":
                         return 6;
+                        case "image7":
+                        return 7;
+                        case "image8":
+                        return 8;
                     default:
                         return 0;
                 }

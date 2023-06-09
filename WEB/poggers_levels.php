@@ -428,7 +428,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
         var width = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].width;
         var placement = huge2[yes].Bridges[Object.keys(huge2[yes].Bridges)[j]].Placement;
         for (var k = 0; k < placement.length; k++) {
-            var real = ((width + 1) % 2) + 1;
+            var real = width + 1;
            
             solution["" + real].push(placement[k]);
         }

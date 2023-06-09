@@ -133,19 +133,19 @@ void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max)
         // Determine the direction and width based on the character at the bridge position
         if (*(board + (posMax.x * pos.y) + pos.x) == '~') {
             direction = 1;
-            width = 1;
+            width = 0;
         }
         else if (*(board + (posMax.x * pos.y) + pos.x) == '-') {
             direction = 1;
-            width = 0;
+            width = 1;
         }
         else if (*(board + (posMax.x * pos.y) + pos.x) == '_') {
             direction = 0;
-            width = 1;
+            width = 0;
         }
         else if (*(board + (posMax.x * pos.y) + pos.x) == '.') {
             direction = 0;
-            width = 0;
+            width = 1;
         }
 
         Coord Copy_pos; // Create a copy of the bridge position
@@ -155,7 +155,7 @@ void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max)
         if (Is_not_in_bridges(pos, Bridges, Nb_bridge)) { // Check if the bridge position is not already in the bridges array
 
             if (direction == 0) { // If the direction is horizontal
-                if (width == 0) { // If the width is 0
+                if (width == 1) { // If the width is 1
                     Bridges[Nb_bridge].direction = direction;
                     Bridges[Nb_bridge].size = width;
 
@@ -191,7 +191,7 @@ void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max)
                         }
                     }
                 }
-                else { // If the width is 1
+                else { // If the width is 0
                     Bridges[Nb_bridge].direction = direction;
                     Bridges[Nb_bridge].size = width;
 
@@ -229,7 +229,7 @@ void Stock_bridge(Bridge* Bridges, Coord posMax, char* board, int Nb_bridge_max)
                 }
             }
             else { // If the direction is vertical
-                if (width == 0) { // If the width is 0
+                if (width == 1) { // If the width is 1
                     Bridges[Nb_bridge].direction = direction;
                     Bridges[Nb_bridge].size = width;
 
