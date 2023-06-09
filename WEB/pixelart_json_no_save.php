@@ -112,7 +112,7 @@ if($resultat != "[Invalid arguments. Usage: program_name <width> <height> <bridg
     console.log("<?php echo $_POST['mod'];?>");
     console.log(<?php echo $_SESSION['id'];?>);
     //on redirige vers la page d'accueil
-    //window.location.href = "../index.php";
+    window.location.href = "../index.php";
     <?php
 }
 ?>
