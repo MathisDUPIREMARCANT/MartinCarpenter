@@ -178,6 +178,10 @@ void Print_board(char* Save, char* Board, Coord Taille) {
     int i = 0;
 
     for (i; i < (Taille.x * Taille.y); i++) {
+		if (i % Taille.x == 0 && i != 0) {
+			printf("\n");
+		}
+        
         if (Board[i] == '0') { // If the current position on the board is '0'
             printf("%c", Save[i]); // Print the corresponding character from the Save array that is the real island number
         }
@@ -315,6 +319,10 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction, in
                     if ((*(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') - Direction[i] < 0) {
                         return; // If the island weight minus the direction value is negative, exit the function
                     }
+                    
+                    if ((*(Save + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') == (*(Save + (posMax.x * pos.y) + pos.x) - '0') && (*(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') == (*(Board + (posMax.x * pos.y) + pos.x) - '0')) {
+                        return; 
+                    }
 
                     Place_island_on_map(Board, posMax, Copy_pos, (*(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') - Direction[i]);
 
@@ -324,6 +332,9 @@ void Solver(char* Save, char* Board, Coord posMax, Coord pos, int* Direction, in
 
             Place_island_on_map(Board, posMax, pos, (*(Board + (posMax.x * Copy_pos.y) + Copy_pos.x) - '0') - Type_island);
         }
+        
+        Print_board(Board, Board, posMax);
+        printf("\n\n");
 
         int Nb_islands = Island_on_map(Board, pos, posMax);
 
