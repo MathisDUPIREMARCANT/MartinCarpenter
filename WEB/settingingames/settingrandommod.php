@@ -3,17 +3,17 @@
 if(isset($_POST['theme'])||isset($_POST['mode'])){
 setcookie("Colorgame",$_POST['Choixtheme'],time()+(365*24*3600),'/', '',false,true);
 setcookie("ColorButton",$_POST['ChoiceButton'],time()+(365*24*3600),'/', '',false,true);
-header("location: ../randommod.php?mod=".$_GET['level']);	
+header("location: ../randommod.php?mod=".$_POST['level']);	
 }
 ?>
 <header>
     <div class="buttonhead">
         <button class=" back" type=submit>
-            <a href="../randommod.php?mod=<?php echo $_GET['mod'].'&id='.$_GET['id'];?>">
+            <a href="../randommod.php?mod=<?php echo $_POST['mod'].'&id='.$_POST['id'];?>">
                 <img class="backimg" src="../image/button/arrow.png">
             </a>
         </button>
-        <a class="user" href="../users/userrandom.php?mod=<?php echo $_GET['mod'];?>">
+        <a class="user" href="../users/userrandom.php?mod=<?php echo $_POST['mod'];?>">
             <img class="userimg" src="../image/button/martin.png">
         </a>
         </button>
@@ -49,5 +49,5 @@ header("location: ../randommod.php?mod=".$_GET['level']);
         </div>
         
         <div class=" Choix">
-            <form method="post" class="form" id="formLetter" action="settingrandommod.php?mod=<?php echo $_GET['level']?>">
+            <form method="post" class="form" id="formLetter" action="settingrandommod.php?mod=<?php echo $_POST['level']?>">
                 <?php include("finsetting.php"); ?>

@@ -34,9 +34,7 @@ session_start();
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
         $username = $_SESSION['username'];
-        if($_GET['mod'] != 'custom'){
-        $id = $_GET['id'];
-        }
+
     ?>
 </head>
 
@@ -67,6 +65,26 @@ function jsonToPixelArt(obj) {
     // Convertit la grille en chaine de caracteres
     return grid.map(row => row.join("")).join("");
 }
+function postRedirect(url, params) {
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = url;
+
+    // Create input fields for each parameter
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+      }
+    }
+
+    // Append the form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+  }
     function togglePopup() {
         var popup = document.getElementById("popup");
         if (popup.style.display === "none") {
@@ -147,7 +165,7 @@ function jsonToPixelArt(obj) {
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
         <form action=" custommod.php?mod=custom" method="post">
             <?php 
-        if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
+        if(!isset($_POST['rows']) && !isset($_POST['columns']) && !isset($_POST['JSON']) && !isset($_POST['nbiles'])){
         if($mod == 'custom'){?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
             <label for="nb_iles">Number of islands</label>
@@ -229,7 +247,7 @@ if($mod == 'custom'){
         while($output == -1){
             $output = exec($command);
         }
-        if (!isset($_GET['JSON'])) {
+        if (!isset($_POST['JSON'])) {
         ?>
     <script>
        var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
@@ -251,7 +269,7 @@ if($mod == 'custom'){
     ?> <?php 
     if($mod != 'custom'){
     // //on convertit la variable JS "id" en variable globale PHP 
-     $id = $_GET["id"];
+     $id = $_POST["id"];
 
 
     $_SESSION['id'] = $id;
@@ -269,8 +287,8 @@ if($mod == 'custom'){
                 var mod = "<?php echo $mod; ?>";
 //                 huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [3, 7]            },              {"links" : 4,                   "Placement" : [3, 4]            },              {"links" : 2,                   "Placement" : [1, 4]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 2,                   "Placement" : [1, 2]            },              {"links" : 6,                   "Placement" : [3, 0]            },              {"links" : 2,                   "Placement" : [6, 0]            },              {"links" : 4,                   "Placement" : [0, 0]            },              {"links" : 3,                   "Placement" : [0, 3]            },              {"links" : 1,                   "Placement" : [2, 3]            }    ],    "Grid": [
 // {                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 2,           "direction" : 1,                 "Placement" : [[3, 6],[3, 5]]  },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[2, 4]] },              {               "width" : 0,            "length" : 1,           "direction" : 1,                 "Placement" : [[3, 3]]         },              {               "width" : 1,            "length" : 1,           "direction" : 0,         "Placement" : [[2, 2]]         },              {               "width" : 1,            "length" : 1,          "direction" : 1,          "Placement" : [[3, 1]]         },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[4, 0],[5, 0]]  },              {               "width" : 1,            "length" : 2,           "direction" : 0,                 "Placement" : [[2, 0],[1, 0]]  },             {                "width" : 1,            "length" : 2,           "direction" : 1,                 "Placement" : [[0, 1],[0, 2]]  },              {               "width" : 0,            "length" : 1,           "direction" : 0,                "Placement" : [[1, 3]]  }    ],    "PlacedBridges":{}}
-var rows = huge.Grid[0].size[0];
-                var columns = huge.Grid[0].size[1];
+var columns = huge.Grid[0].size[0];
+                var rows = huge.Grid[0].size[1];
 
                 var gameDiv = document.getElementById('game');
                 var gameDivWidth = gameDiv.clientWidth;
@@ -890,10 +908,12 @@ var rows = huge.Grid[0].size[0];
 
                     // Réinitialiser huge.userPlacedBridges
                     huge.userPlacedBridges = [];
-                var url = "custommod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
-                        columns) + "&JSON=" + encodeURIComponent(JSON.stringify(huge)) + "&nbiles=" +
-                    encodeURIComponent(huge.Islands.length) +  "&mod=" + encodeURIComponent(mod) + "&id=" + encodeURIComponent(id);
-                window.location.href = url;
+                    var params = {JSON: JSON.stringify(huge), mod: "custom", columns: encodeURIComponent(columns), rows: encodeURIComponent(rows), nbiles: encodeURIComponent(huge.Islands.length) };
+                var url = "save_level.php";
+                postRedirect(url, params);
+                // var url = "custommod.php?rows=" +  + "&columns=" +  + "&JSON="  + "&nbiles=" +
+                //     +  "&mod=" +  + "&id=" + encodeURIComponent(id);
+                // window.location.href = url;
             }
 
 
@@ -902,13 +922,13 @@ var rows = huge.Grid[0].size[0];
             <?php   
 }
         }
-            if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
-$rows = $_GET['rows'];
-$columns = $_GET['columns'];
-$pixelArt = $_GET['JSON'];
-$nbiles = $_GET['nbiles'];
+            if(isset($_POST['rows']) && isset($_POST['columns']) && isset($_POST['JSON']) && isset($_POST['nbiles'])){
+$rows = $_POST['rows'];
+$columns = $_POST['columns'];
+$pixelArt = $_POST['JSON'];
+$nbiles = $_POST['nbiles'];
 $difficulty = ($rows*$columns*$nbiles)/20;
-$mod = $_GET['mod'];
+$mod = $_POST['mod'];
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur
 

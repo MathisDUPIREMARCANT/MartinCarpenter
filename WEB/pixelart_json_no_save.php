@@ -37,6 +37,30 @@ session_start();
 </head>
 
 <body>
+    <Script>
+function postRedirect(url, params) {
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = url;
+
+    // Create input fields for each parameter
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+      }
+    }
+
+    // Append the form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+
+</script>
 <video id="background-video" autoplay="autoplay" playsinline loop>
         <source src="image/background.mp4" type="video/mp4">
     </video>
@@ -47,15 +71,19 @@ session_start();
 <?php
 include("traitement/DB_connect.php");
 
-$brdg = $_GET["brdg"];
+$brdg = $_POST["brdg"];
 $brdg = explode(",", $brdg);
 
-$pxl = $_GET["pxl"];
+$pxl = $_POST["pxl"];
 $pxl = explode(",", $pxl);
-$rows = $_GET['row'];
-$columns = $_GET['column'];
+$rows = $_POST['rows'];
+$columns = $_POST['columns'];
 $resultat = "[";
 for ($i = 0; $i < count($brdg); $i++) {
+    // echo $brdg[$i];
+    // echo $pxl[$i];
+    // echo $rows;
+    // echo $columns;
     $command = 'Placements.exe'. ' '. $columns . ' ' . $rows . ' ' . $brdg[$i] . ' ' . $pxl[$i];
     $output = exec($command);
     $resultat = $resultat.$output;
@@ -64,17 +92,27 @@ for ($i = 0; $i < count($brdg); $i++) {
     }
 }  
 $resultat = $resultat."]";
+//on affiche les variables 
+
+
 if($resultat != "[Invalid arguments. Usage: program_name <width> <height> <bridge_count> <board>]"){
     ?>
-    //on redirige vers la page pour afficher le niveau
-    window.location.href = "poggers_levels.php?verif=1" + "&JSON=" + JSON.stringify(<?php echo $resultat; ?>) + "&rows=" + <?php echo $rows; ?> + "&columns=" + <?php echo $columns;?> + "&mod=" + "<?php echo $_GET['mod'];?>" + "&id=" + <?php echo $_SESSION['id'];?>;
+            var params = { mod: <?php echo json_encode($_POST['mod']); ?>, JSON:  JSON.stringify(<?php echo $resultat; ?>), columns: <?php echo $columns;?>, rows: <?php echo $rows; ?>, id: <?php echo $_POST['id'];?>, verif: 1};
+   var url = "poggers_levels.php";
+   postRedirect(url, params);
+    //window.location.href = "poggers_levels.php?verif=1" + "&JSON=" + JSON.stringify(<?php echo $resultat; ?>) + "&rows=" + <?php echo $rows; ?> + "&columns=" + <?php echo $columns;?> + "&mod=" + "<?php echo $_POST['mod'];?>" + "&id=" + <?php echo $_POST['id'];?>;
 <?php
 }else{
     ?>
     //on dit que le niveau n'a pas été enregistré
     alert("Your level is not valid or has a problem in it. please try again");
+    //console.log(<?php echo $resultat; ?>);
+    console.log(<?php echo $rows; ?>);
+    console.log(<?php echo $columns;?>);
+    console.log("<?php echo $_POST['mod'];?>");
+    console.log(<?php echo $_SESSION['id'];?>);
     //on redirige vers la page d'accueil
-    window.location.href = "../index.php";
+    //window.location.href = "../index.php";
     <?php
 }
 ?>

@@ -34,13 +34,39 @@ session_start();
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
         $username = $_SESSION['username'];
-        if($_GET['mod'] != 'custom'){
+        if($_POST['mod'] != 'custom'){
         $id = $_GET['id'];
         }
     ?>
 </head>
 
 <body>
+<script>
+  // Function to create and submit a form with POST method
+  function postRedirect(url, params) {
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = url;
+
+    // Create input fields for each parameter
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+      }
+    }
+
+    // Append the form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+
+</script>
+
     <script>
 
 function jsonToPixelArt(obj) {
@@ -55,16 +81,6 @@ function jsonToPixelArt(obj) {
     // Convertit la grille en chaine de caracteres
     return grid.map(row => row.join("")).join("");
 }
-
-
-
-
-
-
-
-
-
-
     function togglePopup() {
         var popup = document.getElementById("popup");
         if (popup.style.display === "none") {
@@ -126,7 +142,7 @@ function jsonToPixelArt(obj) {
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'].'&id='.$id;?>">Settings
+                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_POST['mod'].'&id='.$id;?>">Settings
                     &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
@@ -136,8 +152,8 @@ function jsonToPixelArt(obj) {
     <main Id="main" class="main">
         <?php         
                 //on récupere les valeurs en url pour les envoyer au .exe (easy, medium, hard, custom)
-                if(isset($_GET['mod'])){
-                    $mod = $_GET['mod'];
+                if(isset($_POST['mod'])){
+                    $mod = $_POST['mod'];
 
                 }
                 if(isset($_POST['mod'])){
@@ -149,7 +165,7 @@ function jsonToPixelArt(obj) {
         <form action=" randommod.php?mod=custom" method="post">
             <?php 
 
-        if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
+        if(!isset($_POST['rows']) && !isset($_POST['columns']) && !isset($_POST['JSON']) && !isset($_POST['nbiles'])){
 
         if($mod == 'custom'){
 ?>
@@ -173,7 +189,7 @@ function jsonToPixelArt(obj) {
                 <?php             
 //on exec le .exe avec les parametres du formulaire 11 13 30
 if("0" == $_GET['verif']){
-if($mod == 'easy'){
+if($_GET['mod'] == 'easy'){
     $nb_iles = 6;
     $nb_colonnes = 7;
     $nb_lignes = 7;
@@ -183,16 +199,17 @@ if($mod == 'easy'){
     while($output == -1){
         $output = exec($command);
     }
-    if (!isset($_GET['JSON'])) {
+    if (!isset($_POST['JSON'])) {
     ?>
 <script>
    var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
    let siuu = <?php echo $output; ?>;
 
    //on redirige vers une page qui va verifier si le niveau est faisable ou non
-
-   window.location.href = "verif_level.php?mod=easy&JSON=" + bangerdefou + "&iles=" + <?php echo $nb_iles; ?> + "&columns=" + <?php echo $nb_colonnes; ?> + "&rows=" + <?php echo $nb_lignes;?> + "&id=" + <?php echo $id;?> + "&siuu=" + JSON.stringify(siuu);
-   
+  // Redirect with POST method
+  var params = { mod: "easy", JSON: bangerdefou, iles: <?php echo $nb_iles; ?>, columns: <?php echo $nb_colonnes; ?>, rows: <?php echo $nb_lignes;?>, id: <?php echo $id;?>, siuu: siuu };
+  var url = "verif_level.php";
+   postRedirect(url, params);
     <?php
     } ?>
 
@@ -202,7 +219,7 @@ if($mod == 'easy'){
         $texte_js = json_encode($texte_php);
         
 }
-if($mod == 'medium'){
+if($_GET['mod'] == 'medium'){
     $nb_iles = 10;
     $nb_colonnes = 10;
     $nb_lignes = 10;
@@ -211,15 +228,15 @@ if($mod == 'medium'){
     while($output == -1){
         $output = exec($command);
     }
-    if (!isset($_GET['JSON'])) {
+    if (!isset($_POST['JSON'])) {
     ?>
 <script>
    var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
    let siuu = <?php echo $output; ?>;
-   //on redirige vers une page qui va verifier si le niveau est faisable ou non
 
-   window.location.href = "verif_level.php?mod=medium&JSON=" + bangerdefou + "&iles=" + <?php echo $nb_iles; ?> + "&columns=" + <?php echo $nb_colonnes; ?> + "&rows=" + <?php echo $nb_lignes;?> + "&id=" + <?php echo $id;?> + "&siuu=" + JSON.stringify(siuu);
-   
+   var params = { mod: "medium", JSON: bangerdefou, iles: <?php echo $nb_iles; ?>, columns: <?php echo $nb_colonnes; ?>, rows: <?php echo $nb_lignes;?>, id: <?php echo $id;?>, siuu: siuu };
+  var url = "verif_level.php";
+   postRedirect(url, params);
     <?php
     } ?>
     
@@ -229,7 +246,7 @@ if($mod == 'medium'){
     $texte_php = $output;
     $texte_js = json_encode($texte_php);
 }
-if($mod == 'hard'){
+if($_GET['mod'] == 'hard'){
     $nb_iles = 25;
     $nb_colonnes = 12   ;
     $nb_lignes = 12;
@@ -238,16 +255,16 @@ if($mod == 'hard'){
     while($output == -1){
         $output = exec($command);
     }
-    if (!isset($_GET['JSON'])) {
+    if (!isset($_POST['JSON'])) {
     ?>
 <script>
    var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
    let siuu = <?php echo $output; ?>;
 
    //on redirige vers une page qui va verifier si le niveau est faisable ou non
-
-   window.location.href = "verif_level.php?mod=hard&JSON=" + bangerdefou + "&iles=" + <?php echo $nb_iles; ?> + "&columns=" + <?php echo $nb_colonnes; ?> + "&rows=" + <?php echo $nb_lignes;?> + "&id=" + <?php echo $id;?> + "&siuu=" + JSON.stringify(siuu);
-   
+   var params = { mod: "hard", JSON: bangerdefou, iles: <?php echo $nb_iles; ?>, columns: <?php echo $nb_colonnes; ?>, rows: <?php echo $nb_lignes;?>, id: <?php echo $id;?>, siuu: siuu };
+  var url = "verif_level.php";
+   postRedirect(url, params);
     <?php
     } ?>
     
@@ -278,7 +295,7 @@ if($mod == 'custom'){
     ?> <?php 
     if($mod != 'custom'){
     // //on convertit la variable JS "id" en variable globale PHP 
-     $id = $_GET["id"];
+     $id = $_POST["id"];
 
 
     $_SESSION['id'] = $id;
@@ -289,13 +306,13 @@ if($mod == 'custom'){
                 <!-- on affiche le texte js avec du JS -->
                 <div id="bangerang"></div>
                 <script type="text/javascript">
-                var texte_js = <?php echo $_GET['JSON']; ?>;
+                var texte_js = <?php echo $_POST['JSON']; ?>;
                 var huge = JSON.parse(texte_js);
                 //on met huge comme etant le get json
 
-                <?php if(isset($_GET['JSON'])){ ?>
+                <?php if(isset($_POST['JSON'])){ ?>
 
-                huge = <?php echo $_GET['siuu']; ?>;
+                huge = <?php echo $_POST['siuu']; ?>;
 
                 <?php } ?>
                
@@ -946,13 +963,13 @@ var rows = huge.Grid[0].size[0];
 
             <?php   
 
-            if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
-$rows = $_GET['rows'];
-$columns = $_GET['columns'];
-$pixelArt = $_GET['JSON'];
-$nbiles = $_GET['nbiles'];
+            if(isset($_POST['rows']) && isset($_POST['columns']) && isset($_POST['JSON']) && isset($_POST['nbiles'])){
+$rows = $_POST['rows'];
+$columns = $_POST['columns'];
+$pixelArt = $_POST['JSON'];
+$nbiles = $_POST['nbiles'];
 $difficulty = ($rows*$columns*$nbiles)/20;
-$mod = $_GET['mod'];
+$mod = $_POST['mod'];
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur
 

@@ -24,11 +24,11 @@ session_start();
     <?php
             
             if(empty($_SESSION["username"])){
-                if(isset($_GET["inscrip"]) && (($_GET["inscrip"] == 0) || ($_GET["inscrip"] == 1) || ($_GET["inscrip"] == 2))){ 
+                if(isset($_POST["inscrip"]) && (($_POST["inscrip"] == 0) || ($_POST["inscrip"] == 1) || ($_POST["inscrip"] == 2))){ 
                     $page_inscription = 10;
-                } else if(isset($_GET['reset']) && (($_GET["reset"] == 2) || ($_GET["reset"] == 3))){ //ici on test le liens pour savoir quelle formulaire afficher
+                } else if(isset($_POST['reset']) && (($_POST["reset"] == 2) || ($_POST["reset"] == 3))){ //ici on test le liens pour savoir quelle formulaire afficher
                     $page_inscription = 15;
-                } else if(isset($_GET["fail"]) && ($_GET["fail"] == 4)){
+                } else if(isset($_POST["fail"]) && ($_POST["fail"] == 4)){
                     $page_inscription = 15;
                 } else {
                     $page_inscription = 1;
@@ -49,15 +49,15 @@ session_start();
                 <form class="sign-in-htm" action="traitement/traitement_connexion.php" method="post">
                     <?php
                                 echo'<h2 class="comment">Connect to Martin Carpenter !</h2>';
-                                if(isset($_GET["fail"]) && $_GET["fail"] == "0"){
+                                if(isset($_POST["fail"]) && $_POST["fail"] == "0"){
                                     echo'<h2 id="fail" class="comment" >No account for this email !</h2>';
                                 }
-                                if(isset($_GET["fail"]) && $_GET["fail"] == "2"){
+                                if(isset($_POST["fail"]) && $_POST["fail"] == "2"){
                                     echo'<h2 id="fail" class="comment" >Your logins are wrong !</h2>';
                                 }
                         ?>
                     <?php 
-                        if(isset($_GET["state"]) && $_GET["state"] == "end"){
+                        if(isset($_POST["state"]) && $_POST["state"] == "end"){
                             echo'<h2 class="comment">End of registration</h2>'; ?>
                     <div class="group">
                         <input placeholder="Username" id="user" name="email" type="email" class="input"
@@ -76,8 +76,8 @@ session_start();
                     </div>
                     <div class="hr"></div>
                     <?php
-                        }else if(empty($_GET["state"])){ 
-                            if(isset($_GET["mdp"]) && $_GET["mdp"] == "reset"){
+                        }else if(empty($_POST["state"])){ 
+                            if(isset($_POST["mdp"]) && $_POST["mdp"] == "reset"){
                                 echo('<h3 class="comment">Your password has been changed.</h3>');
                             }
                             ?>
@@ -102,9 +102,9 @@ session_start();
                 <form class="sign-up-htm" action="traitement/traitement_inscription.php" method="post">
                     <h2 class="comment">Subscribe to Martin Carpenter !</h2>
                     <?php 
-                            if(isset($_GET["inscrip"]) && ($_GET["inscrip"] == 1)){ ?>
+                            if(isset($_POST["inscrip"]) && ($_POST["inscrip"] == 1)){ ?>
                     <h3 class="comment">The passwords are different</h3> <?php
-                            } else if(isset($_GET["inscrip"]) && ($_GET["inscrip"] == 2)){
+                            } else if(isset($_POST["inscrip"]) && ($_POST["inscrip"] == 2)){
                                 ?>
                     <h3 class="comment">The email address already exists </h3> <?php
                             }

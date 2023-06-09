@@ -3,7 +3,7 @@ session_start() ;
 
 		try{
             require("traitement/DB_connect.php"); 
-			$user=$_GET["user"];
+			$user=$_POST["user"];
 			//Compléter ICI
 			$reqPrep1="DELETE FROM users WHERE `username`='$user'";
 			$req1 =$conn->prepare($reqPrep1);

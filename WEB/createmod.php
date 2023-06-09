@@ -39,7 +39,7 @@ session_start();
 
 
     <?php
-    // if($_GET['create']==1){
+    // if($_POST['create']==1){
     //     echo "<script>alert('You have to create a level before playing')</script>";
     // }
         if (isset($_POST['nb_lignes']) && isset($_POST['nb_colonnes'])){
@@ -502,6 +502,26 @@ session_start();
             // Conversion en pixel art
 
 
+            function postRedirect(url, params) {
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = url;
+
+    // Create input fields for each parameter
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+      }
+    }
+
+    // Append the form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+  }
 
             function myFunction() {
                 var pixelArt = convertToPixelArt(rows, columns);
@@ -511,10 +531,13 @@ session_start();
                     "size": [rows, columns]
                 });
                 //on redirige vers la page se verifiacation 
-                window.location.href = "verif_level_user.php?rows=" + encodeURIComponent(rows) +
-                    "&columns=" + encodeURIComponent(columns) + "&pixelArt=" + encodeURIComponent(
-                        pixelArt) + "&nbiles=" + encodeURIComponent(iles) + "&mod=2&siuu=2&id=2&JSON=2" ;
+                //window.location.href = "verif_level_user.php?rows=" + encodeURIComponent(rows) +
+                    //"&columns=" + encodeURIComponent(columns) + "&pixelArt=" + encodeURIComponent(
+                      //  pixelArt) + "&nbiles=" + encodeURIComponent(iles) + "&mod=2&siuu=2&id=2&JSON=2" ;
 
+                var params = { mod: 2, pixelArt: pixelArt, nbiles: iles, columns: columns, rows: rows, id: 2, siuu: 2, JSON: 2 };
+                var url = "verif_level_user.php";
+                postRedirect(url, params);
                 // var url = "createmod.php?rows=" + encodeURIComponent(rows) + "&columns=" + encodeURIComponent(
                 //         columns) + "&pixelArt=" + encodeURIComponent(pixelArt) + "&nbiles=" +
                 //     encodeURIComponent(iles);

@@ -34,8 +34,8 @@ session_start();
         <link rel='stylesheet' href='CSS/Changecolor/$style.css' />";
         }
         $username = $_SESSION['username'];
-        if($_GET['mod'] != 'custom'){
-        $id = $_GET['id'];
+        if($_POST['mod'] != 'custom'){
+        $id = $_POST['id'];
         }
     ?>
 </head>
@@ -102,7 +102,7 @@ session_start();
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'].'&id='.$id;?>">Settings
+                <a id="al" class="al" href="settingingames/settingrandommod.php?mod=<?php echo $_POST['mod'].'&id='.$id;?>">Settings
                     &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
@@ -112,8 +112,8 @@ session_start();
     <main Id="main" class="main">
         <?php         
                 //on récupere les valeurs en url pour les envoyer au .exe (easy, medium, hard, custom)
-                if(isset($_GET['mod'])){
-                    $mod = $_GET['mod'];
+                if(isset($_POST['mod'])){
+                    $mod = $_POST['mod'];
                 }
                 if(isset($_POST['mod'])){
                     $mod = $_POST['mod'];
@@ -122,7 +122,7 @@ session_start();
         <!-- formulaire pour recuperer le nombre d'iles, le nombre de colonnes et le nombre de lignes -->
         <form action=" randommod.php?mod=custom" method="post">
             <?php 
-        if(!isset($_GET['rows']) && !isset($_GET['columns']) && !isset($_GET['JSON']) && !isset($_GET['nbiles'])){
+        if(!isset($_POST['rows']) && !isset($_POST['columns']) && !isset($_POST['JSON']) && !isset($_POST['nbiles'])){
         if($mod == 'custom'){?>
             <input type="hidden" name="mod" value="<?php echo $mod; ?>">
             <label for="nb_iles">Number of islands</label>
@@ -202,7 +202,7 @@ if($mod == 'custom'){
     ?> <?php 
     if($mod != 'custom'){
     // //on convertit la variable JS "id" en variable globale PHP 
-     $id = $_GET["id"];
+     $id = $_POST["id"];
 
 
     $_SESSION['id'] = $id;
@@ -818,13 +818,13 @@ var rows = huge.Grid[0].size[0];
 
             <?php   
 }
-            if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
-$rows = $_GET['rows'];
-$columns = $_GET['columns'];
-$pixelArt = $_GET['JSON'];
-$nbiles = $_GET['nbiles'];
+            if(isset($_POST['rows']) && isset($_POST['columns']) && isset($_POST['JSON']) && isset($_POST['nbiles'])){
+$rows = $_POST['rows'];
+$columns = $_POST['columns'];
+$pixelArt = $_POST['JSON'];
+$nbiles = $_POST['nbiles'];
 $difficulty = ($rows*$columns*$nbiles)/20;
-$mod = $_GET['mod'];
+$mod = $_POST['mod'];
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur
 

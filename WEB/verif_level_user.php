@@ -44,18 +44,38 @@ session_start();
     </video>
 <?php
 //on récupère les données du formulaire
-$pixelArt = $_GET['pixelArt'];
+$pixelArt = $_POST['pixelArt'];
 
-$command = 'MartinS.exe'. ' '. $_GET['columns'] . ' ' . $_GET['rows'] . ' ' . $pixelArt;
+$command = 'MartinS.exe'. ' '. $_POST['columns'] . ' ' . $_POST['rows'] . ' ' . $pixelArt;
 $output = exec($command);
 $pixelArt = $output; 
 
 
 ?>
 <script>
+                function postRedirect(url, params) {
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = url;
+
+    // Create input fields for each parameter
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+      }
+    }
+
+    // Append the form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+  }
     //on convertit rows et columns de variable php en variables js
-    let rows = <?php echo json_encode($_GET['rows']); ?>;
-    let columns = <?php echo json_encode($_GET['columns']); ?>;
+    let rows = <?php echo json_encode($_POST['rows']); ?>;
+    let columns = <?php echo json_encode($_POST['columns']); ?>;
 
     let gridSize = [rows,columns];
    
@@ -76,19 +96,22 @@ $pixelArt = $output;
    
     pixelArt =  solution;
   
-    //window.location.href = "pixelart_json.php?JSON=" + pixel + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge;
+    //window.location.href = "pixelart_json.php?JSON=" + pixel + "&row=" + <?php echo json_encode($_POST['rows']); ?> + "&column=" + <?php echo json_encode($_POST['columns']); ;?> + "&brdg="  + Nb_bridge;
     <?php 
-    if (isset($_GET['mod']) || isset($_GET['id']) || isset($_GET['siuu'])){
-    $mod = $_GET['mod'];
-    $id = $_GET['id'];
-    $siuu = $_GET['siuu'];
+    if (isset($_POST['mod']) || isset($_POST['id']) || isset($_POST['siuu'])){
+    $mod = $_POST['mod'];
+    $id = $_POST['id'];
+    $siuu = $_POST['siuu'];
     }
 
-    $oui = 'Placements.exe'. ' '. $_GET['columns'] . ' ' . $_GET['rows'] . ' ' . 0 . ' ' . $_GET['pixelArt'];
+    $oui = 'Placements.exe'. ' '. $_POST['columns'] . ' ' . $_POST['rows'] . ' ' . 0 . ' ' . $_POST['pixelArt'];
     $non = exec($oui);
     $pixelArtnosol = $non;
     ?>
-    window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($pixelArtnosol); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge + "&nbiles=" + <?php echo json_encode($_GET['nbiles']); ?>;
+    var params = { mod: 2, JSON: <?php echo json_encode($pixelArtnosol); ?>, nbiles: <?php echo json_encode($_POST['nbiles']); ?>, column: <?php echo json_encode($_POST['columns']); ?>, row: <?php echo json_encode($_POST['rows']); ?>, id: 2, siuu: 2, pxl: pixel, brdg: Nb_bridge };
+    var url = "pixelart_json.php";
+                postRedirect(url, params);
+    //window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($pixelArtnosol); ?> + "&siuu=" + <?php echo json_encode($_POST['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_POST['rows']); ?> + "&column=" + <?php echo json_encode($_POST['columns']); ?> + "&brdg="  + Nb_bridge + "&nbiles=" + <?php echo json_encode($_POST['nbiles']); ?>;
 
     //on récupere le nombre de ponts et d'iles dans le pixelart
     let nbIslands = 0;

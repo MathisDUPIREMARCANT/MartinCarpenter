@@ -73,20 +73,19 @@ session_start();
             You WIN !
         </div>
         <?php 
-        if($_GET ['mod'] == 10){
+        if($_POST ['mod'] == 10){
             $score = 10;
         }
-if($_GET ['mod'] != 'custom'){
+if($_POST ['mod'] != 'custom'){
                 //on verifie que l'id en session est bien celui dans l'url
-                if($_SESSION['id'] == $_SESSION['id2']){
                    $username = $_SESSION['username'];
-                    if($_GET ['mod'] == 'easy'){
+                    if($_GET['mod'] == 'easy'){
                         $score = 15;
                     }
-                    elseif($_GET ['mod'] == 'medium'){
+                    elseif($_GET['mod'] == 'medium'){
                         $score = 35;
                     }
-                    elseif($_GET ['mod'] == 'hard'){
+                    elseif($_GET['mod'] == 'hard'){
                         $score = 100;
                     }
                 //on vient ajouter le score de l'utilisateur dans la base de données en fonction du mode de jeu. on ajoute le score avec une addition 
@@ -95,8 +94,15 @@ if($_GET ['mod'] != 'custom'){
                 $stmt = $conn->prepare($sql);
                 //on execute la requete
                 $stmt->execute();
+                }else{
+                    $username = $_SESSION['username'];
+                    $sql = "UPDATE users SET score = score + 20 WHERE username = '$username'";
+                    //on prepare la requete
+                    $stmt = $conn->prepare($sql);
+                    //on execute la requete
+                    $stmt->execute();
                 }
-            }
+            
 
                 ?>
         <script>

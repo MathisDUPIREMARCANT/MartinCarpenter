@@ -11,7 +11,7 @@
 
 
 int main(int argc, char* argv[]) {
-    if (argc < 5) {
+    if (argc < 4) {
         printf("Invalid arguments. Usage: program_name <width> <height> <bridge_count> <board>\n");
         return 1;
     }

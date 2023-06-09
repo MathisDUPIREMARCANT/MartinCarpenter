@@ -4,13 +4,13 @@ session_start();
 
 function GetPath($number){
     require("traitement/DB_connect.php");
-    $sql = "SELECT path FROM levels WHERE number='$number'";
+    $sql = "SELECT soluce FROM levels WHERE number='$number'";
     $result = $conn->query($sql);
     $path = $result->fetch(PDO::FETCH_ASSOC);
     return $path;
 }
-if(isset($_GET['JSON'])){
-$texte_php = $_GET["JSON"];
+if(isset($_POST['JSON'])){
+$texte_php = $_POST["JSON"];
 $texte_js = json_encode($texte_php);
 //on importe la solution du niveau dans la base de donnée
 require("traitement/DB_connect.php");
@@ -32,6 +32,20 @@ if(isset($_GET['story_level'])){
         }
     json_encode($texte_js);
 }
+
+if (isset($_GET["number"])){
+    $number = $_GET["number"];
+require("traitement/DB_connect.php");
+$sql = "SELECT soluce FROM users_level WHERE `number`= $number";
+$result = $conn->query($sql);
+$soluce = $result->fetch(PDO::FETCH_ASSOC);
+foreach($soluce as $key => $value){
+    $soluce = $value;
+}
+$texte_js = $soluce;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +141,7 @@ if(isset($_GET['story_level'])){
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settinguserslevels.php?level=<?php echo urlencode($_GET['level'])?>">Settings
+                <a id="al" class="al" href="settingingames/settinguserslevels.php?level=<?php echo urlencode($_POST['level'])?>">Settings
                     &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
@@ -144,12 +158,7 @@ if(isset($_GET['story_level'])){
                 <div id="bangerang"></div>
                 <script type="text/javascript">
                 var texte_js = <?php echo $texte_js; ?>;
-                <?php if(!isset($_GET['story_level'])){ ?>
-                var huge = JSON.parse(texte_js);
-                <?php }
-                else{ ?>
-                    var huge = texte_js;
-                    <?php }?>
+                var huge = texte_js;
                 <?php ?>
                 // huge = {       "Islands" : [           {"links" : 1,                   "Placement" : [5, 5]            },              {"links" : 5,                   "Placement" : [5, 7]            },              {"links" : 6,                   "Placement" : [5, 9]            },              {"links" : 3,                   "Placement" : [1, 9]            },              {"links" : 3,                   "Placement" : [1, 2]            },              {"links" : 5,                   "Placement" : [3, 2]            },              {"links" : 4,                   "Placement" : [5, 2]            },              {"links" : 2,                   "Placement" : [5, 4]            },              {"links" : 2,                   "Placement" : [8, 4]            },              {"links" : 1,                   "Placement" : [8, 6]            }    ],    "Grid": [
                 //{                       "size" : [10, 10]               }     ],    "Bridges" : [               {               "width" : 0,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 6]]         },             {                "width" : 1,            "length" : 1,           "direction" : 0,                 "Placement" : [[5, 8]] },              {               "width" : 1,            "length" : 3,           "direction" : 1,                 "Placement" : [[4, 9],[3, 9],[2, 9]]   },              {               "width" : 0,            "length" : 6,           "direction" : 0,                 "Placement" : [[1, 8],[1, 7],[1, 6],[1, 5],[1, 4],[1, 3]]      },              {              "width" : 1,             "length" : 1,           "direction" : 1,                 "Placement" : [[2, 2]]         },
@@ -519,7 +528,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
     // Vérifie si tmp correspond à l'une des solutions dans tmp2
     for (var siu = 0; siu < tmp2.length; siu++) {
         if (JSON.stringify(tmp) === JSON.stringify(tmp2[siu])) {
-            document.location.href = "Win.php?mod=10&score=50";
+            document.location.href = "Win.php?mod=custom";
             break;
         }
     }
@@ -737,6 +746,186 @@ for (var yes = 0; yes < huge2.length; yes++) {
                     check_win();
                 }
 
+
+                function solution(){
+// Obtenir la référence du body
+var body = document.getElementsByTagName("body")[0];
+                    // Créer les éléments <table> et <tbody>
+                    var tbl = document.createElement("table");
+                    var tblBody = document.createElement("tbody");
+
+                    <?php if(isset($_COOKIE['Colorgame'])){
+                if($_COOKIE['Colorgame']=="red"){ 
+                echo"tbl.style.border = '0.4vw solid #f23e31';
+                tbl.style.backgroundColor = '#bf2424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="grey"){ 
+                echo"tbl.style.border = '0.4vw solid #cecaca';
+                tbl.style.backgroundColor = '#aa9a9a38';";
+                }
+                 elseif($_COOKIE['Colorgame']=="yellow"){ 
+                echo"tbl.style.border = '0.4vw solid #eff84aec';
+                tbl.style.backgroundColor = '#bfb224e7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="orange"){ 
+                echo"tbl.style.border = '0.4vw solid #f2ab31';
+                tbl.style.backgroundColor = '#bf8424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="pink"){ 
+                    echo"tbl.style.border = '0.4vw solid #f231c8';
+                    tbl.style.backgroundColor = '#bf24b2e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="green"){ 
+                echo"tbl.style.border = '0.4vw solid #34f231';
+                tbl.style.backgroundColor = '#24bf2ce7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="purple"){ 
+                echo"tbl.style.border = '0.4vw solid #9b31f2';
+                tbl.style.backgroundColor = '#8424bfe7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="blue"  ){ 
+                echo"tbl.style.border = '0.4vw solid #19608F';
+                tbl.style.backgroundColor = '#247cbfe7';";
+                }}
+                else{
+                    echo"tbl.style.border = '0.4vw solid #19608F';
+                    tbl.style.backgroundColor = '#247cbfe7';";
+                }?>
+
+                    tbl.style.borderRadius = "20px";
+                    tbl.style.width = "70vw";
+                    tbl.style.height = "70vh";
+                    tbl.style.overflow = "scroll"; // allows the table to scroll if necessary
+
+
+
+
+                    // Set table dimensions to match game div
+                    tbl.style.width = gameDivWidth + 'px';
+                    tbl.style.height = gameDivHeight + 'px';
+
+                    // Créer les cellules
+for (var i = 0; i < rows; i++) {
+    var row = document.createElement("tr");
+
+
+    for (var j = 0; j < columns; j++) {
+        var cell = document.createElement("td");
+
+
+        // Vérifier si l'île se trouve à la position actuelle
+        var foundIsland = false;
+        for (var k = 0; k < huge.Islands.length; k++) {
+            if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                foundIsland = true;
+                break;
+            }
+        }
+
+
+        if (foundIsland) {
+                                var islandImage = document.createElement("img");
+                                islandImage.setAttribute("id", "island-" + i + "-" + j);
+                                //on verifie le status du cookie "mode" 
+                                if (getCookie("mode") == 1) {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "image/images_temporaires/1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "image/images_temporaires/2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "image/images_temporaires/3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "image/images_temporaires/4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "image/images_temporaires/5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "image/images_temporaires/6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                } else {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "../WEB/image/iles/ile1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "../WEB/image/iles/ile2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "../WEB/image/iles/ile3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "../WEB/image/iles/ile4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "../WEB/image/iles/ile5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "../WEB/image/iles/ile6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                }
+} else {
+            // Vérifier si un pont se trouve à la position actuelle
+            var bridgeFound = false;
+            for (var l = 0; l < huge.Bridges.length; l++) {
+                var bridge = huge.Bridges[l];
+                for (var m = 0; m < bridge.Placement.length; m++) {
+                    var bridgePlacement = bridge.Placement[m];
+                    if (bridgePlacement[0] === i && bridgePlacement[1] === j) {
+                        bridgeFound = true;
+                        break;
+                    }
+                }
+                if (bridgeFound) {
+                    var bridgeImage = document.createElement("img");
+                    if (bridge.direction === 1) { // Pont vertical
+                        if (bridge.width === 1) {
+                            bridgeImage.style.width = "100%"; // Largeur d1u pont en pixels
+                                    bridgeImage.style.height = "75%"; // Hauteur du pont en pixels 
+                            bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
+                        } else {
+                            bridgeImage.style.width = "100%"; // Largeur du pont en pixels
+                                bridgeImage.style.height = "35%"; // Hauteur du pont en pixels
+                            bridgeImage.src = "../WEB/image/iles/bridge_h.png";
+                        }
+                    } else { // Pont horizontal
+                        if (bridge.width === 1) {
+                            bridgeImage.style.width = "80%"; // Largeur du pont en pixels
+                                    bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
+                            bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
+                        } else {
+                            bridgeImage.style.width = "20%"; // Largeur du pont en pixels
+                                bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
+                            bridgeImage.src = "../WEB/image/iles/bridge_V.png";
+                        }
+                    }
+                    cell.appendChild(bridgeImage);
+                    break;
+                }
+            }
+        }
+
+
+        row.appendChild(cell);
+        cell.setAttribute("class", 'case');
+        cell.setAttribute("id", '0');
+    }
+
+
+    tblBody.appendChild(row);
+}
+
+
+// Ajouter <tbody> à <table>
+tbl.appendChild(tblBody);
+// Ajouter <table> au body
+document.getElementById("bangerang").appendChild(tbl);
+}
+         
             
             </script>
             </div>

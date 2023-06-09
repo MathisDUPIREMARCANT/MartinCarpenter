@@ -47,13 +47,13 @@ session_start();
 <?php
 include("traitement/DB_connect.php");
 
-$brdg = $_GET["brdg"];
+$brdg = $_POST["brdg"];
 $brdg = explode(",", $brdg);
 
-$pxl = $_GET["pxl"];
+$pxl = $_POST["pxl"];
 $pxl = explode(",", $pxl);
-$rows = $_GET['row'];
-$columns = $_GET['column'];
+$rows = $_POST['row'];
+$columns = $_POST['column'];
 $resultat = "[";
 for ($i = 0; $i < count($brdg); $i++) {
     $command = 'Placements.exe'. ' '. $columns . ' ' . $rows . ' ' . $brdg[$i] . ' ' . $pxl[$i];
@@ -65,8 +65,8 @@ for ($i = 0; $i < count($brdg); $i++) {
 }  
 $resultat = $resultat."]";
 if($resultat != "[Invalid arguments. Usage: program_name <width> <height> <bridge_count> <board>]"){
-$pixelArt = $_GET['JSON'];
-$nbiles = $_GET['nbiles'];
+$pixelArt = $_POST['JSON'];
+$nbiles = $_POST['nbiles'];
 $difficulty = ($rows*$columns*$nbiles)/20;
 //on stock les valeurs dans la base de données
 //on recupere le pseudo de l'utilisateur

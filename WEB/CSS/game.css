@@ -19,7 +19,11 @@ table {
   height: 70vh;
 
 }
-
+.soluce{
+  margin-left: 6vw;
+  height: 80px;
+  width: 80px;
+}
 
 td, tr {
   width: 1fr; /* takes up an equal share of the available space */

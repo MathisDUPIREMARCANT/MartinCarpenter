@@ -4,11 +4,11 @@
     <header>
         <div class="buttonhead">
             <button class="back" type=submit>
-                <a href="../settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'];?>">
+                <a href="../settingingames/settingrandommod.php">
                     <img class="backimg" src="../image/button/arrow.png">
                 </a>
             </button>
-            <a class="al" - href="../settingingames/settingrandommod.php?mod=<?php echo $_GET['mod'];?>">
+            <a class="al" - href="../settingingames/settingrandommod.php">
                 <img class="settingimg" src="../image/button/boutonsetting.png" />
             </a>
 

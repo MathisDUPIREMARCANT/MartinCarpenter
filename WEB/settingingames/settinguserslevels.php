@@ -3,17 +3,17 @@
 if(isset($_POST['theme'])||isset($_POST['mode'])){
 setcookie("Colorgame",$_POST['Choixtheme'],time()+(365*24*3600),'/', '',false,true);
 setcookie("ColorButton",$_POST['ChoiceButton'],time()+(365*24*3600),'/', '',false,true);
-header("location: ../users_levels.php?mod=".$_GET['level']);	
+header("location: ../game.php");	
 }
 ?>
 <header>
     <div class="buttonhead">
         <button class=" back" type=submit>
-            <a href="../users_levels.php?level=<?php echo urlencode($_GET['level'])?>">
+            <a href="../game.php">
                 <img class="backimg" src="../image/button/arrow.png">
             </a>
         </button>
-        <a class="user" href="../users/userrandom.php?level=<?php echo urlencode($_GET['level']);?>">
+        <a class="user" href="../users/userrandom.php">
             <img class="userimg" src="../image/button/martin.png">
         </a>
         </button>
@@ -49,5 +49,5 @@ header("location: ../users_levels.php?mod=".$_GET['level']);
         </div>
         
         <div class=" Choix">
-            <form method="post" class="form" id="formLetter" action="settinguserslevels.php?mod=<?php echo $_GET['level']?>">
+            <form method="post" class="form" id="formLetter" action="location: ../game.php">
                 <?php include("finsetting.php"); ?>

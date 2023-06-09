@@ -11,8 +11,8 @@ function GetPath($number){
 }
 
 
-if(isset($_GET['story_level'])){
-    $story_level = $_GET['story_level'];
+if(isset($_POST['story_level'])){
+    $story_level = $_POST['story_level'];
 
     $texte_js = GetPath($story_level);
         //on convertit le tableau path en chaine de caractère avec un foreach
@@ -21,6 +21,7 @@ if(isset($_GET['story_level'])){
         }
     json_encode($texte_js);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +60,26 @@ if(isset($_GET['story_level'])){
 <body>
 
     <script>
+        function postRedirect(url, params) {
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = url;
+
+    // Create input fields for each parameter
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+      }
+    }
+
+    // Append the form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+  }
     function togglePopup() {
         var popup = document.getElementById("popup");
         if (popup.style.display === "none") {
@@ -95,6 +116,9 @@ if(isset($_GET['story_level'])){
             <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
+            <a id="soluce" class="soluce">
+                <img class="soluceimg" src="image/button/ampoule.png" onclick="solution();"/>
+            </a>
             <a id="savepos" class="savepos">
                 <img class="save" src="image/button/savestar.png" onclick="myFunction()"/>
             </a>
@@ -119,7 +143,7 @@ if(isset($_GET['story_level'])){
             </button>
 
             <button id="Buttonp" class="Buttonp" type="submit">
-                <a id="al" class="al" href="settingingames/settinguserslevels.php?level=<?php echo urlencode($_GET['level'])?>">Settings
+                <a id="al" class="al" href="settingingames/settinguserslevels.php">Settings
                     &emsp;
                     <img class="img" src="image/button/boutonsetting.png" />
                 </a>
@@ -135,8 +159,8 @@ if(isset($_GET['story_level'])){
                 <!-- on affiche le texte js avec du JS -->
                 <div id="bangerang"></div>
                 <script type="text/javascript">
-                var texte_js = <?php echo $_GET['JSON'] ?>;
-                <?php if(!isset($_GET['story_level'])){ ?>
+                var texte_js = <?php echo $_POST['JSON'] ?>;
+                <?php if(!isset($_POST['story_level'])){ ?>
                 var huge = texte_js;
                 <?php }
                 else{ ?>
@@ -495,7 +519,7 @@ for (var yes = 0; yes < huge2.length; yes++) {
     // Vérifie si tmp correspond à l'une des solutions dans tmp2
     for (var siu = 0; siu < tmp2.length; siu++) {
         if (JSON.stringify(tmp) === JSON.stringify(tmp2[siu])) {
-            document.location.href = "Win.php?mod=10&score=50";
+            document.location.href = "Win.php?mod=<?php echo $_POST['mod']; ?>";
             break;
         }
     }
@@ -714,12 +738,195 @@ for (var yes = 0; yes < huge2.length; yes++) {
 
             function myFunction() {
 //on enregistre le niveau dans la base de données
-var url = "save_level.php?JSON=" + <?php echo json_encode($_GET["JSON"]); ?> + "&mod=" + <?php echo json_encode($_GET["mod"]); ?> + "&row=" + <?php echo json_encode($_GET["rows"]); ?> + "&column=" + <?php echo json_encode($_GET["columns"]); ?>; 
+
+var params = {JSON: <?php echo json_encode($_POST["JSON"]); ?>, mod: <?php echo json_encode($_POST["mod"]); ?>, columns: <?php echo json_encode($_POST["columns"]); ?>, rows: <?php echo json_encode($_POST["rows"]); ?>};
+                var url = "save_level.php";
+                postRedirect(url, params);
+//var url = "save_level.php?JSON=" +  + "&mod=" +  + "&row=" + + "&column=" + 
 //on redirige 
-window.location.href = url;
+//window.location.href = url;
 
 
             }
+            function solution(){
+// Obtenir la référence du body
+var body = document.getElementsByTagName("body")[0];
+                    // Créer les éléments <table> et <tbody>
+                    var tbl = document.createElement("table");
+                    var tblBody = document.createElement("tbody");
+
+                    <?php if(isset($_COOKIE['Colorgame'])){
+                if($_COOKIE['Colorgame']=="red"){ 
+                echo"tbl.style.border = '0.4vw solid #f23e31';
+                tbl.style.backgroundColor = '#bf2424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="grey"){ 
+                echo"tbl.style.border = '0.4vw solid #cecaca';
+                tbl.style.backgroundColor = '#aa9a9a38';";
+                }
+                 elseif($_COOKIE['Colorgame']=="yellow"){ 
+                echo"tbl.style.border = '0.4vw solid #eff84aec';
+                tbl.style.backgroundColor = '#bfb224e7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="orange"){ 
+                echo"tbl.style.border = '0.4vw solid #f2ab31';
+                tbl.style.backgroundColor = '#bf8424e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="pink"){ 
+                    echo"tbl.style.border = '0.4vw solid #f231c8';
+                    tbl.style.backgroundColor = '#bf24b2e7';";
+                }
+                elseif($_COOKIE['Colorgame']=="green"){ 
+                echo"tbl.style.border = '0.4vw solid #34f231';
+                tbl.style.backgroundColor = '#24bf2ce7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="purple"){ 
+                echo"tbl.style.border = '0.4vw solid #9b31f2';
+                tbl.style.backgroundColor = '#8424bfe7';";
+                }
+                 elseif($_COOKIE['Colorgame']=="blue"  ){ 
+                echo"tbl.style.border = '0.4vw solid #19608F';
+                tbl.style.backgroundColor = '#247cbfe7';";
+                }}
+                else{
+                    echo"tbl.style.border = '0.4vw solid #19608F';
+                    tbl.style.backgroundColor = '#247cbfe7';";
+                }?>
+
+                    tbl.style.borderRadius = "20px";
+                    tbl.style.width = "70vw";
+                    tbl.style.height = "70vh";
+                    tbl.style.overflow = "scroll"; // allows the table to scroll if necessary
+
+
+
+
+                    // Set table dimensions to match game div
+                    tbl.style.width = gameDivWidth + 'px';
+                    tbl.style.height = gameDivHeight + 'px';
+
+                    // Créer les cellules
+for (var i = 0; i < rows; i++) {
+    var row = document.createElement("tr");
+
+
+    for (var j = 0; j < columns; j++) {
+        var cell = document.createElement("td");
+
+
+        // Vérifier si l'île se trouve à la position actuelle
+        var foundIsland = false;
+        for (var k = 0; k < huge.Islands.length; k++) {
+            if (huge.Islands[k].Placement[0] === i && huge.Islands[k].Placement[1] === j) {
+                foundIsland = true;
+                break;
+            }
+        }
+
+
+        if (foundIsland) {
+                                var islandImage = document.createElement("img");
+                                islandImage.setAttribute("id", "island-" + i + "-" + j);
+                                //on verifie le status du cookie "mode" 
+                                if (getCookie("mode") == 1) {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "image/images_temporaires/1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "image/images_temporaires/2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "image/images_temporaires/3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "image/images_temporaires/4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "image/images_temporaires/5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "image/images_temporaires/6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                } else {
+                                    if (huge.Islands[k].links == 1) {
+                                        islandImage.src = "../WEB/image/iles/ile1.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 2) {
+                                        islandImage.src = "../WEB/image/iles/ile2.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 3) {
+                                        islandImage.src = "../WEB/image/iles/ile3.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 4) {
+                                        islandImage.src = "../WEB/image/iles/ile4.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 5) {
+                                        islandImage.src = "../WEB/image/iles/ile5.png";
+                                        cell.appendChild(islandImage);
+                                    } else if (huge.Islands[k].links == 6) {
+                                        islandImage.src = "../WEB/image/iles/ile6.png";
+                                        cell.appendChild(islandImage);
+                                    }
+                                }
+} else {
+            // Vérifier si un pont se trouve à la position actuelle
+            var bridgeFound = false;
+            for (var l = 0; l < huge.Bridges.length; l++) {
+                var bridge = huge.Bridges[l];
+                for (var m = 0; m < bridge.Placement.length; m++) {
+                    var bridgePlacement = bridge.Placement[m];
+                    if (bridgePlacement[0] === i && bridgePlacement[1] === j) {
+                        bridgeFound = true;
+                        break;
+                    }
+                }
+                if (bridgeFound) {
+                    var bridgeImage = document.createElement("img");
+                    if (bridge.direction === 1) { // Pont vertical
+                        if (bridge.width === 1) {
+                            bridgeImage.style.width = "100%"; // Largeur d1u pont en pixels
+                                    bridgeImage.style.height = "75%"; // Hauteur du pont en pixels 
+                            bridgeImage.src = "../WEB/image/iles/bridgedouble.png";
+                        } else {
+                            bridgeImage.style.width = "100%"; // Largeur du pont en pixels
+                                bridgeImage.style.height = "35%"; // Hauteur du pont en pixels
+                            bridgeImage.src = "../WEB/image/iles/bridge_h.png";
+                        }
+                    } else { // Pont horizontal
+                        if (bridge.width === 1) {
+                            bridgeImage.style.width = "80%"; // Largeur du pont en pixels
+                                    bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
+                            bridgeImage.src = "../WEB/image/iles/bridgedoubleverticale.png";
+                        } else {
+                            bridgeImage.style.width = "20%"; // Largeur du pont en pixels
+                                bridgeImage.style.height = "100%"; // Hauteur du pont en pixels
+                            bridgeImage.src = "../WEB/image/iles/bridge_V.png";
+                        }
+                    }
+                    cell.appendChild(bridgeImage);
+                    break;
+                }
+            }
+        }
+
+
+        row.appendChild(cell);
+        cell.setAttribute("class", 'case');
+        cell.setAttribute("id", '0');
+    }
+
+
+    tblBody.appendChild(row);
+}
+
+
+// Ajouter <tbody> à <table>
+tbl.appendChild(tblBody);
+// Ajouter <table> au body
+document.getElementById("bangerang").appendChild(tbl);
+}
+            
             </script>
             </div>
         </div>

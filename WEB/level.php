@@ -24,6 +24,41 @@ session_start();
 </head>
 
 <body>
+<script>
+                      <?php
+
+?>
+    function postRedirect(url, params) {
+        console.log("postRedirect");
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = url;
+        console.log(url);
+    // Create input fields for each parameter
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        console.log(input.value);
+        form.appendChild(input);
+      }
+    }
+    console.log(form);
+
+    // Append the form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+    function redirection(level, rows,  columns){
+        console.log("redirection");
+    var params = { mod: "1", JSON: level, columns: rows, rows: rows, id: 1, siuu: 1 };
+  var url = "users_levels.php";
+   postRedirect(url, params);
+  }
+                </script>
 
     <header>
         <div class="buttonhead">
@@ -40,37 +75,32 @@ session_start();
             <div class="Title2">
                 Workshop
             </div>
+
             <div class="levels">
                 <?php
-                try{
                 require("traitement/DB_connect.php");
-                $reqPrep1="SELECT user,difficulty,rows,colls,islands,path FROM users_level WHERE user='$_SESSION[username]'";
+                $reqPrep1="SELECT number,user,difficulty,rows,colls,islands,path FROM users_level WHERE user='$_SESSION[username]'";
                 $req1 =$conn->prepare($reqPrep1);
                 $req1->execute();
                 $resultat = $req1->fetchAll();
                 
-                }
-                catch(Exception $e){
-
-                die("Erreur : " . $e->getMessage());
-                } 
                 foreach($resultat as $row){
-                    $level=$row['path'];
-                ?>
+                    $number=$row['number'];
+?>
+<a class="lev" href="users_levels.php?number=<?php echo $number ;?>"> 
+    Made by <?php echo $row["user"] ?><br>
+    Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
+    Difficulty:<?php echo " ".$row["difficulty"] ?>
+</a>
 
-                    <a class="lev" href="users_levels.php?JSON=<?php echo urlencode($level); ?>&rows=<?php echo $row["rows"] ?>&columns=<?php echo $row["colls"]?>&mod=1&id=1&siuu=1">
-                    Made by <?php echo $row["user"] ?><br>
-                    Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
-                    Difficulty: <?php echo " ".$row["difficulty"] ?>
-
-                </a>
-                <?php } ?>
+<?php } ?>
+            
             </div>
             <div class="levels">
                 <?php
                 try{
                 require("traitement/DB_connect.php");
-                $reqPrep1="SELECT user,difficulty,rows,colls,islands,path FROM users_level ";
+                $reqPrep1="SELECT * FROM users_level ";
                 $req1 =$conn->prepare($reqPrep1);
                 $req1->execute();
                 $resultat = $req1->fetchAll();
@@ -82,14 +112,16 @@ session_start();
                 } 
                 foreach($resultat as $row){
                     $level=$row['path'];
+                    $number2 =$row['number'];
                 ?>
 
-                <a class="lev" href="users_levels.php?level=<?php echo urlencode($level); ?>">
+                <a class="lev" href="users_levels.php?number=<?php echo $number2 ;?>">
                     Made by <?php echo $row["user"] ?><br>
                     Grid: <?php echo $row["rows"]."x".$row["colls"]." with ".$row["islands"]." islands" ?><br>
                     Difficulty:<?php echo " ".$row["difficulty"] ?>
 
                 </a>
+
                 <?php } ?>
             </div>
         </div>
