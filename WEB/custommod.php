@@ -207,7 +207,7 @@ if($mod == 'medium'){
 if($mod == 'hard'){
     $nb_iles = 25;
     $nb_colonnes = 11;
-    $nb_lignes = 13;
+    $nb_lignes = 11;
     $command = 'MartinG_hard.exe'. ' '. $nb_iles . ' ' . $nb_colonnes . ' ' . $nb_lignes;
     $output = exec($command);
     while($output == -1){
@@ -229,11 +229,24 @@ if($mod == 'custom'){
         while($output == -1){
             $output = exec($command);
         }
+        if (!isset($_GET['JSON'])) {
+        ?>
+    <script>
+       var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
+       let siuu = <?php echo $output; ?>;
+       console.log('siuuuuu', siuu);
+       //on redirige vers une page qui va verifier si le niveau est faisable ou non
+    
+       //window.location.href = "verif_level.php?mod=medium&JSON=" + bangerdefou + "&iles=" + <?php echo $nb_iles; ?> + "&columns=" + <?php echo $nb_colonnes; ?> + "&rows=" + <?php echo $nb_lignes;?> + "&id=1" + "&siuu=" + JSON.stringify(siuu);
+       
+        <?php
+        } ?>
         
-                    
+           var bangerdefou = jsonToPixelArt(<?php echo $output; ?>)
+        </script>
+        <?php
         $texte_php = $output;
         $texte_js = json_encode($texte_php);
-    }
 }
     ?> <?php 
     if($mod != 'custom'){
@@ -895,6 +908,7 @@ var rows = huge.Grid[0].size[0];
 
             <?php   
 }
+        }
             if(isset($_GET['rows']) && isset($_GET['columns']) && isset($_GET['JSON']) && isset($_GET['nbiles'])){
 $rows = $_GET['rows'];
 $columns = $_GET['columns'];

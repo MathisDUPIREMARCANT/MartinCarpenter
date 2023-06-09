@@ -157,8 +157,8 @@ if(isset($_GET['story_level'])){
                 huge2 = huge;
                 huge = huge[0]
                 console.log('siu', huge)
-                var rows = huge.Grid[0].size[0];
-                var columns = huge.Grid[0].size[1];
+                var columns = huge.Grid[0].size[0];
+                var rows = huge.Grid[0].size[1];
 
                 var gameDiv = document.getElementById('game');
                 var gameDivWidth = gameDiv.clientWidth;

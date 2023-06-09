@@ -46,7 +46,7 @@ session_start();
 //on récupère les données du formulaire
 $pixelArt = $_GET['pixelArt'];
 
-$command = 'MartinS.exe'. ' '. $_GET['rows'] . ' ' . $_GET['columns'] . ' ' . $pixelArt;
+$command = 'MartinS.exe'. ' '. $_GET['columns'] . ' ' . $_GET['rows'] . ' ' . $pixelArt;
 $output = exec($command);
 $pixelArt = $output; 
 
@@ -84,7 +84,7 @@ $pixelArt = $output;
     $siuu = $_GET['siuu'];
     }
 
-    $oui = 'Placements.exe'. ' '. $_GET['rows'] . ' ' . $_GET['columns'] . ' ' . 0 . ' ' . $_GET['pixelArt'];
+    $oui = 'Placements.exe'. ' '. $_GET['columns'] . ' ' . $_GET['rows'] . ' ' . 0 . ' ' . $_GET['pixelArt'];
     $non = exec($oui);
     $pixelArtnosol = $non;
     ?>

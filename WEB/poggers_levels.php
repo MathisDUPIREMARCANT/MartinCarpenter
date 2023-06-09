@@ -9,19 +9,7 @@ function GetPath($number){
     $path = $result->fetch(PDO::FETCH_ASSOC);
     return $path;
 }
-if($_GET['mod'] != "easy"){
-$texte_php = $_GET["JSON"];
-$texte_js = json_encode($texte_php);
-//on importe la solution du niveau dans la base de donnée
-require("traitement/DB_connect.php");
-$sql = "SELECT soluce FROM users_level WHERE path='$texte_php'";
-$result = $conn->query($sql);
-$soluce = $result->fetch(PDO::FETCH_ASSOC);
-foreach($soluce as $key => $value){
-    $soluce = $value;
-}
-$texte_js = json_encode($soluce);
-}
+
 
 if(isset($_GET['story_level'])){
     $story_level = $_GET['story_level'];
@@ -107,6 +95,9 @@ if(isset($_GET['story_level'])){
             <button id="boutonPause" class="pause" type="submit" onclick="togglePopup(); hideButton()">
                 <a class="al"><img class="pauseimg" src="image/button/buttonpause.png"></a>
             </button>
+            <a id="savepos" class="savepos">
+                <img class="save" src="image/button/savestar.png" onclick="myFunction()"/>
+            </a>
         </div>
         <div id="popup" style="display: none;">
             <button id="Buttonp" class="Buttonp" type="submit" onclick="togglePopup(); showButton()">
@@ -730,7 +721,14 @@ for (var yes = 0; yes < huge2.length; yes++) {
                     check_win();
                 }
 
-            
+            function myFunction() {
+//on enregistre le niveau dans la base de données
+var url = "save_level.php?JSON=" + <?php echo json_encode($_GET["JSON"]); ?> + "&mod=" + <?php echo json_encode($_GET["mod"]); ?> + "&row=" + <?php echo json_encode($_GET["rows"]); ?> + "&column=" + <?php echo json_encode($_GET["columns"]); ?>; 
+//on redirige 
+window.location.href = url;
+
+
+            }
             </script>
             </div>
         </div>

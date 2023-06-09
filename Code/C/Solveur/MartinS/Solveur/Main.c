@@ -17,8 +17,8 @@ int main(int argc, char* argv[]) {
     char* Board = (char*)malloc(((posMax.x * posMax.y) + 1) * sizeof(char));
 
     if (Board != NULL && Save != NULL) {
-        strncpy_s(Board, argv[3], (strlen(argv[3]) + 1) * sizeof(char), (posMax.x * posMax.y) + 1);
-        strncpy_s(Save, argv[3], (strlen(argv[3]) + 1) * sizeof(char), (posMax.x * posMax.y) + 1);
+        strncpy_s(Board, (strlen(argv[3]) + 1) * sizeof(char), argv[3], (posMax.x * posMax.y) + 1);
+        strncpy_s(Save, (strlen(argv[3]) + 1) * sizeof(char), argv[3], (posMax.x * posMax.y) + 1);
    }
     else {
         printf("Error: Memory allocation failed\n");

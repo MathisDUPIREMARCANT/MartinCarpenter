@@ -46,7 +46,7 @@ session_start();
 //on récupère les données du formulaire
 $pixelArt = $_GET['JSON'];
 
-$command = 'MartinS.exe'. ' '. $_GET['rows'] . ' ' . $_GET['columns'] . ' ' . $pixelArt;
+$command = 'MartinS.exe'. ' '. $_GET['columns'] . ' ' . $_GET['rows'] . ' ' . $pixelArt;
 $output = exec($command);
 $pixelArt = $output; 
 
@@ -107,7 +107,12 @@ if ("<?php echo($_GET['mod']);?>" == 1){
     window.location.href = "pixelart_json.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=1" + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge
 }
 else {
+    if("<?php echo($_GET['mod']);?>" == "medium" && <?php echo($_GET['id']);?> == 1){
+       window.location.href = "pixelart_json_no_save.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=" + <?php echo json_encode($_GET['mod']); ?> + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge + "&nbiles=" + nombreiles
+    }
+    else{
     window.location.href = "pixelart_json_no_save.php?JSON=" + <?php echo json_encode($_GET['JSON']); ?> + "&siuu=" + <?php echo json_encode($_GET['siuu']); ?> + "&pxl=" + pixel + "&mod=" + <?php echo json_encode($_GET['mod']); ?> + "&row=" + <?php echo json_encode($_GET['rows']); ?> + "&column=" + <?php echo json_encode($_GET['columns']); ;?> + "&brdg="  + Nb_bridge + "&nbiles=" + nombreiles
+    }
 }
     //on récupere le nombre de ponts et d'iles dans le pixelart
     let nbIslands = 0;
